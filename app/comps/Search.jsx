@@ -7,12 +7,9 @@ const Search = () => {
   return (
     <div className="flex w-full max-w-7xl items-center space-x-2 mt-14 text-goodbot-primary-starryNightBlack font-poppins font-bold">
       <Input type="text" placeholder="Search Goodbot" />
-      <Button
-        className="bg-goodbot-secondary-lightBlue text-goodbot-primary-starryNightBlack flex justify-between gap-1 "
-        type="submit"
-      >
+      <Button className="flex justify-between gap-1 " type="submit">
         <AiOutlineSearch />
-        <span>SEARCH</span>
+        <span className="font-bold">SEARCH</span>
       </Button>
     </div>
   );
