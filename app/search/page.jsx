@@ -44,84 +44,8 @@ export default function search() {
             </CardFooter>
           </Card>
         </div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 ">
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 ">
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 ">
-        <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter>
-          </Card>
-
-        </div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 ">
-
-        <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <Badge variant="secondary">tag</Badge>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter>
-          </Card>
-        </div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 "></div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 "></div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 "></div>
-        <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 "></div>
+        
+ 
         <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 "></div>
       </div>
     </section>
