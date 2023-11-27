@@ -1,4 +1,4 @@
-import Nav from "@/app/comps/nav";
+import Navbar from "@/app/comps/Navbar";
 import React from "react";
 
 function Page() {

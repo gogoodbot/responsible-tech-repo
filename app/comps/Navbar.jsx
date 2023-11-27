@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const Nav = () => {
+const Navbar = () => {
   return (
     <nav className="bg-goodbot-primary-gray w-full h-16 absolute top-0 block">
       <div className="flex justify-between items-center px-8 py-3 my-auto">
@@ -21,4 +21,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Navbar;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import "./globals.css";
-import Nav from "./comps/Nav";
+import Navbar from "./comps/Navbar";
 import Hero from "./comps/Hero";
 
 export default function Home() {
