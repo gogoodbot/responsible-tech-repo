@@ -17,7 +17,7 @@ export default async function ResultsCard(query) {
     console.log(error);
   }
 
-  console.log(global);
+  // console.log(global);
 
   return (
     <Card>
