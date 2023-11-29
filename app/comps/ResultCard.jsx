@@ -10,7 +10,7 @@ import {
 import { globalSearch } from "@/lib/actions";
 
 export default async function ResultsCard(query) {
-  console.log(query);
+  console.log("resultCard",query);
   try {
     const global = await globalSearch(query);
   } catch (error) {
