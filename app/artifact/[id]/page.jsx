@@ -4,6 +4,7 @@ import { DataTable } from "@/app/comps/DataTable";
 import { columns } from "./columns";
 // import { globalSearch } from "@/lib/actions";
 import { getDataForTable } from "@/lib/actions";
+import Search from "@/app/comps/Search";
 
 async function getGlobal() {
   const keyword = { query: "ai" }; //to be change to actual key words found in the artifact tag field
@@ -18,18 +19,12 @@ async function getGlobal() {
 }
 
 export default async function Page() {
-  // const keyword = { query: "ai" }; //to be change to actual key words found in the artifact tag field
   const data = await getGlobal();
   console.log(data);
 
-  // try {
-  //   console.log(data);
-  // } catch (error) {
-  //   console.log(error);
-  // }
-
   return (
     <section className="py-24">
+      <Search />
       <div className="container">
         <h1>All Artifacts</h1>
         <DataTable columns={columns} data={data} />
