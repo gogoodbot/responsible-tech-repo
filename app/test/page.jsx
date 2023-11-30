@@ -1,16 +1,11 @@
-import { fetchOrganizations } from "@/lib/actions";
+// import { fetchOrganizations } from "@/lib/actions";
 
 const Page = async () => {
-  const organizations = await fetchOrganizations();
-  console.log("page", organizations);
+  // const organizations = await fetchOrganizations();
+  // console.log("page", organizations);
   return (
     <div>
-      <ul>
-        {organizations &&
-          organizations.map((organization) => (
-            <li key={organization.id}>{organization.name}</li>
-          ))}
-      </ul>
+      <h1>Test page</h1>
     </div>
   );
 };
