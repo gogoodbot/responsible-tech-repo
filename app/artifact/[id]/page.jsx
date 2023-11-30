@@ -1,8 +1,6 @@
-import Navbar from "@/app/comps/Navbar";
 import React from "react";
 import { DataTable } from "@/app/comps/DataTable";
 import { columns } from "./columns";
-// import { globalSearch } from "@/lib/actions";
 import { getDataForTable } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 

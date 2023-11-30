@@ -4,15 +4,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-// export type Payment = {
-//   id: string
-//   amount: number
-//   status: "pending" | "processing" | "success" | "failed"
-//   email: string
-// }
-
 export const columns = [
   {
     accessorKey: "tableName",
@@ -26,6 +17,10 @@ export const columns = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      const data = row.getValue("tableName");
+      return <div className="text-center">{data}</div>;
     },
   },
   {
@@ -62,7 +57,7 @@ export const columns = [
     cell: ({ row }) => {
       const date = new Date(row.getValue("modified_on"));
       const formatted = date.toLocaleDateString();
-      return <div>{formatted}</div>;
+      return <div className="text-center">{formatted}</div>;
     },
   },
 ];
