@@ -24,12 +24,12 @@ export default async function ResultsCard(query) {
       <CardHeader>
         <CardTitle>Digital Charter Implimentation Act</CardTitle>
         <CardDescription>(Bill C-27)</CardDescription>
-        {/* <CardDescription>
+        <CardDescription>
             
           <Badge variant="secondary">Legislation</Badge>
           <Badge variant="secondary">Policy</Badge>
           <Badge variant="secondary">tag</Badge>
-          </CardDescription> */}
+          </CardDescription>
       </CardHeader>
 
       <CardContent>

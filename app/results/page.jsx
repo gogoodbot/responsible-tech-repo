@@ -5,6 +5,7 @@ import Search from "../comps/Search";
 import { DataTable } from "@/app/comps/DataTable"; // import DataTable
 import { columns } from "../artifact/[id]/columns";
 import { getDataForTable } from "@/lib/actions"; // import data fetching function
+import { DatePickerWithRange } from "@/components/results/date-picker";
 
 export default function Results({ searchParams }) {
   const [data, setData] = useState([]); // state to store the data
@@ -29,6 +30,7 @@ export default function Results({ searchParams }) {
       <section className="flex-1 space-y-4 p-8 pt-6">
 
         <div className="container">
+          <DatePickerWithRange />
         <Search />
 
           <h1>Search Results</h1>
