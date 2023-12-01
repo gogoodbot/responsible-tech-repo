@@ -27,9 +27,10 @@ export default function Results({ searchParams }) {
   return (
     <>
       <section className="flex-1 space-y-4 p-8 pt-6">
-        <Search />
 
         <div className="container">
+        <Search />
+
           <h1>Search Results</h1>
           {/* Render DataTable with fetched data */}
           <DataTable columns={columns} data={data} />
