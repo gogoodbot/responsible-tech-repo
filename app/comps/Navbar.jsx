@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="bg-goodbot-primary-gray w-full h-16 absolute top-0 block">
-      <div className="flex justify-between items-center px-8 py-3 my-auto">
+    <nav className="bg-goodbot-primary-gray sticky top-0 z-40 w-full border-b">
+      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <div className="logo">
           <Link href="/" className="font-poppins font-bold text-4xl">
             goodbot
