@@ -22,8 +22,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 export function DataTable({ columns, data }) {
+  // console.log("data from page", data);
+  const router = useRouter();
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
@@ -40,6 +43,12 @@ export function DataTable({ columns, data }) {
       columnFilters,
     },
   });
+
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   console.log(e);
+  //   router.push("/artifact/789");
+  // };
 
   return (
     <div>
@@ -93,9 +102,16 @@ export function DataTable({ columns, data }) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  // onClick={handleClick}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    // passing data from the cell when clicked
+                    <TableCell
+                      onClick={() =>
+                        router.push(`/artifact/${data[row.id].name}`)
+                      }
+                      key={cell.id}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
