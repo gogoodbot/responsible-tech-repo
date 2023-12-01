@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Search from "../comps/Search";
-import { DataTable } from "@/app/comps/DataTable"; // import DataTable
-import { columns } from "../artifact/[id]/columns";
+import { ResultsDataTable } from "@/components/results/ResultsDataTable";
+import { ResultColumns } from "./ResultColumns";
 import { getDataForTable } from "@/lib/actions"; // import data fetching function
 import { DatePickerWithRange } from "@/components/results/date-picker";
 
@@ -35,7 +35,7 @@ export default function Results({ searchParams }) {
 
           <h1>Search Results</h1>
           {/* Render DataTable with fetched data */}
-          <DataTable columns={columns} data={data} />
+          <ResultsDataTable columns={ResultColumns} data={data} />
         </div>
       </section>
     </>
