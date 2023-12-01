@@ -1,23 +1,38 @@
-import Search from "../comps/Search";
-import ResultsCard from "../comps/ResultCard";
-import { Suspense } from "react";
+"use client"
 
-export default function results({ searchParams }) {
+import React, { useState, useEffect } from "react";
+import Search from "../comps/Search";
+import { DataTable } from "@/app/comps/DataTable"; // import DataTable
+import { columns } from "../artifact/[id]/columns";
+import { getDataForTable } from "@/lib/actions"; // import data fetching function
+
+export default function Results({ searchParams }) {
+  const [data, setData] = useState([]); // state to store the data
   const query = searchParams?.query || "";
-  // console.log(query);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Fetch data using the query
+        const fetchedData = await getDataForTable({ query });
+        setData(fetchedData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  }, [query]);
+
   return (
     <>
       <section className="flex-1 space-y-4 p-8 pt-6">
         <Search />
 
-        <div className="flex flex-wrap overflow-hidden">
-          <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 ">
-            <Suspense key={query}>
-              <ResultsCard query={query} />
-            </Suspense>
-          </div>
-
-          <div className="w-1/4 px-1 my-1 sm:w-full sm:px-1 sm:my-1 md:w-1/3 md:px-1 md:my-1 lg:w-1/4 lg:w-1/4 lg:w-1/4 xl:w-1/4 "></div>
+        <div className="container">
+          <h1>Search Results</h1>
+          {/* Render DataTable with fetched data */}
+          <DataTable columns={columns} data={data} />
         </div>
       </section>
     </>
