@@ -3,6 +3,7 @@ import { DataTable } from "@/app/comps/DataTable";
 import { columns } from "./columns";
 import { getDataForTable, getDataWithId } from "@/lib/actions";
 import Search from "@/app/comps/Search";
+import ArtifactInfo from "@/app/comps/ArtifactInfo";
 
 async function getGlobal() {
   const keyword = { query: "Digital" }; //to be change to actual key words found in the artifact tag field
@@ -39,6 +40,7 @@ export default async function Page({ params }) {
       <Search />
       <div className="container">
         <DataTable columns={columns} data={data} />
+        <ArtifactInfo artifactInfo={artifactInfo} />
       </div>
     </section>
   );
