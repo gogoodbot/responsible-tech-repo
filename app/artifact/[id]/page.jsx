@@ -1,7 +1,7 @@
 import React from "react";
 import { DataTable } from "@/app/comps/DataTable";
 import { columns } from "./columns";
-import { getDataForTable, getDataWithName } from "@/lib/actions";
+import { getDataForTable, getDataWithId } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 
 async function getGlobal() {
@@ -16,12 +16,12 @@ async function getGlobal() {
   }
 }
 
-async function getArtifactName(query) {
+async function getArtifactInfo(query) {
   // const keyword = { query: "Digital" }; //to be change to actual key words found in the artifact tag field
-  console.log("query", query);
+  // console.log("query", query);
   try {
-    const global = await getDataWithName(query);
-    console.log("global", global);
+    const global = await getDataWithId(query);
+    // console.log("global", global);
     return global;
   } catch (error) {
     console.log(error);
@@ -30,8 +30,9 @@ async function getArtifactName(query) {
 
 export default async function Page({ params }) {
   const data = await getGlobal();
-  const artifactName = await getArtifactName(params.id);
-  console.log("params", params);
+  // console.log(data);
+  const artifactInfo = await getArtifactInfo(params.id);
+  console.log("Artifact Info", artifactInfo);
 
   return (
     <section className="py-24">

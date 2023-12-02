@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 
 export function DataTable({ columns, data }) {
   // console.log("data from page", data);
+
   const router = useRouter();
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -44,11 +45,13 @@ export function DataTable({ columns, data }) {
     },
   });
 
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   console.log(e);
-  //   router.push("/artifact/789");
-  // };
+  const handleClick = (data) => {
+    const lowerCaseTable =
+      data.tableName[0].toLowerCase() + data.tableName.slice(1);
+    const tableId = data[`${lowerCaseTable}_id`];
+    // console.log("tableId", tableId);
+    router.push(`/artifact/${tableId}`);
+  };
 
   return (
     <div>
@@ -102,14 +105,11 @@ export function DataTable({ columns, data }) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  // onClick={handleClick}
                 >
                   {row.getVisibleCells().map((cell) => (
                     // passing data from the cell when clicked
                     <TableCell
-                      onClick={() =>
-                        router.push(`/artifact/${data[row.id].name}`)
-                      }
+                      onClick={() => handleClick(data[row.id])}
                       key={cell.id}
                     >
                       {flexRender(
