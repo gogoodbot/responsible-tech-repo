@@ -11,7 +11,6 @@ const Navbar = () => {
           </Link>
         </div>
         <h1 className="font-poppins font-semibold text-lg">
-          Responsible Tech Repo
         </h1>
         <div>
           <Link href="/about">About</Link>

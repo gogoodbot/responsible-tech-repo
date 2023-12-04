@@ -3,39 +3,51 @@ import "./globals.css";
 import Navbar from "./comps/Navbar";
 import Hero from "./comps/Hero";
 import Search from "./comps/Search";
-import ResultsCard from "./comps/ResultCard";
+import Results from "./results/page";
+import ResultCard from "./comps/ResultCard";
+import SearchTabs from "./comps/SearchTabs";
+import Tags from "./comps/Tags";
+import {Badge} from "../components/ui/badge"
 
 export default function Home() {
   return (
-    <main className="font-openSans">
-      <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+    <section className="container relative">
+      <Hero />
+      <section className="overflow-hidden rounded-lg border bg-background shadow">
 
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-        GoodBot strengthens technology governance
-        <br className="hidden sm:inline" /> 
-        we&apos;re working towards building a more humane technology ecosystem.
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel fringilla metus, vel pulvinar eros. Duis accumsan ligula in sem vestibulum mollis. Mauris at sagittis velit.
-        </p>
-      </div>
-      <Search />  
+        <div className="flex-1 space-y-4 p-8 pt-6">
 
-      <div className="flex gap-4">
-        <ResultsCard />
-        <ResultsCard />
-        <ResultsCard />
+        <Search />
 
-      </div>
-      <div className="flex gap-4">
-        <ResultsCard />
-        <ResultsCard />
-        <ResultsCard />
+        <div className="flex-1 items-center space-x-4">
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
+            <Badge >This</Badge>
 
-      </div>
+          </div>
+
+        <div className="border-b">
+
+          <div className="flex items-center px-4">
+            
+
+
+          </div>
+        </div>
+
+
+          <div className="">
+            <SearchTabs />
+            </div>
+        </div>
+      </section>
     </section>
-
-    </main>
   );
 }
