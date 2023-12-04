@@ -25,8 +25,6 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 
 export function DataTable({ columns, data }) {
-  // console.log("data from page", data);
-
   const router = useRouter();
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -49,7 +47,6 @@ export function DataTable({ columns, data }) {
     const lowerCaseTable =
       data.tableName[0].toLowerCase() + data.tableName.slice(1);
     const tableId = data[`${lowerCaseTable}_id`];
-    // console.log("tableId", tableId);
     router.push(`/artifact/${tableId}`);
   };
 
