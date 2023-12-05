@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <div className="absolute top-0 block w-screen">
         <Navbar />
       </div>
-      <body className={`${inter.className} mt-16 pt-5`}>{children}</body>
+      <body className={`${inter.className} flex-1`}>{children}</body>
     </html>
   );
 }
