@@ -22,8 +22,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 export function DataTable({ columns, data }) {
+  const router = useRouter();
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
@@ -40,6 +42,13 @@ export function DataTable({ columns, data }) {
       columnFilters,
     },
   });
+
+  const handleClick = (data) => {
+    const lowerCaseTable =
+      data.tableName[0].toLowerCase() + data.tableName.slice(1);
+    const tableId = data[`${lowerCaseTable}_id`];
+    router.push(`/artifact/${tableId}`);
+  };
 
   return (
     <div>
@@ -95,7 +104,11 @@ export function DataTable({ columns, data }) {
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    // passing data from the cell when clicked
+                    <TableCell
+                      onClick={() => handleClick(data[row.id])}
+                      key={cell.id}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
