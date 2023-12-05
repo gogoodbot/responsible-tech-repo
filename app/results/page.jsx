@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Search from "../comps/Search";
@@ -6,6 +6,8 @@ import { ResultsDataTable } from "@/components/results/ResultsDataTable";
 import { ResultColumns } from "./ResultColumns";
 import { getDataForTable } from "@/lib/actions"; // import data fetching function
 import { DatePickerWithRange } from "@/components/results/date-picker";
+import { DataTable } from "../comps/DataTable";
+import { columns } from "../artifact/[id]/columns";
 
 export default function Results({ searchParams }) {
   const [data, setData] = useState([]); // state to store the data
@@ -28,14 +30,14 @@ export default function Results({ searchParams }) {
   return (
     <>
       <section className="flex-1 space-y-4 p-8 pt-6">
-
         <div className="container">
           <DatePickerWithRange />
-        <Search />
+          <Search />
 
           <h1>Search Results</h1>
           {/* Render DataTable with fetched data */}
-          <ResultsDataTable columns={ResultColumns} data={data} />
+          {/* <ResultsDataTable columns={ResultColumns} data={data} /> */}
+          <DataTable columns={columns} data={data} />
         </div>
       </section>
     </>
