@@ -7,9 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { organizationHome } from "@/lib/actions";
 import { Circle } from "lucide-react";
 
-const ResultCard = () => {
+const ResultCard = async () => {
+  const data = await organizationHome();
+  console.log(data);
   return (
     <Card>
       <CardHeader>
