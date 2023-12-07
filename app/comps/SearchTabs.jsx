@@ -1,12 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ResultCard from "./ResultCard";
-// import { organizationHome } from "@/lib/actions";
 import { cardsHome } from "@/lib/actions";
 
 const getCardsInfo = async (artifact) => {
   try {
     const cards = await cardsHome(artifact);
-    // console.log("cards at searchTabs", cards);
     return cards;
   } catch (error) {
     console.log(error);
@@ -19,6 +17,7 @@ const SearchTabs = async () => {
   const policies = await getCardsInfo("Policy");
   const resources = await getCardsInfo("Resource");
   const stakeholders = await getCardsInfo("Stakeholder");
+
   return (
     <Tabs defaultValue="organizations">
       <TabsList>
@@ -36,7 +35,7 @@ const SearchTabs = async () => {
               return (
                 <ResultCard
                   key={organization.organization_id}
-                  data={organization}
+                  data={{ ...organization, tableName: "Organizations" }}
                 />
               );
             })}
@@ -47,9 +46,12 @@ const SearchTabs = async () => {
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* map through first 4 litigations in table to present */}
-            {litigations.map((Litigation) => {
+            {litigations.map((litigation) => {
               return (
-                <ResultCard key={Litigation.Litigation_id} data={Litigation} />
+                <ResultCard
+                  key={litigation.litigation_id}
+                  data={{ ...litigation, tableName: "Litigations" }}
+                />
               );
             })}
           </div>
@@ -58,9 +60,14 @@ const SearchTabs = async () => {
       <TabsContent value="policies">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {/* map through first 4 litigations in table to present */}
+            {/* map through first 4 policies in table to present */}
             {policies.map((policy) => {
-              return <ResultCard key={policy.policy_id} data={policy} />;
+              return (
+                <ResultCard
+                  key={policy.policy_id}
+                  data={{ ...policy, tableName: "Policies" }}
+                />
+              );
             })}
           </div>
         </div>
@@ -68,9 +75,14 @@ const SearchTabs = async () => {
       <TabsContent value="resources">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {/* map through first 4 litigations in table to present */}
+            {/* map through first 4 resources in table to present */}
             {resources.map((resource) => {
-              return <ResultCard key={resource.resource_id} data={resource} />;
+              return (
+                <ResultCard
+                  key={resource.resource_id}
+                  data={{ ...resource, tableName: "Resources" }}
+                />
+              );
             })}
           </div>
         </div>
@@ -78,12 +90,12 @@ const SearchTabs = async () => {
       <TabsContent value="stakeholders">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {/* map through first 4 litigations in table to present */}
+            {/* map through first 4 stakeholders in table to present */}
             {stakeholders.map((stakeholder) => {
               return (
                 <ResultCard
                   key={stakeholder.stakeholder_id}
-                  data={stakeholder}
+                  data={{ ...stakeholder, tableName: "Stakeholders" }}
                 />
               );
             })}
