@@ -1,10 +1,24 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ResultCard from "./ResultCard";
-import { organizationHome } from "@/lib/actions";
+// import { organizationHome } from "@/lib/actions";
+import { cardsHome } from "@/lib/actions";
+
+const getCardsInfo = async (artifact) => {
+  try {
+    const cards = await cardsHome(artifact);
+    // console.log("cards at searchTabs", cards);
+    return cards;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const SearchTabs = async () => {
-  const organizations = await organizationHome();
-  // console.log(organizations);
+  const organizations = await getCardsInfo("Organization");
+  const litigations = await getCardsInfo("Litigation");
+  const policies = await getCardsInfo("Policy");
+  const resources = await getCardsInfo("Resource");
+  const stakeholders = await getCardsInfo("Stakeholder");
   return (
     <Tabs defaultValue="organizations">
       <TabsList>
@@ -19,22 +33,62 @@ const SearchTabs = async () => {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* map through first 4 organizations in table to present */}
             {organizations.map((organization) => {
-              <ResultCard data={{ organization }} />;
+              return (
+                <ResultCard
+                  key={organization.organization_id}
+                  data={organization}
+                />
+              );
             })}
-            <ResultCard />
-            <ResultCard />
-            <ResultCard />
-            <ResultCard />
           </div>
         </div>
       </TabsContent>
       <TabsContent value="litigations">
-        Change your litigations here.
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* map through first 4 litigations in table to present */}
+            {litigations.map((Litigation) => {
+              return (
+                <ResultCard key={Litigation.Litigation_id} data={Litigation} />
+              );
+            })}
+          </div>
+        </div>
       </TabsContent>
-      <TabsContent value="policies">Change your policies here.</TabsContent>
-      <TabsContent value="resources">Change your resources here.</TabsContent>
+      <TabsContent value="policies">
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* map through first 4 litigations in table to present */}
+            {policies.map((policy) => {
+              return <ResultCard key={policy.policy_id} data={policy} />;
+            })}
+          </div>
+        </div>
+      </TabsContent>
+      <TabsContent value="resources">
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* map through first 4 litigations in table to present */}
+            {resources.map((resource) => {
+              return <ResultCard key={resource.resource_id} data={resource} />;
+            })}
+          </div>
+        </div>
+      </TabsContent>
       <TabsContent value="stakeholders">
-        Change your stakeholders here.
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* map through first 4 litigations in table to present */}
+            {stakeholders.map((stakeholder) => {
+              return (
+                <ResultCard
+                  key={stakeholder.stakeholder_id}
+                  data={stakeholder}
+                />
+              );
+            })}
+          </div>
+        </div>
       </TabsContent>
     </Tabs>
   );
