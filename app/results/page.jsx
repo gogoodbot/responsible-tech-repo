@@ -29,17 +29,41 @@ export default function Results({ searchParams }) {
 
   return (
     <>
-      <section className="flex-1 space-y-4 p-8 pt-6">
-        <div className="container">
-          <DatePickerWithRange />
-          <Search />
 
-          <h1>Search Results</h1>
+<section className="container relative mt-10">
+
+<div className="flex items-center justify-between space-y-2">
+            <h2 className="text-3xl font-bold tracking-tight">Search Results</h2>
+            <div className="flex items-center space-x-2">
+            </div>
+          </div>
+
+
+
+      <section className="overflow-hidden rounded-lg border bg-background shadow">
+        <div className=" flex-col md:flex">
+          <div className="border-b">
+            <div className="flex h-16 items-center px-4">
+              <Search />
+            </div>
+          </div>
+          
+          <div className="flex-1 space-y-4 p-8 pt-6">
+
+
+            <div className=" items-center justify-between space-y-2">
           {/* Render DataTable with fetched data */}
           {/* <ResultsDataTable columns={ResultColumns} data={data} /> */}
           <DataTable columns={columns} data={data} />
+            </div>
+          </div>
+
         </div>
       </section>
+
+
+</section>
+
     </>
   );
 }

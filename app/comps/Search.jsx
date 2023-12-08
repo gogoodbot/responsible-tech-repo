@@ -19,7 +19,7 @@ const Search = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full max-w-7xl items-center space-x-2 mt-14 text-goodbot-primary-starryNightBlack font-poppins font-bold">
+    <form onSubmit={handleSubmit} className="flex w-full max-w-7xl items-center space-x-2 text-goodbot-primary-starryNightBlack font-poppins font-bold">
       <Input
         htmlFor="search"
         type="text"
