@@ -5,7 +5,10 @@ import Navbar from "./comps/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Goodbot",
+  title: {
+    template: "%s | Goodbot",
+    default: "Goodbot",
+  },
   description: "Goodbot responsible repo",
 };
 

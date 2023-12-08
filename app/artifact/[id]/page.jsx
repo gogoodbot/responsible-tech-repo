@@ -4,6 +4,12 @@ import { columns } from "./columns";
 import { getDataForTable, getDataWithId } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
+import { notFound } from "next/navigation";
+
+export const metadata = {
+  title: "Results",
+};
+
 async function getGlobal() {
   const keyword = { query: "" }; //to be change to actual key words found in the artifact tag field
 
@@ -11,16 +17,19 @@ async function getGlobal() {
     const global = await getDataForTable(keyword);
     return global;
   } catch (error) {
-    console.log(error);
+    return { message: "Database error: Failed to fetch data" };
   }
 }
 
 async function getArtifactInfo(query) {
   try {
     const global = await getDataWithId(query);
+    if (!global) {
+      notFound();
+    }
     return global;
   } catch (error) {
-    console.log(error);
+    return { message: "Database error: Failed to fetch data" };
   }
 }
 

@@ -20,7 +20,7 @@ export default function Results({ searchParams }) {
         const fetchedData = await getDataForTable({ query });
         setData(fetchedData);
       } catch (error) {
-        console.error(error);
+        return { message: "Database error: Failed to fetch data" };
       }
     }
 
