@@ -34,15 +34,15 @@ async function getArtifactInfo(query) {
 }
 
 export default async function Page({ params }) {
-  const data = await getGlobal();
   const artifactInfo = await getArtifactInfo(params.id);
+  const data = await getGlobal();
 
   return (
     <section className="py-24">
-      <Search />
       <div className="container">
+      <ArtifactInfo params={artifactInfo} />
+
         <DataTable columns={columns} data={data} />
-        <ArtifactInfo params={artifactInfo} />
       </div>
     </section>
   );
