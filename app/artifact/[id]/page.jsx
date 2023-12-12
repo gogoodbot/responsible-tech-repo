@@ -40,10 +40,7 @@ export default async function Page({ params }) {
   const data = await getGlobal();
 
   return (
-    <section className="container relative">
-      <div className="container">
-
-      </div>
+    <section className="container relative mt-10">
 
 
 
@@ -64,7 +61,7 @@ export default async function Page({ params }) {
                   <TabsTrigger value="related">Related</TabsTrigger>
                 </TabsList>
                 <TabsContent value="summary">
-                <ArtifactInfo params={artifactInfo} />
+      <ArtifactInfo params={artifactInfo} />
 
                 </TabsContent>
                 <TabsContent value="related">
