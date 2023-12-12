@@ -7,7 +7,6 @@ import ArtifactInfo from "@/app/comps/ArtifactInfo";
 import { notFound } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-
 export const metadata = {
   title: "Results",
 };
@@ -41,9 +40,6 @@ export default async function Page({ params }) {
 
   return (
     <section className="container relative mt-10">
-
-
-
       <section className="overflow-hidden rounded-lg border bg-background shadow">
         <div className=" flex-col md:flex">
           <div className="border-b">
@@ -61,12 +57,10 @@ export default async function Page({ params }) {
                   <TabsTrigger value="related">Related</TabsTrigger>
                 </TabsList>
                 <TabsContent value="summary">
-      <ArtifactInfo params={artifactInfo} />
-
+                  <ArtifactInfo params={artifactInfo} />
                 </TabsContent>
                 <TabsContent value="related">
-        <DataTable columns={columns} data={data} />
-
+                  <DataTable columns={columns} data={data} />
                 </TabsContent>
               </Tabs>
             </div>
@@ -75,8 +69,6 @@ export default async function Page({ params }) {
           <div className=""></div>
         </div>
       </section>
-
-
     </section>
   );
 }
