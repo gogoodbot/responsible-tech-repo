@@ -29,7 +29,7 @@ const SearchTabs = async () => {
       </TabsList>
       <TabsContent value="organizations">
         <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
             {/* map through first 4 organizations in table to present */}
             {organizations.map((organization) => {
               return (
@@ -44,7 +44,7 @@ const SearchTabs = async () => {
       </TabsContent>
       <TabsContent value="litigations">
         <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
             {/* map through first 4 litigations in table to present */}
             {litigations.map((litigation) => {
               return (
@@ -59,7 +59,7 @@ const SearchTabs = async () => {
       </TabsContent>
       <TabsContent value="policies">
         <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
             {/* map through first 4 policies in table to present */}
             {policies.map((policy) => {
               return (
@@ -74,7 +74,7 @@ const SearchTabs = async () => {
       </TabsContent>
       <TabsContent value="resources">
         <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
             {/* map through first 4 resources in table to present */}
             {resources.map((resource) => {
               return (
@@ -89,7 +89,7 @@ const SearchTabs = async () => {
       </TabsContent>
       <TabsContent value="stakeholders">
         <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
             {/* map through first 4 stakeholders in table to present */}
             {stakeholders.map((stakeholder) => {
               return (

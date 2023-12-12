@@ -5,6 +5,7 @@ import { getDataForTable, getDataWithId } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
 import { notFound } from "next/navigation";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const metadata = {
   title: "Results",
@@ -38,12 +39,36 @@ export default async function Page({ params }) {
   const data = await getGlobal();
 
   return (
-    <section className="py-24">
-      <div className="container">
-      <ArtifactInfo params={artifactInfo} />
+    <section className="container relative mt-10">
+      <section className="overflow-hidden rounded-lg border bg-background shadow">
+        <div className=" flex-col md:flex">
+          <div className="border-b">
+            <div className="flex h-16 items-center px-4">
+              <h1>title</h1>
+            </div>
+          </div>
+          <div className="flex-1 space-y-4 p-8 pt-6">
+            <div className="flex items-center justify-between space-y-2">
+              {/* main container */}
 
-        <DataTable columns={columns} data={data} />
-      </div>
+              <Tabs defaultValue="summary">
+                <TabsList>
+                  <TabsTrigger value="summary">Summary</TabsTrigger>
+                  <TabsTrigger value="related">Related</TabsTrigger>
+                </TabsList>
+                <TabsContent value="summary">
+                  <ArtifactInfo params={artifactInfo} />
+                </TabsContent>
+                <TabsContent value="related">
+                  <DataTable columns={columns} data={data} />
+                </TabsContent>
+              </Tabs>
+            </div>
+          </div>
+
+          <div className=""></div>
+        </div>
+      </section>
     </section>
   );
 }
