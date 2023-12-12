@@ -17,8 +17,9 @@ const Navbar = () => {
           About
         </Link>
         </div>
-        <ModeToggle />
       </div>
+      <ModeToggle />
+
     </nav>
   );
 };
