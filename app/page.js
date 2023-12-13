@@ -40,7 +40,7 @@ export default async function Home() {
               {/* @todo add feedback button */}
             </div>
           </div>
-
+          <Separator />
     {/* tags component */}
           <div className="relative">
         <div className="mb-4 flex items-center">

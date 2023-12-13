@@ -28,7 +28,7 @@ module.exports = {
       colors: {
         goodbot: {
           primary: {
-            teal: "#3155F4",
+            teal: "#91CAC9",
             yellow: "#FEDA10",
             skyBlue: "#06BADB",
             starryNightBlack: "#242424",
@@ -37,7 +37,7 @@ module.exports = {
           },
           secondary: {
             neonGreen: "#96EA61",
-            lightBlue: "#A3E2EC",
+            lightBlue: "#91CAC9",
           },
         },
         border: "hsl(var(--border))",
