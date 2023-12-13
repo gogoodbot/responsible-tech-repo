@@ -10,6 +10,7 @@ import Tags from "./comps/Tags";
 import { Badge } from "../components/ui/badge";
 import { searchTags } from "@/lib/actions";
 import Link from "next/link";
+import { Separator } from "../components/ui/separator";
 
 export default async function Home() {
   const tags = await searchTags();
@@ -17,7 +18,31 @@ export default async function Home() {
     <section className="container relative">
       <Hero />
 
-      <div className="relative">
+
+
+      <section className="overflow-hidden rounded-lg border bg-background shadow">
+        <div className=" flex-col md:flex">
+          <div className="border-b">
+            <div className="flex h-16 items-center px-4">
+              <Search />
+            </div>
+          </div>
+
+
+
+          <div className="flex-1 space-y-4 p-8 pt-6">
+
+            
+
+          <div className="flex items-center justify-between space-y-2">
+            <h2 className="text-3xl font-bold tracking-tight">Explore</h2>
+            <div className="flex items-center space-x-2">
+              {/* @todo add feedback button */}
+            </div>
+          </div>
+
+    {/* tags component */}
+          <div className="relative">
         <div className="mb-4 flex items-center">
           {tags &&
             tags.map((tag) => (
@@ -33,14 +58,8 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="overflow-hidden rounded-lg border bg-background shadow">
-        <div className=" flex-col md:flex">
-          <div className="border-b">
-            <div className="flex h-16 items-center px-4">
-              <Search />
-            </div>
-          </div>
-          <div className="flex-1 space-y-4 p-8 pt-6">
+      <Separator />
+
             <div className="flex items-center justify-between space-y-2">
               <SearchTabs />
             </div>
