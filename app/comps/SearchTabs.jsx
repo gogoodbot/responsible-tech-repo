@@ -19,14 +19,30 @@ const SearchTabs = async () => {
   const stakeholders = await getCardsInfo("Stakeholder");
 
   return (
-    <Tabs defaultValue="organizations">
+    <Tabs defaultValue="policies">
       <TabsList>
+      <TabsTrigger value="policies">Policies</TabsTrigger>
+
         <TabsTrigger value="organizations">Organizations</TabsTrigger>
         <TabsTrigger value="litigations">Litigations</TabsTrigger>
-        <TabsTrigger value="policies">Policies</TabsTrigger>
         <TabsTrigger value="resources">Resources</TabsTrigger>
         <TabsTrigger value="stakeholders">Stakeholders</TabsTrigger>
       </TabsList>
+      <TabsContent value="policies">
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
+            {/* map through first 4 policies in table to present */}
+            {policies.map((policy) => {
+              return (
+                <ResultCard
+                  key={policy.policy_id}
+                  data={{ ...policy, tableName: "Policies" }}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </TabsContent>
       <TabsContent value="organizations">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
@@ -57,21 +73,7 @@ const SearchTabs = async () => {
           </div>
         </div>
       </TabsContent>
-      <TabsContent value="policies">
-        <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
-            {/* map through first 4 policies in table to present */}
-            {policies.map((policy) => {
-              return (
-                <ResultCard
-                  key={policy.policy_id}
-                  data={{ ...policy, tableName: "Policies" }}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </TabsContent>
+
       <TabsContent value="resources">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
