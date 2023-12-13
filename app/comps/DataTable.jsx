@@ -53,7 +53,15 @@ export function DataTable({ columns, data }) {
   return (
     <div>
       {/* Categories */}
+
       <div className="flex flex-row justify-center gap-3 text-goodbot-primary-teal font-bold font-openSans">
+        <Button
+          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          onClick={() => table.getColumn("tableName")?.setFilterValue("")}
+        >
+          All
+        </Button>
+
         <Button
           className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() =>
@@ -91,12 +99,6 @@ export function DataTable({ columns, data }) {
           }
         >
           Stakeholder
-        </Button>
-        <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
-          onClick={() => table.getColumn("tableName")?.setFilterValue("")}
-        >
-          All
         </Button>
       </div>
       {/* Filters */}
