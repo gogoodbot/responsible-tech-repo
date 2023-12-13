@@ -1,7 +1,11 @@
 import React from "react";
 import { DataTable } from "@/app/comps/DataTable";
 import { columns } from "./columns";
-import { getDataForTable, getDataWithId } from "@/lib/actions";
+import {
+  getDataForTable,
+  getDataWithId,
+  // artifactRecommendations,
+} from "@/lib/actions";
 import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
 import { notFound } from "next/navigation";
@@ -37,6 +41,9 @@ async function getArtifactInfo(query) {
 export default async function Page({ params }) {
   const artifactInfo = await getArtifactInfo(params.id);
   const data = await getGlobal();
+  const titleArtifact = artifactInfo[0].name;
+  // const recommend = await artifactRecommendations(params.id);
+  // console.log(recommend);
 
   return (
     <section className="container relative mt-10">
@@ -44,7 +51,9 @@ export default async function Page({ params }) {
         <div className=" flex-col md:flex">
           <div className="border-b">
             <div className="flex h-16 items-center px-4">
-              <h1>title</h1>
+              <h1 className="font-poppins font-bold text-xl pl-5">
+                {titleArtifact}
+              </h1>
             </div>
           </div>
           <div className="flex-1 space-y-4 p-8 pt-6">
