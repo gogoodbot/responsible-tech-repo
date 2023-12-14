@@ -30,7 +30,7 @@ const SearchTabs = async () => {
       </TabsList>
       <TabsContent value="policies">
         <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
             {/* map through first 4 policies in table to present */}
             {policies.map((policy) => {
               return (

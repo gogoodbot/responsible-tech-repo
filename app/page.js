@@ -20,7 +20,7 @@ export default async function Home() {
 
 
 
-      <section className="overflow-hidden rounded-lg border bg-background shadow">
+      <section className="overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 ">
         <div className=" flex-col md:flex">
           <div className="border-b">
             <div className="flex h-16 items-center px-4">

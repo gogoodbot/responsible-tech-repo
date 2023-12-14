@@ -52,9 +52,11 @@ const ResultCard = ({ data }) => {
       <Card>
         <CardHeader>
           <CardTitle>{data.name}</CardTitle>
+          <CardDescription>{formattedDate}</CardDescription>
+
         </CardHeader>
         <CardContent>
-          <CardDescription>{data.summary}</CardDescription>
+          <p>{data.summary}</p>
         </CardContent>
         <CardFooter>
           <div className="flex space-x-4 text-sm text-muted-foreground">
@@ -62,8 +64,6 @@ const ResultCard = ({ data }) => {
               <Circle className={`mr-1 h-3 w-3 ${circleColor}`} />
               {data.tableName}
             </div>
-            <div className="flex items-center"></div>
-            <div>{formattedDate}</div>
           </div>
         </CardFooter>
       </Card>

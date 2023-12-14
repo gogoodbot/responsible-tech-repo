@@ -26,7 +26,7 @@ const Search = () => {
       <Input
         htmlFor="search"
         type="text"
-        placeholder="Search for companies, policies, and trends."
+        placeholder="Search for companies, policies, and trends..."
         onChange={(e) => setSearchTerm(e.target.value)}
         value={searchTerm}
         className="  border-4 
