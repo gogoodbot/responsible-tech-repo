@@ -4,7 +4,7 @@ import { columns } from "./columns";
 import {
   getDataForTable,
   getDataWithId,
-  // artifactRecommendations,
+  artifactRecommendations,
 } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
@@ -42,8 +42,8 @@ export default async function Page({ params }) {
   const artifactInfo = await getArtifactInfo(params.id);
   const data = await getGlobal();
   const titleArtifact = artifactInfo[0].name;
-  // const recommend = await artifactRecommendations(params.id);
-  // console.log(recommend);
+  const recommend = await artifactRecommendations(params.id);
+  console.log("param id", params.id);
 
   return (
     <section className="container relative mt-10">
