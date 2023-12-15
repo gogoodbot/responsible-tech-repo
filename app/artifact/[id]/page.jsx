@@ -10,6 +10,7 @@ import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
 import { notFound } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ArtifactModal from "@/app/comps/ArtifactModal";
 
 export const metadata = {
   title: "Results",
@@ -55,6 +56,7 @@ export default async function Page({ params }) {
                 {titleArtifact}
               </h1>
             </div>
+            <ArtifactModal/>
           </div>
           <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between space-y-2">
