@@ -29,19 +29,19 @@ const ResultCard = ({ data }) => {
 
     const getCircleColor = () => {
       if (data.organization_id) {
-        return 'text-blue-500 fill-blue-500'; // Color for organization
+        return 'text-goodbot-primary-purple'; // Color for organization
       }
       if (data.litigation_id) {
-        return 'text-green-500 fill-green-500'; // Color for litigation
+        return 'text-goodbot-primary-red'; // Color for litigation
       }
       if (data.policy_id) {
-        return 'text-red-500 fill-red-500'; // Color for policy
+        return 'text-goodbot-primary-blue'; // Color for policy
       }
       if (data.resource_id) {
-        return 'text-yellow-500 fill-yellow-500'; // Color for resource
+        return 'text-goodbot-primary-yellow'; // Color for resource
       }
       if (data.stakeholder_id) {
-        return 'text-purple-500 fill-purple-500'; // Color for stakeholder
+        return 'text-goodbot-primary-pink'; // Color for stakeholder
       }
       return 'text-sky-400 fill-sky-400'; // Default color
     };
@@ -51,9 +51,8 @@ const ResultCard = ({ data }) => {
     <Link href={`/artifact/${id}`}>
       <Card>
         <CardHeader>
-          <CardTitle>{data.name}</CardTitle>
+          <CardTitle className>{data.name}</CardTitle>
           <CardDescription>{formattedDate}</CardDescription>
-
         </CardHeader>
         <CardContent>
           <p>{data.summary}</p>

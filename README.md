@@ -26,25 +26,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 # to-do
 - remove unused colours from tailwind config
 
-# Branding 
 
 
-Blue
+# Misc
+
+
+### Branding > Colour Guide
+Policy: Blue
 hex: #0aa0f5
 gradient: color(display-p3 0.0392 0.6275 0.9608)
 
-Purple
+Organization: Purple
 hex: #7f0af5
 gradient: color(display-p3 0.498 0.0392 0.9608)
 
-Pink
+Stakeholder Pink:
 hex: #f50ad6
 gradient: color(display-p3 0.9608 0.0392 0.8392)
 
-Red: 
+Litigation Red: 
 hex: #f73b6a
 gradient: color(display-p3 0.9686 0.2314 0.4157)
 
-Yellow: 
+Resouce Yellow: 
 hex: #f5a40a
 gradient: color(display-p3 0.9608 0.6431 0.0392)
