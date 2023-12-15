@@ -26,19 +26,14 @@ export default async function Home() {
             </div>
           </div>
           <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Explore</h2>
-            <div className="flex items-center space-x-2">
-              {/* @todo add feedback button */}
-            </div>
-          </div>
-          <Separator />
+
           {/* tags component */}
           <div className="relative">
         <div className="mb-4 flex items-center">
+          
           {tags &&
             tags.map((tag) => (
-              <Badge className="cursor-pointer mr-4 bg-goodbot-primary-blue text-white hover:text-goodbot-primary-blue hover:bg-white" key={tag.keyword}>
+              <Badge className="cursor-pointer mr-4 bg-goodbot-primary-blue text-white hover:text-white hover:bg-black" key={tag.keyword}>
                 <Hash className="mr-1" size={16}/>
                 <Link
                   className="flex items-center"
@@ -52,6 +47,7 @@ export default async function Home() {
       </div>
       <Separator />
             <div className="flex items-center justify-between space-y-2">
+              
               <SearchTabs />
             </div>
           </div>
