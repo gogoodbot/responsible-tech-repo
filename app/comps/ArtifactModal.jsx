@@ -1,47 +1,72 @@
+"use client";
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+const formSchema = z.object({"email":z.string().email().min(1).max(255),"key334":z.string().min(1).max(255)})
 
-export default function DialogDemo() {
+export default function ArtifactModal() {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+email: "",
+key334: "string",
+},
+  })
+
+  function onSubmit(values) {
+    console.log(values)
+  }
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Feedback</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Submit Feedback</DialogTitle>
-          <DialogDescription>
-            Thank you for taking the time to submit feedback. We will get back to you as soon as possible.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Email
-            </Label>
-            <Input id="name" value=" " className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Message
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Submit</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+    <Form {...form}>
+      <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input type="email" placeholder="Email" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="key334"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>My string</FormLabel>
+                  <FormControl>
+                    <Input  placeholder="Placeholder" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Description
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   )
 }

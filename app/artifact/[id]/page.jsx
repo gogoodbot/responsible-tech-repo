@@ -56,7 +56,6 @@ export default async function Page({ params }) {
                 {titleArtifact}
               </h1>
             </div>
-            <ArtifactModal/>
           </div>
           <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between space-y-2">
@@ -66,12 +65,16 @@ export default async function Page({ params }) {
                 <TabsList>
                   <TabsTrigger value="summary">Summary</TabsTrigger>
                   <TabsTrigger value="related">Related</TabsTrigger>
+                  <TabsTrigger value="feedback">Feedback</TabsTrigger>
                 </TabsList>
                 <TabsContent value="summary">
                   <ArtifactInfo params={artifactInfo} />
                 </TabsContent>
                 <TabsContent value="related">
                   <DataTable columns={columns} data={data} />
+                </TabsContent>
+                <TabsContent value="feedback">
+                  <ArtifactModal/>
                 </TabsContent>
               </Tabs>
             </div>
