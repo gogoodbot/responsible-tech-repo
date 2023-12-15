@@ -34,7 +34,7 @@ function ArtifactInfo({ params }) {
   });
 
   return (
-    <div className="bg-white p-6 max-w-4xl mx-auto shadow-lg rounded-lg">
+    <div className="p-6 max-w-4xl mx-auto ">
       {keysInOrganization.map((key) => (
         <div key={key} className={`${key !== 'summary' ? 'mb-4' : 'mb-8'}`}>
           {key === 'summary' ? (

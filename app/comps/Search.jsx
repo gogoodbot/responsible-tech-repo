@@ -44,7 +44,7 @@ const Search = () => {
         "
       />
       <Button
-        className="flex justify-between gap-1 outline-none items-center bg-[#91CAC9] text-black
+        className="flex justify-between gap-1 outline-none items-center bg-[#00b2ff] text-black
   border border-black roundedcursor-pointer  shrink-0 h-11  text-base leading-6 overflow-hidden px-4 py-3 no-underline transition-all duration-140 ease-out  whitespace-nowrap  hover:shadow-[4px_4px_0_#000] hover:-translate-x-1 hover:-translate-y-1focus-visible:outline-offset-1"
         type="submit"
       >
@@ -56,3 +56,5 @@ const Search = () => {
 };
 
 export default Search;
+
+
