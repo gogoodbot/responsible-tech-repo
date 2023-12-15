@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Search as SearchIcon} from "lucide-react";
+
+
 
 const Search = () => {
   const searchParams = useSearchParams();
@@ -29,28 +31,20 @@ const Search = () => {
         placeholder="Search for companies, policies, and trends..."
         onChange={(e) => setSearchTerm(e.target.value)}
         value={searchTerm}
-        className="  border-4 
-        rounded-md
-        h-12
-        leading-normal
-        border-[ #3F4354]
-        block
-        w-full
-        box-border
-        select-auto
-        text-base
-        px-1.5
-        pl-3
-        "
+        className="px-4 border border-gray-300 rounded-md"
       />
       <Button
-        className="flex justify-between gap-1 outline-none items-center bg-[#00b2ff] text-black
-  border border-black roundedcursor-pointer  shrink-0 h-11  text-base leading-6 overflow-hidden px-4 py-3 no-underline transition-all duration-140 ease-out  whitespace-nowrap  hover:shadow-[4px_4px_0_#000] hover:-translate-x-1 hover:-translate-y-1focus-visible:outline-offset-1"
+        variant="ghost"
+        className="outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white"
         type="submit"
+
+
       >
-        <AiOutlineSearch />
-        <span className="font-bold">SEARCH</span>
+        Search 
+        <SearchIcon className="mx-1" />  
+
       </Button>
+
     </form>
   );
 };

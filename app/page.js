@@ -17,9 +17,6 @@ export default async function Home() {
   return (
     <section className="container relative">
       <Hero />
-
-
-
       <section className="overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 ">
         <div className=" flex-col md:flex">
           <div className="border-b">
@@ -27,13 +24,7 @@ export default async function Home() {
               <Search />
             </div>
           </div>
-
-
-
           <div className="flex-1 space-y-4 p-8 pt-6">
-
-            
-
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Explore</h2>
             <div className="flex items-center space-x-2">
@@ -41,12 +32,12 @@ export default async function Home() {
             </div>
           </div>
           <Separator />
-    {/* tags component */}
+          {/* tags component */}
           <div className="relative">
         <div className="mb-4 flex items-center">
           {tags &&
             tags.map((tag) => (
-              <Badge className="cursor-pointer mr-4" key={tag.keyword}>
+              <Badge className="cursor-pointer mr-4 bg-goodbot-primary-blue text-white hover:bg-white hover:text-goodbot-primary-blue" key={tag.keyword}>
                 <Link
                   className="flex items-center"
                   href={`/results?query=${tag.keyword}`}
@@ -57,9 +48,7 @@ export default async function Home() {
             ))}
         </div>
       </div>
-
       <Separator />
-
             <div className="flex items-center justify-between space-y-2">
               <SearchTabs />
             </div>
