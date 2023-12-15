@@ -11,6 +11,7 @@ import { Badge } from "../components/ui/badge";
 import { searchTags } from "@/lib/actions";
 import Link from "next/link";
 import { Separator } from "../components/ui/separator";
+import { Hash } from "lucide-react";
 
 export default async function Home() {
   const tags = await searchTags();
@@ -37,7 +38,8 @@ export default async function Home() {
         <div className="mb-4 flex items-center">
           {tags &&
             tags.map((tag) => (
-              <Badge className="cursor-pointer mr-4 bg-goodbot-primary-blue text-white hover:bg-white hover:text-goodbot-primary-blue" key={tag.keyword}>
+              <Badge className="cursor-pointer mr-4 bg-goodbot-primary-blue text-white hover:bg-black hover:text-white" key={tag.keyword}>
+                <Hash className="mr-1" size={16}/>
                 <Link
                   className="flex items-center"
                   href={`/results?query=${tag.keyword}`}
