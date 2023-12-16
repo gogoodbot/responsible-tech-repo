@@ -17,65 +17,47 @@ const bannedKeys = [
   "modified_by",
   "created_by",
   "created_on",
+  "name",
 ];
 
 function ArtifactInfo({ params }) {
   const artifact = params[0];
-  const keysInOrganization = Object.keys(artifact);
-  let keysWithInfo = [];
-  keysInOrganization.forEach((key) => {
-    if (!bannedKeys.includes(key) && artifact[key]) {
-      keysWithInfo.push(key);
-    }
-  });
-  if (keysWithInfo.includes("summary")) {
-    const sortKeys = keysWithInfo.filter((key) => key !== "summary");
-    keysWithInfo = [...sortKeys, "summary"];
-  }
+  let keysInOrganization = Object.keys(artifact).filter(key => !bannedKeys.includes(key) && artifact[key]);
 
-  const rowNum = Math.ceil(keysWithInfo.length / 4);
-  const date = new Date(artifact.modified_on);
-  const formatted = date.toLocaleDateString("en-US", {
+  // Move 'summary' to the beginning of the array
+  keysInOrganization = ['summary', ...keysInOrganization.filter(key => key !== 'summary')];
+
+  const formattedDate = new Date(artifact.modified_on).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-  artifact.modified_on = formatted;
 
   return (
-    <section className={`grid grid-cols-4 grid-rows-${rowNum} gap-2 mt-5`}>
-      {keysWithInfo.map((key) => {
-        return (
-          <Card
-            className={`${
-              key === "summary" && "row-start-" + rowNum + 1 + " col-span-4"
-            }`}
-            key={key}
-          >
-            <CardHeader>
-              <CardTitle>
-                {key === "modified_on"
-                  ? "last updated"
-                  : key === "start_date"
-                  ? "start date"
-                  : key}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                {key !== "link" ? (
-                  artifact[key]
-                ) : (
-                  <Link href={artifact[key]} target="_blank">
-                    {artifact[key]}
-                  </Link>
+    <div className="p-6 max-w-4xl mx-auto ">
+      {keysInOrganization.map((key) => (
+        <div key={key} className={`${key !== 'summary' ? 'mb-4' : 'mb-8'}`}>
+          {key === 'summary' ? (
+            <div>
+              {/* <h2 className="text-3xl font-medium mb-2">Summary</h2> */}
+              <p className="text-gray-700 dark:text-initial text-lg">{artifact[key]}</p>
+            </div>
+          ) : (
+            <div className="text-sm">
+              <h3 className="text-lg font-medium capitalize mb-1">{key.replace('_', ' ')}</h3>
+              <p className="text-gray-700 dark:text-initial">
+                {key === "modified_on" ? formattedDate : artifact[key]}
+                {key === "link" && (
+                  <a href={artifact[key]} className="text-blue-600 hover:underline ml-2" target="_blank" rel="noopener noreferrer">
+                    Visit Link
+                  </a>
                 )}
-              </CardDescription>
-            </CardContent>
-          </Card>
-        );
-      })}
-    </section>
+              </p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
 
