@@ -15,16 +15,16 @@ export const metadata = {
   title: "Results",
 };
 
-async function getGlobal() {
-  const keyword = { query: "" }; //to be change to actual key words found in the artifact tag field
+// async function getGlobal() {
+//   const keyword = { query: "" }; //to be change to actual key words found in the artifact tag field
 
-  try {
-    const global = await getDataForTable(keyword);
-    return global;
-  } catch (error) {
-    return { message: "Database error: Failed to fetch data" };
-  }
-}
+//   try {
+//     const global = await getDataForTable(keyword);
+//     return global;
+//   } catch (error) {
+//     return { message: "Database error: Failed to fetch data" };
+//   }
+// }
 
 async function getArtifactInfo(query) {
   try {
@@ -40,10 +40,10 @@ async function getArtifactInfo(query) {
 
 export default async function Page({ params }) {
   const artifactInfo = await getArtifactInfo(params.id);
-  const data = await getGlobal();
+  // const data = await getGlobal();
   const titleArtifact = artifactInfo[0].name;
   const recommend = await artifactRecommendations(params.id);
-  console.log("param id", params.id);
+  // console.log("recommend", recommend);
 
   return (
     <section className="container relative mt-10">
@@ -69,7 +69,7 @@ export default async function Page({ params }) {
                   <ArtifactInfo params={artifactInfo} />
                 </TabsContent>
                 <TabsContent value="related">
-                  <DataTable columns={columns} data={data} />
+                  <DataTable columns={columns} data={recommend} />
                 </TabsContent>
               </Tabs>
             </div>
