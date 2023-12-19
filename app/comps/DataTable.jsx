@@ -59,8 +59,6 @@ export function DataTable({ columns, data }) {
       tableId = data[`${lowerCaseTable}_id`]
     }
 
-    console.log("click handle")
-    console.log(data)
     router.push(`/artifact/${tableId}`);
   };
 
