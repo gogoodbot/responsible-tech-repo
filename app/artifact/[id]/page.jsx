@@ -5,6 +5,7 @@ import {
   getDataForTable,
   getDataWithId,
   artifactRecommendations,
+  artifactSuggestions,
 } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
@@ -44,7 +45,8 @@ export default async function Page({ params }) {
   // const data = await getGlobal();
   const titleArtifact = artifactInfo[0].name;
   const recommend = await artifactRecommendations(params.id);
-  // console.log("recommend", recommend);
+  const suggest = await artifactSuggestions(params.id);
+  // console.log(recommend);
 
   return (
     <section className="container relative mt-10">
@@ -74,7 +76,7 @@ export default async function Page({ params }) {
                   <DataTable columns={columns} data={recommend} />
                 </TabsContent>
                 <TabsContent value="feedback">
-                  <ArtifactModal/>
+                  <ArtifactModal />
                 </TabsContent>
               </Tabs>
             </div>

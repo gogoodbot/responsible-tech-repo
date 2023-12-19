@@ -44,9 +44,23 @@ export function DataTable({ columns, data }) {
   });
 
   const handleClick = (data) => {
-    const lowerCaseTable =
+    const lowerCaseTable = '' 
+    //const tableId = data[`${lowerCaseTable}_id`];
+    //const tableId = data["Child_Id"] ? data["Child_Id"] : data[`${lowerCaseTable}_id`] ? data[`${lowerCaseTable}_id`] : data['id'] ;
+    let tableId = ''
+    if (data["Child_Id"]){
+      tableId = data['Child_Id']
+    }
+    else if (data['id']){
+      tableId = data['id']
+    }
+    else {
       data.tableName[0].toLowerCase() + data.tableName.slice(1);
-    const tableId = data[`${lowerCaseTable}_id`];
+      tableId = data[`${lowerCaseTable}_id`]
+    }
+
+    console.log("click handle")
+    console.log(data)
     router.push(`/artifact/${tableId}`);
   };
 
