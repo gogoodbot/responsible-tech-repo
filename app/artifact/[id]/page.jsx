@@ -67,13 +67,17 @@ export default async function Page({ params }) {
                 <TabsList>
                   <TabsTrigger value="summary">Summary</TabsTrigger>
                   <TabsTrigger value="related">Related</TabsTrigger>
+                  <TabsTrigger value="suggest">Suggested</TabsTrigger>
                   <TabsTrigger value="feedback">Feedback</TabsTrigger>
                 </TabsList>
                 <TabsContent value="summary">
                   <ArtifactInfo params={artifactInfo} />
                 </TabsContent>
                 <TabsContent value="related">
-                  <DataTable columns={columns} data={data} />
+                  <DataTable columns={columns} data={recommend} />
+                </TabsContent>
+                <TabsContent value="suggest">
+                  <DataTable columns={columns} data={suggest} />
                 </TabsContent>
                 <TabsContent value="feedback">
                   <ArtifactModal/>

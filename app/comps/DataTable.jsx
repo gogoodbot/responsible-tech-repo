@@ -44,7 +44,6 @@ export function DataTable({ columns, data }) {
   });
 
   const handleClick = (data) => {
-    const lowerCaseTable = '' 
     //const tableId = data[`${lowerCaseTable}_id`];
     //const tableId = data["Child_Id"] ? data["Child_Id"] : data[`${lowerCaseTable}_id`] ? data[`${lowerCaseTable}_id`] : data['id'] ;
     let tableId = ''
@@ -55,7 +54,8 @@ export function DataTable({ columns, data }) {
       tableId = data['id']
     }
     else {
-      data.tableName[0].toLowerCase() + data.tableName.slice(1);
+      const lowerCaseTable = data.tableName[0].toLowerCase() + data.tableName.slice(1) ;
+      console.log()
       tableId = data[`${lowerCaseTable}_id`]
     }
 
