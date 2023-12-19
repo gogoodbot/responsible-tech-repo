@@ -18,7 +18,9 @@ const bannedKeys = [
   "created_by",
   "created_on",
   "name",
+  "tags"
 ];
+
 
 function ArtifactInfo({ params }) {
   const artifact = params[0];

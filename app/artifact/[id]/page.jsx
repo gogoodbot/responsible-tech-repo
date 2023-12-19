@@ -6,9 +6,11 @@ import {
   getDataWithId,
   artifactRecommendations,
   artifactSuggestions,
+  getArtifactTags,
 } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
+import TagSection from "@/app/comps/TagSection";
 import { notFound } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ArtifactModal from "@/app/comps/ArtifactModal";
@@ -46,6 +48,7 @@ export default async function Page({ params }) {
   const titleArtifact = artifactInfo[0].name;
   const recommend = await artifactRecommendations(params.id);
   const suggest = await artifactSuggestions(params.id);
+  const tags = await getArtifactTags(params.id);
   // console.log(recommend);
 
   return (
@@ -64,6 +67,7 @@ export default async function Page({ params }) {
               {/* main container */}
 
               <Tabs defaultValue="summary">
+                <TagSection tags={tags} />
                 <TabsList>
                   <TabsTrigger value="summary">Summary</TabsTrigger>
                   <TabsTrigger value="related">Related</TabsTrigger>
