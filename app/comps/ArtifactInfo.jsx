@@ -18,42 +18,59 @@ const bannedKeys = [
   "created_by",
   "created_on",
   "name",
-  "tags"
+  "tags",
 ];
-
 
 function ArtifactInfo({ params }) {
   const artifact = params[0];
-  let keysInOrganization = Object.keys(artifact).filter(key => !bannedKeys.includes(key) && artifact[key]);
+  let keysInOrganization = Object.keys(artifact).filter(
+    (key) => !bannedKeys.includes(key) && artifact[key]
+  );
 
   // Move 'summary' to the beginning of the array
-  keysInOrganization = ['summary', ...keysInOrganization.filter(key => key !== 'summary')];
+  keysInOrganization = [
+    "summary",
+    ...keysInOrganization.filter((key) => key !== "summary"),
+  ];
 
-  const formattedDate = new Date(artifact.modified_on).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = new Date(artifact.modified_on).toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
 
   return (
     <div className="p-6 max-w-4xl mx-auto ">
       {keysInOrganization.map((key) => (
-        <div key={key} className={`${key !== 'summary' ? 'mb-4' : 'mb-8'}`}>
-          {key === 'summary' ? (
+        <div key={key} className={`${key !== "summary" ? "mb-4" : "mb-8"}`}>
+          {key === "summary" ? (
             <div>
               {/* <h2 className="text-3xl font-medium mb-2">Summary</h2> */}
-              <p className="text-gray-700 dark:text-initial text-lg">{artifact[key]}</p>
+              <p className="text-gray-700 dark:text-initial text-lg">
+                {artifact[key]}
+              </p>
             </div>
           ) : (
             <div className="text-sm">
-              <h3 className="text-lg font-medium capitalize mb-1">{key.replace('_', ' ')}</h3>
+              <h3 className="text-lg font-medium capitalize mb-1">
+                {key.replace("_", " ")}
+              </h3>
               <p className="text-gray-700 dark:text-initial">
                 {key === "modified_on" ? formattedDate : artifact[key]}
-                {key === "link" && (
-                  <a href={artifact[key]} className="text-blue-600 hover:underline ml-2" target="_blank" rel="noopener noreferrer">
-                    Visit Link
-                  </a>
-                )}
+                {key === "link" ||
+                  (key === "website" && (
+                    <a
+                      href={artifact[key]}
+                      className="text-blue-600 hover:underline ml-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visit Link
+                    </a>
+                  ))}
               </p>
             </div>
           )}
