@@ -11,6 +11,7 @@ import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
 import { notFound } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ArtifactModal from "@/app/comps/ArtifactModal";
 
 export const metadata = {
   title: "Results",
@@ -66,16 +67,16 @@ export default async function Page({ params }) {
                 <TabsList>
                   <TabsTrigger value="summary">Summary</TabsTrigger>
                   <TabsTrigger value="related">Related</TabsTrigger>
-                  <TabsTrigger value="suggested">Suggested</TabsTrigger>
+                  <TabsTrigger value="feedback">Feedback</TabsTrigger>
                 </TabsList>
                 <TabsContent value="summary">
                   <ArtifactInfo params={artifactInfo} />
                 </TabsContent>
                 <TabsContent value="related">
-                  <DataTable columns={columns} data={recommend} />
+                  <DataTable columns={columns} data={data} />
                 </TabsContent>
-                <TabsContent value="suggested">
-                  <DataTable columns={columns} data={suggest} />
+                <TabsContent value="feedback">
+                  <ArtifactModal/>
                 </TabsContent>
               </Tabs>
             </div>
