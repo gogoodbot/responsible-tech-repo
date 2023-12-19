@@ -4,7 +4,8 @@ import { columns } from "./columns";
 import {
   getDataForTable,
   getDataWithId,
-   artifactRecommendations,
+  artifactRecommendations,
+  artifactSuggestions
 } from "@/lib/actions";
 import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
@@ -43,6 +44,7 @@ export default async function Page({ params }) {
   const data = await getGlobal();
   const titleArtifact = artifactInfo[0].name;
   const recommend = await artifactRecommendations(params.id);
+  const suggest = await(artifactSuggestions(params.id))
   // console.log(recommend);
 
   return (
@@ -73,7 +75,7 @@ export default async function Page({ params }) {
                   <DataTable columns={columns} data={recommend} />
                 </TabsContent>
                 <TabsContent value="suggested">
-                  <DataTable columns={columns} data={data} />
+                  <DataTable columns={columns} data={suggest} />
                 </TabsContent>
               </Tabs>
             </div>
