@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -27,25 +26,25 @@ const ResultCard = ({ data }) => {
     data.resource_id ||
     data.stakeholder_id;
 
-    const getCircleColor = () => {
-      if (data.organization_id) {
-        return 'text-goodbot-primary-purple'; // Color for organization
-      }
-      if (data.litigation_id) {
-        return 'text-goodbot-primary-red'; // Color for litigation
-      }
-      if (data.policy_id) {
-        return 'text-goodbot-primary-blue'; // Color for policy
-      }
-      if (data.resource_id) {
-        return 'text-goodbot-primary-yellow'; // Color for resource
-      }
-      if (data.stakeholder_id) {
-        return 'text-goodbot-primary-pink'; // Color for stakeholder
-      }
-      return 'text-sky-400 fill-sky-400'; // Default color
-    };
-    const circleColor = getCircleColor();
+  const getCircleColor = () => {
+    if (data.organization_id) {
+      return "text-goodbot-primary-purple"; // Color for organization
+    }
+    if (data.litigation_id) {
+      return "text-goodbot-primary-red"; // Color for litigation
+    }
+    if (data.policy_id) {
+      return "text-goodbot-primary-blue"; // Color for policy
+    }
+    if (data.resource_id) {
+      return "text-goodbot-primary-yellow"; // Color for resource
+    }
+    if (data.stakeholder_id) {
+      return "text-goodbot-primary-pink"; // Color for stakeholder
+    }
+    return "text-sky-400 fill-sky-400"; // Default color
+  };
+  const circleColor = getCircleColor();
 
   return (
     <Link href={`/artifact/${id}`}>
