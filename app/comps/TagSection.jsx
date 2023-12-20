@@ -4,8 +4,6 @@ import Link from "next/link";
 import React from "react";
 
 function TagSection({ tags }) {
-  console.log("TAG SECTION");
-  console.log(tags);
   return (
     <div className="mb-4 flex items-center">
       {tags &&

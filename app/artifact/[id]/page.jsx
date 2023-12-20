@@ -2,13 +2,11 @@ import React from "react";
 import { DataTable } from "@/app/comps/DataTable";
 import { columns } from "./columns";
 import {
-  getDataForTable,
   getDataWithId,
   artifactRecommendations,
   artifactSuggestions,
   getArtifactTags,
 } from "@/lib/actions";
-import Search from "@/app/comps/Search";
 import ArtifactInfo from "@/app/comps/ArtifactInfo";
 import TagSection from "@/app/comps/TagSection";
 import { notFound } from "next/navigation";
@@ -18,17 +16,6 @@ import ArtifactModal from "@/app/comps/ArtifactModal";
 export const metadata = {
   title: "Results",
 };
-
-// async function getGlobal() {
-//   const keyword = { query: "" }; //to be change to actual key words found in the artifact tag field
-
-//   try {
-//     const global = await getDataForTable(keyword);
-//     return global;
-//   } catch (error) {
-//     return { message: "Database error: Failed to fetch data" };
-//   }
-// }
 
 async function getArtifactInfo(query) {
   try {
@@ -44,12 +31,10 @@ async function getArtifactInfo(query) {
 
 export default async function Page({ params }) {
   const artifactInfo = await getArtifactInfo(params.id);
-  // const data = await getGlobal();
   const titleArtifact = artifactInfo[0].name;
   const recommend = await artifactRecommendations(params.id);
   const suggest = await artifactSuggestions(params.id);
   const tags = await getArtifactTags(params.id);
-  // console.log(recommend);
 
   return (
     <section className="container relative mt-10">

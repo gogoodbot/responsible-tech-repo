@@ -21,12 +21,12 @@ const SearchTabs = async () => {
   return (
     <Tabs defaultValue="policies">
       <TabsList>
-      <TabsTrigger value="policies">Policies</TabsTrigger>
+        <TabsTrigger value="policies">Policies</TabsTrigger>
 
         <TabsTrigger value="organizations">Organizations</TabsTrigger>
         <TabsTrigger value="litigations">Litigations</TabsTrigger>
         <TabsTrigger value="resources">Resources</TabsTrigger>
-        <TabsTrigger value="stakeholders">Stakeholders</TabsTrigger>
+        <TabsTrigger value="stakeholders">Thought Leaders</TabsTrigger>
       </TabsList>
       <TabsContent value="policies">
         <div className="space-y-4">
@@ -97,7 +97,7 @@ const SearchTabs = async () => {
               return (
                 <ResultCard
                   key={stakeholder.stakeholder_id}
-                  data={{ ...stakeholder, tableName: "Stakeholders" }}
+                  data={{ ...stakeholder, tableName: "Thought Leaders" }}
                 />
               );
             })}

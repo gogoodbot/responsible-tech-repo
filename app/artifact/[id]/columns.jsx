@@ -20,7 +20,11 @@ export const columns = [
     },
     cell: ({ row }) => {
       const data = row.getValue("tableName");
-      return <div className="text-center">{data}</div>;
+      return (
+        <div className="text-center">
+          {data === "Stakeholder" ? "Thought Leadersconso" : data}
+        </div>
+      );
     },
   },
   {

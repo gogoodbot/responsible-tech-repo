@@ -1,9 +1,6 @@
 "use client";
 import {
-  ColumnDef,
-  ColumnFiltersState,
   flexRender,
-  SortingState,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
@@ -44,19 +41,16 @@ export function DataTable({ columns, data }) {
   });
 
   const handleClick = (data) => {
-    //const tableId = data[`${lowerCaseTable}_id`];
-    //const tableId = data["Child_Id"] ? data["Child_Id"] : data[`${lowerCaseTable}_id`] ? data[`${lowerCaseTable}_id`] : data['id'] ;
-    let tableId = ''
-    if (data["Child_Id"]){
-      tableId = data['Child_Id']
-    }
-    else if (data['id']){
-      tableId = data['id']
-    }
-    else {
-      const lowerCaseTable = data.tableName[0].toLowerCase() + data.tableName.slice(1) ;
-      console.log()
-      tableId = data[`${lowerCaseTable}_id`]
+    let tableId = "";
+    if (data["Child_Id"]) {
+      tableId = data["Child_Id"];
+    } else if (data["id"]) {
+      tableId = data["id"];
+    } else {
+      const lowerCaseTable =
+        data.tableName[0].toLowerCase() + data.tableName.slice(1);
+      console.log("lowerCaseTableName", lowerCaseTable);
+      tableId = data[`${lowerCaseTable}_id`];
     }
 
     router.push(`/artifact/${tableId}`);
@@ -110,7 +104,7 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Stakeholder")
           }
         >
-          Stakeholder
+          Thought Leader
         </Button>
       </div>
       {/* Filters */}
