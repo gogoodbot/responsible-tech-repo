@@ -20,7 +20,7 @@ export default function ArtifactModal() {
     resolver: zodResolver(formSchema),
     defaultValues: {
 email: "",
-key334: "string",
+key334: "",
 },
   })
 
@@ -54,12 +54,12 @@ key334: "string",
               name="key334"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>My string</FormLabel>
+                  <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Input  placeholder="Placeholder" {...field} />
+                    <Input  placeholder="Description" {...field} />
                   </FormControl>
                   <FormDescription>
-                    Description
+                    Thank you for your feedback. We will be in touch with you shortly.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
