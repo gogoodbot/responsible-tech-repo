@@ -22,7 +22,7 @@ export const columns = [
       const data = row.getValue("tableName");
       return (
         <div className="text-center">
-          {data === "Stakeholder" ? "Thought Leadersconso" : data}
+          {data === "Stakeholder" ? "Thought Leaders" : data}
         </div>
       );
     },
