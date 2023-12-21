@@ -1,37 +1,43 @@
 ## Getting Started
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-```
+- Next.js Framework: Leveraging the capabilities of Next.js for server-side rendering and static site generation.
+- Shadcn Component Library: Utilizes Radix UI for building accessible design systems.
+- Supabase Integration: Implements Supabase for scalable back-end services.
+- Responsive Design: Tailwind CSS is used for styling, ensuring a responsive and customizable UI.
+- Data Handling and Validation: Implemented react-hook-form and zod for form handling and data validation.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation and Usage
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Clone the Repository:
+git clone [[repository-url]](https://github.com/cabbeer/goodbot.git)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install Dependencies:
+Navigate to the project directory and run:
+`npm install`
 
-## Learn More
+Development:
+Start the development server:
+`npm run dev`
 
-To learn more about Next.js, take a look at the following resources:
+Dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Radix UI components for accessible design systems.
+- Supabase for backend-as-a-service.
+- Tailwind CSS for utility-first styling.
+- React and Next.js for building user interfaces.
+- Various other dependencies for date handling, animations, and data manipulation.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+DevDependencies
 
-
-
-# to-do
-- remove unused colours from tailwind config
-
-
+- Tailwind CSS and PostCSS for advanced styling.
+- ESLint for code quality and standardization.
 
 # Misc
 
-
 ### Branding > Colour Guide
+
 Policy: Blue
 hex: #0aa0f5
 gradient: color(display-p3 0.0392 0.6275 0.9608)
@@ -44,10 +50,10 @@ Stakeholder Pink:
 hex: #f50ad6
 gradient: color(display-p3 0.9608 0.0392 0.8392)
 
-Litigation Red: 
+Litigation Red:
 hex: #f73b6a
 gradient: color(display-p3 0.9686 0.2314 0.4157)
 
-Resouce Yellow: 
+Resouce Yellow:
 hex: #f5a40a
 gradient: color(display-p3 0.9608 0.6431 0.0392)
