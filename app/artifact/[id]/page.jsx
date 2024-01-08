@@ -35,6 +35,7 @@ export default async function Page({ params }) {
   const recommend = await artifactRecommendations(params.id);
   const suggest = await artifactSuggestions(params.id);
   const tags = await getArtifactTags(params.id);
+  console.log(artifactInfo);
 
   return (
     <section className="container relative mt-10">

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const bannedKeys = [
   "organization_id",
   "policy_id",
@@ -52,14 +54,14 @@ function ArtifactInfo({ params }) {
                 {key === "modified_on" ? formattedDate : artifact[key]}
                 {key === "link" ||
                   (key === "website" && (
-                    <a
+                    <Link
                       href={artifact[key]}
                       className="text-blue-600 hover:underline ml-2"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Visit Link
-                    </a>
+                    </Link>
                   ))}
               </p>
             </div>
