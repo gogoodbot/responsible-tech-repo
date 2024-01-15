@@ -11,7 +11,7 @@
 ## Installation and Usage
 
 Clone the Repository:
-git clone [[repository-url]](https://github.com/cabbeer/goodbot.git)
+`git clone https://github.com/gogoodbot/goodbot.git`
 
 Install Dependencies:
 Navigate to the project directory and run:
