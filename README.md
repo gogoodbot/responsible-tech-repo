@@ -10,15 +10,15 @@
 
 ## Installation and Usage
 
-Clone the Repository:
+Clone the Repository:  
 `git clone https://github.com/gogoodbot/goodbot.git`
 
-Install Dependencies:
-Navigate to the project directory and run:
+Install Dependencies:  
+Navigate to the project directory and run:  
 `npm install`
 
-Development:
-Start the development server:
+Development:  
+Start the development server:  
 `npm run dev`
 
 Dependencies
