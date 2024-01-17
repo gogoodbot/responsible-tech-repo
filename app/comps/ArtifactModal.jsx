@@ -44,9 +44,6 @@ export default function ArtifactModal() {
               <FormControl>
                 <Input type="email" placeholder="Email" {...field} />
               </FormControl>
-              <FormDescription>
-
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
