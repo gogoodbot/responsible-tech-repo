@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "captcha": "next dev -H test.mydomain.com --port 9000"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.9.3",
