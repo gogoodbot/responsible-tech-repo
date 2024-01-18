@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import Captcha from "./HCaptcha"
+import emailjs from '@emailjs/browser';
 
 const formSchema = z.object({ "email": z.string().email().min(1).max(255), "key334": z.string().min(1).max(255) })
 
@@ -35,6 +36,21 @@ export default function ArtifactModal() {
 
     if (hCaptchaToken) {
       console.log('Feedback form values:', values);
+      try {
+        const response = await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+          {
+            message: values.key334,
+            reply_to: values.email,
+          },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_API_KEY
+        );
+
+        console.log('Email sent successfully!', response);
+      } catch (error) {
+        console.error('Error sending email:', error);
+      }
     } else {
       console.error('Captcha not passed.');
     }
