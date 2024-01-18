@@ -94,7 +94,7 @@ export default function ArtifactModal() {
         <FormField
           control={form.control}
           name="hCaptcha"
-          render={({ field }) => (
+          render={({ }) => (
             <FormItem>
               <FormLabel>Please confirm you are human:</FormLabel>
               <FormControl>
