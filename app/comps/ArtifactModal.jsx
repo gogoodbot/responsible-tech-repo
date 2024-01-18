@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -19,6 +20,8 @@ import Captcha from "./HCaptcha"
 const formSchema = z.object({ "email": z.string().email().min(1).max(255), "key334": z.string().min(1).max(255) })
 
 export default function ArtifactModal() {
+  const [isCaptchaValid, setIsCaptchaValid] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,9 +30,15 @@ export default function ArtifactModal() {
     },
   })
 
-  function onSubmit(values) {
-    console.log(values)
-  }
+  async function onSubmit(values) {
+    const hCaptchaToken = form.getValues('hCaptcha');
+
+    if (hCaptchaToken) {
+      console.log('Feedback form values:', values);
+    } else {
+      console.error('Captcha not passed.');
+    }
+  };
 
   return (
     <Form {...form}>
@@ -73,14 +82,17 @@ export default function ArtifactModal() {
             <FormItem>
               <FormLabel>Please confirm you are human:</FormLabel>
               <FormControl>
-                <Captcha onVerify={(token) => form.setValue("hCaptcha", token)} />
+                <Captcha onVerify={(token) => {
+                  form.setValue("hCaptcha", token);
+                  setIsCaptchaValid(true);
+                }} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={!isCaptchaValid}>Submit</Button>
       </form>
     </Form>
   )
