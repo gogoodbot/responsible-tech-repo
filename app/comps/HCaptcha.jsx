@@ -5,7 +5,6 @@ const Captcha = ({ onVerify }) => {
   const [isHcaptchaValid, setIsHcaptchaValid] = useState(false);
 
   const handleHcaptchaVerify = (token) => {
-    console.log('hCaptcha token:', token);
     setIsHcaptchaValid(true);
     onVerify && onVerify(token);
   };
