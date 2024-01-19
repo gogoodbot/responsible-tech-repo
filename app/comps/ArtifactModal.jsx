@@ -58,6 +58,7 @@ export default function ArtifactModal({ titleArtifact }) {
         setIsFormSubmitted(true);
         setIsCaptchaValid(false);
         setShowThankYou(true);
+        form.reset({ email: "", subject: "", key334: "", hCaptcha: "" });
       } catch (error) {
         console.error('Error sending email:', error);
       }
