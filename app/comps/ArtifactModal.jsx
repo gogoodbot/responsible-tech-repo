@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input"
 import Captcha from "./HCaptcha"
 import emailjs from '@emailjs/browser';
 
-const formSchema = z.object({ "email": z.string().email().min(1).max(255), "key334": z.string().min(1).max(255) })
+const formSchema = z.object({ "email": z.string().email().min(1).max(255), "subject": z.string().min(1).max(150), "key334": z.string().min(1).max(255) })
 
 export default function ArtifactModal({ titleArtifact }) {
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
@@ -27,6 +27,7 @@ export default function ArtifactModal({ titleArtifact }) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      subject: "",
       key334: "",
     },
   })
@@ -42,8 +43,9 @@ export default function ArtifactModal({ titleArtifact }) {
           process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
           process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
           {
-            message: values.key334,
             reply_to: values.email,
+            subject: values.subject,
+            message: values.key334,
             user_referrer: currentUrl,
             artifact_title: titleArtifact,
           },
@@ -71,6 +73,20 @@ export default function ArtifactModal({ titleArtifact }) {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="Email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="subject"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Subject Title</FormLabel>
+              <FormControl>
+                <Input placeholder="Subject" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
