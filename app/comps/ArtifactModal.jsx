@@ -35,7 +35,8 @@ export default function ArtifactModal() {
     const hCaptchaToken = form.getValues('hCaptcha');
 
     if (hCaptchaToken) {
-      console.log('Feedback form values:', values);
+      const currentUrl = window.location.href;
+
       try {
         const response = await emailjs.send(
           process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
@@ -43,6 +44,7 @@ export default function ArtifactModal() {
           {
             message: values.key334,
             reply_to: values.email,
+            user_referrer: currentUrl,
           },
           process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_API_KEY
         );
