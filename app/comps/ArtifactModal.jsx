@@ -20,7 +20,7 @@ import emailjs from '@emailjs/browser';
 
 const formSchema = z.object({ "email": z.string().email().min(1).max(255), "key334": z.string().min(1).max(255) })
 
-export default function ArtifactModal() {
+export default function ArtifactModal({ titleArtifact }) {
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
 
   const form = useForm({
@@ -45,6 +45,7 @@ export default function ArtifactModal() {
             message: values.key334,
             reply_to: values.email,
             user_referrer: currentUrl,
+            artifact_title: titleArtifact,
           },
           process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_API_KEY
         );
