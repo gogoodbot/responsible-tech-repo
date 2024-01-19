@@ -54,7 +54,6 @@ export default function ArtifactModal({ titleArtifact }) {
           process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_API_KEY
         );
 
-        console.log('Email sent successfully!', response);
         setIsFormSubmitted(true);
         setIsCaptchaValid(false);
         setShowThankYou(true);
