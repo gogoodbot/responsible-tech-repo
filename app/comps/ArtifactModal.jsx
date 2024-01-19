@@ -22,6 +22,7 @@ const formSchema = z.object({ "email": z.string().email().min(1).max(255), "subj
 
 export default function ArtifactModal({ titleArtifact }) {
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -53,6 +54,7 @@ export default function ArtifactModal({ titleArtifact }) {
         );
 
         console.log('Email sent successfully!', response);
+        setShowThankYou(true);
       } catch (error) {
         console.error('Error sending email:', error);
       }
@@ -102,9 +104,6 @@ export default function ArtifactModal({ titleArtifact }) {
               <FormControl>
                 <Input placeholder="Description" {...field} />
               </FormControl>
-              <FormDescription>
-                Thank you for your feedback. We will be in touch with you shortly.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -128,7 +127,12 @@ export default function ArtifactModal({ titleArtifact }) {
         />
 
         <Button type="submit" disabled={!isCaptchaValid}>Submit</Button>
+        {showThankYou && (
+          <FormDescription>
+            Thank you for your feedback. If a response is required, we will be in touch with you shortly.
+          </FormDescription>
+        )}
       </form>
     </Form>
-  )
+  );
 }
