@@ -22,6 +22,7 @@ const formSchema = z.object({ "email": z.string().email().min(1).max(255), "subj
 
 export default function ArtifactModal({ titleArtifact }) {
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
 
   const form = useForm({
@@ -54,6 +55,8 @@ export default function ArtifactModal({ titleArtifact }) {
         );
 
         console.log('Email sent successfully!', response);
+        setIsFormSubmitted(true);
+        setIsCaptchaValid(false);
         setShowThankYou(true);
       } catch (error) {
         console.error('Error sending email:', error);
@@ -126,7 +129,9 @@ export default function ArtifactModal({ titleArtifact }) {
           )}
         />
 
-        <Button type="submit" disabled={!isCaptchaValid}>Submit</Button>
+        <Button type="submit" disabled={!isCaptchaValid || isFormSubmitted}>
+          Submit
+        </Button>
         {showThankYou && (
           <FormDescription>
             Thank you for your feedback. If a response is required, we will be in touch with you shortly.
