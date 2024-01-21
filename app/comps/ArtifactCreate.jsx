@@ -57,39 +57,39 @@ const formSchema = z.object({
 });
 
 // Mock data for tags
-const tagKeywords = [
-  {
-    value: "media",
-    label: "Media",
-  },
-  {
-    value: "social-innovation",
-    label: "Social Innovation",
-  },
-  {
-    value: "data",
-    label: "Data",
-  }, {
-    value: "education",
-    label: "Education",
-  },
-  {
-    value: "technology-sector",
-    label: "Technology Sector",
-  },
-  {
-    value: "academia",
-    label: "Academia",
-  },
-  {
-    value: "civic-engagement",
-    label: "Civic Engagement",
-  },
-  {
-    value: "artificial-intelligence",
-    label: "Artificial Intelligence",
-  },
-];
+// const tagKeywords = [
+//   {
+//     value: "media",
+//     label: "Media",
+//   },
+//   {
+//     value: "social-innovation",
+//     label: "Social Innovation",
+//   },
+//   {
+//     value: "data",
+//     label: "Data",
+//   }, {
+//     value: "education",
+//     label: "Education",
+//   },
+//   {
+//     value: "technology-sector",
+//     label: "Technology Sector",
+//   },
+//   {
+//     value: "academia",
+//     label: "Academia",
+//   },
+//   {
+//     value: "civic-engagement",
+//     label: "Civic Engagement",
+//   },
+//   {
+//     value: "artificial-intelligence",
+//     label: "Artificial Intelligence",
+//   },
+// ];
 
 export default function ArtifactCreate() {
   const [open, setOpen] = React.useState(false);
@@ -118,14 +118,14 @@ export default function ArtifactCreate() {
       return updatedTags;
     });
   };
+
   const addTagSelector = () => {
     setSelectedTags((prevTags) => [...prevTags, null]);
   };
-  const setOpenState = (newOpen) => {
-    setOpen(newOpen);
-  };
+
   const removeLastTag = () => {
     setSelectedTags((prevTags) => prevTags.slice(0, -1));
+    setOpen(false);
   };
 
   return (
@@ -369,40 +369,26 @@ export default function ArtifactCreate() {
           name="tags"
           render={({ field }) => (
             <FormItem>
-            <FormLabel>Tags</FormLabel>
-            {selectedTags.map((selectedTag, index) => (
-              <div key={index} className="mb-2">
-                <TagSelector
-                  selectedTag={selectedTag}
-                  onSelect={(tag) => handleTagSelect(index, tag)}
-                />
-              </div>
-            ))}
-            <Button type="button" onClick={addTagSelector}>
-              Add Tag
-            </Button>
-            {selectedTags.length > 0 && (
+              <FormLabel>Tags</FormLabel>
+              {selectedTags.map((selectedTag, index) => (
+                <div key={index} className="mb-2">
+                  <TagSelector
+                    selectedTag={selectedTag}
+                    onSelect={(tag) => handleTagSelect(index, tag)}
+                  />
+                </div>
+              ))}
+              <Button type="button" onClick={addTagSelector}>
+                Add Tag
+              </Button>
+              {selectedTags.length > 0 && (
                 <Button type="button" onClick={removeLastTag}>
                   Remove Last Tag
                 </Button>
               )}
-            <FormDescription></FormDescription>
-            <FormMessage />
-          </FormItem>
-            // <FormItem>
-            //   <FormLabel>Tags</FormLabel>
-            //   {selectedTag.map((selectedTag, index) => (
-            //     <span key={index} className="mb-2">
-                  
-            //     </span>
-            //   ))}
-            //   )}
-
-
-
-            //   <FormDescription>Tag description text</FormDescription>
-            //   <FormMessage />
-            // </FormItem>
+              <FormDescription></FormDescription>
+              <FormMessage />
+            </FormItem>
           )}
         />
 
@@ -414,7 +400,8 @@ export default function ArtifactCreate() {
 
 //Seperate component for tag selector. 
 function TagSelector({ selectedTag, onSelect }) {
-  const [open, setOpen] = React.useState(false);  // Add this line
+  const [open, setOpen] = React.useState(false);
+
   const tagKeywords = [
     {
       value: "media",
@@ -448,6 +435,7 @@ function TagSelector({ selectedTag, onSelect }) {
       label: "Artificial Intelligence",
     },
   ];
+  
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -476,10 +464,8 @@ function TagSelector({ selectedTag, onSelect }) {
                   key={tag.value}
                   value={tag.value}
                   onSelect={(value) => {
-                    // const selectedTag = tagKeywords.find((tag) => tag.value === value);
-                    // setSelectedTag(selectedTag || null);
-                    // setOpen(false);
                     onSelect(tag);
+                    setOpen(false);
                   }}
                 >
                   <span>{tag.label}</span>
