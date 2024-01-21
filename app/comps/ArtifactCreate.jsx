@@ -124,6 +124,9 @@ export default function ArtifactCreate() {
   const setOpenState = (newOpen) => {
     setOpen(newOpen);
   };
+  const removeLastTag = () => {
+    setSelectedTags((prevTags) => prevTags.slice(0, -1));
+  };
 
   return (
     <Form {...form}>
@@ -378,46 +381,11 @@ export default function ArtifactCreate() {
             <Button type="button" onClick={addTagSelector}>
               Add Tag
             </Button>
-            {/* <Popover open={open} onOpenChange={setOpenState}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-[150px] justify-start"
-                  >
-                    {selectedTag ? (
-                      <>
-                        {selectedTag.label}
-                      </>
-                    ) : (
-                      <>+ Add a tag</>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="p-0" side="right" align="start">
-                  <Command>
-                    <CommandInput placeholder="Find a proper tag..." />
-                    <CommandList>
-                      <CommandEmpty>No results found.</CommandEmpty>
-                      <CommandGroup>
-                        {tagKeywords.map((tag) => (
-                          <CommandItem
-                            key={tag.value}
-                            value={tag.value}
-                            onSelect={(value) => {
-                              const selectedTag = tagKeywords.find((tag) => tag.value === value);
-                              setSelectedTag(selectedTag || null);
-                              setOpen(false);
-                            }}
-                          >
-                            <span>{tag.label}</span>
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover> */}
+            {selectedTags.length > 0 && (
+                <Button type="button" onClick={removeLastTag}>
+                  Remove Last Tag
+                </Button>
+              )}
             <FormDescription></FormDescription>
             <FormMessage />
           </FormItem>
