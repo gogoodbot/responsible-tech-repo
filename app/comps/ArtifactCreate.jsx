@@ -3,7 +3,7 @@
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useForm, useState } from "react-hook-form";
+import { useForm, useState, useEffect } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -94,6 +94,8 @@ const tagKeywords = [
 export default function ArtifactCreate() {
   const [open, setOpen] = React.useState(false);
   const [selectedTag, setSelectedTag] = React.useState(null);
+  const [selectedTags, setSelectedTags] = React.useState([]); // Change to an array
+
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -108,6 +110,20 @@ export default function ArtifactCreate() {
   function onSubmit(values) {
     console.log(values);
   }
+
+  const handleTagSelect = (index, tag) => {
+    setSelectedTags((prevTags) => {
+      const updatedTags = [...prevTags];
+      updatedTags[index] = tag;
+      return updatedTags;
+    });
+  };
+  const addTagSelector = () => {
+    setSelectedTags((prevTags) => [...prevTags, null]);
+  };
+  const setOpenState = (newOpen) => {
+    setOpen(newOpen);
+  };
 
   return (
     <Form {...form}>
@@ -350,8 +366,19 @@ export default function ArtifactCreate() {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Tags</FormLabel>
-              <Popover open={open} onOpenChange={setOpen}>
+            <FormLabel>Tags</FormLabel>
+            {selectedTags.map((selectedTag, index) => (
+              <div key={index} className="mb-2">
+                <TagSelector
+                  selectedTag={selectedTag}
+                  onSelect={(tag) => handleTagSelect(index, tag)}
+                />
+              </div>
+            ))}
+            <Button type="button" onClick={addTagSelector}>
+              Add Tag
+            </Button>
+            {/* <Popover open={open} onOpenChange={setOpenState}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -390,15 +417,110 @@ export default function ArtifactCreate() {
                     </CommandList>
                   </Command>
                 </PopoverContent>
-              </Popover>
-              <FormDescription>Tag description text</FormDescription>
-              <FormMessage />
-            </FormItem>
+              </Popover> */}
+            <FormDescription></FormDescription>
+            <FormMessage />
+          </FormItem>
+            // <FormItem>
+            //   <FormLabel>Tags</FormLabel>
+            //   {selectedTag.map((selectedTag, index) => (
+            //     <span key={index} className="mb-2">
+                  
+            //     </span>
+            //   ))}
+            //   )}
+
+
+
+            //   <FormDescription>Tag description text</FormDescription>
+            //   <FormMessage />
+            // </FormItem>
           )}
         />
 
         <Button type="submit">Submit</Button>
       </form>
     </Form>
+  );
+}
+
+//Seperate component for tag selector. 
+function TagSelector({ selectedTag, onSelect }) {
+  const [open, setOpen] = React.useState(false);  // Add this line
+  const tagKeywords = [
+    {
+      value: "media",
+      label: "Media",
+    },
+    {
+      value: "social-innovation",
+      label: "Social Innovation",
+    },
+    {
+      value: "data",
+      label: "Data",
+    }, {
+      value: "education",
+      label: "Education",
+    },
+    {
+      value: "technology-sector",
+      label: "Technology Sector",
+    },
+    {
+      value: "academia",
+      label: "Academia",
+    },
+    {
+      value: "civic-engagement",
+      label: "Civic Engagement",
+    },
+    {
+      value: "artificial-intelligence",
+      label: "Artificial Intelligence",
+    },
+  ];
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-[150px] justify-start"
+        >
+          {selectedTag ? (
+            <>
+              {selectedTag.label}
+            </>
+          ) : (
+            <>+ Add a tag</>
+          )}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="p-0" side="right" align="start">
+        <Command>
+          <CommandInput placeholder="Find a proper tag..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup>
+              {tagKeywords.map((tag) => (
+                <CommandItem
+                  key={tag.value}
+                  value={tag.value}
+                  onSelect={(value) => {
+                    // const selectedTag = tagKeywords.find((tag) => tag.value === value);
+                    // setSelectedTag(selectedTag || null);
+                    // setOpen(false);
+                    onSelect(tag);
+                  }}
+                >
+                  <span>{tag.label}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 }
