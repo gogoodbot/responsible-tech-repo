@@ -51,18 +51,21 @@ function ArtifactInfo({ params }) {
                 {key.replace("_", " ")}
               </h3>
               <p className="text-gray-700 dark:text-initial">
-                {key === "modified_on" ? formattedDate : artifact[key]}
-                {key === "link" ||
-                  (key === "website" && (
-                    <Link
-                      href={artifact[key]}
-                      className="text-blue-600 hover:underline ml-2"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Visit Link
-                    </Link>
-                  ))}
+                {key === "modified_on" ? formattedDate : (
+                  <>
+                    {artifact[key]}
+                    {(key === "link" || key === "website") && (
+                      <Link
+                        href={artifact[key]}
+                        className="text-blue-600 hover:underline ml-2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Visit Link
+                      </Link>
+                    )}
+                  </>
+                )}
               </p>
             </div>
           )}
