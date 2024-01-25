@@ -29,11 +29,6 @@ import {
   CommandList,
 } from "@/components/ui/command";
 
-// const datetime = z.date().datetime();
-// Which data should be create/update on ArtifactCreate.jsx?
-// Where should be stay this component?
-// How can I see those keys data types?
-//
 const formSchema = z.object({
   name: z.string().min(1).max(40),
   website: z.string().url(),
@@ -56,44 +51,9 @@ const formSchema = z.object({
   //tags: z.array(tagSchema),
 });
 
-// Mock data for tags
-// const tagKeywords = [
-//   {
-//     value: "media",
-//     label: "Media",
-//   },
-//   {
-//     value: "social-innovation",
-//     label: "Social Innovation",
-//   },
-//   {
-//     value: "data",
-//     label: "Data",
-//   }, {
-//     value: "education",
-//     label: "Education",
-//   },
-//   {
-//     value: "technology-sector",
-//     label: "Technology Sector",
-//   },
-//   {
-//     value: "academia",
-//     label: "Academia",
-//   },
-//   {
-//     value: "civic-engagement",
-//     label: "Civic Engagement",
-//   },
-//   {
-//     value: "artificial-intelligence",
-//     label: "Artificial Intelligence",
-//   },
-// ];
 
 export default function ArtifactCreate() {
   const [open, setOpen] = React.useState(false);
-  const [selectedTag, setSelectedTag] = React.useState(null);
   const [selectedTags, setSelectedTags] = React.useState([]); // Change to an array
 
 
@@ -102,11 +62,11 @@ export default function ArtifactCreate() {
     //Do we need any default values?
     defaultValues: {
       name: "",
-      website: "",
+      website: "", // or any other default value
     },
   });
 
-  // free to delete this function
+  // free to delete test function
   function onSubmit(values) {
     console.log(values);
   }
@@ -368,21 +328,21 @@ export default function ArtifactCreate() {
           control={form.control}
           name="tags"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Tags</FormLabel>
+            <FormItem >
+              <FormLabel className="mr-4">Tags</FormLabel>
               {selectedTags.map((selectedTag, index) => (
-                <div key={index} className="mb-2">
+                <div key={index} className="mb-2.5">
                   <TagSelector
                     selectedTag={selectedTag}
                     onSelect={(tag) => handleTagSelect(index, tag)}
                   />
                 </div>
               ))}
-              <Button type="button" onClick={addTagSelector}>
+              <Button className="mr-4" type="button" onClick={addTagSelector}>
                 Add Tag
               </Button>
               {selectedTags.length > 0 && (
-                <Button type="button" onClick={removeLastTag}>
+                <Button className=" mr-4" type="button" onClick={removeLastTag}>
                   Remove Last Tag
                 </Button>
               )}
