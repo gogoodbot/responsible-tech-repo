@@ -54,6 +54,6 @@ Litigation Red:
 hex: #f73b6a
 gradient: color(display-p3 0.9686 0.2314 0.4157)
 
-Resouce Yellow:
+Resource Yellow:
 hex: #f5a40a
 gradient: color(display-p3 0.9608 0.6431 0.0392)
