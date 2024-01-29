@@ -53,7 +53,7 @@ function ArtifactInfo({ params }) {
               <p className="text-gray-700 dark:text-initial">
                 {key === "modified_on" ? formattedDate : (
                   <>
-                    {artifact[key]}
+
                     {(key === "link" || key === "website") && (
                       <Link
                         href={artifact[key]}
@@ -61,7 +61,7 @@ function ArtifactInfo({ params }) {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Visit Link
+                        {artifact[key]}
                       </Link>
                     )}
                   </>
