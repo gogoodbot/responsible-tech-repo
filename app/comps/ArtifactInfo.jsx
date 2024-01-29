@@ -57,7 +57,7 @@ function ArtifactInfo({ params }) {
               </p>
             </div>
           ) : (
-            <div className="text-sm">
+            <div className="text-sm flex items-center">
               <Image
                 src={iconMapping[key]}
                 alt={`${key} icon`}
@@ -65,25 +65,27 @@ function ArtifactInfo({ params }) {
                 height={48}
                 className="mr-2"
               />
-              <h3 className="text-lg font-medium capitalize mb-1">
-                {key.replace("_", " ")}
-              </h3>
-              <p className="text-gray-700 dark:text-initial">
-                {key === "modified_on" ? formattedDate : (
-                  <>
-                    {(key === "link" || key === "website") && (
-                      <Link
-                        href={artifact[key]}
-                        className="text-blue-600 hover:underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {artifact[key]}
-                      </Link>
-                    )}
-                  </>
-                )}
-              </p>
+              <div>
+                <h3 className="text-lg font-medium capitalize mb-1">
+                  {key.replace("_", " ")}
+                </h3>
+                <p className="text-gray-700 dark:text-initial">
+                  {key === "modified_on" ? formattedDate : (
+                    <>
+                      {(key === "link" || key === "website") && (
+                        <Link
+                          href={artifact[key]}
+                          className="text-blue-600 hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {artifact[key]}
+                        </Link>
+                      )}
+                    </>
+                  )}
+                </p>
+              </div>
             </div>
           )}
         </div>
