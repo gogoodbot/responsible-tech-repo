@@ -57,7 +57,7 @@ function ArtifactInfo({ params }) {
                     {(key === "link" || key === "website") && (
                       <Link
                         href={artifact[key]}
-                        className="text-blue-600 hover:underline ml-2"
+                        className="text-blue-600 hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
