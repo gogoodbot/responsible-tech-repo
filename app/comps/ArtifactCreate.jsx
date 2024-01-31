@@ -1,9 +1,11 @@
 /* eslint-disable func-style */
 "use client";
 import * as React from "react";
+import { useState, useEffect } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useForm, useState, useEffect } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -28,6 +30,17 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+//import { set } from "date-fns";
+import { getTableColumns } from "@/lib/actions";
 
 const formSchema = z.object({
   name: z.string().min(1).max(40),
@@ -53,9 +66,30 @@ const formSchema = z.object({
 
 
 export default function ArtifactCreate() {
+  const [position, setPosition] = React.useState("Select Artifact's Type"); //artifact types
+  // const [selectedComponent, setSelectedComponent] = React.useState(null); //artifact types
   const [open, setOpen] = React.useState(false);
-  const [selectedTags, setSelectedTags] = React.useState([]); // Change to an array
+  const [selectedTags, setSelectedTags] = React.useState([]);
 
+  const [tableColumns, setTableColumns] = React.useState([]);
+
+  useEffect(() => {
+    console.log("Position:", position);
+    if (position) {
+      const fetchTableColumns = async () => {
+        try {
+          const columns = await getTableColumns(position);
+          console.log("Fetched Columns:", columns);
+
+          setTableColumns(columns);
+        } catch (error) {
+          console.error('Error fetching table columns:', error.message);
+        }
+      };
+
+      fetchTableColumns();
+    }
+  }, [position]);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -88,273 +122,113 @@ export default function ArtifactCreate() {
     setOpen(false);
   };
 
+
+const artifactTypes = [
+  "Litigation",
+  "Policy",
+  "Resource",
+  "Stakeholder",
+  "Organization",
+];
+console.log(`test table columns:`);
+console.log(getTableColumns('Litigation'))
   return (
-    <Form {...form}>
-      <form
-        noValidate
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
-      >
-        <div>
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input type="" placeholder="Name" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+//     <Form {...form}>
+//       <form
+//         noValidate
+//         onSubmit={form.handleSubmit(onSubmit)}
+//         className="space-y-8 mt-10"
+//       >
+//         <div>
+//           <DropdownMenu>
+//               <p>artifact type:</p>
+//             <DropdownMenuTrigger asChild>
+//               <Button variant="outline">{position ? (
+//                 <>
+//                   {position}
+//                 </>
+//               ) : (<>Types</>)}</Button>
+//             </DropdownMenuTrigger>
+//             <DropdownMenuContent className="w-56">
+//               <DropdownMenuLabel>Types</DropdownMenuLabel>
+//               <DropdownMenuSeparator />
+//               <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+//                 <DropdownMenuRadioItem value="Litigation">Litigation</DropdownMenuRadioItem>
+//                 <DropdownMenuRadioItem value="Policy">Policy</DropdownMenuRadioItem>
+//                 <DropdownMenuRadioItem value="Resourse">Resourse</DropdownMenuRadioItem>
+//                 <DropdownMenuRadioItem value="Stakeholder">Stakeholder</DropdownMenuRadioItem>
+//                 <DropdownMenuRadioItem value="Organization">Organization</DropdownMenuRadioItem>
+//               </DropdownMenuRadioGroup>
+//             </DropdownMenuContent>
+//           </DropdownMenu>
+//         </div>
+        
+// <select value={ArtifactCreate} onChange={(e)=> {
+//   setPosition(e.target.value);
+//   console.log(e.target.value);
+// }}>
+//   <option value=""> option...</option>
+//   {artifactTypes.map((artifactType) => (
+//     <option key={artifactType} value={artifactType}>
+//       {artifactType}
+//     </option>))}
 
-          <FormField
-            control={form.control}
-            name="website"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Website</FormLabel>
-                <FormControl>
-                  <Input placeholder="Website" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="summary"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Summary</FormLabel>
-                <FormControl>
-                  <Input placeholder="summary" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="affiliation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Affiliation</FormLabel>
-                <FormControl>
-                  <Input placeholder="affiliation" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="scope"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Scope</FormLabel>
-                <FormControl>
-                  <Input placeholder="scope" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="communities_of_focus"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Communities of Focus</FormLabel>
-                <FormControl>
-                  <Input placeholder="communities_of_focus" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="geographic_mandate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Geographic Mandate</FormLabel>
-                <FormControl>
-                  <Input placeholder="geographic_mandate" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="hq_province"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>HQ Province</FormLabel>
-                <FormControl>
-                  <Input placeholder="hq_province" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="hq_city"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>HQ City</FormLabel>
-                <FormControl>
-                  <Input placeholder="hq_city" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="status"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Status</FormLabel>
-                <FormControl>
-                  <Input placeholder="status" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="stage"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Stage</FormLabel>
-                <FormControl>
-                  <Input placeholder="stage" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
 
-            control={form.control}
-            name="composition"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Composition</FormLabel>
-                <FormControl>
-                  <Input placeholder="composition" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="size"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Size</FormLabel>
-                <FormControl>
-                  <Input placeholder="size" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="established_date"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Established Date</FormLabel>
-                <FormControl>
-                  <Input placeholder="established_date" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="created_by"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Created By</FormLabel>
-                <FormControl>
-                  <Input placeholder="created_by" {...field} />
-                </FormControl>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* <FormField
-          control={form.control}
-          name="created_on"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Created On</FormLabel>
-              <FormControl>
-                <Input placeholder="created_on" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
+// </select>
 
-        </div>
-        <FormField
-          control={form.control}
-          name="tags"
-          render={({ field }) => (
-            <FormItem >
-              <FormLabel className="mr-4">Tags</FormLabel>
-              {selectedTags.map((selectedTag, index) => (
-                <div key={index} className="mb-2.5">
-                  <TagSelector
-                    selectedTag={selectedTag}
-                    onSelect={(tag) => handleTagSelect(index, tag)}
-                  />
-                </div>
-              ))}
-              <Button className="mr-4" type="button" onClick={addTagSelector}>
-                Add Tag
-              </Button>
-              {selectedTags.length > 0 && (
-                <Button className=" mr-4" type="button" onClick={removeLastTag}>
-                  Remove Last Tag
-                </Button>
-              )}
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+//         <FormField
+//           control={form.control}
+//           name="tags"
+//           render={({ field }) => (
+//             <FormItem >
+//               <FormLabel className="mr-4">Tags</FormLabel>
+//               {selectedTags.map((selectedTag, index) => (
+//                 <div key={index} className="mb-2.5">
+//                   <TagSelector
+//                     selectedTag={selectedTag}
+//                     onSelect={(tag) => handleTagSelect(index, tag)}
+//                   />
+//                 </div>
+//               ))}
+//               <Button className="mr-4" type="button" onClick={addTagSelector}>
+//                 Add Tag
+//               </Button>
+//               {selectedTags.length > 0 && (
+//                 <Button className=" mr-4" type="button" onClick={removeLastTag}>
+//                   Remove Last Tag
+//                 </Button>
+//               )}
+//               <FormDescription></FormDescription>
+//               <FormMessage />
+//             </FormItem>
+//           )}
+//         />
+
+//         <Button type="submit">Submit</Button>
+//       </form>
+//     </Form>
+       <Form {...form}>
+<form
+  noValidate
+  onSubmit={form.handleSubmit(onSubmit)}
+  className="space-y-8 mt-10"
+>
+  {/* ... (other form elements) */}
+
+  {/* Display fetched table columns */}
+  <div>
+    <h2>Table Columns for {position}</h2>
+    <ul>
+      {tableColumns.map((column) => (
+        <li key={column.column_name}>{column.column_name}</li>
+      ))}
+    </ul>
+  </div>
+
+  <Button type="submit">Submit</Button>
+</form>
+</Form>
   );
 }
 
@@ -395,7 +269,7 @@ function TagSelector({ selectedTag, onSelect }) {
       label: "Artificial Intelligence",
     },
   ];
-  
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
