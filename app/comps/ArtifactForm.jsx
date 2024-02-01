@@ -9,6 +9,7 @@ import TagSelectorList from "./TagSelectorList";
 // import TableColumnsList from "./TableColumnsList";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
+import { getTableColumns } from "@/lib/actions";
 
 
 const formSchema = z.object({
