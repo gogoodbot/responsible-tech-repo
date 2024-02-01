@@ -68,7 +68,7 @@ const ResultCard = ({ data }) => {
         <CardFooter>
           <div className="flex space-x-4 text-sm text-muted-foreground">
             <div className="flex items-center">
-              <Image src={iconUrl} width={16} height={16} alt={`${data.tableName} icon`} />
+              <Image src={iconUrl} width={16} height={16} alt={`${data.tableName} icon`} className="mr-1" />
               {data.tableName}
             </div>
           </div>
