@@ -52,6 +52,7 @@ const SearchTabs = async () => {
           Thought Leaders
         </TabsTrigger>
       </TabsList>
+
       <TabsContent value="policies">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -67,6 +68,7 @@ const SearchTabs = async () => {
           </div>
         </div>
       </TabsContent>
+
       <TabsContent value="organizations">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
@@ -82,6 +84,7 @@ const SearchTabs = async () => {
           </div>
         </div>
       </TabsContent>
+
       <TabsContent value="litigations">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
@@ -113,6 +116,7 @@ const SearchTabs = async () => {
           </div>
         </div>
       </TabsContent>
+
       <TabsContent value="stakeholders">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
