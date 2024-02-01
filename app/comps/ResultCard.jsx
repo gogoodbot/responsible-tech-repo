@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Circle } from "lucide-react";
+import Image from 'next/image';
 import Link from "next/link";
 
 const ResultCard = ({ data }) => {
@@ -26,25 +26,34 @@ const ResultCard = ({ data }) => {
     data.resource_id ||
     data.stakeholder_id;
 
-  const getCircleColor = () => {
+  const getIcon = () => {
+    // Use up to 2 hex codes in the URL for colour gradient
+    const iconMapping = {
+      policy: "https://img.icons8.com/nolan/64/0aa0f5/0aa0f5/terms-and-conditions.png",
+      organization: "https://img.icons8.com/nolan/64/7f0af5/7f0af5/company.png",
+      litigation: "https://img.icons8.com/nolan/64/f73b6a/f73b6a/scales.png",
+      resource: "https://img.icons8.com/nolan/64/f5a40a/f5a40a/commodity.png",
+      stakeholder: "https://img.icons8.com/nolan/64/38bdf8/38bdf8/project-management.png", // default colour sky-400
+    };
     if (data.organization_id) {
-      return "text-goodbot-primary-purple"; // Color for organization
+      return iconMapping.organization;
     }
     if (data.litigation_id) {
-      return "text-goodbot-primary-red"; // Color for litigation
+      return iconMapping.litigation;
     }
     if (data.policy_id) {
-      return "text-goodbot-primary-blue"; // Color for policy
+      return iconMapping.policy;
     }
     if (data.resource_id) {
-      return "text-goodbot-primary-yellow"; // Color for resource
+      return iconMapping.resource;
     }
     if (data.stakeholder_id) {
-      return "text-goodbot-primary-pink"; // Color for stakeholder
+      return iconMapping.stakeholder;
     }
-    return "text-sky-400 fill-sky-400"; // Default color
+    return iconMapping.policy;
   };
-  const circleColor = getCircleColor();
+
+  const iconUrl = getIcon();
 
   return (
     <Link href={`/artifact/${id}`}>
@@ -59,7 +68,7 @@ const ResultCard = ({ data }) => {
         <CardFooter>
           <div className="flex space-x-4 text-sm text-muted-foreground">
             <div className="flex items-center">
-              <Circle className={`mr-1 h-3 w-3 ${circleColor}`} />
+              <Image src={iconUrl} width={16} height={16} alt={`${data.tableName} icon`} />
               {data.tableName}
             </div>
           </div>
