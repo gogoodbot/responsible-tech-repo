@@ -32,23 +32,23 @@ const SearchTabs = async () => {
     <Tabs defaultValue="policies">
       <TabsList>
         <TabsTrigger value="policies">
-          <Image src={iconMapping.policy} width={32} height={32} alt="Policies" />
+          <Image src={iconMapping.policy} width={32} height={32} alt="Policies" className="mr-1" />
           Policies
         </TabsTrigger>
         <TabsTrigger value="organizations">
-          <Image src={iconMapping.organization} width={32} height={32} alt="Organizations" />
+          <Image src={iconMapping.organization} width={32} height={32} alt="Organizations" className="mr-1" />
           Organizations
         </TabsTrigger>
         <TabsTrigger value="litigations">
-          <Image src={iconMapping.litigation} width={32} height={32} alt="Litigations" />
+          <Image src={iconMapping.litigation} width={32} height={32} alt="Litigations" className="mr-1" />
           Litigations
         </TabsTrigger>
         <TabsTrigger value="resources">
-          <Image src={iconMapping.resource} width={32} height={32} alt="Resources" />
+          <Image src={iconMapping.resource} width={32} height={32} alt="Resources" className="mr-1" />
           Resources
         </TabsTrigger>
         <TabsTrigger value="stakeholders">
-          <Image src={iconMapping.stakeholder} width={32} height={32} alt="Thought Leaders" />
+          <Image src={iconMapping.stakeholder} width={32} height={32} alt="Thought Leaders" className="mr-1" />
           Thought Leaders
         </TabsTrigger>
       </TabsList>
