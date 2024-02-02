@@ -8,10 +8,37 @@ import { Button } from "@/components/ui/button";
 export default function TagSelector({ selectedTag, onSelect }) {
   const [open, setOpen] = useState(false);
   const tagKeywords = [
-    { value: "media", label: "Media" },
-    { value: "social-innovation", label: "Social Innovation" },
-    { value: "data", label: "Data" },
-    // ... other tag keywords ...
+    {
+      value: "media",
+      label: "Media",
+    },
+    {
+      value: "social-innovation",
+      label: "Social Innovation",
+    },
+    {
+      value: "data",
+      label: "Data",
+    }, {
+      value: "education",
+      label: "Education",
+    },
+    {
+      value: "technology-sector",
+      label: "Technology Sector",
+    },
+    {
+      value: "academia",
+      label: "Academia",
+    },
+    {
+      value: "civic-engagement",
+      label: "Civic Engagement",
+    },
+    {
+      value: "artificial-intelligence",
+      label: "Artificial Intelligence",
+    },
   ];
 
   return (
