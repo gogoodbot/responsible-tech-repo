@@ -1,6 +1,6 @@
+import SearchIcon from "@/components/ui/SearchIcons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cardsHome } from "@/lib/actions";
-import Image from 'next/image';
 import ResultCard from "./ResultCard";
 
 const getCardsInfo = async (artifact) => {
@@ -10,15 +10,6 @@ const getCardsInfo = async (artifact) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-// Use up to 2 hex codes in the URL for colour gradient
-const iconMapping = {
-  policy: "https://img.icons8.com/nolan/64/06badb/0aa0f5/terms-and-conditions.png",
-  organization: "https://img.icons8.com/nolan/64/06badb/0aa0f5/company.png",
-  litigation: "https://img.icons8.com/nolan/64/06badb/0aa0f5/scales.png",
-  resource: "https://img.icons8.com/nolan/64/06badb/0aa0f5/commodity.png",
-  stakeholder: "https://img.icons8.com/nolan/64/06badb/0aa0f5/project-management.png",
 };
 
 const SearchTabs = async () => {
@@ -32,23 +23,23 @@ const SearchTabs = async () => {
     <Tabs defaultValue="policies">
       <TabsList>
         <TabsTrigger value="policies">
-          <Image src={iconMapping.policy} width={32} height={32} alt="Policies" className="mr-1" />
+          <SearchIcon type="policy" width={32} height={32} className="mr-1" />
           Policies
         </TabsTrigger>
         <TabsTrigger value="organizations">
-          <Image src={iconMapping.organization} width={32} height={32} alt="Organizations" className="mr-1" />
+          <SearchIcon type="organization" width={32} height={32} className="mr-1" />
           Organizations
         </TabsTrigger>
         <TabsTrigger value="litigations">
-          <Image src={iconMapping.litigation} width={32} height={32} alt="Litigations" className="mr-1" />
+          <SearchIcon type="litigation" width={32} height={32} className="mr-1" />
           Litigations
         </TabsTrigger>
         <TabsTrigger value="resources">
-          <Image src={iconMapping.resource} width={32} height={32} alt="Resources" className="mr-1" />
+          <SearchIcon type="resource" width={32} height={32} className="mr-1" />
           Resources
         </TabsTrigger>
         <TabsTrigger value="stakeholders">
-          <Image src={iconMapping.stakeholder} width={32} height={32} alt="Thought Leaders" className="mr-1" />
+          <SearchIcon type="stakeholder" width={32} height={32} className="mr-1" />
           Thought Leaders
         </TabsTrigger>
       </TabsList>
