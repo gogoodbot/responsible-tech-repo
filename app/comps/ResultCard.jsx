@@ -1,5 +1,6 @@
 "use client";
 
+import SearchIcon from '@/components/ui/SearchIcons';
 import {
   Card,
   CardContent,
@@ -8,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Image from 'next/image';
 import Link from "next/link";
 
 const ResultCard = ({ data }) => {
@@ -27,33 +27,25 @@ const ResultCard = ({ data }) => {
     data.stakeholder_id;
 
   const getIcon = () => {
-    // Use up to 2 hex codes in the URL for colour gradient
-    const iconMapping = {
-      policy: "https://img.icons8.com/nolan/64/0aa0f5/0aa0f5/terms-and-conditions.png",
-      organization: "https://img.icons8.com/nolan/64/7f0af5/7f0af5/company.png",
-      litigation: "https://img.icons8.com/nolan/64/f73b6a/f73b6a/scales.png",
-      resource: "https://img.icons8.com/nolan/64/f5a40a/f5a40a/commodity.png",
-      stakeholder: "https://img.icons8.com/nolan/64/38bdf8/38bdf8/project-management.png", // default colour sky-400
-    };
     if (data.organization_id) {
-      return iconMapping.organization;
+      return "organization";
     }
     if (data.litigation_id) {
-      return iconMapping.litigation;
+      return "litigation";
     }
     if (data.policy_id) {
-      return iconMapping.policy;
+      return "policy";
     }
     if (data.resource_id) {
-      return iconMapping.resource;
+      return "resource";
     }
     if (data.stakeholder_id) {
-      return iconMapping.stakeholder;
+      return "stakeholder";
     }
-    return iconMapping.policy;
+    return "policy";
   };
 
-  const iconUrl = getIcon();
+  const icon = getIcon();
 
   return (
     <Link href={`/artifact/${id}`}>
@@ -68,7 +60,7 @@ const ResultCard = ({ data }) => {
         <CardFooter>
           <div className="flex space-x-4 text-sm text-muted-foreground">
             <div className="flex items-center">
-              <Image src={iconUrl} width={16} height={16} alt={`${data.tableName} icon`} className="mr-1" />
+              <SearchIcon type={icon} width={16} height={16} className="mr-1" />
               {data.tableName}
             </div>
           </div>
