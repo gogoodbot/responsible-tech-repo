@@ -27,7 +27,7 @@ const formSchema = z.object({
     "country": z.string().min(1).max(255),
     "status": z.string().min(1).max(255),
     "mandate": z.string().min(1).max(255),
-    "startDate": z.string().min(1).max(255),
+    // "startDate": z.string().min(1).max(255),
     "jurisdiction": z.string().min(1).max(255),
     "created_by": z.string(),
     "modified_by": z.string(),
@@ -45,7 +45,7 @@ export default function LitigationFormFields() {
         country: '',
         status: '',
         mandate: '',
-        startDate: '2022-01-01T00:00:00Z',
+        startDate: '',
         jurisdiction: '',
         created_by: '',
         modified_by: '',
@@ -61,18 +61,27 @@ export default function LitigationFormFields() {
             litigation_id: '',
             name: "",
             summary: "",
-            startDate: '2022-01-01T00:00:00Z' // or any other default value
+            // startDate: '2024-01-01' // or any other default value
         },
     });
 
     const handleSubmit = async (e) => {
+        console.log('handleSubmit called');
         e.preventDefault();
 
+
+        // Check if startDate is a non-empty string and a valid date
+        if (!formData.startDate || formData.startDate.trim() === '' || isNaN(new Date(formData.startDate))) {
+            console.error('Error inserting data: startDate is empty or not a valid date');
+            return;
+        }
         // Check if startDate is a non-empty string
         if (!formData.startDate || formData.startDate.trim() === '') {
             console.error('Error inserting data: startDate cannot be empty');
             return;
         }
+
+
 
         // Insert the form data into the Litigation table
         const { data, error } = await supabase.from('Litigation').insert([formData]);
@@ -86,12 +95,29 @@ export default function LitigationFormFields() {
     };
 
     const handleChange = (e) => {
+        if (e.target.name === 'startDate') {
+            // Check for a non-empty string and valid date format
+            if (e.target.value.trim() !== '' && isNaN(new Date(e.target.value))) {
+                console.error('Invalid date format for startDate');
+                return;
+            }
+        }
+
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        console.log('Updated form data:', formData);
     };
 
-    const { data, error } = supabase.from('Litigation').insert([formData]);
-    console.log('Response Data:', data);
-    console.log('Error:', error);
+
+    async function insertData() {
+        const { data, error } = await supabase.from('Litigation').insert([formData]);
+        if (error) {
+            console.error('Error inserting data:', error.message, 'Full error:', error);
+        } else {
+            console.log('Data inserted successfully:', data);
+        }
+    }
+
+    insertData();
 
     return (
 
@@ -101,6 +127,10 @@ export default function LitigationFormFields() {
                 <label>
                     Name:
                     <Input type="text" name="name" value={formData.name} onChange={handleChange} />
+                </label>
+                <label>
+                    StartDate:
+                    <Input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
                 </label>
 
                 {/* Add similar labels and inputs for other columns */}
