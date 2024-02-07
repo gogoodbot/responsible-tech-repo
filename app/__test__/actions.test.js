@@ -41,5 +41,3 @@ async function newItem(field, value, table) {
   }
   return data;
 }
-
-// Similarly, integrate the remaining functions from the provided file into this file.
