@@ -1,13 +1,17 @@
 "use client";
+
 import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
-  getSortedRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
+import SearchIcon from '@/components/ui/SearchIcons';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -16,10 +20,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function DataTable({ columns, data }) {
   const router = useRouter();
@@ -59,7 +61,6 @@ export function DataTable({ columns, data }) {
   return (
     <div>
       {/* Categories */}
-
       <div className="flex flex-row justify-center gap-3 text-goodbot-primary-teal font-bold font-openSans">
         <Button
           className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
@@ -67,13 +68,13 @@ export function DataTable({ columns, data }) {
         >
           All
         </Button>
-
         <Button
           className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Litigation")
           }
         >
+          <SearchIcon type="litigation" width={32} height={32} />
           Litigation
         </Button>
         <Button
@@ -82,12 +83,14 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Organization")
           }
         >
+          <SearchIcon type="organization" width={32} height={32} />
           Organization
         </Button>
         <Button
           className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() => table.getColumn("tableName")?.setFilterValue("Policy")}
         >
+          <SearchIcon type="policy" width={32} height={32} />
           Policy
         </Button>
         <Button
@@ -96,6 +99,7 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Resource")
           }
         >
+          <SearchIcon type="resource" width={32} height={32} />
           Resource
         </Button>
         <Button
@@ -104,6 +108,7 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Stakeholder")
           }
         >
+          <SearchIcon type="stakeholder" width={48} height={48} />
           Thought Leader
         </Button>
       </div>
@@ -132,9 +137,9 @@ export function DataTable({ columns, data }) {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
