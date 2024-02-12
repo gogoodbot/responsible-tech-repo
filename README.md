@@ -11,7 +11,7 @@
 ## Installation and Usage
 
 Clone the Repository:  
-`git clone https://github.com/gogoodbot/goodbot.git`
+`git clone https://github.com/gogoodbot/responsible-tech-repo.git`
 
 Install Dependencies:  
 Navigate to the project directory and run:  
