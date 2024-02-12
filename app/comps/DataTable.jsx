@@ -66,6 +66,7 @@ export function DataTable({ columns, data }) {
           className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() => table.getColumn("tableName")?.setFilterValue("")}
         >
+          <SearchIcon type="all" width={32} height={32} />
           All
         </Button>
         <Button
