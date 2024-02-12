@@ -61,12 +61,12 @@ export function DataTable({ columns, data }) {
   return (
     <div>
       {/* Categories */}
-      <div className="flex flex-row justify-center gap-3 text-goodbot-primary-teal font-bold font-openSans">
+      <div className="flex flex-row justify-center gap-x-1 text-goodbot-primary-teal font-bold font-openSans">
         <Button
           className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() => table.getColumn("tableName")?.setFilterValue("")}
         >
-          <SearchIcon type="all" width={32} height={32} />
+          <SearchIcon type="all" width={32} height={32} className="mr-1" />
           All
         </Button>
         <Button
@@ -75,7 +75,7 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Litigation")
           }
         >
-          <SearchIcon type="litigation" width={32} height={32} />
+          <SearchIcon type="litigation" width={32} height={32} className="mr-1" />
           Litigation
         </Button>
         <Button
@@ -84,14 +84,14 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Organization")
           }
         >
-          <SearchIcon type="organization" width={32} height={32} />
+          <SearchIcon type="organization" width={32} height={32} className="mr-1" />
           Organization
         </Button>
         <Button
           className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() => table.getColumn("tableName")?.setFilterValue("Policy")}
         >
-          <SearchIcon type="policy" width={32} height={32} />
+          <SearchIcon type="policy" width={32} height={32} className="mr-1" />
           Policy
         </Button>
         <Button
@@ -100,7 +100,7 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Resource")
           }
         >
-          <SearchIcon type="resource" width={32} height={32} />
+          <SearchIcon type="resource" width={32} height={32} className="mr-1" />
           Resource
         </Button>
         <Button
@@ -109,7 +109,7 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Stakeholder")
           }
         >
-          <SearchIcon type="stakeholder" width={32} height={32} />
+          <SearchIcon type="stakeholder" width={32} height={32} className="mr-1" />
           Thought Leader
         </Button>
       </div>
