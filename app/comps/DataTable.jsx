@@ -109,7 +109,7 @@ export function DataTable({ columns, data }) {
             table.getColumn("tableName")?.setFilterValue("Stakeholder")
           }
         >
-          <SearchIcon type="stakeholder" width={48} height={48} />
+          <SearchIcon type="stakeholder" width={32} height={32} />
           Thought Leader
         </Button>
       </div>
