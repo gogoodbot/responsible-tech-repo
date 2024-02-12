@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 export const iconMapping = {
+  all: "https://img.icons8.com/nolan/64/06badb/0aa0f5/document.png",
   policy: "https://img.icons8.com/nolan/64/0aa0f5/0aa0f5/terms-and-conditions.png",
   organization: "https://img.icons8.com/nolan/64/7f0af5/7f0af5/company.png",
   litigation: "https://img.icons8.com/nolan/64/f73b6a/f73b6a/scales.png",
