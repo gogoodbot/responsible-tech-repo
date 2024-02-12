@@ -63,14 +63,14 @@ export function DataTable({ columns, data }) {
       {/* Categories */}
       <div className="flex flex-row justify-center gap-3 text-goodbot-primary-teal font-bold font-openSans">
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent  hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() => table.getColumn("tableName")?.setFilterValue("")}
         >
           <SearchIcon type="all" width={32} height={32} />
           All
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent  hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Litigation")
           }
@@ -79,7 +79,7 @@ export function DataTable({ columns, data }) {
           Litigation
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent  hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Organization")
           }
@@ -88,14 +88,14 @@ export function DataTable({ columns, data }) {
           Organization
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent  hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() => table.getColumn("tableName")?.setFilterValue("Policy")}
         >
           <SearchIcon type="policy" width={32} height={32} />
           Policy
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent  hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Resource")
           }
@@ -104,7 +104,7 @@ export function DataTable({ columns, data }) {
           Resource
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent  hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Stakeholder")
           }
