@@ -1,17 +1,16 @@
-import React from "react";
+import ArtifactInfo from "@/app/comps/ArtifactInfo";
+import ArtifactModal from "@/app/comps/ArtifactModal";
 import { DataTable } from "@/app/comps/DataTable";
-import { columns } from "./columns";
+import TagSection from "@/app/comps/TagSection";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  getDataWithId,
   artifactRecommendations,
   artifactSuggestions,
   getArtifactTags,
+  getDataWithId,
 } from "@/lib/actions";
-import ArtifactInfo from "@/app/comps/ArtifactInfo";
-import TagSection from "@/app/comps/TagSection";
 import { notFound } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ArtifactModal from "@/app/comps/ArtifactModal";
+import { columns } from "./columns";
 
 export const metadata = {
   title: "Results",
@@ -74,8 +73,6 @@ export default async function Page({ params }) {
               </Tabs>
             </div>
           </div>
-
-          <div className=""></div>
         </div>
       </section>
     </section>
