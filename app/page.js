@@ -52,8 +52,6 @@ export default async function Home() {
               <SearchTabs />
             </div>
           </div>
-
-          <div className=""></div>
         </div>
       </section>
     </section>
