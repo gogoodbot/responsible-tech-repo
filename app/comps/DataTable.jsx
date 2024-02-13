@@ -189,6 +189,8 @@ export function DataTable({ columns, data }) {
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          className="border-goodbot-primary-blue"
+
         >
           <Image
             src="https://img.icons8.com/nolan/64/0aa0f5/chevron-left.png"
@@ -204,6 +206,7 @@ export function DataTable({ columns, data }) {
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          className="border-goodbot-primary-blue"
         >
           Next
           <Image
