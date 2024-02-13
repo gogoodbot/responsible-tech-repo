@@ -206,6 +206,13 @@ export function DataTable({ columns, data }) {
           disabled={!table.getCanNextPage()}
         >
           Next
+          <Image
+            src="https://img.icons8.com/nolan/64/0aa0f5/chevron-right.png"
+            alt="icon for next"
+            width={32}
+            height={32}
+            className="ml-1"
+          />
         </Button>
       </div>
     </div>
