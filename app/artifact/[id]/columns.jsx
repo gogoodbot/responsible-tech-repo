@@ -18,6 +18,7 @@ export const columns = [
             alt="icon for column sort"
             width={24}
             height={24}
+            className="ml-1"
           />
         </Button>
       );
@@ -45,6 +46,7 @@ export const columns = [
             alt="icon for column sort"
             width={24}
             height={24}
+            className="ml-1"
           />
         </Button>
       );
@@ -68,6 +70,7 @@ export const columns = [
             alt="icon for column sort"
             width={24}
             height={24}
+            className="ml-1"
           />
         </Button>
       );
