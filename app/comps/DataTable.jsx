@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -189,6 +190,13 @@ export function DataTable({ columns, data }) {
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
+          <Image
+            src="https://img.icons8.com/nolan/64/0aa0f5/chevron-left.png"
+            alt="icon for previous"
+            width={32}
+            height={32}
+            className="ml-1"
+          />
           Previous
         </Button>
         <Button
