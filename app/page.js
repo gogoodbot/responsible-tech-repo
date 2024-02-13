@@ -27,7 +27,7 @@ export default async function Home() {
                 {tags &&
                   tags.map((tag) => (
                     <Badge
-                      className="cursor-pointer mr-2 border-2 border-transparent font-bold text-sm font-openSans bg-goodbot-primary-blue text-white hover:bg-goodbot-primary-darkGrey hover:border-goodbot-primary-blue"
+                      className="cursor-pointer mr-2 border-2 border-transparent text-sm font-openSans bg-goodbot-primary-blue text-white hover:bg-goodbot-primary-darkGrey hover:border-goodbot-primary-blue"
                       key={tag.keyword}
                     >
                       <Image
