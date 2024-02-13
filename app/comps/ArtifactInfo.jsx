@@ -41,7 +41,6 @@ function ArtifactInfo({ params }) {
         <div key={key} className={`${key !== "summary" ? "mb-4" : "mb-8"}`}>
           {key === "summary" ? (
             <div>
-              {/* <h2 className="text-3xl font-medium mb-2">Summary</h2> */}
               <p className="text-gray-700 dark:text-goodbot-primary-gray text-lg">
                 {artifact[key]}
               </p>
