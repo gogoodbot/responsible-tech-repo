@@ -187,10 +187,9 @@ export function DataTable({ columns, data }) {
         <Button
           variant="outline"
           size="sm"
+          className="pointer-cursor border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-          className="border-goodbot-primary-blue"
-
+        // disabled={!table.getCanPreviousPage()}
         >
           <Image
             src="https://img.icons8.com/nolan/64/0aa0f5/chevron-left.png"
@@ -204,9 +203,9 @@ export function DataTable({ columns, data }) {
         <Button
           variant="outline"
           size="sm"
+          className="pointer-cursor border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-          className="border-goodbot-primary-blue"
+        // disabled={!table.getCanNextPage()}
         >
           Next
           <Image
