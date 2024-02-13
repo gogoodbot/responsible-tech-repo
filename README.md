@@ -40,8 +40,8 @@ Start the development server:
 - Tailwind CSS for utility-first styling.
 - React and Next.js for building user interfaces.
 - Various other dependencies for date handling, animations, and data manipulation.
-- EmailJS for user feedback form.
-- hCaptcha for spam protection.
+- [EmailJS](https://www.emailjs.com) for user feedback form.
+- [hCaptcha](https://www.hcaptcha.com) for spam protection.
 
 ### Development Dependencies  
 - Tailwind CSS and PostCSS for advanced styling.
