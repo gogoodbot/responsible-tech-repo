@@ -25,6 +25,12 @@ Navigate to the project directory and run:
 Start the development server:  
 `npm run dev`
 
+### hCaptcha Local Development
+- To use hCaptcha in local development, amend the local file system `hosts` file as directed in the [Developer Guide](https://docs.hcaptcha.com/#local-development)  
+- Start the hCaptcha development server:
+`npm run captcha`  
+- The site will be served at [http://test.mydomain.com:9000](http://test.mydomain.com:9000)
+
 ### Dependencies  
 - Radix UI components for accessible design systems.
 - Supabase for backend-as-a-service.
