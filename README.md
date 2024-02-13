@@ -63,3 +63,6 @@ gradient: color(display-p3 0.9608 0.6431 0.0392)
 Default (sky-400):  
 hex: #60a5fa  
 gradient: color(display-p3 0.0235 0.7294 0.8588)  
+
+## Thanks & Acknowledgements
+- Site icons by [Icons8](https://icons8.com/)
