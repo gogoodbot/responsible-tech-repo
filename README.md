@@ -21,6 +21,9 @@ This repo contains both the frontend and backend portions of Goodbot's **Respons
 Navigate to the project directory and run:  
 `npm install`
 
+### Set up local .env file
+Create a local `.env` file based on the provided `.env.example` file
+
 ### Development
 Start the development server:  
 `npm run dev`
