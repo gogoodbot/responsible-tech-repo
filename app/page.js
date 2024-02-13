@@ -14,7 +14,7 @@ export default async function Home() {
     <section className="container relative">
       <Hero />
       <section className="overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 ">
-        <div className=" flex-col md:flex">
+        <div className="flex-col md:flex">
           <div className="border-b">
             <div className="flex h-16 items-center px-4">
               <Search />
@@ -27,12 +27,12 @@ export default async function Home() {
                 {tags &&
                   tags.map((tag) => (
                     <Badge
-                      className="cursor-pointer mr-4 bg-goodbot-primary-blue text-white hover:text-white hover:bg-black"
+                      className="cursor-pointer mr-2 border-2 border-transparent font-bold text-sm font-openSans bg-goodbot-primary-blue text-white hover:bg-goodbot-primary-darkGrey hover:border-goodbot-primary-blue"
                       key={tag.keyword}
                     >
                       <Image
                         src="https://img.icons8.com/nolan/64/ffffff/hashtag-key.png"
-                        alt="hashtag-key"
+                        alt="icon for hashtag"
                         width={32}
                         height={32}
                         className="mr-1"
