@@ -33,7 +33,7 @@ const Search = () => {
       />
       <Button
         variant="ghost"
-        className="outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white"
+        className="outline-none cursor-pointer border-2 border-transparent rounded-md font-openSans text-white bg-goodbot-primary-darkestGrey px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-goodbot-primary-blue hover:border-goodbot-primary-starryNightBlack hover:text-white  dark:bg-goodbot-primary-gray dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:text-white"
         type="submit"
       >
         Search
