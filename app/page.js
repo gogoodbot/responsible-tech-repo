@@ -39,7 +39,7 @@ export default async function Home() {
                       />
                       <Link
                         className="flex items-center"
-                        href={`/results?query=${tag.keyword}`}
+                        href={`/results?query=${encodeURIComponent(tag.keyword)}`}
                       >
                         {tag.keyword}
                       </Link>
