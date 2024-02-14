@@ -24,6 +24,20 @@ Navigate to the project directory and run:
 ### Set up local .env file
 Create a local `.env` file based on the provided `.env.example` file
 
+#### Initial hCaptcha Setup
+- [Sign Up](https://dashboard.hcaptcha.com/signup) for new Basic (Free) User account
+  - Make a note of the `Sitekey` provided
+  - Generate a `Secret Key` and make a note of it
+- Select `Add Site`, and enter details:  
+  - Name: `Goodbot Responsible Tech Repo`
+  - Domains:  
+    - `goodbot-beta.vercel.app`
+    - `http://responsibletechrepo.com`
+    - `http://responsibletechrepo.org`
+  - hCaptcha Behaviour:
+    - Mode: `Always Challenge`
+    - Passing Threshold: `Auto`
+
 ### Development
 Start the development server:  
 `npm run dev`
