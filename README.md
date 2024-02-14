@@ -1,4 +1,6 @@
-## Getting Started
+# Responsible Tech Repo
+
+This repo contains both the frontend and backend portions of Goodbot's **Responsible Tech Repo** application.
 
 ## Features
 
@@ -8,52 +10,110 @@
 - Responsive Design: Tailwind CSS is used for styling, ensuring a responsive and customizable UI.
 - Data Handling and Validation: Implemented react-hook-form and zod for form handling and data validation.
 
-## Installation and Usage
+## Getting Started
 
-Clone the Repository:
-git clone [[repository-url]](https://github.com/cabbeer/goodbot.git)
+### Installation and Usage
 
-Install Dependencies:
-Navigate to the project directory and run:
+### Clone the Repository  
+`git clone https://github.com/gogoodbot/responsible-tech-repo.git`
+
+### Install Dependencies    
+Navigate to the project directory and run:  
 `npm install`
 
-Development:
-Start the development server:
+### Set up local .env file
+Create a local `.env` file based on the provided `.env.example` file
+
+#### Initial hCaptcha Setup
+- [Sign Up](https://dashboard.hcaptcha.com/signup) for new Basic [hCaptcha](https://www.hcaptcha.com) User account
+  - Make a note of the `Sitekey` provided
+  - Generate a `Secret Key` and make a note of it
+- Select `Add Site`, and enter details:  
+  - Name: `Goodbot Responsible Tech Repo`
+  - Domains:  
+    - `goodbot-beta.vercel.app`
+    - `http://responsibletechrepo.com`
+    - `http://responsibletechrepo.org`
+  - hCaptcha Behaviour:
+    - Mode: `Always Challenge`
+    - Passing Threshold: `Auto`
+
+#### Initial EmailJS Setup
+- [Sign Up](https://dashboard.emailjs.com/sign-up) for new [EmailJS](https://www.emailjs.com) account
+- Select `Add New Service`, select preferred email provider
+- Enter details: 
+  - Name: `Responsible Tech Repo - Feedback Form`
+  - Service ID: `RTR_Feedback_Form`
+- Use `Test Email` functionality to check service is connected
+- Select `Email Templates`
+- Select `Create New Template`
+- Enter details:
+  - To Email: `[email address set up to receive feedback]`
+  - From Name: `Responsible Tech Repo - Feedback Form`
+  - From Email: select checkbox `Use Default Email Address` or amend as preferred
+  - Reply To: `{{reply_to}}`
+  - Subject: `Responsible Tech Repo - Feedback Received from {{reply_to}}`
+  - Content: `[adjust variables/formatting as preferred]`
+```
+Hello Goodbot Responsible Tech Repo team,
+You have received user feedback.
+{{reply_to}} commented:
+Subject: {{subject}}
+Message: {{message}}
+Artifact Title: {{artifact_title}}
+Artifact URL: {{user_referrer}}
+```
+
+### Development
+Start the development server:  
 `npm run dev`
 
-Dependencies
+### hCaptcha Local Development
+- To use hCaptcha in local development, amend the local file system `hosts` file as directed in the [Developer Guide](https://docs.hcaptcha.com/#local-development)  
+- Start the hCaptcha development server:
+`npm run captcha`  
+- The site will be served at [http://test.mydomain.com:9000](http://test.mydomain.com:9000)
 
+### Dependencies  
 - Radix UI components for accessible design systems.
 - Supabase for backend-as-a-service.
 - Tailwind CSS for utility-first styling.
 - React and Next.js for building user interfaces.
 - Various other dependencies for date handling, animations, and data manipulation.
+- [EmailJS](https://www.emailjs.com) for user feedback form.
+- [hCaptcha](https://www.hcaptcha.com) for spam protection.
 
-DevDependencies
-
+### Development Dependencies  
 - Tailwind CSS and PostCSS for advanced styling.
 - ESLint for code quality and standardization.
 
-# Misc
+## Misc
 
 ### Branding > Colour Guide
 
-Policy: Blue
-hex: #0aa0f5
-gradient: color(display-p3 0.0392 0.6275 0.9608)
+Policy: Blue  
+hex: #0aa0f5  
+gradient: color(display-p3 0.0392 0.6275 0.9608)  
 
-Organization: Purple
-hex: #7f0af5
-gradient: color(display-p3 0.498 0.0392 0.9608)
+Organization: Purple  
+hex: #7f0af5  
+gradient: color(display-p3 0.498 0.0392 0.9608)  
 
-Stakeholder Pink:
-hex: #f50ad6
-gradient: color(display-p3 0.9608 0.0392 0.8392)
+Stakeholder: Pink  
+hex: #f50ad6  
+gradient: color(display-p3 0.9608 0.0392 0.8392)  
 
-Litigation Red:
-hex: #f73b6a
-gradient: color(display-p3 0.9686 0.2314 0.4157)
+Litigation: Red  
+hex: #f73b6a  
+gradient: color(display-p3 0.9686 0.2314 0.4157)  
 
-Resouce Yellow:
-hex: #f5a40a
-gradient: color(display-p3 0.9608 0.6431 0.0392)
+Resource: Yellow  
+hex: #f5a40a  
+gradient: color(display-p3 0.9608 0.6431 0.0392)  
+
+Default (sky-400):  
+hex: #60a5fa  
+gradient: color(display-p3 0.0235 0.7294 0.8588)  
+
+## Thanks & Acknowledgements
+- Site icons by [Icons8](https://icons8.com/)

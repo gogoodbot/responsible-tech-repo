@@ -1,6 +1,7 @@
+import SearchIcon from "@/components/ui/SearchIcons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ResultCard from "./ResultCard";
 import { cardsHome } from "@/lib/actions";
+import ResultCard from "./ResultCard";
 
 const getCardsInfo = async (artifact) => {
   try {
@@ -21,13 +22,28 @@ const SearchTabs = async () => {
   return (
     <Tabs defaultValue="policies">
       <TabsList>
-        <TabsTrigger value="policies">Policies</TabsTrigger>
-
-        <TabsTrigger value="organizations">Organizations</TabsTrigger>
-        <TabsTrigger value="litigations">Litigations</TabsTrigger>
-        <TabsTrigger value="resources">Resources</TabsTrigger>
-        <TabsTrigger value="stakeholders">Thought Leaders</TabsTrigger>
+        <TabsTrigger value="policies">
+          <SearchIcon type="policy" width={32} height={32} className="mr-1" />
+          Policies
+        </TabsTrigger>
+        <TabsTrigger value="organizations">
+          <SearchIcon type="organization" width={32} height={32} className="mr-1" />
+          Organizations
+        </TabsTrigger>
+        <TabsTrigger value="litigations">
+          <SearchIcon type="litigation" width={32} height={32} className="mr-1" />
+          Litigations
+        </TabsTrigger>
+        <TabsTrigger value="resources">
+          <SearchIcon type="resource" width={32} height={32} className="mr-1" />
+          Resources
+        </TabsTrigger>
+        <TabsTrigger value="stakeholders">
+          <SearchIcon type="stakeholder" width={32} height={32} className="mr-1" />
+          Thought Leaders
+        </TabsTrigger>
       </TabsList>
+
       <TabsContent value="policies">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -43,6 +59,7 @@ const SearchTabs = async () => {
           </div>
         </div>
       </TabsContent>
+
       <TabsContent value="organizations">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
@@ -58,6 +75,7 @@ const SearchTabs = async () => {
           </div>
         </div>
       </TabsContent>
+
       <TabsContent value="litigations">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">
@@ -89,6 +107,7 @@ const SearchTabs = async () => {
           </div>
         </div>
       </TabsContent>
+
       <TabsContent value="stakeholders">
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-2">

@@ -1,7 +1,7 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "./comps/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Inter } from "next/font/google";
+import Navbar from "./comps/Navbar";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,7 +10,7 @@ export const metadata = {
     template: "%s | Goodbot",
     default: "Goodbot",
   },
-  description: "Goodbot responsible repo",
+  description: "Goodbot - Responsible Tech Repo",
 };
 
 export default function RootLayout({ children }) {

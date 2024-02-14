@@ -1,17 +1,16 @@
-import React from "react";
+import ArtifactInfo from "@/app/comps/ArtifactInfo";
+import ArtifactModal from "@/app/comps/ArtifactModal";
 import { DataTable } from "@/app/comps/DataTable";
-import { columns } from "./columns";
+import TagSection from "@/app/comps/TagSection";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  getDataWithId,
   artifactRecommendations,
   artifactSuggestions,
   getArtifactTags,
+  getDataWithId,
 } from "@/lib/actions";
-import ArtifactInfo from "@/app/comps/ArtifactInfo";
-import TagSection from "@/app/comps/TagSection";
 import { notFound } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ArtifactModal from "@/app/comps/ArtifactModal";
+import { columns } from "./columns";
 
 export const metadata = {
   title: "Results",
@@ -35,7 +34,6 @@ export default async function Page({ params }) {
   const recommend = await artifactRecommendations(params.id);
   const suggest = await artifactSuggestions(params.id);
   const tags = await getArtifactTags(params.id);
-  console.log(artifactInfo);
 
   return (
     <section className="container relative mt-10">
@@ -50,8 +48,8 @@ export default async function Page({ params }) {
           </div>
           <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between space-y-2">
-              {/* main container */}
 
+              {/* main container */}
               <Tabs defaultValue="summary">
                 <TagSection tags={tags} />
                 <TabsList>
@@ -70,13 +68,11 @@ export default async function Page({ params }) {
                   <DataTable columns={columns} data={suggest} />
                 </TabsContent>
                 <TabsContent value="feedback">
-                  <ArtifactModal />
+                  <ArtifactModal titleArtifact={titleArtifact} />
                 </TabsContent>
               </Tabs>
             </div>
           </div>
-
-          <div className=""></div>
         </div>
       </section>
     </section>

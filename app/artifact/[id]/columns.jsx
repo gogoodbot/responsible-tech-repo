@@ -1,8 +1,7 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from 'next/image';
 
 export const columns = [
   {
@@ -14,7 +13,13 @@ export const columns = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Type
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <Image
+            src="https://img.icons8.com/nolan/64/0aa0f5/sorting-arrows--v1.png"
+            alt="icon for column sort"
+            width={24}
+            height={24}
+            className="ml-1"
+          />
         </Button>
       );
     },
@@ -36,7 +41,13 @@ export const columns = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <Image
+            src="https://img.icons8.com/nolan/64/0aa0f5/sorting-arrows--v1.png"
+            alt="icon for column sort"
+            width={24}
+            height={24}
+            className="ml-1"
+          />
         </Button>
       );
     },
@@ -54,7 +65,13 @@ export const columns = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Last Updated
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <Image
+            src="https://img.icons8.com/nolan/64/0aa0f5/sorting-arrows--v1.png"
+            alt="icon for column sort"
+            width={24}
+            height={24}
+            className="ml-1"
+          />
         </Button>
       );
     },

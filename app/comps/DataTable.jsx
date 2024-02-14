@@ -1,13 +1,17 @@
 "use client";
+
 import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
-  getSortedRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
+import SearchIcon from '@/components/ui/SearchIcons';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -16,10 +20,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function DataTable({ columns, data }) {
   const router = useRouter();
@@ -59,51 +62,55 @@ export function DataTable({ columns, data }) {
   return (
     <div>
       {/* Categories */}
-
-      <div className="flex flex-row justify-center gap-3 text-goodbot-primary-teal font-bold font-openSans">
+      <div className="flex flex-row justify-center gap-x-1 text-goodbot-primary-teal font-bold font-openSans">
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() => table.getColumn("tableName")?.setFilterValue("")}
         >
+          <SearchIcon type="all" width={32} height={32} className="mr-1" />
           All
         </Button>
-
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Litigation")
           }
         >
+          <SearchIcon type="litigation" width={32} height={32} className="mr-1" />
           Litigation
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Organization")
           }
         >
+          <SearchIcon type="organization" width={32} height={32} className="mr-1" />
           Organization
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() => table.getColumn("tableName")?.setFilterValue("Policy")}
         >
+          <SearchIcon type="policy" width={32} height={32} className="mr-1" />
           Policy
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Resource")
           }
         >
+          <SearchIcon type="resource" width={32} height={32} className="mr-1" />
           Resource
         </Button>
         <Button
-          className="hover:border-2 hover:border-goodbot-primary-teal hover:bg-white border-0 hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg"
+          className="border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() =>
             table.getColumn("tableName")?.setFilterValue("Stakeholder")
           }
         >
+          <SearchIcon type="stakeholder" width={32} height={32} className="mr-1" />
           Thought Leader
         </Button>
       </div>
@@ -132,9 +139,9 @@ export function DataTable({ columns, data }) {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
@@ -180,18 +187,34 @@ export function DataTable({ columns, data }) {
         <Button
           variant="outline"
           size="sm"
+          className="pointer-cursor border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
+          <Image
+            src="https://img.icons8.com/nolan/64/0aa0f5/chevron-left.png"
+            alt="icon for previous"
+            width={32}
+            height={32}
+            className="ml-1"
+          />
           Previous
         </Button>
         <Button
           variant="outline"
           size="sm"
+          className="pointer-cursor border-2 border-transparent hover:border-goodbot-primary-teal hover:bg-white  hover:text-goodbot-primary-teal bg-white text-goodbot-primary-teal font-bold font-openSans text-lg dark:bg-goodbot-primary-darkGrey dark:text-goodbot-primary-paleGrey dark:hover:border-goodbot-primary-skyBlue dark:hover:bg-goodbot-primary-darkestGrey dark:hover:text-goodbot-primary-gray"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
           Next
+          <Image
+            src="https://img.icons8.com/nolan/64/0aa0f5/chevron-right.png"
+            alt="icon for next"
+            width={32}
+            height={32}
+            className="ml-1"
+          />
         </Button>
       </div>
     </div>

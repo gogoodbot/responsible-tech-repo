@@ -29,6 +29,9 @@ module.exports = {
         goodbot: {
           primary: {
             lightgrey: "rgb(241 241 242 / 40%)",
+            paleGrey: '#94a3b8',
+            darkGrey: '#1e293b',
+            darkestGrey: "#020817",
             teal: "#91CAC9",
             yellow: "#f5a40a",
             skyBlue: "#06BADB",

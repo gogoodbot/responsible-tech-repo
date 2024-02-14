@@ -1,3 +1,4 @@
+import ArtifactIcon from '@/components/ui/ArtifactIcons';
 import Link from "next/link";
 
 const bannedKeys = [
@@ -40,30 +41,34 @@ function ArtifactInfo({ params }) {
         <div key={key} className={`${key !== "summary" ? "mb-4" : "mb-8"}`}>
           {key === "summary" ? (
             <div>
-              {/* <h2 className="text-3xl font-medium mb-2">Summary</h2> */}
-              <p className="text-gray-700 dark:text-initial text-lg">
+              <p className="text-gray-700 dark:text-goodbot-primary-gray text-lg">
                 {artifact[key]}
               </p>
             </div>
           ) : (
-            <div className="text-sm">
-              <h3 className="text-lg font-medium capitalize mb-1">
-                {key.replace("_", " ")}
-              </h3>
-              <p className="text-gray-700 dark:text-initial">
-                {key === "modified_on" ? formattedDate : artifact[key]}
-                {key === "link" ||
-                  (key === "website" && (
-                    <Link
-                      href={artifact[key]}
-                      className="text-blue-600 hover:underline ml-2"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Visit Link
-                    </Link>
-                  ))}
-              </p>
+            <div className="text-sm flex items-center">
+              <ArtifactIcon type={key} width={48} height={48} className="mr-2" />
+              <div>
+                <h3 className="text-lg font-medium capitalize mb-1">
+                  {key.replace("_", " ")}
+                </h3>
+                <p className="text-gray-700 dark:text-goodbot-primary-gray text-lg">
+                  {key === "modified_on" ? formattedDate : (
+                    <>
+                      {(key === "link" || key === "website") && (
+                        <Link
+                          href={artifact[key]}
+                          className="text-blue-600 hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {artifact[key]}
+                        </Link>
+                      )}
+                    </>
+                  )}
+                </p>
+              </div>
             </div>
           )}
         </div>

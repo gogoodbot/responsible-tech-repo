@@ -1,5 +1,6 @@
 "use client";
 
+import SearchIcon from '@/components/ui/SearchIcons';
 import {
   Card,
   CardContent,
@@ -8,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Circle } from "lucide-react";
 import Link from "next/link";
 
 const ResultCard = ({ data }) => {
@@ -26,25 +26,26 @@ const ResultCard = ({ data }) => {
     data.resource_id ||
     data.stakeholder_id;
 
-  const getCircleColor = () => {
+  const getIcon = () => {
     if (data.organization_id) {
-      return "text-goodbot-primary-purple"; // Color for organization
+      return "organization";
     }
     if (data.litigation_id) {
-      return "text-goodbot-primary-red"; // Color for litigation
+      return "litigation";
     }
     if (data.policy_id) {
-      return "text-goodbot-primary-blue"; // Color for policy
+      return "policy";
     }
     if (data.resource_id) {
-      return "text-goodbot-primary-yellow"; // Color for resource
+      return "resource";
     }
     if (data.stakeholder_id) {
-      return "text-goodbot-primary-pink"; // Color for stakeholder
+      return "stakeholder";
     }
-    return "text-sky-400 fill-sky-400"; // Default color
+    return "policy";
   };
-  const circleColor = getCircleColor();
+
+  const icon = getIcon();
 
   return (
     <Link href={`/artifact/${id}`}>
@@ -59,7 +60,7 @@ const ResultCard = ({ data }) => {
         <CardFooter>
           <div className="flex space-x-4 text-sm text-muted-foreground">
             <div className="flex items-center">
-              <Circle className={`mr-1 h-3 w-3 ${circleColor}`} />
+              <SearchIcon type={icon} width={16} height={16} className="mr-1" />
               {data.tableName}
             </div>
           </div>
