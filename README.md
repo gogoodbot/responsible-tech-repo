@@ -38,6 +38,32 @@ Create a local `.env` file based on the provided `.env.example` file
     - Mode: `Always Challenge`
     - Passing Threshold: `Auto`
 
+#### Initial EmailJS Setup
+- [Sign Up](https://dashboard.emailjs.com/sign-up) for new account
+- Select `Add New Service`, select preferred email provider
+- Enter details: 
+  - Name: `Responsible Tech Repo - Feedback Form`
+  - Service ID: `RTR_Feedback_Form`
+- Use `Test Email` functionality to check service is connected
+- Select `Email Templates`
+- Select `Create New Template`
+- Enter details:
+  - To Email: `[email address set up to receive feedback]`
+  - From Name: `Responsible Tech Repo - Feedback Form`
+  - From Email: select checkbox `Use Default Email Address` or amend as preferred
+  - Reply To: `{{reply_to}}`
+  - Subject: `Responsible Tech Repo - Feedback Received from {{reply_to}}`
+  - Content: `[adjust variables/spacing as preferred]`
+```
+Hello Goodbot Responsible Tech Repo team,
+You have received user feedback.
+{{reply_to}} commented:
+Subject: {{subject}}
+Message: {{message}}
+Artifact Title: {{artifact_title}}
+Artifact URL: {{user_referrer}}
+```
+
 ### Development
 Start the development server:  
 `npm run dev`
