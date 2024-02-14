@@ -25,7 +25,7 @@ Navigate to the project directory and run:
 Create a local `.env` file based on the provided `.env.example` file
 
 #### Initial hCaptcha Setup
-- [Sign Up](https://dashboard.hcaptcha.com/signup) for new Basic (Free) User account
+- [Sign Up](https://dashboard.hcaptcha.com/signup) for new Basic [hCaptcha](https://www.hcaptcha.com) User account
   - Make a note of the `Sitekey` provided
   - Generate a `Secret Key` and make a note of it
 - Select `Add Site`, and enter details:  
@@ -39,7 +39,7 @@ Create a local `.env` file based on the provided `.env.example` file
     - Passing Threshold: `Auto`
 
 #### Initial EmailJS Setup
-- [Sign Up](https://dashboard.emailjs.com/sign-up) for new account
+- [Sign Up](https://dashboard.emailjs.com/sign-up) for new [EmailJS](https://www.emailjs.com) account
 - Select `Add New Service`, select preferred email provider
 - Enter details: 
   - Name: `Responsible Tech Repo - Feedback Form`
@@ -53,7 +53,7 @@ Create a local `.env` file based on the provided `.env.example` file
   - From Email: select checkbox `Use Default Email Address` or amend as preferred
   - Reply To: `{{reply_to}}`
   - Subject: `Responsible Tech Repo - Feedback Received from {{reply_to}}`
-  - Content: `[adjust variables/spacing as preferred]`
+  - Content: `[adjust variables/formatting as preferred]`
 ```
 Hello Goodbot Responsible Tech Repo team,
 You have received user feedback.
