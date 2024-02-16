@@ -20,25 +20,28 @@ import { insertPolicy } from '@/lib/actions';
 
 
 const formSchema = z.object({
-  "name": z.string().min(1).max(40),
-  "summary": z.string().min(1).max(255),
-  "country": z.string().min(1).max(255),
-  "type": z.string().min(1).max(255),
-  "link": z.string().url(),
-  "status": z.string().min(1).max(255),
-  "mandate": z.string().min(1).max(255),
-  "jurisdiction": z.string().min(1).max(255),
-  "entity": z.string().min(1).max(255),
-  "sub_entity": z.string().min(1).max(255),
-  "start_date": z.string().min(1).max(255),
-  "notes": z.string().min(1).max(255),
-  "created_by": z.string().min(1).max(255),
-  "created_on": z.string().min(1).max(255),
-  "modified_by": z.string().min(1).max(255),
-  "modified_on": z.string().min(1).max(255),
-  "tags": z.string().min(1).max(255),
+  name: z.string().min(2).max(50),
+  summary: z.string().min(10).max(200),
+  country: z.string().min(2).max(50),
+  type: z.string().min(2).max(50),
+  link: z.string().url(),
+  status: z.string().min(2).max(20),
+  mandate: z.string().min(2).max(50),
+  jurisdiction: z.string().min(2).max(50),
+  entity: z.string().min(2).max(50),
+  sub_entity: z.string().min(2).max(50),
+  start_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), // Assuming YYYY-MM-DD format
+  notes: z.string().max(500),
+  created_by: z.string().min(2).max(50),
+  created_on: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  modified_by: z.string().min(2).max(50),
+  modified_on: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
 });
 export default function PolicyForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(formSchema),
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     summary: '',
