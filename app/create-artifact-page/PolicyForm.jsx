@@ -1,15 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { insertPolicy } from '@/lib/actions';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 
 const initialPolicyState = {
   name: '',
@@ -57,7 +48,7 @@ export default function PolicyForm() {
     setPolicyData(initialPolicyState);
   };
   return (
-    <Form onSubmit={handleSubmit} className="max-w-sm mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
       <div className="space-y-4">
         {Object.entries(initialPolicyState).map(([key, value]) => (
           <div key={key}>
@@ -75,6 +66,6 @@ export default function PolicyForm() {
         ))}
         <Button type="submit" >Submit</Button>
       </div>
-    </Form>
+    </form>
   );
 }
