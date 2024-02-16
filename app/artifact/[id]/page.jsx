@@ -12,7 +12,6 @@ import TagSection from "@/app/comps/TagSection";
 import { notFound } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ArtifactModal from "@/app/comps/ArtifactModal";
-import ArtifactCreate from "@/app/comps/ArtifactCreate";
 
 export const metadata = {
   title: "Results",
@@ -59,7 +58,6 @@ export default async function Page({ params }) {
                   <TabsTrigger value="related">Related</TabsTrigger>
                   <TabsTrigger value="suggest">Suggested</TabsTrigger>
                   <TabsTrigger value="feedback">Feedback</TabsTrigger>
-                  <TabsTrigger value="create">Create</TabsTrigger>
 
                 </TabsList>
                 <TabsContent value="summary">
@@ -73,9 +71,6 @@ export default async function Page({ params }) {
                 </TabsContent>
                 <TabsContent value="feedback">
                   <ArtifactModal />
-                </TabsContent>
-                <TabsContent value="create">
-                  <ArtifactCreate />
                 </TabsContent>
               </Tabs>
             </div>
