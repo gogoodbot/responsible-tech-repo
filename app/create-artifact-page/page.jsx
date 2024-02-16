@@ -6,8 +6,10 @@ import formSchema from "../comps/ArtifactCreate";
 
 function createArtifactPage() {
   return (
-    <section className="container relative">
-      <ArtifactCreate />
+    <section className="container mx-auto py-8">
+      <div className="max-w-lg mx-auto">
+        <ArtifactCreate />
+      </div>
     </section>
   );
 }

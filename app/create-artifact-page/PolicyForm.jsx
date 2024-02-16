@@ -1,6 +1,15 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { insertPolicy } from '@/lib/actions';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const initialPolicyState = {
   name: '',
@@ -48,19 +57,24 @@ export default function PolicyForm() {
     setPolicyData(initialPolicyState);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      {Object.entries(initialPolicyState).map(([key, value]) => (
-        <label key={key}>
-          {key.replace('_', ' ')}:
-          <input
-            type="text"
-            name={key}
-            value={policyData[key]}
-            onChange={handleChange}
-          />
-        </label>
-      ))}
-      <Button type="submit">Submit</Button>
-    </form>
+    <Form onSubmit={handleSubmit} className="max-w-sm mx-auto">
+      <div className="space-y-4">
+        {Object.entries(initialPolicyState).map(([key, value]) => (
+          <div key={key}>
+            <label htmlFor={key} className="block font-medium">{key.replace('_', ' ')}</label>
+            <input
+              type="text"
+              id={key}
+              name={key}
+              value={policyData[key]}
+              onChange={handleChange}
+              placeholder={key}
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            />
+          </div>
+        ))}
+        <Button type="submit" >Submit</Button>
+      </div>
+    </Form>
   );
 }
