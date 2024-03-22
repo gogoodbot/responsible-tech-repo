@@ -35,6 +35,14 @@ const ResourceForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // submit your data to your API
+
+  // Check if at least one tag is selected
+  if (selectedTags.length === 0) {
+    // Show an error message to the user
+    alert("Please select at least one tag."); // Consider using a more user-friendly way to show errors
+    return; // Prevent form submission
+  }
+    
     console.log(formData);
   };
 
@@ -45,7 +53,7 @@ const ResourceForm = () => {
       tags: selectedTags,
     }));
   }, [selectedTags]); 
-  
+
   const handleTags = (tag) => {
     {
       setSelectedTags(currentTags => {
@@ -70,6 +78,7 @@ const ResourceForm = () => {
         onChange={handleChange}
         value={formData.name}
         className='px-4 border border-gray-300 rounded-md'
+        required
       />
       <Input
         name='focusArea'
@@ -78,6 +87,7 @@ const ResourceForm = () => {
         onChange={handleChange}
         value={formData.focusArea}
         className='px-4 border border-gray-300 rounded-md'
+        required
       />
       <Input
         name='summary'
@@ -86,6 +96,7 @@ const ResourceForm = () => {
         onChange={handleChange}
         value={formData.summary}
         className='px-4 border border-gray-300 rounded-md'
+        required
       />
       <Input
         name='link'
@@ -94,6 +105,7 @@ const ResourceForm = () => {
         onChange={handleChange}
         value={formData.link}
         className='px-4 border border-gray-300 rounded-md'
+        required
       />
       <Input
         name='post'
@@ -102,6 +114,7 @@ const ResourceForm = () => {
         onChange={handleChange}
         value={formData.post}
         className='px-4 border border-gray-300 rounded-md'
+        required
       />
       <Input
         name='notes'
@@ -110,6 +123,7 @@ const ResourceForm = () => {
         onChange={handleChange}
         value={formData.notes}
         className='px-4 border border-gray-300 rounded-md'
+        required
       />
       <Input
         name='format'
@@ -118,6 +132,7 @@ const ResourceForm = () => {
         onChange={handleChange}
         value={formData.format}
         className='px-4 border border-gray-300 rounded-md'
+        required
       />
       <div className='form-group space-y-2'>
         <label htmlFor='tags' className='sr-only'>
