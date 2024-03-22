@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -9,8 +9,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+  import {Tags} from '../api-data';
 
 const ResourceForm = () => {
+  const [selectedTags, setSelectedTags] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     focusArea: '',
@@ -19,7 +21,7 @@ const ResourceForm = () => {
     post: '',
     notes: '',
     format: '',
-    tags: '',
+    tags: [],
   });
 
   const handleChange = (e) => {
@@ -35,6 +37,26 @@ const ResourceForm = () => {
     // submit your data to your API
     console.log(formData);
   };
+
+
+  useEffect(() => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      tags: selectedTags,
+    }));
+  }, [selectedTags]); 
+  
+  const handleTags = (tag) => {
+    {
+      setSelectedTags(currentTags => {
+        if (currentTags.some((t) => t.id === tag.id)) {
+          return [...currentTags];
+        } else {
+          return [...currentTags, tag];
+        }
+      });
+    }
+  }
 
   return (
     <form
@@ -97,14 +119,6 @@ const ResourceForm = () => {
         value={formData.format}
         className='px-4 border border-gray-300 rounded-md'
       />
-      {/* <Input
-        name='tags'
-        type='text'
-        placeholder='Tags'
-        onChange={handleChange}
-        value={formData.tags}
-        className='px-4 border border-gray-300 rounded-md'
-      /> */}
       <div className='form-group space-y-2'>
         <label htmlFor='tags' className='sr-only'>
           Tags
@@ -112,37 +126,31 @@ const ResourceForm = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='outline'>
-              <span style={{ color: 'gray' }}>Tag</span>
+              <span style={{ color: 'gray' }}>Select Tags</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
-            <DropdownMenuItem
-              onClick={() => setFormData({ ...formData, tags: 'Tag-1' })}
-            >
-              Tag-1
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setFormData({ ...formData, tags: 'Tag-2' })}
-            >
-              Tag-2
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setFormData({ ...formData, tags: 'Tag-3' })}
-            >
-              Tag-3
-            </DropdownMenuItem>
+            {Tags.map(tag =>
+              <DropdownMenuItem key={tag.id}
+                onClick={() => handleTags(tag)}>
+                {tag.name}
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
-        <p>{formData.tags}</p>{' '}
-        {/* this might need to a <ul> if there are supposed to be more than one tag picked */}
-      </div>
       <Button
         variant='ghost'
         className='outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white'
         type='submit'
       >
         Submit Form
-      </Button>
+        </Button>
+        <div>
+          <ul>
+            {formData.tags.map(tag => <li key={tag.id}>{ tag.name}</li>)}
+          </ul>
+        </div>
+      </div>
     </form>
   );
 };
