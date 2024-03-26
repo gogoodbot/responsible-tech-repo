@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-  import {Tags} from '../api-data';
+import { Tags } from '../api-data';
 
 const ResourceForm = () => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -23,7 +23,7 @@ const ResourceForm = () => {
     format: '',
     tags: [],
     username: '',
-    password: ''
+    password: '',
   });
 
   const handleChange = (e) => {
@@ -38,35 +38,34 @@ const ResourceForm = () => {
     event.preventDefault();
     // submit your data to your API
 
-  // Check if at least one tag is selected
-  if (selectedTags.length === 0) {
-    // Show an error message to the user
-    alert("Please select at least one tag."); // Consider using a more user-friendly way to show errors
-    return; // Prevent form submission
-  }
-    
+    // Check if at least one tag is selected
+    if (selectedTags.length === 0) {
+      // Show an error message to the user
+      alert('Please select at least one tag.'); // Consider using a more user-friendly way to show errors
+      return; // Prevent form submission
+    }
+
     console.log(formData);
   };
-
 
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       tags: selectedTags,
     }));
-  }, [selectedTags]); 
+  }, [selectedTags]);
 
   const handleTags = (tag) => {
     {
-      setSelectedTags(currentTags => {
+      setSelectedTags((currentTags) => {
         if (currentTags.some((t) => t.id === tag.id)) {
-          return currentTags.filter(t => t.id !== tag.id);
+          return currentTags.filter((t) => t.id !== tag.id);
         } else {
           return [...currentTags, tag];
         }
       });
     }
-  }
+  };
 
   return (
     <form
@@ -147,14 +146,20 @@ const ResourceForm = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
-            {Tags.map(tag =>
-              <DropdownMenuItem key={tag.id}
-                onClick={() => handleTags(tag)}>
+            {Tags.map((tag) => (
+              <DropdownMenuItem key={tag.id} onClick={() => handleTags(tag)}>
                 {tag.name}
               </DropdownMenuItem>
-            )}
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
+      </div>
+      <div>
+        <ul>
+          {formData.tags.map((tag) => (
+            <li key={tag.id}>{tag.name}</li>
+          ))}
+        </ul>
       </div>
       <Input
         name='username'
@@ -182,11 +187,6 @@ const ResourceForm = () => {
       >
         Submit Form
       </Button>
-      <div>
-        <ul>
-          {formData.tags.map(tag => <li key={tag.id}>{ tag.name}</li>)}
-        </ul>
-      </div>
     </form>
   );
 };
