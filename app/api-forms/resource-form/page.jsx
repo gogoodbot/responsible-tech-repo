@@ -60,7 +60,7 @@ const ResourceForm = () => {
     {
       setSelectedTags(currentTags => {
         if (currentTags.some((t) => t.id === tag.id)) {
-          return [...currentTags];
+          return currentTags.filter(t => t.id !== tag.id);
         } else {
           return [...currentTags, tag];
         }
