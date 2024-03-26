@@ -22,6 +22,8 @@ const ResourceForm = () => {
     notes: '',
     format: '',
     tags: [],
+    username: '',
+    password: ''
   });
 
   const handleChange = (e) => {
@@ -153,18 +155,37 @@ const ResourceForm = () => {
             )}
           </DropdownMenuContent>
         </DropdownMenu>
+      </div>
+      <Input
+        name='username'
+        type='text'
+        placeholder='Username'
+        onChange={handleChange}
+        value={formData.username}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='password'
+        type='password'
+        placeholder='Password'
+        onChange={handleChange}
+        value={formData.password}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+
       <Button
         variant='ghost'
         className='outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white'
         type='submit'
       >
         Submit Form
-        </Button>
-        <div>
-          <ul>
-            {formData.tags.map(tag => <li key={tag.id}>{ tag.name}</li>)}
-          </ul>
-        </div>
+      </Button>
+      <div>
+        <ul>
+          {formData.tags.map(tag => <li key={tag.id}>{ tag.name}</li>)}
+        </ul>
       </div>
     </form>
   );
