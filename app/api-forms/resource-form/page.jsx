@@ -101,7 +101,7 @@ const ResourceForm = () => {
       />
       <Input
         name='link'
-        type='text'
+        type='url'
         placeholder='Link'
         onChange={handleChange}
         value={formData.link}
