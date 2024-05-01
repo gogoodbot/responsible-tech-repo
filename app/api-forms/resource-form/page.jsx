@@ -12,8 +12,7 @@ import {
 import { Tags } from '../api-data';
 
 const ResourceForm = () => {
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [formData, setFormData] = useState({
+  const initialState = {
     name: '',
     focusArea: '',
     summary: '',
@@ -24,7 +23,9 @@ const ResourceForm = () => {
     tags: [],
     username: '',
     password: '',
-  });
+  };
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,6 +47,8 @@ const ResourceForm = () => {
     }
 
     console.log(formData);
+    alert('Your form has been submitted. Thank you!');
+    setFormData(initialState);
   };
 
   useEffect(() => {

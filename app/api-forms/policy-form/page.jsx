@@ -12,8 +12,7 @@ import {
 import { Tags } from '../api-data';
 
 const PolicyForm = () => {
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [formData, setFormData] = useState({
+  const initialState = {
     name: '',
     summary: '',
     country: '',
@@ -29,7 +28,9 @@ const PolicyForm = () => {
     tags: [],
     username: '',
     password: '',
-  });
+  };
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,6 +52,8 @@ const PolicyForm = () => {
     }
 
     console.log(formData);
+    alert('Your form has been submitted. Thank you!');
+    setFormData(initialState);
   };
 
   useEffect(() => {
