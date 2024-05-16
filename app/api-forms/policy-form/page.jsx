@@ -11,15 +11,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Tags } from '../api-data';
 
-const ResourceForm = () => {
+const PolicyForm = () => {
   const initialState = {
     name: '',
-    focusArea: '',
     summary: '',
+    country: '',
+    type: '',
     link: '',
-    post: '',
+    status: '',
+    mandate: '',
+    juristication: '',
+    entity: '',
+    sub_entity: '',
+    start_date: '',
     notes: '',
-    format: '',
     tags: [],
     username: '',
     password: '',
@@ -85,20 +90,29 @@ const ResourceForm = () => {
         required
       />
       <Input
-        name='focusArea'
-        type='text'
-        placeholder='Focus Area'
-        onChange={handleChange}
-        value={formData.focusArea}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
         name='summary'
         type='text'
         placeholder='Summary'
         onChange={handleChange}
         value={formData.summary}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='country'
+        type='text'
+        placeholder='Country'
+        onChange={handleChange}
+        value={formData.country}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='type'
+        type='text'
+        placeholder='Type'
+        onChange={handleChange}
+        value={formData.type}
         className='px-4 border border-gray-300 rounded-md'
         required
       />
@@ -112,11 +126,56 @@ const ResourceForm = () => {
         required
       />
       <Input
-        name='post'
+        name='status'
         type='text'
-        placeholder='Post'
+        placeholder='Status'
         onChange={handleChange}
-        value={formData.post}
+        value={formData.status}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='mandate'
+        type='text'
+        placeholder='Mandate'
+        onChange={handleChange}
+        value={formData.mandate}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='juristication'
+        type='text'
+        placeholder='Juristication'
+        onChange={handleChange}
+        value={formData.juristication}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='entity'
+        type='text'
+        placeholder='Entity'
+        onChange={handleChange}
+        value={formData.entity}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='sub_entity'
+        type='text'
+        placeholder='Sub_entity'
+        onChange={handleChange}
+        value={formData.sub_entity}
+        className='px-4 border border-gray-300 rounded-md'
+        required
+      />
+      <Input
+        name='start_date'
+        type='text'
+        placeholder='Start_date'
+        onChange={handleChange}
+        value={formData.start_date}
         className='px-4 border border-gray-300 rounded-md'
         required
       />
@@ -126,15 +185,6 @@ const ResourceForm = () => {
         placeholder='Notes'
         onChange={handleChange}
         value={formData.notes}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        name='format'
-        type='text'
-        placeholder='Format'
-        onChange={handleChange}
-        value={formData.format}
         className='px-4 border border-gray-300 rounded-md'
         required
       />
@@ -194,4 +244,4 @@ const ResourceForm = () => {
   );
 };
 
-export default ResourceForm;
+export default PolicyForm;
