@@ -27,9 +27,51 @@ const StakeholderForm = () => {
   };
   const [selectedTags, setSelectedTags] = useState([]);
   const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState({});
+
+  const validateField = (name, value) => {
+    const regexPatterns = {
+      name: /^[A-Za-z\s]{2,50}$/,
+      summary: /^.{5,10000}$/,
+      role: /^[A-Za-z\s]{2,50}$/,
+      email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+      phone: /^\+?[1-9]\d{1,14}$/,
+      website: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
+      country: /^[A-Za-z\s]{2,60}$/,
+      state_province: /^[A-Za-z\s]{2,60}$/,
+      username: /^[A-Za-z0-9_]{3,20}$/,
+      password: /^[0-9].{4,6}$/,
+    };
+
+    if (name === 'tags') {
+      // Example of custom validation logic for tags if needed
+      if (value.length === 0) {
+        return 'At least one tag must be selected.';
+      }
+      return null;
+    }
+
+    if (!regexPatterns[name]) {
+      console.error(`No regex pattern defined for field: ${name}`);
+      return `${name} has no validation rule.`;
+    }
+
+    if (!regexPatterns[name].test(value)) {
+      return `${name} is invalid.`;
+    }
+
+    return null;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const error = validateField(name, value);
+
+    setErrors((prevState) => ({
+      ...prevState,
+      [name]: error,
+    }));
+
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -38,19 +80,41 @@ const StakeholderForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // submit your data to your API
+    const newErrors = {};
+
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key]);
+      if (error) {
+        newErrors[key] = error;
+      }
+    });
 
     // Check if at least one tag is selected
     if (selectedTags.length === 0) {
-      // Show an error message to the user
-      alert('Please select at least one tag.'); // Consider using a more user-friendly way to show errors
-      return; // Prevent form submission
+      newErrors.tags = 'Please select at least one tag.';
     }
 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // submit your data to your API
     console.log(formData);
+    setErrors({});
     alert('Your form has been submitted. Thank you!');
     setFormData(initialState);
+    setSelectedTags([]);
   };
+
+  useEffect(() => {
+    if (selectedTags.length > 0) {
+      setErrors((prevState) => ({
+        ...prevState,
+        tags: null,
+      }));
+    }
+  }, [selectedTags]);
 
   useEffect(() => {
     setFormData((prevFormData) => ({
@@ -62,11 +126,19 @@ const StakeholderForm = () => {
   const handleTags = (tag) => {
     {
       setSelectedTags((currentTags) => {
-        if (currentTags.some((t) => t.id === tag.id)) {
-          return currentTags.filter((t) => t.id !== tag.id);
-        } else {
-          return [...currentTags, tag];
+        const newTags = currentTags.some((t) => t.id === tag.id)
+          ? currentTags.filter((t) => t.id !== tag.id)
+          : [...currentTags, tag];
+
+        // Clear the tags error if there are any selected tags
+        if (newTags.length > 0) {
+          setErrors((prevState) => ({
+            ...prevState,
+            tags: null,
+          }));
         }
+
+        return newTags;
       });
     }
   };
@@ -85,6 +157,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.name && <p className='text-red-500'>{errors.name}</p>}
+
       <Input
         name='summary'
         type='text'
@@ -94,6 +168,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.summary && <p className='text-red-500'>{errors.summary}</p>}
+
       <Input
         name='role'
         type='text'
@@ -103,6 +179,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.role && <p className='text-red-500'>{errors.role}</p>}
+
       <Input
         //  TODO: add .com or so to ajax
         name='email'
@@ -113,6 +191,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.email && <p className='text-red-500'>{errors.email}</p>}
+
       <Input
         name='phone'
         type='phone'
@@ -122,6 +202,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.phone && <p className='text-red-500'>{errors.phone}</p>}
+
       <Input
         name='website'
         type='url'
@@ -131,6 +213,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.website && <p className='text-red-500'>{errors.website}</p>}
+
       <Input
         // TODO: get the country name from an api or list, make it a dropdown selection
         name='country'
@@ -141,6 +225,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.country && <p className='text-red-500'>{errors.country}</p>}
+
       <Input
         // TODO: get the state_province name from an api or list, make it a dropdown selection
         name='state_province'
@@ -151,6 +237,10 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.state_province && (
+        <p className='text-red-500'>{errors.state_province}</p>
+      )}
+
       <div className='form-group space-y-2'>
         <label htmlFor='tags' className='sr-only'>
           Tags
@@ -176,6 +266,7 @@ const StakeholderForm = () => {
             <li key={tag.id}>{tag.name}</li>
           ))}
         </ul>
+        {errors.tags && <p className='text-red-500'>{errors.tags}</p>}
       </div>
       <Input
         name='username'
@@ -186,6 +277,8 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.username && <p className='text-red-500'>{errors.username}</p>}
+
       <Input
         name='password'
         type='password'
@@ -195,6 +288,7 @@ const StakeholderForm = () => {
         className='px-4 border border-gray-300 rounded-md'
         required
       />
+      {errors.password && <p className='text-red-500'>{errors.password}</p>}
 
       <Button
         variant='ghost'
