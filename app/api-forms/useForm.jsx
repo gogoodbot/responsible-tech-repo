@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import debounce from 'lodash/debounce';
 
 const useForm = (initialState, validateField) => {
   const [formData, setFormData] = useState(initialState);
@@ -7,16 +8,39 @@ const useForm = (initialState, validateField) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    debouncedValidateField(name, value);
+  };
+
+  const debouncedValidateField = useCallback(
+    debounce((name, value) => {
+      const error = validateField(name, value);
+
+      setErrors((prevState) => ({
+        ...prevState,
+        [name]: error,
+      }));
+
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }, 300),
+    [] // Dependencies
+  );
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
     const error = validateField(name, value);
 
     setErrors((prevState) => ({
       ...prevState,
       [name]: error,
-    }));
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
     }));
   };
 
@@ -33,7 +57,7 @@ const useForm = (initialState, validateField) => {
 
     //  Check if at least one tag is selected
     if (selectedTags.length === 0) {
-      newErrors.tag = "Please select at least one tag.";
+      newErrors.tag = 'Please select at least one tag.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -88,6 +112,7 @@ const useForm = (initialState, validateField) => {
     errors,
     selectedTags,
     handleChange,
+    handleBlur,
     handleSubmit,
     handleTags,
     setFormData,

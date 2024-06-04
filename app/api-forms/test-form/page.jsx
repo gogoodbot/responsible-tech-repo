@@ -64,11 +64,17 @@ const validateField = (name, value) => {
   return null;
 };
 
+const ErrorMessage = ({ error }) => {
+  if (!error) return null;
+  return <p className='text-red-500'>{error}</p>;
+};
+
 const TestForm = () => {
   const {
     formData,
     errors,
     handleChange,
+    handleBlur,
     handleSubmit,
     handleTags,
     selectedTags,
@@ -85,10 +91,12 @@ const TestForm = () => {
           name='name'
           type='text'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.name}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.name && <p className='text-red-500'>{errors.name}</p>}
 
@@ -98,10 +106,12 @@ const TestForm = () => {
           name='focusArea'
           type='text'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.focusArea}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.focusArea && <p className='text-red-500'>{errors.focusArea}</p>}
 
@@ -111,10 +121,12 @@ const TestForm = () => {
           name='summary'
           type='text'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.summary}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.summary && <p className='text-red-500'>{errors.summary}</p>}
 
@@ -124,10 +136,12 @@ const TestForm = () => {
           name='link'
           type='url'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.link}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.link && <p className='text-red-500'>{errors.link}</p>}
 
@@ -137,10 +151,12 @@ const TestForm = () => {
           name='post'
           type='text'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.post}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.post && <p className='text-red-500'>{errors.post}</p>}
 
@@ -150,10 +166,12 @@ const TestForm = () => {
           name='notes'
           type='text'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.notes}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.notes && <p className='text-red-500'>{errors.notes}</p>}
 
@@ -163,16 +181,19 @@ const TestForm = () => {
           name='format'
           type='text'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.format}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.format && <p className='text-red-500'>{errors.format}</p>}
 
       <div className='form-group space-y-2'>
         <label htmlFor='tags' className='sr-only'>
           Tags
+          <ErrorMessage error={errors.name} />
         </label>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -204,10 +225,12 @@ const TestForm = () => {
           name='username'
           type='text'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.username}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.username && <p className='text-red-500'>{errors.username}</p>}
 
@@ -217,10 +240,12 @@ const TestForm = () => {
           name='password'
           type='password'
           onChange={handleChange}
+          onBlur={handleBlur}
           value={formData.password}
           className='px-4 border border-gray-300 rounded-md'
           required
         />
+        <ErrorMessage error={errors.name} />
       </label>
       {errors.password && <p className='text-red-500'>{errors.password}</p>}
 
