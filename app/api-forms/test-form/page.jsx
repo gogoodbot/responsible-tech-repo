@@ -62,7 +62,7 @@ const TestForm = () => {
         onSubmit={handleSubmit}
         className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md space-y-4'
       >
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Name
           <Input
             name='name'
@@ -76,7 +76,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.name} />
         </label>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Focus Area
           <Input
             name='focusArea'
@@ -90,7 +90,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.focusArea} />
         </label>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Summary
           <div>
             <textarea
@@ -105,7 +105,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.summary} />
         </label>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Link
           <Input
             name='link'
@@ -119,7 +119,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.link} />
         </label>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Post
           <div>
             <textarea
@@ -134,7 +134,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.post} />
         </label>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Notes
           <div>
             <textarea
@@ -149,7 +149,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.notes} />
         </label>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Format
           <Input
             name='format'
@@ -194,7 +194,7 @@ const TestForm = () => {
           </ul>
         </div>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Username
           <Input
             name='username'
@@ -208,7 +208,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.username} />
         </label>
 
-        <label className='pb-2 block'>
+        <label className='pb-2 block text-lg text-gray-600'>
           Password
           <Input
             name='password'
