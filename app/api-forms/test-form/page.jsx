@@ -62,7 +62,7 @@ const TestForm = () => {
         onSubmit={handleSubmit}
         className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md space-y-4'
       >
-        <label>
+        <label className='pb-2 block'>
           Name
           <Input
             name='name'
@@ -76,7 +76,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.name} />
         </label>
 
-        <label>
+        <label className='pb-2 block'>
           Focus Area
           <Input
             name='focusArea'
@@ -90,7 +90,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.focusArea} />
         </label>
 
-        <label>
+        <label className='pb-2 block'>
           Summary
           <div>
             <textarea
@@ -105,7 +105,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.summary} />
         </label>
 
-        <label>
+        <label className='pb-2 block'>
           Link
           <Input
             name='link'
@@ -119,7 +119,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.link} />
         </label>
 
-        <label>
+        <label className='pb-2 block'>
           Post
           <div>
             <textarea
@@ -134,7 +134,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.post} />
         </label>
 
-        <label>
+        <label className='pb-2 block'>
           Notes
           <div>
             <textarea
@@ -149,7 +149,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.notes} />
         </label>
 
-        <label>
+        <label className='pb-2 block'>
           Format
           <Input
             name='format'
@@ -164,11 +164,11 @@ const TestForm = () => {
         </label>
 
         <div className='form-group space-y-2'>
-          <label>
+          <label className='mb-2 block'>
             Tags
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant='outline'>
+                <Button className='ml-4' variant='outline'>
                   <span style={{ color: 'gray' }}>Select Tags</span>
                 </Button>
               </DropdownMenuTrigger>
@@ -194,7 +194,7 @@ const TestForm = () => {
           </ul>
         </div>
 
-        <label>
+        <label className='pb-2 block'>
           Username
           <Input
             name='username'
@@ -208,7 +208,7 @@ const TestForm = () => {
           <ErrorMessage error={errors.username} />
         </label>
 
-        <label>
+        <label className='pb-2 block'>
           Password
           <Input
             name='password'
@@ -231,7 +231,7 @@ const TestForm = () => {
         </Button>
         <Button
           variant='ghost'
-          className={`${generalButtonClassName} hover:bg-red-600 hover:border-red-600 hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-red-600 dark:hover:border-red-600 dark:hover:text-white`}
+          className={`${generalButtonClassName} ml-4 hover:bg-red-600 hover:border-red-600 hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-red-600 dark:hover:border-red-600 dark:hover:text-white`}
           type='button'
           onClick={resetForm}
         >
