@@ -136,9 +136,14 @@ const useForm = (initialState, regexPatterns) => {
   };
 
   const resetForm = () => {
-    setFormData(initialState);
-    setSelectedTags([]);
-    setErrors({});
+    const confirmReset = window.confirm(
+      'Are you sure you want to reset the form? All data will be lost.'
+    );
+    if (confirmReset) {
+      setFormData(initialState);
+      setSelectedTags([]);
+      setErrors({});
+    }
   };
 
   return {
