@@ -1,10 +1,35 @@
 import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 
-const useForm = (initialState, validateField) => {
+const useForm = (initialState, regexPatterns) => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [selectedTags, setSelectedTags] = useState([]);
+
+  const validateField = (name, value) => {
+    if (name === 'tags') {
+      // Example of custom validation logic for tags if needed
+      if (value.length === 0) {
+        return 'At least one tag must be selected.';
+      }
+      return null;
+    }
+
+    if (!regexPatterns[name]) {
+      console.error(`No regex pattern defined for field: ${name}`);
+      return `${name} has no validation rule.`;
+    }
+
+    if (!regexPatterns[name].test(value)) {
+      return `${name} is invalid.`;
+    }
+
+    if (!value) {
+      return 'This field is required';
+    }
+
+    return null;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;

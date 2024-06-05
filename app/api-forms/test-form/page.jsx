@@ -25,43 +25,16 @@ const initialState = {
   password: '',
 };
 
-const validateField = (name, value) => {
-  const regexPatterns = {
-    name: /^[A-Za-z\s]{2,50}$/,
-    focusArea: /^[A-Za-z\s]{3,50}$/,
-    summary: /^.{5,10000}$/,
-    link: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
-    post: /^.{1,200}$/,
-    notes: /^.{1,200}$/,
-    format: /^[A-Za-z\s]{1,50}$/,
-    username: /^[A-Za-z0-9_]{3,20}$/,
-    password: /^[0-9].{4,6}$/,
-  };
-
-  console.log('Validating field:', name, value);
-  console.log('Available regex patterns:', regexPatterns);
-  if (name === 'tags') {
-    // Example of custom validation logic for tags if needed
-    if (value.length === 0) {
-      return 'At least one tag must be selected.';
-    }
-    return null;
-  }
-
-  if (!regexPatterns[name]) {
-    console.error(`No regex pattern defined for field: ${name}`);
-    return `${name} has no validation rule.`;
-  }
-
-  if (!regexPatterns[name].test(value)) {
-    return `${name} is invalid.`;
-  }
-
-  if (!value) {
-    return 'This field is required';
-  }
-
-  return null;
+const regexPatterns = {
+  name: /^[A-Za-z\s]{2,50}$/,
+  focusArea: /^[A-Za-z\s]{3,50}$/,
+  summary: /^.{5,10000}$/,
+  link: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
+  post: /^.{1,200}$/,
+  notes: /^.{1,200}$/,
+  format: /^[A-Za-z\s]{1,50}$/,
+  username: /^[A-Za-z0-9_]{3,20}$/,
+  password: /^[0-9].{4,6}$/,
 };
 
 const ErrorMessage = ({ error }) => {
@@ -78,7 +51,7 @@ const TestForm = () => {
     handleSubmit,
     handleTags,
     selectedTags,
-  } = useForm(initialState, validateField);
+  } = useForm(initialState, regexPatterns);
 
   return (
     <form
@@ -98,7 +71,6 @@ const TestForm = () => {
         />
         <ErrorMessage error={errors.name} />
       </label>
-      {errors.name && <p className='text-red-500'>{errors.name}</p>}
 
       <label>
         Focus Area
@@ -111,9 +83,8 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.focusArea} />
       </label>
-      {errors.focusArea && <p className='text-red-500'>{errors.focusArea}</p>}
 
       <label>
         Summary
@@ -126,9 +97,8 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.summary} />
       </label>
-      {errors.summary && <p className='text-red-500'>{errors.summary}</p>}
 
       <label>
         Link
@@ -141,9 +111,8 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.link} />
       </label>
-      {errors.link && <p className='text-red-500'>{errors.link}</p>}
 
       <label>
         Post
@@ -156,9 +125,8 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.post} />
       </label>
-      {errors.post && <p className='text-red-500'>{errors.post}</p>}
 
       <label>
         Notes
@@ -171,9 +139,8 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.notes} />
       </label>
-      {errors.notes && <p className='text-red-500'>{errors.notes}</p>}
 
       <label>
         Format
@@ -186,29 +153,28 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.format} />
       </label>
-      {errors.format && <p className='text-red-500'>{errors.format}</p>}
 
       <div className='form-group space-y-2'>
-        <label htmlFor='tags' className='sr-only'>
+        <label>
           Tags
-          <ErrorMessage error={errors.name} />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='outline'>
+                <span style={{ color: 'gray' }}>Select Tags</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end'>
+              {Tags.map((tag) => (
+                <DropdownMenuItem key={tag.id} onClick={() => handleTags(tag)}>
+                  {tag.name}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </label>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='outline'>
-              <span style={{ color: 'gray' }}>Select Tags</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            {Tags.map((tag) => (
-              <DropdownMenuItem key={tag.id} onClick={() => handleTags(tag)}>
-                {tag.name}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ErrorMessage error={errors.tags} />
       </div>
       <div>
         <ul>
@@ -216,7 +182,6 @@ const TestForm = () => {
             <li key={tag.id}>{tag.name}</li>
           ))}
         </ul>
-        {errors.tags && <p className='text-red-500'>{errors.tags}</p>}
       </div>
 
       <label>
@@ -230,9 +195,8 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.username} />
       </label>
-      {errors.username && <p className='text-red-500'>{errors.username}</p>}
 
       <label>
         Password
@@ -245,9 +209,8 @@ const TestForm = () => {
           className='px-4 border border-gray-300 rounded-md'
           required
         />
-        <ErrorMessage error={errors.name} />
+        <ErrorMessage error={errors.password} />
       </label>
-      {errors.password && <p className='text-red-500'>{errors.password}</p>}
 
       <Button
         variant='ghost'
