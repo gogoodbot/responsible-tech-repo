@@ -5,6 +5,9 @@ const useForm = (initialState, regexPatterns) => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [selectedTags, setSelectedTags] = useState([]);
+  const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
+  const generalButtonClassName =
+    'outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out';
 
   const validateField = (name, value) => {
     if (name === 'tags') {
@@ -147,6 +150,8 @@ const useForm = (initialState, regexPatterns) => {
     handleTags,
     resetForm,
     selectedTags,
+    generalFieldClassName,
+    generalButtonClassName,
   };
 };
 
