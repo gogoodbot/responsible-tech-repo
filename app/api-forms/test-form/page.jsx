@@ -50,6 +50,7 @@ const TestForm = () => {
     handleBlur,
     handleSubmit,
     handleTags,
+    resetForm,
     selectedTags,
   } = useForm(initialState, regexPatterns);
 
@@ -218,6 +219,14 @@ const TestForm = () => {
         type='submit'
       >
         Submit Form
+      </Button>
+      <Button
+        variant='ghost'
+        className='outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-red-600 hover:border-red-600 hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-red-600 dark:hover:border-red-600 dark:hover:text-white'
+        type='button'
+        onClick={resetForm}
+      >
+        Reset Form
       </Button>
     </form>
   );

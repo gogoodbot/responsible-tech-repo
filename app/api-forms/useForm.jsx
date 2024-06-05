@@ -132,16 +132,21 @@ const useForm = (initialState, regexPatterns) => {
     });
   };
 
+  const resetForm = () => {
+    setFormData(initialState);
+    setSelectedTags([]);
+    setErrors({});
+  };
+
   return {
     formData,
     errors,
-    selectedTags,
     handleChange,
     handleBlur,
     handleSubmit,
     handleTags,
-    setFormData,
-    setSelectedTags,
+    resetForm,
+    selectedTags,
   };
 };
 
