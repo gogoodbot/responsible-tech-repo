@@ -203,7 +203,7 @@ const PolicyForm = () => {
           </label>
 
           <label className='pb-2 block text-lg text-gray-600'>
-            Sub_entity
+            Sub Entity
             <Input
               name='sub_entity'
               type='text'
@@ -217,7 +217,7 @@ const PolicyForm = () => {
           </label>
 
           <label className='pb-2 block text-lg text-gray-600'>
-            Start_date
+            Start Date
             <Input
               name='start_date'
               type='text'
