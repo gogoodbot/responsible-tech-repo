@@ -1,6 +1,5 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -10,199 +9,254 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Tags } from '../api-data';
+import useForm from '../useForm';
+
+const initialState = {
+  name: '',
+  link: '',
+  summary: '',
+  country: '',
+  status: '',
+  mandate: '',
+  start_date: '', // startDate: '' >> TODO: fix it in database
+  jurisdiction: '',
+  tags: [],
+  username: '',
+  password: '',
+};
+
+const regexPatterns = {
+  name: /^[A-Za-z\s]{2,50}$/,
+  link: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
+  summary: /^.{5,10000}$/,
+  country: /^[A-Za-z\s]{2,60}$/,
+  status: /^[A-Za-z\s]{2,20}$/,
+  mandate: /^[A-Za-z\s]{2,20}$/,
+  start_date: /^\d{4}-\d{2}-\d{2}$/,
+  jurisdiction: /^[A-Za-z\s]{2,20}$/,
+  username: /^[A-Za-z0-9_]{3,20}$/,
+  password: /^[0-9].{4,6}$/,
+};
+
+const ErrorMessage = ({ error }) => {
+  if (!error) return null;
+  return <p className='text-red-500'>{error}</p>;
+};
 
 const LitigationForm = () => {
-  const initialState = {
-    name: '',
-    link: '',
-    summary: '',
-    country: '',
-    status: '',
-    mandate: '',
-    startDate: '',
-    jurisdiction: '',
-    tags: [],
-    username: '',
-    password: '',
-  };
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [formData, setFormData] = useState(initialState);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // submit your data to your API
-
-    // Check if at least one tag is selected
-    if (selectedTags.length === 0) {
-      // Show an error message to the user
-      alert('Please select at least one tag.'); // Consider using a more user-friendly way to show errors
-      return; // Prevent form submission
-    }
-
-    console.log(formData);
-    alert('Your form has been submitted. Thank you!');
-    setFormData(initialState);
-  };
-
-  useEffect(() => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      tags: selectedTags,
-    }));
-  }, [selectedTags]);
-
-  const handleTags = (tag) => {
-    {
-      setSelectedTags((currentTags) => {
-        if (currentTags.some((t) => t.id === tag.id)) {
-          return currentTags.filter((t) => t.id !== tag.id);
-        } else {
-          return [...currentTags, tag];
-        }
-      });
-    }
-  };
+  const {
+    formData,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    handleTags,
+    resetForm,
+    selectedTags,
+    generalFieldClassName,
+    generalButtonClassName,
+  } = useForm(initialState, regexPatterns);
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className='w-full max-w-7xl items-center space-y-2 '
-    >
-      <Input
-        name='name'
-        type='text'
-        placeholder='Name'
-        onChange={handleChange}
-        value={formData.name}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        name='link'
-        type='url'
-        placeholder='Link'
-        onChange={handleChange}
-        value={formData.link}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        name='summary'
-        type='text'
-        placeholder='Summary'
-        onChange={handleChange}
-        value={formData.summary}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        // TODO: get the country name from an api or list, make it a dropdown selection
-        name='country'
-        type='text'
-        placeholder='Country'
-        onChange={handleChange}
-        value={formData.country}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        name='status'
-        type='text'
-        placeholder='Status'
-        onChange={handleChange}
-        value={formData.status}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        name='mandate'
-        type='text'
-        placeholder='Mandate'
-        onChange={handleChange}
-        value={formData.mandate}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        //  TODO: add .com or so to ajax
-        name='startDate'
-        type='date'
-        placeholder='Start Date'
-        onChange={handleChange}
-        value={formData.startDate}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        name='jurisdiction'
-        type='text'
-        placeholder='Jurisdiction'
-        onChange={handleChange}
-        value={formData.jurisdiction}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <div className='form-group space-y-2'>
-        <label htmlFor='tags' className='sr-only'>
-          Tags
-        </label>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='outline'>
-              <span style={{ color: 'gray' }}>Select Tags</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            {Tags.map((tag) => (
-              <DropdownMenuItem key={tag.id} onClick={() => handleTags(tag)}>
-                {tag.name}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      <div>
-        <ul>
-          {formData.tags.map((tag) => (
-            <li key={tag.id}>{tag.name}</li>
-          ))}
-        </ul>
-      </div>
-      <Input
-        name='username'
-        type='text'
-        placeholder='Username'
-        onChange={handleChange}
-        value={formData.username}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
-      <Input
-        name='password'
-        type='password'
-        placeholder='Password'
-        onChange={handleChange}
-        value={formData.password}
-        className='px-4 border border-gray-300 rounded-md'
-        required
-      />
+    <div className='flex items-center justify-center min-h-screen p-4'>
+      <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
+        <h1 className='text-3xl font-bold my-8'>Test form</h1>
+        <form
+          onSubmit={handleSubmit}
+          className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
+        >
+          <label className='pb-2 block text-lg text-gray-600'>
+            Name
+            <Input
+              name='name'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.name}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.name} />
+          </label>
 
-      <Button
-        variant='ghost'
-        className='outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white'
-        type='submit'
-      >
-        Submit Form
-      </Button>
-    </form>
+          <label className='pb-2 block text-lg text-gray-600'>
+            Link
+            <Input
+              name='link'
+              type='url'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.link}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.link} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Summary
+            <div>
+              <textarea
+                name='summary'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.summary}
+                className={`${generalFieldClassName} h-40 resize-y`}
+                required
+              />
+            </div>
+            <ErrorMessage error={errors.summary} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Country
+            <Input
+              // TODO: get the country name from an api or list, make it a dropdown selection
+              name='country'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.country}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.country} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Status
+            <Input
+              name='status'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.status}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.status} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Mandate
+            <Input
+              name='mandate'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.mandate}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.mandate} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Start Date
+            <Input
+              name='start_date'
+              type='text'
+              placeholder='YYYY-MM-DD'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.start_date}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.start_date} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Jurisdiction
+            <Input
+              name='juristiction'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.juristiction}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.juristiction} />
+          </label>
+
+          <div className='form-group space-y-2'>
+            <label className='mb-2 block'>
+              Tags
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className='ml-4' variant='outline'>
+                    <span style={{ color: 'gray' }}>Select Tags</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align='end'>
+                  {Tags.map((tag) => (
+                    <DropdownMenuItem
+                      key={tag.id}
+                      onClick={() => handleTags(tag)}
+                    >
+                      {tag.name}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </label>
+            <ErrorMessage error={errors.tags} />
+          </div>
+          <div>
+            <ul>
+              {formData.tags.map((tag) => (
+                <li key={tag.id}>{tag.name}</li>
+              ))}
+            </ul>
+          </div>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Username
+            <Input
+              name='username'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.username}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.username} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Password
+            <Input
+              name='password'
+              type='password'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.password}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.password} />
+          </label>
+
+          <Button
+            variant='ghost'
+            className={`${generalButtonClassName} hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white`}
+            type='submit'
+          >
+            Submit Form
+          </Button>
+          <Button
+            variant='ghost'
+            className={`${generalButtonClassName} ml-4 hover:bg-red-600 hover:border-red-600 hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-red-600 dark:hover:border-red-600 dark:hover:text-white`}
+            type='button'
+            onClick={resetForm}
+          >
+            Reset Form
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 };
 
