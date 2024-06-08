@@ -221,6 +221,7 @@ const PolicyForm = () => {
             <Input
               name='start_date'
               type='text'
+              placeholder='YYYY-MM-DD'
               onChange={handleChange}
               onBlur={handleBlur}
               value={formData.start_date}

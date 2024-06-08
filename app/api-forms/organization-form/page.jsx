@@ -189,6 +189,7 @@ const OrganizationFrom = () => {
             <Input
               name='established_date'
               type='text'
+              placeholder='YYYY-MM-DD'
               onChange={handleChange}
               onBlur={handleBlur}
               value={formData.established_date}
