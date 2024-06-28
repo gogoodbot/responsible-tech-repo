@@ -16,18 +16,18 @@ const initialState = {
   website: '',
   summary: '',
   legal_status: '',
-  // affiliation: '',
-  // functional_role: '',
-  // sector_focus: '',
-  // scope: '',
-  // communities_of_focus: '',
+  affiliation: '',
+  functional_role: '',
+  sector_focus: '',
+  scope: '',
+  communities_of_focus: '',
   geographic_mandate: '',
   hq_province: '',
   hq_city: '',
   status: '',
-  // stage: '',
-  // composition: '',
-  // size: '',
+  stage: '',
+  composition: '',
+  size: '',
   established_date: '',
   tags: [],
   username: '',
@@ -39,18 +39,18 @@ const regexPatterns = {
   website: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
   summary: /^.{5,10000}$/,
   legal_status: /^[A-Za-z\s]{2,20}$/,
-  // affiliation: /^[A-Za-z\s]{3,50}$/,
-  // functional_role: /^[A-Za-z\s]{2,50}$/,
-  // sector_focus: /^[A-Za-z\s]{3,50}$/,
-  // scope: /^[A-Za-z\s]{3,50}$/,
-  // communities_of_focus: /^[A-Za-z\s]{3,50}$/,
+  affiliation: /^[A-Za-z\s]{3,50}$/,
+  functional_role: /^[A-Za-z\s]{2,50}$/,
+  sector_focus: /^[A-Za-z\s]{3,50}$/,
+  scope: /^[A-Za-z\s]{3,50}$/,
+  communities_of_focus: /^[A-Za-z\s]{3,50}$/,
   geographic_mandate: /^[A-Za-z\s]{2,20}$/,
   hq_province: /^[A-Za-z\s]{2,60}$/,
   hq_city: /^[A-Za-z\s]{2,60}$/,
   status: /^[A-Za-z\s]{2,20}$/,
-  // stage: /^[A-Za-z\s]{2,20}$/,
-  // composition: /^[A-Za-z\s]{2,20}$/,
-  // size: /^[A-Za-z\s]{3,20}$/,
+  stage: /^[A-Za-z\s]{2,20}$/,
+  composition: /^[A-Za-z\s]{2,20}$/,
+  size: /^[A-Za-z\s]{3,20}$/,
   established_date: /^\d{4}-\d{2}-\d{2}$/,
   username: /^[A-Za-z0-9_]{3,20}$/,
   password: /^[0-9].{4,6}$/,
@@ -127,6 +127,90 @@ const OrganizationFrom = () => {
           </label>
 
           <label className='pb-2 block text-lg text-gray-600'>
+            Legal Status
+            <Input
+              name='legal_status'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.legal_status}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.legal_status} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Affilication
+            <Input
+              name='affiliation'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.affiliation}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.affiliation} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Functional Role
+            <Input
+              name='functional_role'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.functional_role}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.functional_role} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Sector Focus
+            <Input
+              name='sector_focus'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.sector_focus}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.sector_focus} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Scope
+            <Input
+              name='scope'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.scope}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.scope} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Communities of Focus
+            <Input
+              name='communities_of_focus'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.communities_of_focus}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.communities_of_focus} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
             Geographic Mandate
             <Input
               name='geographic_mandate'
@@ -169,26 +253,67 @@ const OrganizationFrom = () => {
             />
             <ErrorMessage error={errors.hq_city} />
           </label>
-
           <label className='pb-2 block text-lg text-gray-600'>
-            Legal Status
+            Status
             <Input
-              name='legal_status'
+              name='status'
               type='text'
               onChange={handleChange}
               onBlur={handleBlur}
-              value={formData.legal_status}
+              value={formData.status}
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.legal_status} />
+            <ErrorMessage error={errors.status} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Stage
+            <Input
+              name='stage'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.stage}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.stage} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Composition
+            <Input
+              name='composition'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.composition}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.composition} />
+          </label>
+
+          <label className='pb-2 block text-lg text-gray-600'>
+            Size
+            <Input
+              name='size'
+              type='text'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.size}
+              className={generalFieldClassName}
+              required
+            />
+            <ErrorMessage error={errors.size} />
           </label>
 
           <label className='pb-2 block text-lg text-gray-600'>
             Establishe Date
             <Input
               name='established_date'
-              type='text'
+              type='date'
               placeholder='YYYY-MM-DD'
               onChange={handleChange}
               onBlur={handleBlur}
