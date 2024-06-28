@@ -53,7 +53,6 @@ const regexPatterns = {
   size: /^[A-Za-z\s]{3,20}$/,
   established_date: /^\d{4}-\d{2}-\d{2}$/,
   username: /^[A-Za-z0-9_]{3,20}$/,
-  password: /^[0-9].{4,6}$/,
 };
 
 const ErrorMessage = ({ error }) => {

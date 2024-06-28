@@ -18,13 +18,15 @@ const useForm = (initialState, regexPatterns) => {
       return null;
     }
 
-    if (!regexPatterns[name]) {
-      console.error(`No regex pattern defined for field: ${name}`);
-      return `${name} has no validation rule.`;
-    }
+    if (name !== 'password') {
+      if (!regexPatterns[name]) {
+        console.error(`No regex pattern defined for field: ${name}`);
+        return `${name} has no validation rule.`;
+      }
 
-    if (!regexPatterns[name].test(value)) {
-      return `${name} is invalid.`;
+      if (!regexPatterns[name].test(value)) {
+        return `${name} is invalid.`;
+      }
     }
 
     if (!value) {
