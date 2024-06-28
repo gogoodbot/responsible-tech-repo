@@ -39,10 +39,10 @@ const regexPatterns = {
   website: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
   summary: /^.{5,10000}$/,
   legal_status: /^[A-Za-z\s]{2,20}$/,
-  // affiliation: /^ $/,
+  // affiliation: /^[A-Za-z\s]{3,50}$/,
   // functional_role: /^[A-Za-z\s]{2,50}$/,
   // sector_focus: /^[A-Za-z\s]{3,50}$/,
-  // scope: /^ $/,
+  // scope: /^[A-Za-z\s]{3,50}$/,
   // communities_of_focus: /^[A-Za-z\s]{3,50}$/,
   geographic_mandate: /^[A-Za-z\s]{2,20}$/,
   hq_province: /^[A-Za-z\s]{2,60}$/,
@@ -50,7 +50,7 @@ const regexPatterns = {
   status: /^[A-Za-z\s]{2,20}$/,
   // stage: /^[A-Za-z\s]{2,20}$/,
   // composition: /^[A-Za-z\s]{2,20}$/,
-  // size: '',
+  // size: /^[A-Za-z\s]{3,20}$/,
   established_date: /^\d{4}-\d{2}-\d{2}$/,
   username: /^[A-Za-z0-9_]{3,20}$/,
   password: /^[0-9].{4,6}$/,
@@ -78,7 +78,7 @@ const OrganizationFrom = () => {
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
       <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
-        <h1 className='text-3xl font-bold my-8'>Test form</h1>
+        <h1 className='text-3xl font-bold my-8'>Organization Form</h1>
         <form
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
@@ -255,7 +255,7 @@ const OrganizationFrom = () => {
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.password} />
+            {/* <ErrorMessage error={errors.password} /> */}
           </label>
 
           <Button
