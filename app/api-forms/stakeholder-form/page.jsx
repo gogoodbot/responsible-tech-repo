@@ -35,7 +35,6 @@ const regexPatterns = {
   country: /^[A-Za-z\s]{2,60}$/,
   state_province: /^[A-Za-z\s]{2,60}$/,
   username: /^[A-Za-z0-9_]{3,20}$/,
-  password: /^[0-9].{4,6}$/,
 };
 
 const ErrorMessage = ({ error }) => {

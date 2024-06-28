@@ -44,7 +44,6 @@ const regexPatterns = {
   start_date: /^\d{4}-\d{2}-\d{2}$/,
   notes: /^.{1,200}$/,
   username: /^[A-Za-z0-9_]{3,20}$/,
-  password: /^[0-9].{4,6}$/,
 };
 
 const ErrorMessage = ({ error }) => {
