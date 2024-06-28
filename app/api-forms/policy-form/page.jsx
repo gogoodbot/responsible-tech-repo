@@ -177,15 +177,15 @@ const PolicyForm = () => {
           <label className='pb-2 block text-lg text-gray-600'>
             Jurisdiction
             <Input
-              name='juristiction'
+              name='jurisdiction'
               type='text'
               onChange={handleChange}
               onBlur={handleBlur}
-              value={formData.juristiction}
+              value={formData.jurisdiction}
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.juristiction} />
+            <ErrorMessage error={errors.jurisdiction} />
           </label>
 
           <label className='pb-2 block text-lg text-gray-600'>
@@ -220,7 +220,7 @@ const PolicyForm = () => {
             Start Date
             <Input
               name='start_date'
-              type='text'
+              type='date'
               placeholder='YYYY-MM-DD'
               onChange={handleChange}
               onBlur={handleBlur}
@@ -302,7 +302,7 @@ const PolicyForm = () => {
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.password} />
+            {/* <ErrorMessage error={errors.password} /> */}
           </label>
 
           <Button
