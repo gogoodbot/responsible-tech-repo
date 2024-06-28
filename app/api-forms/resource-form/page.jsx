@@ -58,7 +58,7 @@ const ResourceForm = () => {
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
       <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
-        <h1 className='text-3xl font-bold my-8'>Test form</h1>
+        <h1 className='text-3xl font-bold my-8'>Resource Form</h1>
         <form
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
@@ -220,7 +220,7 @@ const ResourceForm = () => {
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.password} />
+            {/* <ErrorMessage error={errors.password} /> */}
           </label>
 
           <Button
