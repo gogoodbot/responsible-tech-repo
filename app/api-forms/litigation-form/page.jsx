@@ -155,7 +155,7 @@ const LitigationForm = () => {
             Start Date
             <Input
               name='start_date'
-              type='text'
+              type='date'
               placeholder='YYYY-MM-DD'
               onChange={handleChange}
               onBlur={handleBlur}
@@ -169,15 +169,15 @@ const LitigationForm = () => {
           <label className='pb-2 block text-lg text-gray-600'>
             Jurisdiction
             <Input
-              name='juristiction'
+              name='jurisdiction'
               type='text'
               onChange={handleChange}
               onBlur={handleBlur}
-              value={formData.juristiction}
+              value={formData.jurisdiction}
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.juristiction} />
+            <ErrorMessage error={errors.jurisdiction} />
           </label>
 
           <div className='form-group space-y-2'>
@@ -236,7 +236,6 @@ const LitigationForm = () => {
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.password} />
           </label>
 
           <Button
