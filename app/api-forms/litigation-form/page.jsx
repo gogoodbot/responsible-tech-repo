@@ -35,7 +35,6 @@ const regexPatterns = {
   start_date: /^\d{4}-\d{2}-\d{2}$/,
   jurisdiction: /^[A-Za-z\s]{2,20}$/,
   username: /^[A-Za-z0-9_]{3,20}$/,
-  password: /^[0-9].{4,6}$/,
 };
 
 const ErrorMessage = ({ error }) => {
@@ -60,7 +59,7 @@ const LitigationForm = () => {
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
       <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
-        <h1 className='text-3xl font-bold my-8'>Test form</h1>
+        <h1 className='text-3xl font-bold my-8'>Litigation Form</h1>
         <form
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
@@ -155,7 +154,7 @@ const LitigationForm = () => {
             Start Date
             <Input
               name='start_date'
-              type='text'
+              type='date'
               placeholder='YYYY-MM-DD'
               onChange={handleChange}
               onBlur={handleBlur}
@@ -169,15 +168,15 @@ const LitigationForm = () => {
           <label className='pb-2 block text-lg text-gray-600'>
             Jurisdiction
             <Input
-              name='juristiction'
+              name='jurisdiction'
               type='text'
               onChange={handleChange}
               onBlur={handleBlur}
-              value={formData.juristiction}
+              value={formData.jurisdiction}
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.juristiction} />
+            <ErrorMessage error={errors.jurisdiction} />
           </label>
 
           <div className='form-group space-y-2'>
@@ -236,7 +235,6 @@ const LitigationForm = () => {
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.password} />
           </label>
 
           <Button

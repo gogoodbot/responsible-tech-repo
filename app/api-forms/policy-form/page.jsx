@@ -44,7 +44,6 @@ const regexPatterns = {
   start_date: /^\d{4}-\d{2}-\d{2}$/,
   notes: /^.{1,200}$/,
   username: /^[A-Za-z0-9_]{3,20}$/,
-  password: /^[0-9].{4,6}$/,
 };
 
 const ErrorMessage = ({ error }) => {
@@ -69,7 +68,7 @@ const PolicyForm = () => {
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
       <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
-        <h1 className='text-3xl font-bold my-8'>Test form</h1>
+        <h1 className='text-3xl font-bold my-8'>Plicy Form</h1>
         <form
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
@@ -177,15 +176,15 @@ const PolicyForm = () => {
           <label className='pb-2 block text-lg text-gray-600'>
             Jurisdiction
             <Input
-              name='juristiction'
+              name='jurisdiction'
               type='text'
               onChange={handleChange}
               onBlur={handleBlur}
-              value={formData.juristiction}
+              value={formData.jurisdiction}
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.juristiction} />
+            <ErrorMessage error={errors.jurisdiction} />
           </label>
 
           <label className='pb-2 block text-lg text-gray-600'>
@@ -220,7 +219,7 @@ const PolicyForm = () => {
             Start Date
             <Input
               name='start_date'
-              type='text'
+              type='date'
               placeholder='YYYY-MM-DD'
               onChange={handleChange}
               onBlur={handleBlur}
@@ -302,7 +301,7 @@ const PolicyForm = () => {
               className={generalFieldClassName}
               required
             />
-            <ErrorMessage error={errors.password} />
+            {/* <ErrorMessage error={errors.password} /> */}
           </label>
 
           <Button
