@@ -16,38 +16,31 @@ const PARAGRAPH_LONG = /^.{5,10000}$/;
 export const REGEX_PATTERNS = {
   name: ALPHA_MEDIUM,
   summary: PARAGRAPH_LONG,
-  role: ALPHA_MEDIUM,
   email: EMAIL,
   phone: PHONE,
-
   website: URL,
   link: URL,
-
-  status: ALPHA_SHORT,
-  legal_status: ALPHA_SHORT,
-
+  type: ALPHA_SHORT,
+  role: ALPHA_MEDIUM,
+  functional_role: ALPHA_MEDIUM,
+  communities_of_focus: ALPHA_MEDIUM,
   focusArea: ALPHA_MEDIUM,
   sector_focus: ALPHA_MEDIUM,
   scope: ALPHA_MEDIUM,
-
-  affiliation: ALPHA_MEDIUM,
-  functional_role: ALPHA_MEDIUM,
-  communities_of_focus: ALPHA_MEDIUM,
-  stage: ALPHA_SHORT,
-  composition: ALPHA_SHORT,
   size: ALPHA_SHORT,
+  stage: ALPHA_SHORT,
+  status: ALPHA_SHORT,
+  legal_status: ALPHA_SHORT,
+  affiliation: ALPHA_MEDIUM,
+  composition: ALPHA_SHORT,
   jurisdiction: ALPHA_SHORT,
-  type: ALPHA_SHORT,
   notes: PARAGRAPH_SHORT,
   post: PARAGRAPH_SHORT,
   format: ALPHA_MEDIUM,
-
   entity: ALPHA_MEDIUM,
   sub_entity: ALPHA_MEDIUM,
-
   geographic_mandate: ALPHA_SHORT,
   mandate: ALPHA_SHORT,
-
   start_date: DATE,
   established_date: DATE,
 
