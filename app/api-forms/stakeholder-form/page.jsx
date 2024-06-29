@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Tags } from '../api-data';
+import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 
 const initialState = {
@@ -23,18 +23,6 @@ const initialState = {
   tags: [],
   username: '',
   password: '',
-};
-
-const regexPatterns = {
-  name: /^[A-Za-z\s]{2,50}$/,
-  summary: /^.{5,10000}$/,
-  role: /^[A-Za-z\s]{2,50}$/,
-  email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-  phone: /^\+?[1-9]\d{1,14}$/,
-  website: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
-  country: /^[A-Za-z\s]{2,60}$/,
-  state_province: /^[A-Za-z\s]{2,60}$/,
-  username: /^[A-Za-z0-9_]{3,20}$/,
 };
 
 const ErrorMessage = ({ error }) => {
@@ -54,7 +42,7 @@ const StakeholderForm = () => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
-  } = useForm(initialState, regexPatterns);
+  } = useForm(initialState, REGEX_PATTERNS);
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
