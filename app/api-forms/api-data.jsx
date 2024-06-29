@@ -3,49 +3,58 @@ export const Tags = [
   { name: 'Tag-2', id: '2' },
   { name: 'Tag-3', id: '3' },
 ];
+const ALPHA_SHORT = /^[A-Za-z\s]{2,20}$/;
+const ALPHA_MEDIUM = /^[A-Za-z\s]{2,50}$/;
+const ALPHA_NUMERIC = /^[A-Za-z0-9_]{3,20}$/;
+const DATE = /^\d{4}-\d{2}-\d{2}$/;
+const URL = /^(https?:\/\/[^\s/$.?#].[^\s]*)$/;
+const EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const PHONE = /^\+?[1-9]\d{1,14}$/;
+const PARAGRAPH_SHORT = /^.{1,1000}$/;
+const PARAGRAPH_LONG = /^.{5,10000}$/;
 
 export const REGEX_PATTERNS = {
-  name: /^[A-Za-z\s]{2,50}$/,
-  summary: /^.{5,10000}$/,
-  role: /^[A-Za-z\s]{2,50}$/,
-  email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-  phone: /^\+?[1-9]\d{1,14}$/,
+  name: ALPHA_MEDIUM,
+  summary: PARAGRAPH_LONG,
+  role: ALPHA_MEDIUM,
+  email: EMAIL,
+  phone: PHONE,
 
-  website: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
-  link: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
+  website: URL,
+  link: URL,
 
-  status: /^[A-Za-z\s]{2,20}$/,
-  legal_status: /^[A-Za-z\s]{2,20}$/,
+  status: ALPHA_SHORT,
+  legal_status: ALPHA_SHORT,
 
-  focusArea: /^[A-Za-z\s]{3,50}$/,
-  sector_focus: /^[A-Za-z\s]{3,50}$/,
-  scope: /^[A-Za-z\s]{3,50}$/,
+  focusArea: ALPHA_MEDIUM,
+  sector_focus: ALPHA_MEDIUM,
+  scope: ALPHA_MEDIUM,
 
-  affiliation: /^[A-Za-z\s]{3,50}$/,
-  functional_role: /^[A-Za-z\s]{2,50}$/,
-  communities_of_focus: /^[A-Za-z\s]{3,50}$/,
-  stage: /^[A-Za-z\s]{2,20}$/,
-  composition: /^[A-Za-z\s]{2,20}$/,
-  size: /^[A-Za-z\s]{3,20}$/,
-  jurisdiction: /^[A-Za-z\s]{2,20}$/,
-  type: /^[A-Za-z\s]{2,20}$/,
-  notes: /^.{1,1000}$/,
-  post: /^.{1,1000}$/,
-  format: /^[A-Za-z\s]{1,50}$/,
+  affiliation: ALPHA_MEDIUM,
+  functional_role: ALPHA_MEDIUM,
+  communities_of_focus: ALPHA_MEDIUM,
+  stage: ALPHA_SHORT,
+  composition: ALPHA_SHORT,
+  size: ALPHA_SHORT,
+  jurisdiction: ALPHA_SHORT,
+  type: ALPHA_SHORT,
+  notes: PARAGRAPH_SHORT,
+  post: PARAGRAPH_SHORT,
+  format: ALPHA_MEDIUM,
 
-  entity: /^[A-Za-z\s]{2,50}$/,
-  sub_entity: /^[A-Za-z\s]{2,50}$/,
+  entity: ALPHA_MEDIUM,
+  sub_entity: ALPHA_MEDIUM,
 
-  geographic_mandate: /^[A-Za-z\s]{2,20}$/,
-  mandate: /^[A-Za-z\s]{2,20}$/,
+  geographic_mandate: ALPHA_SHORT,
+  mandate: ALPHA_SHORT,
 
-  start_date: /^\d{4}-\d{2}-\d{2}$/,
-  established_date: /^\d{4}-\d{2}-\d{2}$/,
+  start_date: DATE,
+  established_date: DATE,
 
   country: /^[A-Za-z\s]{2,60}$/,
   state_province: /^[A-Za-z\s]{2,60}$/,
   hq_province: /^[A-Za-z\s]{2,60}$/,
   hq_city: /^[A-Za-z\s]{2,60}$/,
 
-  username: /^[A-Za-z0-9_]{3,20}$/,
+  username: ALPHA_NUMERIC,
 };
