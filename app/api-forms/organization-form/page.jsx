@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Tags } from '../api-data';
+import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 
 const initialState = {
@@ -34,27 +34,6 @@ const initialState = {
   password: '',
 };
 
-const regexPatterns = {
-  name: /^[A-Za-z\s]{2,50}$/,
-  website: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
-  summary: /^.{5,10000}$/,
-  legal_status: /^[A-Za-z\s]{2,20}$/,
-  affiliation: /^[A-Za-z\s]{3,50}$/,
-  functional_role: /^[A-Za-z\s]{2,50}$/,
-  sector_focus: /^[A-Za-z\s]{3,50}$/,
-  scope: /^[A-Za-z\s]{3,50}$/,
-  communities_of_focus: /^[A-Za-z\s]{3,50}$/,
-  geographic_mandate: /^[A-Za-z\s]{2,20}$/,
-  hq_province: /^[A-Za-z\s]{2,60}$/,
-  hq_city: /^[A-Za-z\s]{2,60}$/,
-  status: /^[A-Za-z\s]{2,20}$/,
-  stage: /^[A-Za-z\s]{2,20}$/,
-  composition: /^[A-Za-z\s]{2,20}$/,
-  size: /^[A-Za-z\s]{3,20}$/,
-  established_date: /^\d{4}-\d{2}-\d{2}$/,
-  username: /^[A-Za-z0-9_]{3,20}$/,
-};
-
 const ErrorMessage = ({ error }) => {
   if (!error) return null;
   return <p className='text-red-500'>{error}</p>;
@@ -72,7 +51,7 @@ const OrganizationFrom = () => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
-  } = useForm(initialState, regexPatterns);
+  } = useForm(initialState, REGEX_PATTERNS);
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>

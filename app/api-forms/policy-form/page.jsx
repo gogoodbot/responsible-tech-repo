@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Tags } from '../api-data';
+import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 
 const initialState = {
@@ -30,22 +30,6 @@ const initialState = {
   password: '',
 };
 
-const regexPatterns = {
-  name: /^[A-Za-z\s]{2,50}$/,
-  summary: /^.{5,10000}$/,
-  country: /^[A-Za-z\s]{2,60}$/,
-  type: /^[A-Za-z\s]{2,20}$/,
-  link: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
-  status: /^[A-Za-z\s]{2,20}$/,
-  mandate: /^[A-Za-z\s]{2,20}$/,
-  jurisdiction: /^[A-Za-z\s]{2,20}$/,
-  entity: /^[A-Za-z\s]{2,50}$/,
-  sub_entity: /^[A-Za-z\s]{2,50}$/,
-  start_date: /^\d{4}-\d{2}-\d{2}$/,
-  notes: /^.{1,200}$/,
-  username: /^[A-Za-z0-9_]{3,20}$/,
-};
-
 const ErrorMessage = ({ error }) => {
   if (!error) return null;
   return <p className='text-red-500'>{error}</p>;
@@ -63,7 +47,7 @@ const PolicyForm = () => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
-  } = useForm(initialState, regexPatterns);
+  } = useForm(initialState, REGEX_PATTERNS);
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
