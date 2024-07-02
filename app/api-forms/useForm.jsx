@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
+import { custom } from 'zod';
 
 const useForm = (initialState, regexPatterns) => {
   const [formData, setFormData] = useState(initialState);
@@ -8,29 +9,63 @@ const useForm = (initialState, regexPatterns) => {
   const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
   const generalButtonClassName =
     'outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out';
+  const customErrorMessages = {
+    name: {
+      required: 'Name is required.',
+      invalid: 'Name must be between 2 and 50 alphabetic characters.',
+    },
+    focusArea: {
+      required: 'Focus area is required.',
+      invalid: 'Focus area must be between 2 and 50 alphabetic characters.',
+    },
+    summary: {
+      required: 'Summary is required.',
+      invalid: 'Summary must be between 5 and 10000 characters.',
+    },
+    link: {
+      required: 'Link is required.',
+      invalid: 'Please enter a valid URL.',
+    },
+    post: {
+      required: 'Post is required.',
+      invalid: 'Post must be between 1 and 1000 characters.',
+    },
+    notes: {
+      required: 'Notes are required.',
+      invalid: 'Notes must be between 1 and 1000 characters.',
+    },
+    format: {
+      required: 'Format is required.',
+      invalid: 'Format must be between 2 and 50 alphabetic characters.',
+    },
+    username: {
+      required: 'Username is required.',
+      invalid: 'Username must be between 3 and 20 alphanumeric characters.',
+    },
+    password: {
+      required: 'Password is required.',
+    },
+    tags: {
+      required: 'At least one tag must be selected.',
+    },
+  };
 
   const validateField = (name, value) => {
     if (name === 'tags') {
       // Example of custom validation logic for tags if needed
       if (value.length === 0) {
-        return 'At least one tag must be selected.';
+        return customErrorMessages.tags.required;
       }
       return null;
     }
-
-    if (name !== 'password') {
-      if (!regexPatterns[name]) {
-        console.error(`No regex pattern defined for field: ${name}`);
-        return `${name} has no validation rule.`;
-      }
-
-      if (!regexPatterns[name].test(value)) {
-        return `${name} is invalid.`;
-      }
+    if (!value) {
+      return customErrorMessages[name]?.required || 'This field is required';
     }
 
-    if (!value) {
-      return 'This field is required';
+    if (name !== 'password' && regexPatterns[name]) {
+      if (!regexPatterns[name].test(value)) {
+        return customErrorMessages[name]?.invalid || `${name} is invalid.`;
+      }
     }
 
     return null;
@@ -87,7 +122,7 @@ const useForm = (initialState, regexPatterns) => {
 
     //  Check if at least one tag is selected
     if (selectedTags.length === 0) {
-      newErrors.tag = 'Please select at least one tag.';
+      newErrors.tag = customErrorMessages.tags.required;
     }
 
     if (Object.keys(newErrors).length > 0) {
