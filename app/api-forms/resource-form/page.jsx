@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
+import { submitToResource } from '../submitHandlers';
 
 const initialState = {
   name: '',
@@ -41,7 +42,7 @@ const ResourceForm = () => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
-  } = useForm(initialState, REGEX_PATTERNS);
+  } = useForm(initialState, REGEX_PATTERNS, submitToResource);
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
