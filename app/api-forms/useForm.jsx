@@ -82,6 +82,10 @@ const useForm = (initialState, regexPatterns) => {
     debouncedValidateField(name, value);
   };
 
+  const handleLocationChange = ({ country, state, city }) => {
+    setFormData({ ...formData, country, state, city });
+  };
+
   const debouncedValidateField = useCallback(
     debounce((name, value) => {
       const error = validateField(name, value);
@@ -187,6 +191,7 @@ const useForm = (initialState, regexPatterns) => {
     formData,
     errors,
     handleChange,
+    handleLocationChange,
     handleBlur,
     handleSubmit,
     handleTags,
