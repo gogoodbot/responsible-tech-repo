@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
+import { submitToStakeholder } from '../submit-handler';
 
 const initialState = {
   name: '',
@@ -42,7 +43,7 @@ const StakeholderForm = () => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
-  } = useForm(initialState, REGEX_PATTERNS);
+  } = useForm(initialState, REGEX_PATTERNS, submitToStakeholder);
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>

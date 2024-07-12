@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
+import upabase from './supabaseClient';
 import { custom } from 'zod';
 
-const useForm = (initialState, regexPatterns) => {
+const useForm = (initialState, regexPatterns, submitHandler) => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [selectedTags, setSelectedTags] = useState([]);
@@ -109,7 +110,7 @@ const useForm = (initialState, regexPatterns) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const newErrors = {};
 
@@ -130,12 +131,16 @@ const useForm = (initialState, regexPatterns) => {
       return;
     }
 
-    // submit your data to your API
-    console.log(formData);
-    setErrors({});
-    alert('Your form has been submitted. Thank you!');
-    setFormData(initialState);
-    setSelectedTags([]);
+    try {
+      await submitHandler(formData);
+      alert('Your form has been submitted. Thank you!');
+      setFormData(initialState);
+      setSelectedTags([]);
+      setErrors({});
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      alert('An unexpected error occurred. Please try again.');
+    }
   };
 
   useEffect(() => {
