@@ -1,9 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
-import upabase from './supabaseClient';
-import { custom } from 'zod';
 
-const useForm = (initialState, regexPatterns, submitHandler) => {
+const useForm = (initialState, regexPatterns) => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [selectedTags, setSelectedTags] = useState([]);
@@ -46,8 +44,14 @@ const useForm = (initialState, regexPatterns, submitHandler) => {
     password: {
       required: 'Password is required.',
     },
-    tags: {
-      required: 'At least one tag must be selected.',
+    country: {
+      required: 'Country must be selected.',
+    },
+    state: {
+      required: 'State/Province must be selected.',
+    },
+    city: {
+      required: 'City must be selected.',
     },
   };
 
@@ -83,6 +87,15 @@ const useForm = (initialState, regexPatterns, submitHandler) => {
     debouncedValidateField(name, value);
   };
 
+  const handleLocationChange = (locationData) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      country: locationData.country,
+      state: locationData.state,
+      city: locationData.city,
+    }));
+  };
+
   const debouncedValidateField = useCallback(
     debounce((name, value) => {
       const error = validateField(name, value);
@@ -110,7 +123,7 @@ const useForm = (initialState, regexPatterns, submitHandler) => {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = {};
 
@@ -121,27 +134,58 @@ const useForm = (initialState, regexPatterns, submitHandler) => {
       }
     });
 
-    //  Check if at least one tag is selected
-    if (selectedTags.length === 0) {
-      newErrors.tag = customErrorMessages.tags.required;
+    // Check if at least one tag is selected
+    if (formData.tags.length === 0) {
+      newErrors.tags = customErrorMessages.tags.required;
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      console.log(newErrors);
       return;
     }
 
-    try {
-      await submitHandler(formData);
-      alert('Your form has been submitted. Thank you!');
-      setFormData(initialState);
-      setSelectedTags([]);
-      setErrors({});
-    } catch (error) {
-      console.error('Unexpected error:', error);
-      alert('An unexpected error occurred. Please try again.');
-    }
+    // Process form submission logic here
+    console.log('Submited');
+    console.log(formData); // Check formData to ensure tags are correctly set
+
+    setFormData(initialState);
+    setSelectedTags([]);
+    setErrors({});
   };
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const newErrors = {};
+
+  //   Object.keys(formData).forEach((key) => {
+  //     const error = validateField(key, formData[key]);
+  //     if (error) {
+  //       newErrors[key] = error;
+  //     }
+  //   });
+
+  //   //  Check if at least one tag is selected
+  //   if (selectedTags.length === 0) {
+  //     newErrors.tag = customErrorMessages.tags.required;
+  //   }
+
+  //   if (Object.keys(newErrors).length > 0) {
+  //     setErrors(newErrors);
+  //     return;
+  //   }
+
+  //   try {
+  //     await submitHandler(formData);
+  //     alert('Your form has been submitted. Thank you!');
+  //     setFormData(initialState);
+  //     setSelectedTags([]);
+  //     setErrors({});
+  //   } catch (error) {
+  //     console.error('Unexpected error:', error);
+  //     alert('An unexpected error occurred. Please try again.');
+  //   }
+  // };
 
   useEffect(() => {
     if (selectedTags.length > 0) {
@@ -152,18 +196,17 @@ const useForm = (initialState, regexPatterns, submitHandler) => {
     }
   }, [selectedTags]);
 
-  useEffect(() => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      tags: selectedTags,
-    }));
-  }, [selectedTags]);
-
   const handleTags = (tag) => {
     setSelectedTags((currentTags) => {
       const newTags = currentTags.some((t) => t.id === tag.id)
         ? currentTags.filter((t) => t.id !== tag.id)
         : [...currentTags, tag];
+
+      // Update formData with selected tags
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        tags: newTags,
+      }));
 
       // Clear the tags error if there are any selected tags
       if (newTags.length > 0) {
@@ -192,6 +235,7 @@ const useForm = (initialState, regexPatterns, submitHandler) => {
     formData,
     errors,
     handleChange,
+    handleLocationChange,
     handleBlur,
     handleSubmit,
     handleTags,

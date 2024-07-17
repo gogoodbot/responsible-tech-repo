@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
-import { submitToLitigation } from '../submitHandlers';
 import LocationSelect from '../location-select';
 
 const initialState = {
@@ -37,6 +36,7 @@ const LitigationForm = () => {
     formData,
     errors,
     handleChange,
+    handleLocationChange,
     handleBlur,
     handleSubmit,
     handleTags,
@@ -44,7 +44,7 @@ const LitigationForm = () => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
-  } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
+  } = useForm(initialState, REGEX_PATTERNS);
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
@@ -99,22 +99,9 @@ const LitigationForm = () => {
 
           <LocationSelect
             onLocationChange={handleLocationChange}
-            fields={[country]}
+            fields={['country']}
+            countryRequired={require}
           />
-          {/* <label className='pb-2 block text-lg text-gray-600'>
-            Country
-            <Input
-              // TODO: get the country name from an api or list, make it a dropdown selection
-              name='country'
-              type='text'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={formData.country}
-              className={generalFieldClassName}
-              required
-            />
-            <ErrorMessage error={errors.country} />
-          </label> */}
 
           <label className='pb-2 block text-lg text-gray-600'>
             Status

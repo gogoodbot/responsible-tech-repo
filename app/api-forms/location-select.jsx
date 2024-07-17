@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { Country, State, City } from 'country-state-city';
 
-const LocationSelect = ({ onLocationChange, fields }) => {
+const LocationSelect = ({
+  onLocationChange,
+  fields,
+  countryRequired,
+  stateRequired,
+  cityRequired,
+}) => {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
@@ -81,6 +87,7 @@ const LocationSelect = ({ onLocationChange, fields }) => {
             options={countries}
             value={selectedCountry}
             onChange={handleCountryChange}
+            {...(countryRequired && require)}
           />
         </label>
       )}
@@ -93,6 +100,7 @@ const LocationSelect = ({ onLocationChange, fields }) => {
             value={selectedState}
             onChange={handleStateChange}
             isDisabled={!selectedCountry}
+            {...(stateRequired && require)}
           />
         </label>
       )}
@@ -105,6 +113,7 @@ const LocationSelect = ({ onLocationChange, fields }) => {
             value={selectedCity}
             onChange={handleCityChange}
             isDisabled={!selectedState}
+            {...(cityRequired && require)}
           />
         </label>
       )}
