@@ -11,6 +11,7 @@ import {
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 import { submitToLitigation } from '../submitHandlers';
+import LocationSelect from '../location-select';
 
 const initialState = {
   name: '',
@@ -96,7 +97,11 @@ const LitigationForm = () => {
             <ErrorMessage error={errors.summary} />
           </label>
 
-          <label className='pb-2 block text-lg text-gray-600'>
+          <LocationSelect
+            onLocationChange={handleLocationChange}
+            fields={[country]}
+          />
+          {/* <label className='pb-2 block text-lg text-gray-600'>
             Country
             <Input
               // TODO: get the country name from an api or list, make it a dropdown selection
@@ -109,7 +114,7 @@ const LitigationForm = () => {
               required
             />
             <ErrorMessage error={errors.country} />
-          </label>
+          </label> */}
 
           <label className='pb-2 block text-lg text-gray-600'>
             Status
