@@ -5,6 +5,7 @@ const useForm = (initialState, regexPatterns) => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [selectedTags, setSelectedTags] = useState([]);
+  const [isClearLocations, setIsClearLocations] = useState(false);
   const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
   const generalButtonClassName =
     'outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out';
@@ -83,35 +84,46 @@ const useForm = (initialState, regexPatterns) => {
       ...prevState,
       [name]: value,
     }));
-
+    console.log('formData Changed:', formData);
     debouncedValidateField(name, value);
   };
 
-  const handleLocationChange = (locationData) => {
+  const handleCountryChange = (locationData) => {
     setFormData((prevState) => ({
       ...prevState,
       country: locationData.country,
+    }));
+  };
+  const handleStateChange = (locationData) => {
+    setFormData((prevState) => ({
+      ...prevState,
+
       state: locationData.state,
+    }));
+  };
+  const handleCityChange = (locationData) => {
+    setFormData((prevState) => ({
+      ...prevState,
+
       city: locationData.city,
     }));
   };
 
-  const debouncedValidateField = useCallback(
-    debounce((name, value) => {
-      const error = validateField(name, value);
+  // const debouncedValidateField = (name, value) => {
+  //   const error = validateField(name, value);
 
-      setErrors((prevState) => ({
-        ...prevState,
-        [name]: error,
-      }));
+  //   setErrors((prevState) => ({
+  //     ...prevState,
+  //     [name]: error,
+  //   }));
 
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }, 300),
-    [] // Dependencies
-  );
+  //   setFormData((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
@@ -144,13 +156,12 @@ const useForm = (initialState, regexPatterns) => {
       console.log(newErrors);
       return;
     }
-
-    // Process form submission logic here
-    console.log('Submited');
-    console.log(formData); // Check formData to ensure tags are correctly set
+    // Check formData to ensure tags are correctly set
+    console.log('formData: ', Object.keys(formData));
 
     setFormData(initialState);
     setSelectedTags([]);
+    setIsClearLocations(true);
     setErrors({});
   };
 
@@ -227,6 +238,7 @@ const useForm = (initialState, regexPatterns) => {
     if (confirmReset) {
       setFormData(initialState);
       setSelectedTags([]);
+      setIsClearLocations(true);
       setErrors({});
     }
   };
@@ -235,12 +247,15 @@ const useForm = (initialState, regexPatterns) => {
     formData,
     errors,
     handleChange,
-    handleLocationChange,
+    handleCountryChange,
+    handleStateChange,
+    handleCityChange,
     handleBlur,
     handleSubmit,
     handleTags,
     resetForm,
     selectedTags,
+    isClearLocations,
     generalFieldClassName,
     generalButtonClassName,
   };

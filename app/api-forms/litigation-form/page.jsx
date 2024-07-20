@@ -36,12 +36,13 @@ const LitigationForm = () => {
     formData,
     errors,
     handleChange,
-    handleLocationChange,
+    handleNameChange,
+    handleCountryChange,
     handleBlur,
     handleSubmit,
     handleTags,
     resetForm,
-    selectedTags,
+    isClearLocations,
     generalFieldClassName,
     generalButtonClassName,
   } = useForm(initialState, REGEX_PATTERNS);
@@ -59,7 +60,7 @@ const LitigationForm = () => {
             <Input
               name='name'
               type='text'
-              onChange={handleChange}
+              onChange={handleNameChange}
               onBlur={handleBlur}
               value={formData.name}
               className={generalFieldClassName}
@@ -98,9 +99,10 @@ const LitigationForm = () => {
           </label>
 
           <LocationSelect
-            onLocationChange={handleLocationChange}
+            onCountryChange={handleCountryChange}
             fields={['country']}
-            countryRequired={require}
+            isClear={isClearLocations}
+            // countryRequired={require}
           />
 
           <label className='pb-2 block text-lg text-gray-600'>

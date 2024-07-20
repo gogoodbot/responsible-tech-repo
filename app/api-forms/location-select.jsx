@@ -3,8 +3,9 @@ import Select from 'react-select';
 import { Country, State, City } from 'country-state-city';
 
 const LocationSelect = ({
-  onLocationChange,
+  onCountryChange,
   fields,
+  isClear,
   countryRequired,
   stateRequired,
   cityRequired,
@@ -25,17 +26,19 @@ const LocationSelect = ({
     );
   }, []);
 
+  useEffect(() => {
+    if (isClear) {
+      setSelectedCountry(null);
+      setSelectedState(null);
+      setSelectedCity(null);
+    }
+  }, [isClear]);
+
   const handleCountryChange = (selectedOption) => {
     setSelectedCountry(selectedOption);
-    setSelectedState(null);
-    setSelectedCity(null);
-    setStates([]);
-    setCities([]);
     fetchStates(selectedOption.value);
-    onLocationChange({
+    onCountryChange({
       country: selectedOption.label,
-      state: '',
-      city: '',
     });
   };
 
@@ -87,7 +90,7 @@ const LocationSelect = ({
             options={countries}
             value={selectedCountry}
             onChange={handleCountryChange}
-            {...(countryRequired && require)}
+            // {...(countryRequired === require && require)}
           />
         </label>
       )}
@@ -100,7 +103,7 @@ const LocationSelect = ({
             value={selectedState}
             onChange={handleStateChange}
             isDisabled={!selectedCountry}
-            {...(stateRequired && require)}
+            // {...(stateRequired === true && require)}
           />
         </label>
       )}
@@ -113,7 +116,7 @@ const LocationSelect = ({
             value={selectedCity}
             onChange={handleCityChange}
             isDisabled={!selectedState}
-            {...(cityRequired && require)}
+            // {...(cityRequired && require)}
           />
         </label>
       )}
