@@ -49,7 +49,6 @@ export function DataTable({ columns, data }) {
     } else {
       const lowerCaseTable =
         data.tableName[0].toLowerCase() + data.tableName.slice(1);
-      console.log("lowerCaseTableName", lowerCaseTable);
       tableId = data[`${lowerCaseTable}_id`];
     }
 
