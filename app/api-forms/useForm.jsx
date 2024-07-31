@@ -168,7 +168,8 @@ const useForm = (initialState, regexPatterns) => {
       return;
     }
     // Check formData to ensure tags are correctly set
-    console.log('formData: ', Object.keys(formData));
+    console.log('formData Keys: ', Object.keys(formData));
+    console.log('Form Data: ', formData);
 
     setFormData(initialState);
     setSelectedTags([]);
