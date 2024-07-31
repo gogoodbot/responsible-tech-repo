@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
-import { submitToPolicy } from '../submitHandlers';
+import { submitToPolicy } from '../submit-handler';
 
 const initialState = {
   name: '',

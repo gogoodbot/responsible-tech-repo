@@ -11,6 +11,7 @@ import {
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 import LocationSelect from '../location-select';
+import { submitToLitigation } from '../submit-handler';
 
 const initialState = {
   name: '',
@@ -45,7 +46,7 @@ const LitigationForm = () => {
     isClearLocations,
     generalFieldClassName,
     generalButtonClassName,
-  } = useForm(initialState, REGEX_PATTERNS);
+  } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
