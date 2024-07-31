@@ -80,11 +80,22 @@ const useForm = (initialState, regexPatterns) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // setFormData((prevState) => ({
+    //   ...prevState,
+    //   [name]: value,
+    // }));
+    console.log('formData Changed:', formData);
+    debouncedValidateField(name, value);
+  };
+
+  const handleNameChange = (e) => {
+    const { name, value } = e.target;
+
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log('formData Changed:', formData);
+    console.log('Name Changed:', formData);
     debouncedValidateField(name, value);
   };
 
@@ -109,21 +120,21 @@ const useForm = (initialState, regexPatterns) => {
     }));
   };
 
-  // const debouncedValidateField = (name, value) => {
-  //   const error = validateField(name, value);
+  const debouncedValidateField = (name, value) => {
+    const error = validateField(name, value);
 
-  //   setErrors((prevState) => ({
-  //     ...prevState,
-  //     [name]: error,
-  //   }));
+    setErrors((prevState) => ({
+      ...prevState,
+      [name]: error,
+    }));
 
-  //   setFormData((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       [name]: value,
-  //     };
-  //   });
-  // };
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
@@ -247,6 +258,7 @@ const useForm = (initialState, regexPatterns) => {
     formData,
     errors,
     handleChange,
+    handleNameChange,
     handleCountryChange,
     handleStateChange,
     handleCityChange,
