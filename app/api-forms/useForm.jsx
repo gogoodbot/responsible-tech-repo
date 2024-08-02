@@ -99,6 +99,22 @@ const useForm = (initialState, regexPatterns) => {
     debouncedValidateField(name, value);
   };
 
+  const debouncedValidateField = (name, value) => {
+    const error = validateField(name, value);
+
+    setErrors((prevState) => ({
+      ...prevState,
+      [name]: error,
+    }));
+
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
   const handleCountryChange = (locationData) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -118,22 +134,6 @@ const useForm = (initialState, regexPatterns) => {
 
       city: locationData.city,
     }));
-  };
-
-  const debouncedValidateField = (name, value) => {
-    const error = validateField(name, value);
-
-    setErrors((prevState) => ({
-      ...prevState,
-      [name]: error,
-    }));
-
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
-    });
   };
 
   const handleBlur = (e) => {

@@ -4,6 +4,8 @@ import { Country, State, City } from 'country-state-city';
 
 const LocationSelect = ({
   onCountryChange,
+  onStateChange,
+  onCityChange,
   fields,
   isClear,
   countryRequired,
@@ -17,14 +19,49 @@ const LocationSelect = ({
   const [selectedState, setSelectedState] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
 
-  useEffect(() => {
-    setCountries(
-      Country.getAllCountries().map((country) => ({
-        value: country.isoCode,
-        label: country.name,
-      }))
-    );
-  }, []);
+  const handleCountryChange = (selectedOption) => {
+    console.log('Selected country:', selectedOption);
+    setSelectedCountry(selectedOption);
+    onCountryChange({
+      country: selectedOption.label,
+    });
+  };
+
+  const handleStateChange = (selectedOption) => {
+    console.log('Selected state:', selectedOption);
+    setSelectedState(selectedOption);
+    onStateChange({
+      country: selectedCountry.label,
+      state: selectedOption.label,
+    });
+  };
+
+  const handleCityChange = (selectedOption) => {
+    setSelectedCity(selectedOption);
+    onCityChange({
+      country: selectedCountry.label,
+      state: selectedState.label,
+      city: selectedOption.label,
+    });
+  };
+
+  // const fetchStates = (countryCode) => {
+  //   setStates(
+  //     State.getStatesOfCountry(countryCode).map((state) => ({
+  //       value: state.isoCode,
+  //       label: state.name,
+  //     }))
+  //   );
+  // };
+
+  // const fetchCities = (countryCode, stateCode) => {
+  //   setCities(
+  //     City.getCitiesOfState(countryCode, stateCode).map((city) => ({
+  //       value: city.isoCode,
+  //       label: city.name,
+  //     }))
+  //   );
+  // };
 
   useEffect(() => {
     if (isClear) {
@@ -34,52 +71,51 @@ const LocationSelect = ({
     }
   }, [isClear]);
 
-  const handleCountryChange = (selectedOption) => {
-    setSelectedCountry(selectedOption);
-    fetchStates(selectedOption.value);
-    onCountryChange({
-      country: selectedOption.label,
-    });
-  };
+  useEffect(() => {
+    const allCountries = Country.getAllCountries().map((country) => ({
+      value: country.isoCode,
+      label: country.name,
+    }));
+    setCountries(allCountries);
+    console.log('Fetched Countries: ', allCountries);
+  }, []);
 
-  const handleStateChange = (selectedOption) => {
-    setSelectedState(selectedOption);
-    setSelectedCity(null);
+  useEffect(() => {
+    if (selectedCountry) {
+      console.log('Fetching states for country:', selectedCountry.value);
+      const fetchedStates = State.getStatesOfCountry(selectedCountry.value).map(
+        (state) => ({
+          value: state.isoCode,
+          label: state.name,
+        })
+      );
+      console.log('Fetched states:', fetchedStates);
+      setStates(fetchedStates);
+    } else {
+      setStates([]);
+    }
+    setSelectedState(null);
     setCities([]);
-    fetchCities(selectedCountry.value, selectedOption.value);
-    onLocationChange({
-      country: selectedCountry.label,
-      state: selectedOption.label,
-      city: '',
-    });
-  };
+    setSelectedCity(null);
+  }, [selectedCountry]);
 
-  const handleCityChange = (selectedOption) => {
-    setSelectedCity(selectedOption);
-    onLocationChange({
-      country: selectedCountry.label,
-      state: selectedState.label,
-      city: selectedOption.label,
-    });
-  };
-
-  const fetchStates = (countryCode) => {
-    setStates(
-      State.getStatesOfCountry(countryCode).map((state) => ({
-        value: state.isoCode,
-        label: state.name,
-      }))
-    );
-  };
-
-  const fetchCities = (countryCode, stateCode) => {
-    setCities(
-      City.getCitiesOfState(countryCode, stateCode).map((city) => ({
-        value: city.isoCode,
+  useEffect(() => {
+    if (selectedState) {
+      console.log('Fetching cities for state:', selectedState.value);
+      const fetchedCities = City.getCitiesOfState(
+        selectedCountry.value,
+        selectedState.value
+      ).map((city) => ({
+        value: city.name,
         label: city.name,
-      }))
-    );
-  };
+      }));
+      console.log('Fetched cities:', fetchedCities);
+      setCities(fetchedCities);
+    } else {
+      setCities([]);
+    }
+    setSelectedCity(null);
+  }, [selectedCountry, selectedState]);
 
   return (
     <div>
@@ -90,7 +126,6 @@ const LocationSelect = ({
             options={countries}
             value={selectedCountry}
             onChange={handleCountryChange}
-            // {...(countryRequired === require && require)}
           />
         </label>
       )}
@@ -102,8 +137,7 @@ const LocationSelect = ({
             options={states}
             value={selectedState}
             onChange={handleStateChange}
-            isDisabled={!selectedCountry}
-            // {...(stateRequired === true && require)}
+            // isDisabled={!selectedCountry}
           />
         </label>
       )}
@@ -115,8 +149,7 @@ const LocationSelect = ({
             options={cities}
             value={selectedCity}
             onChange={handleCityChange}
-            isDisabled={!selectedState}
-            // {...(cityRequired && require)}
+            // isDisabled={!selectedState}
           />
         </label>
       )}

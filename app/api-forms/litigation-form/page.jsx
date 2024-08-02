@@ -39,6 +39,8 @@ const LitigationForm = () => {
     handleChange,
     handleNameChange,
     handleCountryChange,
+    handleStateChange,
+    handleCityChange,
     handleBlur,
     handleSubmit,
     handleTags,
@@ -102,6 +104,18 @@ const LitigationForm = () => {
           <LocationSelect
             onCountryChange={handleCountryChange}
             fields={['country']}
+            isClear={isClearLocations}
+            // countryRequired={require}
+          />
+          <LocationSelect
+            onStateChange={handleStateChange}
+            fields={['state']}
+            isClear={isClearLocations}
+            // countryRequired={require}
+          />
+          <LocationSelect
+            onCityChange={handleCityChange}
+            fields={['city']}
             isClear={isClearLocations}
             // countryRequired={require}
           />
