@@ -58,6 +58,7 @@ export default async function Page({ params }) {
                   <TabsTrigger value="related">Related</TabsTrigger>
                   <TabsTrigger value="suggest">Suggested</TabsTrigger>
                   <TabsTrigger value="feedback">Feedback</TabsTrigger>
+
                 </TabsList>
                 <TabsContent value="summary">
                   <ArtifactInfo params={artifactInfo} />

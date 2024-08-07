@@ -14,6 +14,9 @@ const Navbar = () => {
         <Link href="/about" className="ml-6 flex items-center space-x-2">
           About
         </Link>
+        <Link href="/create-artifact-page" className="ml-6 flex items-center space-x-2">
+          Create a New Artifact
+        </Link>
         <ModeToggle />
       </nav>
     </div>
