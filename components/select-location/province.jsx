@@ -12,6 +12,7 @@ export default function SelectProvince({ onProvinceSelect, countryCode }) {
   };
 
   useEffect(() => {
+    setSelectedProvince(null);
     const allProvinces = State.getStatesOfCountry(countryCode).map(
       (province) => ({
         value: province.isoCode,

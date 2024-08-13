@@ -16,6 +16,7 @@ export default function SelectProvince({
   };
 
   useEffect(() => {
+    setSelectedCity(null);
     const allCities = City.getCitiesOfState(countryCode, stateCode).map(
       (city) => ({
         value: city.isoCode,
