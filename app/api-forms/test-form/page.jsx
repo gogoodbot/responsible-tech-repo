@@ -1,5 +1,5 @@
 'use client';
-
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
 import { REGEX_PATTERNS } from '../api-data';
@@ -13,12 +13,16 @@ const initialState = {
 };
 
 const TestForm = () => {
+  const [countryCode, setCountryCode] = useState('');
   const { handleSubmit, resetForm, generalButtonClassName } = useForm(
     initialState,
     REGEX_PATTERNS,
     submitToLitigation
   );
 
+  function handleCountrySelect(selectedOption) {
+    setCountryCode(selectedOption.value);
+  }
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
       <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
@@ -27,8 +31,11 @@ const TestForm = () => {
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
-          <SelectCountry onCountrySelect={} />
-          <SelectProvince />
+          <SelectCountry onCountrySelect={handleCountrySelect} />
+          <SelectProvince
+            // onProvinceSelect={(e) => setSelectedProvince(e.target.value)}
+            countryCode={countryCode}
+          />
 
           <Button
             variant='ghost'

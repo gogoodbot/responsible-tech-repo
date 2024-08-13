@@ -10,16 +10,14 @@ export default function SelectCountry({ onCountrySelect }) {
     setSelectedCountry(selectedOption);
     onCountrySelect?.(selectedOption);
   };
-  console.log('selected Country: ', selectedCountry);
+
   useEffect(() => {
     const allCountries = Country.getAllCountries().map((country) => ({
       value: country.isoCode,
       label: country.name,
     }));
     setCountries(allCountries);
-    // console.log('Fetched Countries: ', allCountries);
   }, []);
-  console.log('Countries: ', countries);
 
   return (
     <div>
