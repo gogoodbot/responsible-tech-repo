@@ -11,7 +11,6 @@ export default function SelectProvince({ onProvinceSelect, countryCode }) {
     onProvinceSelect?.(selectedOption);
   };
 
-  // debugger;
   useEffect(() => {
     const allProvinces = State.getStatesOfCountry(countryCode).map(
       (province) => ({

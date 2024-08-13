@@ -6,6 +6,7 @@ import { REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 import SelectCountry from '@/components/select-location/select-country';
 import SelectProvince from '@/components/select-location/province';
+import SelectCity from '@/components/select-location/city';
 import { submitToLitigation } from '../submit-handler';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
 
 const TestForm = () => {
   const [countryCode, setCountryCode] = useState('');
+  const [stateCode, setStateCode] = useState('');
   const { handleSubmit, resetForm, generalButtonClassName } = useForm(
     initialState,
     REGEX_PATTERNS,
@@ -22,6 +24,12 @@ const TestForm = () => {
 
   function handleCountrySelect(selectedOption) {
     setCountryCode(selectedOption.value);
+  }
+  function handleProvinceSelect(selectedOption) {
+    setStateCode(selectedOption.value);
+  }
+  function handleCitySelect(selectedOption) {
+    console.log('city: ', selectedOption.label);
   }
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
@@ -33,8 +41,13 @@ const TestForm = () => {
         >
           <SelectCountry onCountrySelect={handleCountrySelect} />
           <SelectProvince
-            // onProvinceSelect={(e) => setSelectedProvince(e.target.value)}
+            onProvinceSelect={handleProvinceSelect}
             countryCode={countryCode}
+          />
+          <SelectCity
+            onCitySelect={handleCitySelect}
+            countryCode={countryCode}
+            stateCode={stateCode}
           />
 
           <Button
