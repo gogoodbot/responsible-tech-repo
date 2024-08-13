@@ -8,7 +8,8 @@ const LocationSelect = ({
   onCityChange,
   fields,
   isClear,
-  countryRequired,
+  ostan,
+  onCountrySelected,
   stateRequired,
   cityRequired,
 }) => {
@@ -20,7 +21,7 @@ const LocationSelect = ({
   const [selectedCity, setSelectedCity] = useState(null);
 
   const handleCountryChange = (selectedOption) => {
-    console.log('Selected country:', selectedOption);
+    // console.log('Selected country:', selectedOption);
     setSelectedCountry(selectedOption);
     onCountryChange({
       country: selectedOption.label,
@@ -28,7 +29,7 @@ const LocationSelect = ({
   };
 
   const handleStateChange = (selectedOption) => {
-    console.log('Selected state:', selectedOption);
+    // console.log('Selected state:', selectedOption);
     setSelectedState(selectedOption);
     onStateChange({
       country: selectedCountry.label,
@@ -76,8 +77,7 @@ const LocationSelect = ({
       value: country.isoCode,
       label: country.name,
     }));
-    setCountries(allCountries);
-    console.log('Fetched Countries: ', allCountries);
+    // console.log('Fetched Countries: ', allCountries);
   }, []);
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const LocationSelect = ({
           label: state.name,
         })
       );
-      console.log('Fetched states:', fetchedStates);
+      // console.log('Fetched states:', fetchedStates);
       setStates(fetchedStates);
     } else {
       setStates([]);
@@ -98,10 +98,15 @@ const LocationSelect = ({
     setCities([]);
     setSelectedCity(null);
   }, [selectedCountry]);
+  if (ostan) {
+    // console.log('====================================');
+    // console.log('state', states);
+    // console.log('====================================');
+  }
 
   useEffect(() => {
     if (selectedState) {
-      console.log('Fetching cities for state:', selectedState.value);
+      // console.log('Fetching cities for state:', selectedState.value);
       const fetchedCities = City.getCitiesOfState(
         selectedCountry.value,
         selectedState.value
@@ -109,7 +114,7 @@ const LocationSelect = ({
         value: city.name,
         label: city.name,
       }));
-      console.log('Fetched cities:', fetchedCities);
+      // console.log('Fetched cities:', fetchedCities);
       setCities(fetchedCities);
     } else {
       setCities([]);

@@ -10,8 +10,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
-import LocationSelect from '../location-select';
+import SelectCountry from '@/components/select-location/select-country';
 import { submitToLitigation } from '../submit-handler';
+import { useEffect, useMemo } from 'react';
+import { requestToBodyStream } from 'next/dist/server/body-streams';
 
 const initialState = {
   name: '',
@@ -58,7 +60,9 @@ const LitigationForm = () => {
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
-          <label className='pb-2 block text-lg text-gray-600'>
+          <SelectCountry />
+
+          {/* <label className='pb-2 block text-lg text-gray-600'>
             Name
             <Input
               name='name'
@@ -99,9 +103,9 @@ const LitigationForm = () => {
               />
             </div>
             <ErrorMessage error={errors.summary} />
-          </label>
+          </label> */}
 
-          <LocationSelect
+          {/* <LocationSelect
             onCountryChange={handleCountryChange}
             fields={['country']}
             isClear={isClearLocations}
@@ -111,6 +115,8 @@ const LitigationForm = () => {
             onStateChange={handleStateChange}
             fields={['state']}
             isClear={isClearLocations}
+            ostan={true}
+            // countryId={countryId}
             // countryRequired={require}
           />
           <LocationSelect
@@ -118,9 +124,9 @@ const LitigationForm = () => {
             fields={['city']}
             isClear={isClearLocations}
             // countryRequired={require}
-          />
+          /> */}
 
-          <label className='pb-2 block text-lg text-gray-600'>
+          {/* <label className='pb-2 block text-lg text-gray-600'>
             Status
             <Input
               name='status'
@@ -175,9 +181,9 @@ const LitigationForm = () => {
               required
             />
             <ErrorMessage error={errors.jurisdiction} />
-          </label>
+          </label> */}
 
-          <div className='form-group space-y-2'>
+          {/* <div className='form-group space-y-2'>
             <label className='mb-2 block'>
               Tags
               <DropdownMenu>
@@ -233,7 +239,7 @@ const LitigationForm = () => {
               className={generalFieldClassName}
               required
             />
-          </label>
+          </label> */}
 
           <Button
             variant='ghost'
