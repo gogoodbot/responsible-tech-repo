@@ -158,7 +158,7 @@ const useForm = (initialState, regexPatterns) => {
     });
 
     // Check if at least one tag is selected
-    if (formData.tags.length === 0) {
+    if (formData.tags?.length === 0) {
       newErrors.tags = customErrorMessages.tags.required;
     }
 
