@@ -6,6 +6,7 @@ const useForm = (initialState, regexPatterns) => {
 
   const [selectedTags, setSelectedTags] = useState([]);
   const [countryCode, setCountryCode] = useState('');
+  const [stateCode, setStateCode] = useState('');
 
   const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
   const generalButtonClassName =
@@ -100,6 +101,13 @@ const useForm = (initialState, regexPatterns) => {
     setCountryCode(selectedOption.value);
     debouncedValidateField('country', label);
   }
+
+  function handleProvinceChange(selectedOption) {
+    const { label } = selectedOption;
+
+    setStateCode(selectedOption.value);
+    debouncedValidateField('state', label);
+  }
   // function handleCountrySelect(selectedOption) {
 
   // }
@@ -147,6 +155,8 @@ const useForm = (initialState, regexPatterns) => {
     handleNameChange,
     // handleLocationChange,
     handleCountryChange,
+    countryCode,
+    handleProvinceChange,
     // handleBlur,
     handleSubmit,
     // handleTags,

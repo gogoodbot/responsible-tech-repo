@@ -7,7 +7,6 @@ export default function SelectCountry({ onCountrySelect }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   const handleCountrySelect = (selectedOption) => {
-    console.log('hanldeCountryChange');
     setSelectedCountry(selectedOption);
     onCountrySelect?.(selectedOption);
   };

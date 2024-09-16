@@ -6,6 +6,7 @@ import { REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 import SelectCountry from '@/components/select-location/select-country';
 import { submitToLitigation } from '../submit-handler';
+import SelectProvince from '@/components/select-location/select-province';
 
 const initialState = {
   name: '',
@@ -33,7 +34,8 @@ const LitigationForm = () => {
     handleNameChange,
     // handleLocationChange,
     handleCountryChange,
-    // handleProvinceChange,
+    countryCode,
+    handleProvinceChange,
     // handleCityChange,
     // handleBlur,
     handleSubmit,
@@ -52,6 +54,10 @@ const LitigationForm = () => {
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
           <SelectCountry onCountrySelect={handleCountryChange} />
+          <SelectProvince
+            onProvinceSelect={handleProvinceChange}
+            countryCode={countryCode}
+          />
 
           <label className='pb-2 block text-lg text-gray-600'>
             Name
