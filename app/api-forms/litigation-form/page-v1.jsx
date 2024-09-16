@@ -2,23 +2,31 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { REGEX_PATTERNS } from '../api-data';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 import SelectCountry from '@/components/select-location/select-country';
 import { submitToLitigation } from '../submit-handler';
+import { useEffect, useMemo } from 'react';
+import { requestToBodyStream } from 'next/dist/server/body-streams';
 
 const initialState = {
   name: '',
-  // link: '',
-  // summary: '',
+  link: '',
+  summary: '',
   country: '',
-  // status: '',
-  // mandate: '',
-  // start_date: '', // startDate: '' >> TODO: fix it in database
-  // jurisdiction: '',
-  // tags: [],
-  // username: '',
-  // password: '',
+  status: '',
+  mandate: '',
+  start_date: '', // startDate: '' >> TODO: fix it in database
+  jurisdiction: '',
+  tags: [],
+  username: '',
+  password: '',
 };
 
 const ErrorMessage = ({ error }) => {
@@ -30,15 +38,16 @@ const LitigationForm = () => {
   const {
     formData,
     errors,
+    handleChange,
     handleNameChange,
-    // handleLocationChange,
     handleCountryChange,
-    // handleProvinceChange,
-    // handleCityChange,
-    // handleBlur,
+    handleProvinceChange,
+    handleCityChange,
+    handleBlur,
     handleSubmit,
-    // handleTags,
-    // resetForm,
+    handleTags,
+    resetForm,
+    isClearLocations,
     generalFieldClassName,
     generalButtonClassName,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
@@ -51,15 +60,15 @@ const LitigationForm = () => {
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
-          <SelectCountry onCountrySelect={handleCountryChange} />
+          <SelectCountry />
 
-          <label className='pb-2 block text-lg text-gray-600'>
+          {/* <label className='pb-2 block text-lg text-gray-600'>
             Name
             <Input
               name='name'
               type='text'
               onChange={handleNameChange}
-              // onBlur={handleBlur}
+              onBlur={handleBlur}
               value={formData.name}
               className={generalFieldClassName}
               required
@@ -67,7 +76,7 @@ const LitigationForm = () => {
             <ErrorMessage error={errors.name} />
           </label>
 
-          {/*  <label className='pb-2 block text-lg text-gray-600'>
+          <label className='pb-2 block text-lg text-gray-600'>
             Link
             <Input
               name='link'
@@ -95,6 +104,27 @@ const LitigationForm = () => {
             </div>
             <ErrorMessage error={errors.summary} />
           </label> */}
+
+          {/* <LocationSelect
+            onCountryChange={handleCountryChange}
+            fields={['country']}
+            isClear={isClearLocations}
+            // countryRequired={require}
+          />
+          <LocationSelect
+            onStateChange={handleProvinceChange}
+            fields={['state']}
+            isClear={isClearLocations}
+            ostan={true}
+            // countryId={countryId}
+            // countryRequired={require}
+          />
+          <LocationSelect
+            onCityChange={handleCityChange}
+            fields={['city']}
+            isClear={isClearLocations}
+            // countryRequired={require}
+          /> */}
 
           {/* <label className='pb-2 block text-lg text-gray-600'>
             Status
@@ -218,14 +248,14 @@ const LitigationForm = () => {
           >
             Submit Form
           </Button>
-          {/* <Button
+          <Button
             variant='ghost'
             className={`${generalButtonClassName} ml-4 hover:bg-red-600 hover:border-red-600 hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-red-600 dark:hover:border-red-600 dark:hover:text-white`}
             type='button'
             onClick={resetForm}
           >
             Reset Form
-          </Button> */}
+          </Button>
         </form>
       </div>
     </div>

@@ -1,11 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
-import debounce from 'lodash/debounce';
+import { useState, useEffect } from 'react';
 
 const useForm = (initialState, regexPatterns) => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
+
   const [selectedTags, setSelectedTags] = useState([]);
-  const [isClearLocations, setIsClearLocations] = useState(false);
+  const [countryCode, setCountryCode] = useState('');
+
   const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
   const generalButtonClassName =
     'outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out';
@@ -57,49 +58,15 @@ const useForm = (initialState, regexPatterns) => {
   };
 
   const validateField = (name, value) => {
-    if (name === 'tags') {
-      // Example of custom validation logic for tags if needed
-      if (value.length === 0) {
-        return customErrorMessages.tags.required;
-      }
-      return null;
-    }
     if (!value) {
       return customErrorMessages[name]?.required || 'This field is required';
-    }
-
-    if (name !== 'password' && regexPatterns[name]) {
-      if (!regexPatterns[name].test(value)) {
-        return customErrorMessages[name]?.invalid || `${name} is invalid.`;
-      }
     }
 
     return null;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    // setFormData((prevState) => ({
-    //   ...prevState,
-    //   [name]: value,
-    // }));
-    console.log('formData Changed:', formData);
-    debouncedValidateField(name, value);
-  };
-
-  const handleNameChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    console.log('Name Changed:', formData);
-    debouncedValidateField(name, value);
-  };
-
   const debouncedValidateField = (name, value) => {
+    console.log('debounced: ', name, value);
     const error = validateField(name, value);
 
     setErrors((prevState) => ({
@@ -107,6 +74,7 @@ const useForm = (initialState, regexPatterns) => {
       [name]: error,
     }));
 
+    console.log('name: ', name, ' ', value);
     setFormData((prevState) => {
       return {
         ...prevState,
@@ -115,42 +83,42 @@ const useForm = (initialState, regexPatterns) => {
     });
   };
 
-  const handleCountryChange = (locationData) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      country: locationData.country,
-    }));
-  };
-  const handleStateChange = (locationData) => {
-    setFormData((prevState) => ({
-      ...prevState,
-
-      state: locationData.state,
-    }));
-  };
-  const handleCityChange = (locationData) => {
-    setFormData((prevState) => ({
-      ...prevState,
-
-      city: locationData.city,
-    }));
-  };
-
-  const handleBlur = (e) => {
+  const handleNameChange = (e) => {
     const { name, value } = e.target;
-    const error = validateField(name, value);
 
-    setErrors((prevState) => ({
-      ...prevState,
-      [name]: error,
-    }));
+    // setFormData((prevState) => ({
+    //   ...prevState,
+    //   [name]: value,
+    // }));
+
+    debouncedValidateField(name, value);
   };
+
+  function handleCountryChange(selectedOption) {
+    const { label } = selectedOption;
+
+    setCountryCode(selectedOption.value);
+    debouncedValidateField('country', label);
+  }
+  // function handleCountrySelect(selectedOption) {
+
+  // }
+
+  // const handleCountryChange = (locationData) => {
+  //   debouncedValidateField('country', locationData.country);
+
+  //   // setFormData((prevState) => ({
+  //   //   ...prevState,
+  //   //   country: locationData.country,
+  //   // }));
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
+      console.log('Form Data: ', formData);
       const error = validateField(key, formData[key]);
       if (error) {
         newErrors[key] = error;
@@ -167,108 +135,23 @@ const useForm = (initialState, regexPatterns) => {
       console.log(newErrors);
       return;
     }
-    // Check formData to ensure tags are correctly set
-    console.log('formData Keys: ', Object.keys(formData));
-    console.log('Form Data: ', formData);
 
     setFormData(initialState);
     setSelectedTags([]);
-    setIsClearLocations(true);
     setErrors({});
-  };
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const newErrors = {};
-
-  //   Object.keys(formData).forEach((key) => {
-  //     const error = validateField(key, formData[key]);
-  //     if (error) {
-  //       newErrors[key] = error;
-  //     }
-  //   });
-
-  //   //  Check if at least one tag is selected
-  //   if (selectedTags.length === 0) {
-  //     newErrors.tag = customErrorMessages.tags.required;
-  //   }
-
-  //   if (Object.keys(newErrors).length > 0) {
-  //     setErrors(newErrors);
-  //     return;
-  //   }
-
-  //   try {
-  //     await submitHandler(formData);
-  //     alert('Your form has been submitted. Thank you!');
-  //     setFormData(initialState);
-  //     setSelectedTags([]);
-  //     setErrors({});
-  //   } catch (error) {
-  //     console.error('Unexpected error:', error);
-  //     alert('An unexpected error occurred. Please try again.');
-  //   }
-  // };
-
-  useEffect(() => {
-    if (selectedTags.length > 0) {
-      setErrors((prevState) => ({
-        ...prevState,
-        tags: null,
-      }));
-    }
-  }, [selectedTags]);
-
-  const handleTags = (tag) => {
-    setSelectedTags((currentTags) => {
-      const newTags = currentTags.some((t) => t.id === tag.id)
-        ? currentTags.filter((t) => t.id !== tag.id)
-        : [...currentTags, tag];
-
-      // Update formData with selected tags
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        tags: newTags,
-      }));
-
-      // Clear the tags error if there are any selected tags
-      if (newTags.length > 0) {
-        setErrors((prevState) => ({
-          ...prevState,
-          tags: null,
-        }));
-      }
-
-      return newTags;
-    });
-  };
-
-  const resetForm = () => {
-    const confirmReset = window.confirm(
-      'Are you sure you want to reset the form? All data will be lost.'
-    );
-    if (confirmReset) {
-      setFormData(initialState);
-      setSelectedTags([]);
-      setIsClearLocations(true);
-      setErrors({});
-    }
   };
 
   return {
     formData,
     errors,
-    handleChange,
     handleNameChange,
+    // handleLocationChange,
     handleCountryChange,
-    handleStateChange,
-    handleCityChange,
-    handleBlur,
+    // handleBlur,
     handleSubmit,
-    handleTags,
-    resetForm,
-    selectedTags,
-    isClearLocations,
+    // handleTags,
+    // resetForm,
+    // selectedTags,
     generalFieldClassName,
     generalButtonClassName,
   };
