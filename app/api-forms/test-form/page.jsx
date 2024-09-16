@@ -11,24 +11,32 @@ import { submitToLitigation } from '../submit-handler';
 
 const initialState = {
   country: '',
+  state: '',
+  city: '',
 };
 
 const TestForm = () => {
   const [countryCode, setCountryCode] = useState('');
   const [stateCode, setStateCode] = useState('');
-  const { handleSubmit, resetForm, generalButtonClassName } = useForm(
-    initialState,
-    REGEX_PATTERNS,
-    submitToLitigation
-  );
+  const {
+    handleSubmit,
+    resetForm,
+    generalButtonClassName,
+    handleCountryChange,
+    handleStateChange,
+    handleCityChange,
+  } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
   function handleCountrySelect(selectedOption) {
     setCountryCode(selectedOption.value);
+    handleCountryChange({ country: selectedOption.label });
   }
   function handleProvinceSelect(selectedOption) {
     setStateCode(selectedOption.value);
+    handleStateChange({ state: selectedOption.label });
   }
   function handleCitySelect(selectedOption) {
+    handleCityChange({ city: selectedOption.label });
     console.log('city: ', selectedOption.label);
   }
   return (
