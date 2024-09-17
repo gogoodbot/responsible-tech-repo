@@ -2,25 +2,31 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { REGEX_PATTERNS } from '../api-data';
+import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 import SelectCountry from '@/components/select-location/select-country';
 import { submitToLitigation } from '../submit-handler';
 import SelectProvince from '@/components/select-location/select-province';
 import SelectCity from '@/components/select-location/select-city';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu';
 
 const initialState = {
   name: '',
-  // link: '',
-  // summary: '',
-  country: '',
-  // status: '',
-  // mandate: '',
-  // start_date: '', // startDate: '' >> TODO: fix it in database
-  // jurisdiction: '',
-  // tags: [],
-  // username: '',
-  // password: '',
+  link: '',
+  summary: '',
+  country: '', // TODO: fix country reset on submit
+  status: '',
+  mandate: '',
+  start_date: '', // TODO: startDate: '' >> TODO: fix it in database
+  jurisdiction: '',
+  tags: [], // TODO: Get them from API
+  username: '',
+  password: '',
 };
 
 const ErrorMessage = ({ error }) => {
@@ -32,17 +38,16 @@ const LitigationForm = () => {
   const {
     formData,
     errors,
-    handleNameChange,
-    // handleLocationChange,
+    handleChange,
     handleCountryChange,
     countryCode,
     handleProvinceChange,
     stateCode,
     handleCityChange,
-    // handleBlur,
+    handleBlur,
     handleSubmit,
-    // handleTags,
-    // resetForm,
+    handleTags,
+    handleResetForm,
     generalFieldClassName,
     generalButtonClassName,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
@@ -70,8 +75,8 @@ const LitigationForm = () => {
             <Input
               name='name'
               type='text'
-              onChange={handleNameChange}
-              // onBlur={handleBlur}
+              onChange={handleChange}
+              onBlur={handleBlur}
               value={formData.name}
               className={generalFieldClassName}
               required
@@ -79,7 +84,7 @@ const LitigationForm = () => {
             <ErrorMessage error={errors.name} />
           </label>
 
-          {/*  <label className='pb-2 block text-lg text-gray-600'>
+          <label className='pb-2 block text-lg text-gray-600'>
             Link
             <Input
               name='link'
@@ -92,7 +97,6 @@ const LitigationForm = () => {
             />
             <ErrorMessage error={errors.link} />
           </label>
-
           <label className='pb-2 block text-lg text-gray-600'>
             Summary
             <div>
@@ -106,9 +110,9 @@ const LitigationForm = () => {
               />
             </div>
             <ErrorMessage error={errors.summary} />
-          </label> */}
+          </label>
 
-          {/* <label className='pb-2 block text-lg text-gray-600'>
+          <label className='pb-2 block text-lg text-gray-600'>
             Status
             <Input
               name='status'
@@ -163,9 +167,9 @@ const LitigationForm = () => {
               required
             />
             <ErrorMessage error={errors.jurisdiction} />
-          </label> */}
+          </label>
 
-          {/* <div className='form-group space-y-2'>
+          <div className='form-group space-y-2'>
             <label className='mb-2 block'>
               Tags
               <DropdownMenu>
@@ -195,7 +199,6 @@ const LitigationForm = () => {
               ))}
             </ul>
           </div>
-
           <label className='pb-2 block text-lg text-gray-600'>
             Username
             <Input
@@ -221,7 +224,7 @@ const LitigationForm = () => {
               className={generalFieldClassName}
               required
             />
-          </label> */}
+          </label>
 
           <Button
             variant='ghost'
@@ -230,14 +233,14 @@ const LitigationForm = () => {
           >
             Submit Form
           </Button>
-          {/* <Button
+          <Button
             variant='ghost'
             className={`${generalButtonClassName} ml-4 hover:bg-red-600 hover:border-red-600 hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-red-600 dark:hover:border-red-600 dark:hover:text-white`}
             type='button'
-            onClick={resetForm}
+            onClick={handleResetForm}
           >
             Reset Form
-          </Button> */}
+          </Button>
         </form>
       </div>
     </div>

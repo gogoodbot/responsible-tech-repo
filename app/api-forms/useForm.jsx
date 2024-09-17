@@ -56,18 +56,34 @@ const useForm = (initialState, regexPatterns) => {
     city: {
       required: 'City must be selected.',
     },
+    tags: {
+      required: 'At least one tag is required.',
+    },
   };
 
   const validateField = (name, value) => {
+    if (name === 'tags') {
+      // Example of custom validation logic for tags if needed
+      if (value.length === 0) {
+        return customErrorMessages.tags.required;
+      }
+      return null;
+    }
+
     if (!value) {
       return customErrorMessages[name]?.required || 'This field is required';
+    }
+
+    if (name !== 'password' && regexPatterns[name]) {
+      if (!regexPatterns[name].test(value)) {
+        return customErrorMessages[name]?.invalid || `${name} is invalid.`;
+      }
     }
 
     return null;
   };
 
   const debouncedValidateField = (name, value) => {
-    console.log('debounced: ', name, value);
     const error = validateField(name, value);
 
     setErrors((prevState) => ({
@@ -75,7 +91,6 @@ const useForm = (initialState, regexPatterns) => {
       [name]: error,
     }));
 
-    console.log('name: ', name, ' ', value);
     setFormData((prevState) => {
       return {
         ...prevState,
@@ -84,50 +99,82 @@ const useForm = (initialState, regexPatterns) => {
     });
   };
 
-  const handleNameChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // setFormData((prevState) => ({
-    //   ...prevState,
-    //   [name]: value,
-    // }));
 
     debouncedValidateField(name, value);
   };
 
-  function handleCountryChange(selectedOption) {
+  const handleCountryChange = (selectedOption) => {
     const { label } = selectedOption;
 
     setCountryCode(selectedOption.value);
     debouncedValidateField('country', label);
-  }
+  };
 
-  function handleProvinceChange(selectedOption) {
+  const handleProvinceChange = (selectedOption) => {
     const { label } = selectedOption;
 
     setStateCode(selectedOption.value);
     debouncedValidateField('state', label);
-  }
+  };
 
-  function handleCityChange(selectedOption) {
+  const handleCityChange = (selectedOption) => {
     const { label } = selectedOption;
 
     // setStateCode(selectedOption.value);
     debouncedValidateField('city', label);
+  };
+
+  useEffect(() => {
+    if (selectedTags.length > 0) {
+      setErrors((prevState) => ({
+        ...prevState,
+        tags: null,
+      }));
+    }
+  }, [selectedTags]);
+
+  const handleTags = (tag) => {
+    setSelectedTags((currentTags) => {
+      const newTags = currentTags.some((t) => t.id === tag.id)
+        ? currentTags.filter((t) => t.id !== tag.id)
+        : [...currentTags, tag];
+
+      // Update formData with selected tags
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        tags: newTags,
+      }));
+
+      // Clear the tags error if there are any selected tags
+      if (newTags.length > 0) {
+        setErrors((prevState) => ({
+          ...prevState,
+          tags: null,
+        }));
+      }
+
+      return newTags;
+    });
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+
+    setErrors((prevState) => ({
+      ...prevState,
+      [name]: error,
+    }));
+  };
+
+  function resetForm() {
+    setFormData(initialState);
+    setSelectedTags([]);
+    setCountryCode('');
+    setErrors({});
   }
-
-  // function handleCountrySelect(selectedOption) {
-
-  // }
-
-  // const handleCountryChange = (locationData) => {
-  //   debouncedValidateField('country', locationData.country);
-
-  //   // setFormData((prevState) => ({
-  //   //   ...prevState,
-  //   //   country: locationData.country,
-  //   // }));
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -152,26 +199,32 @@ const useForm = (initialState, regexPatterns) => {
       return;
     }
 
-    setFormData(initialState);
-    setSelectedTags([]);
-    setErrors({});
+    resetForm();
+  };
+
+  const handleResetForm = () => {
+    const confirmReset = window.confirm(
+      'Are you sure you want to reset the form? All data will be lost.'
+    );
+    if (confirmReset) {
+      resetForm();
+    }
   };
 
   return {
     formData,
     errors,
-    handleNameChange,
-
+    handleChange,
     handleCountryChange,
     countryCode,
     handleProvinceChange,
     stateCode,
     handleCityChange,
-    // handleBlur,
+    handleBlur,
     handleSubmit,
-    // handleTags,
-    // resetForm,
-    // selectedTags,
+    handleTags,
+    handleResetForm,
+    selectedTags,
     generalFieldClassName,
     generalButtonClassName,
   };
