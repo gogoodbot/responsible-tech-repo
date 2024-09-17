@@ -25,7 +25,6 @@ export default function SelectProvince({
     );
 
     setCities(allCities);
-    console.log('allCities', allCities);
   }, [countryCode, stateCode]);
 
   return (
