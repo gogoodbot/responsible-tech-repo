@@ -108,6 +108,14 @@ const useForm = (initialState, regexPatterns) => {
     setStateCode(selectedOption.value);
     debouncedValidateField('state', label);
   }
+
+  function handleCityChange(selectedOption) {
+    const { label } = selectedOption;
+
+    // setStateCode(selectedOption.value);
+    debouncedValidateField('city', label);
+  }
+
   // function handleCountrySelect(selectedOption) {
 
   // }
@@ -153,10 +161,12 @@ const useForm = (initialState, regexPatterns) => {
     formData,
     errors,
     handleNameChange,
-    // handleLocationChange,
+
     handleCountryChange,
     countryCode,
     handleProvinceChange,
+    stateCode,
+    handleCityChange,
     // handleBlur,
     handleSubmit,
     // handleTags,

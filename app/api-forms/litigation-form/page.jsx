@@ -7,6 +7,7 @@ import useForm from '../useForm';
 import SelectCountry from '@/components/select-location/select-country';
 import { submitToLitigation } from '../submit-handler';
 import SelectProvince from '@/components/select-location/select-province';
+import SelectCity from '@/components/select-location/select-city';
 
 const initialState = {
   name: '',
@@ -36,7 +37,8 @@ const LitigationForm = () => {
     handleCountryChange,
     countryCode,
     handleProvinceChange,
-    // handleCityChange,
+    stateCode,
+    handleCityChange,
     // handleBlur,
     handleSubmit,
     // handleTags,
@@ -58,7 +60,11 @@ const LitigationForm = () => {
             onProvinceSelect={handleProvinceChange}
             countryCode={countryCode}
           />
-
+          <SelectCity
+            onCitySelect={handleCityChange}
+            countryCode={countryCode}
+            stateCode={stateCode}
+          />
           <label className='pb-2 block text-lg text-gray-600'>
             Name
             <Input
