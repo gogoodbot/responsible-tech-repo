@@ -181,7 +181,6 @@ const useForm = (initialState, regexPatterns) => {
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      console.log('Form Data: ', formData);
       const error = validateField(key, formData[key]);
       if (error) {
         newErrors[key] = error;
@@ -199,6 +198,7 @@ const useForm = (initialState, regexPatterns) => {
       return;
     }
 
+    console.log('Form Data: ', formData);
     resetForm();
   };
 
