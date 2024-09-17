@@ -2,29 +2,29 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Tags, REGEX_PATTERNS } from '../api-data';
+import useForm from '../useForm';
+import SelectCountry from '@/components/select-location/select-country';
+import { submitToLitigation } from '../submit-handler';
+import SelectProvince from '@/components/select-location/select-province';
+import SelectCity from '@/components/select-location/select-city';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Tags, REGEX_PATTERNS } from '../api-data';
-import useForm from '../useForm';
-import SelectCountry from '@/components/select-location/select-country';
-import { submitToLitigation } from '../submit-handler';
-import { useEffect, useMemo } from 'react';
-import { requestToBodyStream } from 'next/dist/server/body-streams';
+} from '@radix-ui/react-dropdown-menu';
 
 const initialState = {
   name: '',
   link: '',
   summary: '',
-  country: '',
+  country: '', // TODO: fix country reset on submit
   status: '',
   mandate: '',
-  start_date: '', // startDate: '' >> TODO: fix it in database
+  start_date: '', // TODO: startDate: '' >> TODO: fix it in database
   jurisdiction: '',
-  tags: [],
+  tags: [], // TODO: Get them from API
   username: '',
   password: '',
 };
@@ -39,15 +39,15 @@ const LitigationForm = () => {
     formData,
     errors,
     handleChange,
-    handleNameChange,
     handleCountryChange,
+    countryCode,
     handleProvinceChange,
+    stateCode,
     handleCityChange,
     handleBlur,
     handleSubmit,
     handleTags,
-    resetForm,
-    isClearLocations,
+    handleResetForm,
     generalFieldClassName,
     generalButtonClassName,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
@@ -60,14 +60,22 @@ const LitigationForm = () => {
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
-          <SelectCountry />
-
-          {/* <label className='pb-2 block text-lg text-gray-600'>
+          <SelectCountry onCountrySelect={handleCountryChange} />
+          <SelectProvince
+            onProvinceSelect={handleProvinceChange}
+            countryCode={countryCode}
+          />
+          <SelectCity
+            onCitySelect={handleCityChange}
+            countryCode={countryCode}
+            stateCode={stateCode}
+          />
+          <label className='pb-2 block text-lg text-gray-600'>
             Name
             <Input
               name='name'
               type='text'
-              onChange={handleNameChange}
+              onChange={handleChange}
               onBlur={handleBlur}
               value={formData.name}
               className={generalFieldClassName}
@@ -89,7 +97,6 @@ const LitigationForm = () => {
             />
             <ErrorMessage error={errors.link} />
           </label>
-
           <label className='pb-2 block text-lg text-gray-600'>
             Summary
             <div>
@@ -103,30 +110,9 @@ const LitigationForm = () => {
               />
             </div>
             <ErrorMessage error={errors.summary} />
-          </label> */}
+          </label>
 
-          {/* <LocationSelect
-            onCountryChange={handleCountryChange}
-            fields={['country']}
-            isClear={isClearLocations}
-            // countryRequired={require}
-          />
-          <LocationSelect
-            onStateChange={handleProvinceChange}
-            fields={['state']}
-            isClear={isClearLocations}
-            ostan={true}
-            // countryId={countryId}
-            // countryRequired={require}
-          />
-          <LocationSelect
-            onCityChange={handleCityChange}
-            fields={['city']}
-            isClear={isClearLocations}
-            // countryRequired={require}
-          /> */}
-
-          {/* <label className='pb-2 block text-lg text-gray-600'>
+          <label className='pb-2 block text-lg text-gray-600'>
             Status
             <Input
               name='status'
@@ -181,9 +167,9 @@ const LitigationForm = () => {
               required
             />
             <ErrorMessage error={errors.jurisdiction} />
-          </label> */}
+          </label>
 
-          {/* <div className='form-group space-y-2'>
+          <div className='form-group space-y-2'>
             <label className='mb-2 block'>
               Tags
               <DropdownMenu>
@@ -213,7 +199,6 @@ const LitigationForm = () => {
               ))}
             </ul>
           </div>
-
           <label className='pb-2 block text-lg text-gray-600'>
             Username
             <Input
@@ -239,7 +224,7 @@ const LitigationForm = () => {
               className={generalFieldClassName}
               required
             />
-          </label> */}
+          </label>
 
           <Button
             variant='ghost'
@@ -252,7 +237,7 @@ const LitigationForm = () => {
             variant='ghost'
             className={`${generalButtonClassName} ml-4 hover:bg-red-600 hover:border-red-600 hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-red-600 dark:hover:border-red-600 dark:hover:text-white`}
             type='button'
-            onClick={resetForm}
+            onClick={handleResetForm}
           >
             Reset Form
           </Button>

@@ -6,7 +6,7 @@ export default function SelectCountry({ onCountrySelect }) {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
 
-  const handleCountryChange = (selectedOption) => {
+  const handleCountrySelect = (selectedOption) => {
     setSelectedCountry(selectedOption);
     onCountrySelect?.(selectedOption);
   };
@@ -26,7 +26,7 @@ export default function SelectCountry({ onCountrySelect }) {
         <Select
           options={countries}
           value={selectedCountry}
-          onChange={handleCountryChange}
+          onChange={handleCountrySelect}
         />
       </label>
     </div>

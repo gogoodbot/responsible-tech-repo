@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
 import SelectCountry from '@/components/select-location/select-country';
-import SelectProvince from '@/components/select-location/province';
+import SelectProvince from '@/components/select-location/province-v1';
 import SelectCity from '@/components/select-location/city';
 import { submitToLitigation } from '../submit-handler';
 
