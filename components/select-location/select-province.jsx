@@ -2,17 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { State } from 'country-state-city';
 
-export default function SelectProvince({ onProvinceSelect, countryCode }) {
+export default function SelectProvince({
+  onProvinceSelect,
+  countryCode,
+  selectedProvince,
+}) {
   const [provinces, setProvinces] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState(null);
+  // const [selectedProvince, setSelectedProvince] = useState(null);
 
-  const handleProvinceSelect = (selectedOption) => {
-    setSelectedProvince(selectedOption);
-    onProvinceSelect?.(selectedOption);
-  };
+  // const handleProvinceSelect = (selectedOption) => {
+  //   // setSelectedProvince(selectedOption);
+  //   onProvinceSelect?.(selectedOption);
+  // };
 
   useEffect(() => {
-    setSelectedProvince(null);
+    // setSelectedProvince(null);
     const allProvinces = State.getStatesOfCountry(countryCode).map(
       (province) => ({
         value: province.isoCode,
@@ -30,7 +34,7 @@ export default function SelectProvince({ onProvinceSelect, countryCode }) {
         <Select
           options={provinces}
           value={selectedProvince}
-          onChange={handleProvinceSelect}
+          onChange={onProvinceSelect}
         />
       </label>
     </div>
