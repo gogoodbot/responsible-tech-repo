@@ -28,6 +28,7 @@ export default function SelectProvince({
           options={provinces}
           value={selectedProvince}
           onChange={onProvinceSelect}
+          placeholder='Select Province'
         />
       </label>
     </div>

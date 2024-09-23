@@ -11,7 +11,7 @@ const URL = /^(https?:\/\/[^\s/$.?#].[^\s]*)$/;
 const EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PHONE = /^\+?[1-9]\d{1,14}$/;
 const PARAGRAPH_SHORT = /^.{1,1000}$/;
-const PARAGRAPH_LONG = /^.{5,10000}$/;
+const PARAGRAPH_LONG = /^([\s\S]{5,10000})$/;
 
 export const REGEX_PATTERNS = {
   name: ALPHA_MEDIUM,

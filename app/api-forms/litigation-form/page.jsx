@@ -112,6 +112,7 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={formData.summary}
                 className={`${generalFieldClassName} h-40 resize-y`}
+                placeholder='Provide a detailed summary...'
                 required
               />
             </div>

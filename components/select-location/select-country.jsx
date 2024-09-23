@@ -26,6 +26,7 @@ export default function SelectCountry({ onCountrySelect, selectedCountry }) {
           options={countries}
           value={selectedCountry}
           onChange={onCountrySelect}
+          placeholder='Select country'
         />
       </label>
     </div>
