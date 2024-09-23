@@ -20,15 +20,12 @@ export default function SelectCountry({ onCountrySelect, selectedCountry }) {
 
   return (
     <div>
-      <label>
-        Country
-        <Select
-          options={countries}
-          value={selectedCountry}
-          onChange={onCountrySelect}
-          placeholder='Select country'
-        />
-      </label>
+      <Select
+        options={countries}
+        value={selectedCountry}
+        onChange={onCountrySelect}
+        placeholder='Select country'
+      />
     </div>
   );
 }

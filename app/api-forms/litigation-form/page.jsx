@@ -19,7 +19,7 @@ const initialState = {
   name: '',
   link: '',
   summary: '',
-  country: '', // TODO: fix country reset on submit
+  country: '',
   status: '',
   mandate: '',
   start_date: '', // TODO: startDate: '' >> TODO: fix it in database
@@ -61,21 +61,37 @@ const LitigationForm = () => {
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
-          <SelectCountry
-            onCountrySelect={handleCountryChange}
-            selectedCountry={selectedCountry}
-          />
-          <SelectProvince
-            onProvinceSelect={handleProvinceChange}
-            selectedProvince={selectedProvince}
-            countryCode={selectedCountry?.value}
-          />
-          <SelectCity
-            onCitySelect={handleCityChange}
-            countryCode={selectedCountry?.value}
-            stateCode={selectedProvince?.value}
-            selectedCity={selectedCity}
-          />
+          <label className='pb-2 block text-lg text-gray-600'>
+            Country
+            <SelectCountry
+              onCountrySelect={handleCountryChange}
+              selectedCountry={selectedCountry}
+            />
+            <ErrorMessage error={errors.country} />
+          </label>
+
+          {/* --- TEST CODE --- */}
+          <label className='pb-2 block text-lg text-gray-600'>
+            Test Code (Province)
+            <SelectProvince
+              onProvinceSelect={handleProvinceChange}
+              selectedProvince={selectedProvince}
+              countryCode={selectedCountry?.value}
+            />
+            <ErrorMessage error={errors.state} />
+            {/* TODO: change state to province? */}
+          </label>
+          <label className='pb-2 block text-lg text-gray-600'>
+            Test Code (City)
+            <SelectCity
+              onCitySelect={handleCityChange}
+              countryCode={selectedCountry?.value}
+              stateCode={selectedProvince?.value}
+              selectedCity={selectedCity}
+            />
+            <ErrorMessage error={errors.city} />
+          </label>
+
           <label className='pb-2 block text-lg text-gray-600'>
             Name
             <Input

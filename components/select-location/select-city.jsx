@@ -23,15 +23,12 @@ export default function SelectProvince({
 
   return (
     <div>
-      <label>
-        City
-        <Select
-          options={cities}
-          value={selectedCity}
-          onChange={onCitySelect}
-          placeholder='Select city'
-        />
-      </label>
+      <Select
+        options={cities}
+        value={selectedCity}
+        onChange={onCitySelect}
+        placeholder='Select city'
+      />
     </div>
   );
 }
