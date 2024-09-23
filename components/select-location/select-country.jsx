@@ -10,7 +10,12 @@ export default function SelectCountry({ onCountrySelect, selectedCountry }) {
       value: country.isoCode,
       label: country.name,
     }));
-    setCountries(allCountries);
+
+    const filteredCountries = allCountries.filter(
+      (country) => country.value === 'CA' || country.value === 'US'
+    );
+
+    setCountries(filteredCountries);
   }, []);
 
   return (
