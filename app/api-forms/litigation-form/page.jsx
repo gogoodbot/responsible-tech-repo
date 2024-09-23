@@ -40,6 +40,7 @@ const LitigationForm = () => {
     errors,
     handleChange,
     handleCountryChange,
+    selectedCountry,
     countryCode,
     handleProvinceChange,
     stateCode,
@@ -60,7 +61,7 @@ const LitigationForm = () => {
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
-          <SelectCountry onCountrySelect={handleCountryChange} />
+          <SelectCountry onCountrySelect={handleCountryChange} selectedCountry={selectedCountry} />
           <SelectProvince
             onProvinceSelect={handleProvinceChange}
             countryCode={countryCode}

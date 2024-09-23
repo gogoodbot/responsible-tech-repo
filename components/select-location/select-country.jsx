@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { Country } from 'country-state-city';
 
-export default function SelectCountry({ onCountrySelect }) {
+export default function SelectCountry({ onCountrySelect, selectedCountry }) {
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  // const [selectedCountry, setSelectedCountry] = useState(null);
 
-  const handleCountrySelect = (selectedOption) => {
-    setSelectedCountry(selectedOption);
-    onCountrySelect?.(selectedOption);
-  };
+  // const handleCountrySelect = (selectedOption) => {
+  //   // setSelectedCountry(selectedOption);
+  //   onCountrySelect?.(selectedOption);
+  // };
 
   useEffect(() => {
     const allCountries = Country.getAllCountries().map((country) => ({
@@ -26,7 +26,7 @@ export default function SelectCountry({ onCountrySelect }) {
         <Select
           options={countries}
           value={selectedCountry}
-          onChange={handleCountrySelect}
+          onChange={onCountrySelect}
         />
       </label>
     </div>
