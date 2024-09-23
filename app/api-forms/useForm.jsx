@@ -8,6 +8,7 @@ const useForm = (initialState, regexPatterns) => {
 
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedProvince, setSelectedProvince] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
 
   // const [countryCode, setCountryCode] = useState('');
   // const [stateCode, setStateCode] = useState('');
@@ -118,7 +119,6 @@ const useForm = (initialState, regexPatterns) => {
   };
 
   const handleProvinceChange = (selectedOption) => {
-    console.log('selected Province: ', selectedOption);
 
     const { label } = selectedOption;
 
@@ -130,6 +130,7 @@ const useForm = (initialState, regexPatterns) => {
   const handleCityChange = (selectedOption) => {
     const { label } = selectedOption;
 
+    setSelectedCity(selectedOption);
     // setStateCode(selectedOption.value);
     debouncedValidateField('city', label);
   };
@@ -230,6 +231,7 @@ const useForm = (initialState, regexPatterns) => {
     selectedProvince,
     // stateCode,
     handleCityChange,
+    selectedCity,
     handleBlur,
     handleSubmit,
     handleTags,

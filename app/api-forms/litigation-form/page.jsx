@@ -46,6 +46,7 @@ const LitigationForm = () => {
     selectedProvince,
     // stateCode,
     handleCityChange,
+    selectedCity,
     handleBlur,
     handleSubmit,
     handleTags,
@@ -71,11 +72,11 @@ const LitigationForm = () => {
             selectedProvince={selectedProvince}
             countryCode={selectedCountry?.value}
           />
-          {console.log('SP', selectedProvince)}
           <SelectCity
             onCitySelect={handleCityChange}
             countryCode={selectedCountry?.value}
             stateCode={selectedProvince?.value}
+            selectedCity={selectedCity}
           />
           <label className='pb-2 block text-lg text-gray-600'>
             Name
