@@ -41,7 +41,7 @@ const LitigationForm = () => {
     handleChange,
     handleCountryChange,
     selectedCountry,
-    countryCode,
+    // countryCode,
     handleProvinceChange,
     stateCode,
     handleCityChange,
@@ -61,14 +61,18 @@ const LitigationForm = () => {
           onSubmit={handleSubmit}
           className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
         >
-          <SelectCountry onCountrySelect={handleCountryChange} selectedCountry={selectedCountry} />
+          <SelectCountry
+            onCountrySelect={handleCountryChange}
+            selectedCountry={selectedCountry}
+          />
+          {/* {console.log('SC', selectedCountry?.value, countryCode)} */}
           <SelectProvince
             onProvinceSelect={handleProvinceChange}
-            countryCode={countryCode}
+            countryCode={selectedCountry?.value}
           />
           <SelectCity
             onCitySelect={handleCityChange}
-            countryCode={countryCode}
+            countryCode={selectedCountry?.value}
             stateCode={stateCode}
           />
           <label className='pb-2 block text-lg text-gray-600'>
