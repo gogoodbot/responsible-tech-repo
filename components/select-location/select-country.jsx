@@ -4,12 +4,6 @@ import { Country } from 'country-state-city';
 
 export default function SelectCountry({ onCountrySelect, selectedCountry }) {
   const [countries, setCountries] = useState([]);
-  // const [selectedCountry, setSelectedCountry] = useState(null);
-
-  // const handleCountrySelect = (selectedOption) => {
-  //   // setSelectedCountry(selectedOption);
-  //   onCountrySelect?.(selectedOption);
-  // };
 
   useEffect(() => {
     const allCountries = Country.getAllCountries().map((country) => ({

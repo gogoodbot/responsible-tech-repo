@@ -10,9 +10,6 @@ const useForm = (initialState, regexPatterns) => {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
 
-  // const [countryCode, setCountryCode] = useState('');
-  // const [stateCode, setStateCode] = useState('');
-
   const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
   const generalButtonClassName =
     'outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out';
@@ -114,16 +111,13 @@ const useForm = (initialState, regexPatterns) => {
     const { label } = selectedOption;
 
     setSelectedCountry(selectedOption);
-    // setCountryCode(selectedOption.value);
     debouncedValidateField('country', label);
   };
 
   const handleProvinceChange = (selectedOption) => {
-
     const { label } = selectedOption;
 
     setSelectedProvince(selectedOption);
-    // setStateCode(selectedOption.value);
     debouncedValidateField('state', label);
   };
 
@@ -131,7 +125,6 @@ const useForm = (initialState, regexPatterns) => {
     const { label } = selectedOption;
 
     setSelectedCity(selectedOption);
-    // setStateCode(selectedOption.value);
     debouncedValidateField('city', label);
   };
 
@@ -226,10 +219,8 @@ const useForm = (initialState, regexPatterns) => {
     handleChange,
     handleCountryChange,
     selectedCountry,
-    // countryCode,
     handleProvinceChange,
     selectedProvince,
-    // stateCode,
     handleCityChange,
     selectedCity,
     handleBlur,
