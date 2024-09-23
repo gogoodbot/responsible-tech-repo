@@ -174,7 +174,9 @@ const useForm = (initialState, regexPatterns) => {
   function resetForm() {
     setFormData(initialState);
     setSelectedTags([]);
-    setCountryCode('');
+    setSelectedCountry(null);
+    setSelectedProvince(null);
+    setSelectedCity(null);
     setErrors({});
   }
 
