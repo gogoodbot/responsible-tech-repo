@@ -25,6 +25,7 @@ export default function SelectCountry({ onCountrySelect, selectedCountry }) {
         value={selectedCountry}
         onChange={onCountrySelect}
         placeholder='Select country'
+        required
       />
     </div>
   );
