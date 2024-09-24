@@ -51,12 +51,18 @@ const queryClient = new QueryClient({
 });
 
 function LitigationTable() {
-  const x = useQuery({
+  const {
+    isLoading,
+    error,
+    data: litigations,
+  } = useQuery({
     queryKey: ['Litigation'],
     queryFn: getLitigation,
   });
 
-  console.log(x);
+  if (isLoading) return <p>Loading...</p>;
+
+  console.log(litigations);
   return <div>Table</div>;
 }
 
