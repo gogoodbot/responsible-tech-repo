@@ -61,9 +61,15 @@ function LitigationTable() {
   });
 
   if (isLoading) return <p>Loading...</p>;
+  if (error) {
+    console.log(error);
+    throw new Error("Litigation data couln't be fetched");
+  }
 
+  initialState.name = litigations[0].name;
   console.log(litigations);
-  return <div>Table</div>;
+
+  return <p>litigations</p>;
 }
 
 const LitigationForm = () => {
@@ -99,6 +105,7 @@ const LitigationForm = () => {
         <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
           <h1 className='text-3xl font-bold my-8'>Litigation Form</h1>
           <LitigationTable />
+
           <form
             onSubmit={handleSubmit}
             className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
@@ -140,7 +147,8 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.name}
+                // value={formData.name} // ADD A CONDITION: if UPDATE ? initialState : formData
+                value={initialState.name}
                 className={generalFieldClassName}
                 required
               />
