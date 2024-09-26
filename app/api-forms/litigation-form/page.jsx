@@ -23,6 +23,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { deleteLitigation, getLitigation } from './apiLitigation';
+import toast from 'react-hot-toast';
 
 const initialState = {
   name: '',
@@ -90,13 +91,14 @@ const LitigationForm = () => {
     // mutationFn: (id) => deleteLitigation(id),
     mutationFn: deleteLitigation,
     onSuccess: () => {
-      alert('Litigation successfuly deleted');
+      toast.success('Litigation successfuly deleted');
       queryClient.invalidateQueries({ queryKey: ['Litigation'] });
     },
+    onError: (err) => toast.error(err.ErrorMessage),
   });
 
   function handleDelete() {
-    const testId = 'aeab94d1-0898-4b87-9d1b-9a5afd44847e';
+    const testId = 'e1807dc0-a6bc-4da9-b503-54e1648fe41d';
     mutate(testId);
     console.log('id: ', testId, ' deleted');
   }
