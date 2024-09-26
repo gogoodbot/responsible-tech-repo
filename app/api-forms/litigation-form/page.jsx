@@ -90,14 +90,15 @@ const LitigationForm = () => {
     // mutationFn: (id) => deleteLitigation(id),
     mutationFn: deleteLitigation,
     onSuccess: () => {
+      alert('Litigation successfuly deleted');
       queryClient.invalidateQueries({ queryKey: ['Litigation'] });
     },
   });
 
   function handleDelete() {
-    console.log('id: c026d460-d32a-405e-9d11-3e6c1e445c27');
-    mutate('c026d460-d32a-405e-9d11-3e6c1e445c27');
-    console.log('deleted');
+    const testId = 'aeab94d1-0898-4b87-9d1b-9a5afd44847e';
+    mutate(testId);
+    console.log('id: ', testId, ' deleted');
   }
   return (
     // <QueryClientProvider client={queryClient}>
