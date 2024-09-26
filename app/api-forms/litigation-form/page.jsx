@@ -17,11 +17,12 @@ import {
 import {
   QueryClient,
   QueryClientProvider,
+  useMutation,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { getLitigation } from './apiLitigation';
-// import { createLitigation } from './apiLitigation';
+import { deleteLitigation, getLitigation } from './apiLitigation';
 
 const initialState = {
   name: '',
@@ -42,14 +43,6 @@ const ErrorMessage = ({ error }) => {
   return <p className='text-red-500'>{error}</p>;
 };
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000,
-    },
-  },
-});
-
 function LitigationTable() {
   const {
     isLoading,
@@ -66,8 +59,9 @@ function LitigationTable() {
     throw new Error("Litigation data couln't be fetched");
   }
 
-  initialState.name = litigations[0].name;
+  // I can read from the supabase Litigation table
   console.log(litigations);
+  initialState.name = litigations[0].name;
 
   return <p>litigations</p>;
 }
@@ -91,20 +85,31 @@ const LitigationForm = () => {
     generalButtonClassName,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
-  // const { mutate, isLoading } = useMutation({
-  //   mutationFn: createLitigation,
-  //   onSuccess: () => {
-  //     toSafeInteger.success('New Litigation was successfully added!');
-  //   },
-  // });
+  const queryClient = useQueryClient();
+  const { isLoading: isDeleting, mutate } = useMutation({
+    // mutationFn: (id) => deleteLitigation(id),
+    mutationFn: deleteLitigation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+    },
+  });
 
+  function handleDelete() {
+    console.log('id: c026d460-d32a-405e-9d11-3e6c1e445c27');
+    mutate('c026d460-d32a-405e-9d11-3e6c1e445c27');
+    console.log('deleted');
+  }
   return (
-    <QueryClientProvider client={queryClient}>
+    // <QueryClientProvider client={queryClient}>
+    <>
       <ReactQueryDevtools initialIsOpen={false} />
       <div className='flex items-center justify-center min-h-screen p-4'>
         <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
           <h1 className='text-3xl font-bold my-8'>Litigation Form</h1>
           <LitigationTable />
+          <button disabled={isDeleting} onClick={handleDelete}>
+            Delete row
+          </button>
 
           <form
             onSubmit={handleSubmit}
@@ -148,7 +153,7 @@ const LitigationForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 // value={formData.name} // ADD A CONDITION: if UPDATE ? initialState : formData
-                value={initialState.name}
+                value={initialState.name} // I can fill up the value from what I get from supabase
                 className={generalFieldClassName}
                 required
               />
@@ -271,6 +276,7 @@ const LitigationForm = () => {
                 ))}
               </ul>
             </div>
+
             <label className='pb-2 block text-lg text-gray-600'>
               Username
               <Input
@@ -316,7 +322,8 @@ const LitigationForm = () => {
           </form>
         </div>
       </div>
-    </QueryClientProvider>
+      {/* // </QueryClientProvider> */}
+    </>
   );
 };
 
