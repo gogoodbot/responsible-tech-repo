@@ -22,10 +22,16 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { deleteLitigation, getLitigation } from './apiLitigation';
-import toast from 'react-hot-toast';
+import { getLitigation } from './apiLitigation';
+import { useEffect, useState } from 'react';
+// import toast from 'react-hot-toast';
 
 const initialState = {
+  created_by: '',
+  created_on: '',
+  modified_by: '',
+  modified_on: '',
+  litigation_id: '',
   name: '',
   link: '',
   summary: '',
@@ -35,8 +41,8 @@ const initialState = {
   start_date: '', // TODO: startDate: '' >> TODO: fix it in database
   jurisdiction: '',
   tags: [], // TODO: Get them from API
-  username: '',
-  password: '',
+  // username: '',
+  // password: '',
 };
 
 const ErrorMessage = ({ error }) => {
@@ -70,6 +76,7 @@ function LitigationTable() {
 const LitigationForm = () => {
   const {
     formData,
+    setFormData,
     errors,
     handleChange,
     handleCountryChange,
@@ -84,24 +91,37 @@ const LitigationForm = () => {
     handleResetForm,
     generalFieldClassName,
     generalButtonClassName,
+    handleDelete,
+    isDeleting,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
-  const queryClient = useQueryClient();
-  const { isLoading: isDeleting, mutate } = useMutation({
-    // mutationFn: (id) => deleteLitigation(id),
-    mutationFn: deleteLitigation,
-    onSuccess: () => {
-      toast.success('Litigation successfuly deleted');
-      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
-    },
-    onError: (err) => toast.error(err.ErrorMessage),
-  });
+  const [isUpdate, setIsUpdate] = useState(false);
+  // const queryClient = useQueryClient();
+  // const { isLoading: isDeleting, mutate } = useMutation({
+  //   // mutationFn: (id) => deleteLitigation(id),
+  //   mutationFn: deleteLitigation,
+  //   onSuccess: () => {
+  //     toast.success('Litigation successfuly deleted');
+  //     queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+  //   },
+  //   onError: (err) => toast.error(err.ErrorMessage),
+  // });
 
-  function handleDelete() {
-    const testId = 'e1807dc0-a6bc-4da9-b503-54e1648fe41d';
-    mutate(testId);
-    console.log('id: ', testId, ' deleted');
-  }
+  // function handleDelete() {
+  //   const testId = 'e1807dc0-a6bc-4da9-b503-54e1648fe41d';
+  //   mutate(testId);
+  //   console.log('id: ', testId, ' deleted');
+  // }
+
+  useEffect(() => {
+    if (!formData.litigation_id) {
+      setFormData((prev) => ({
+        ...prev,
+        litigation_id: crypto.randomUUID(),
+      }));
+    }
+  }, [formData.litigation_id, setFormData]);
+
   return (
     // <QueryClientProvider client={queryClient}>
     <>
@@ -126,7 +146,6 @@ const LitigationForm = () => {
               />
               <ErrorMessage error={errors.country} />
             </label>
-
             {/* --- TEST CODE --- */}
             {/* <label className='pb-2 block text-lg text-gray-600'>
             Test Code (Province)
@@ -147,7 +166,85 @@ const LitigationForm = () => {
             />
             <ErrorMessage error={errors.city} />
           </label> */}
-
+            {/* Hide these later */}
+            <label className='pb-2 block text-lg text-gray-600'>
+              Created by
+              <Input
+                name='created_by'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.created_by} // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                required
+              />
+              {/* <ErrorMessage error={errors.name} /> */}
+            </label>{' '}
+            <label className='pb-2 block text-lg text-gray-600'>
+              Created on
+              <Input
+                name='created_on'
+                type='datetime-local'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={
+                  isUpdate
+                    ? formData.created_on // For update, use existing data
+                    : formData.created_on || new Date().toISOString() // For new entry, use current datetime in ISO format
+                } // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                required
+              />
+            </label>
+            {/* <ErrorMessage error={errors.name} /> */}
+            <label className='pb-2 block text-lg text-gray-600'>
+              Litigation id
+              <Input
+                name='litigation_id'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.litigation_id} // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                required
+              />
+            </label>
+            {/* <ErrorMessage error={errors.name} /> */}
+            <label className='pb-2 block text-lg text-gray-600'>
+              Modified on
+              <Input
+                name='modified_on'
+                type='datetime-local'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={
+                  isUpdate
+                    ? formData.modified_on || new Date().toISOString() // For update, use existing data
+                    : null // For new entry, use current datetime in ISO format
+                } // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                // required
+              />
+            </label>
+            {/* <ErrorMessage error={errors.name} /> */}
+            <label className='pb-2 block text-lg text-gray-600'>
+              Modified by
+              <Input
+                name='modified_by'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.modified_by} // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                // required
+              />
+              {/* <ErrorMessage error={errors.name} /> */}
+            </label>
             <label className='pb-2 block text-lg text-gray-600'>
               Name
               <Input
@@ -155,14 +252,13 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // value={formData.name} // ADD A CONDITION: if UPDATE ? initialState : formData
-                value={initialState.name} // I can fill up the value from what I get from supabase
+                value={formData.name} // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
                 className={generalFieldClassName}
                 required
               />
               <ErrorMessage error={errors.name} />
             </label>
-
             <label className='pb-2 block text-lg text-gray-600'>
               Link
               <Input
@@ -191,7 +287,6 @@ const LitigationForm = () => {
               </div>
               <ErrorMessage error={errors.summary} />
             </label>
-
             <label className='pb-2 block text-lg text-gray-600'>
               Status
               <Input
@@ -205,7 +300,6 @@ const LitigationForm = () => {
               />
               <ErrorMessage error={errors.status} />
             </label>
-
             <label className='pb-2 block text-lg text-gray-600'>
               Mandate
               <Input
@@ -215,11 +309,10 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={formData.mandate}
                 className={generalFieldClassName}
-                required
+                // required
               />
               <ErrorMessage error={errors.mandate} />
             </label>
-
             <label className='pb-2 block text-lg text-gray-600'>
               Start Date
               <Input
@@ -234,7 +327,6 @@ const LitigationForm = () => {
               />
               <ErrorMessage error={errors.start_date} />
             </label>
-
             <label className='pb-2 block text-lg text-gray-600'>
               Jurisdiction
               <Input
@@ -248,7 +340,6 @@ const LitigationForm = () => {
               />
               <ErrorMessage error={errors.jurisdiction} />
             </label>
-
             <div className='form-group space-y-2'>
               <label className='mb-2 block'>
                 Tags
@@ -270,7 +361,7 @@ const LitigationForm = () => {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </label>
-              <ErrorMessage error={errors.tags} />
+              {/* <ErrorMessage error={errors.tags} /> */}
             </div>
             <div>
               <ul>
@@ -279,8 +370,7 @@ const LitigationForm = () => {
                 ))}
               </ul>
             </div>
-
-            <label className='pb-2 block text-lg text-gray-600'>
+            {/* <label className='pb-2 block text-lg text-gray-600'>
               Username
               <Input
                 name='username'
@@ -292,9 +382,8 @@ const LitigationForm = () => {
                 required
               />
               <ErrorMessage error={errors.username} />
-            </label>
-
-            <label className='pb-2 block text-lg text-gray-600'>
+            </label> */}
+            {/* <label className='pb-2 block text-lg text-gray-600'>
               Password
               <Input
                 name='password'
@@ -305,8 +394,7 @@ const LitigationForm = () => {
                 className={generalFieldClassName}
                 required
               />
-            </label>
-
+            </label> */}
             <Button
               variant='ghost'
               className={`${generalButtonClassName} hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white`}
