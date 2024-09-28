@@ -12,6 +12,20 @@ export async function getLitigation() {
   return data;
 }
 
+export async function createLitigation(newLitigation) {
+  const { data, error } = await supabase
+    .from('Litigation')
+    .insert([newLitigation])
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw new Error("Litgigation couldn't be created");
+  }
+
+  console.log('data: ', data);
+  return data;
+}
 export async function deleteLitigation(id) {
   console.log(id);
   const { data, error } = await supabase
