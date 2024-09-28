@@ -215,26 +215,26 @@ const useForm = (initialState, regexPatterns) => {
   };
 
   const queryClient = useQueryClient();
-  function CreateLitigationRow() {
-    const { mutate, isLoading: isCreating } = useMutation({
-      mutationFn: createLitigation,
-      onSuccess: () => {
-        toast.success('Litigatio successfuly created!');
-        queryClient.invalidateQueries({ queryKey: ['Litigation'] });
-      },
-      onError: (err) => toast.error(err.ErrorMessage),
-    });
-  }
-
-  const { isLoading: isDeleting, mutate } = useMutation({
-    // mutationFn: (id) => deleteLitigation(id),
-    mutationFn: deleteLitigation,
+  // function CreateLitigationRow() {
+  const { mutate, isLoading: isCreating } = useMutation({
+    mutationFn: createLitigation,
     onSuccess: () => {
-      toast.success('Litigation successfuly deleted');
+      toast.success('Litigatio successfuly created!');
       queryClient.invalidateQueries({ queryKey: ['Litigation'] });
     },
     onError: (err) => toast.error(err.ErrorMessage),
   });
+  // }
+
+  // const { isLoading: isDeleting, mutate } = useMutation({
+  //   // mutationFn: (id) => deleteLitigation(id),
+  //   mutationFn: deleteLitigation,
+  //   onSuccess: () => {
+  //     toast.success('Litigation successfuly deleted');
+  //     queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+  //   },
+  //   onError: (err) => toast.error(err.ErrorMessage),
+  // });
 
   function handleDelete() {
     const testId = 'e1807dc0-a6bc-4da9-b503-54e1648fe41d';
@@ -269,8 +269,8 @@ const useForm = (initialState, regexPatterns) => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
-    handleDelete,
-    isDeleting,
+    // handleDelete,
+    // isDeleting,
   };
 };
 

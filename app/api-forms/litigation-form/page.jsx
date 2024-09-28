@@ -91,11 +91,11 @@ const LitigationForm = () => {
     handleResetForm,
     generalFieldClassName,
     generalButtonClassName,
-    handleDelete,
-    isDeleting,
+    // handleDelete,
+    // isDeleting,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
-  const [isUpdate, setIsUpdate] = useState(false);
+  const [isUpdate] = useState(false);
   // const queryClient = useQueryClient();
   // const { isLoading: isDeleting, mutate } = useMutation({
   //   // mutationFn: (id) => deleteLitigation(id),
@@ -129,10 +129,10 @@ const LitigationForm = () => {
       <div className='flex items-center justify-center min-h-screen p-4'>
         <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
           <h1 className='text-3xl font-bold my-8'>Litigation Form</h1>
-          <LitigationTable />
-          <button disabled={isDeleting} onClick={handleDelete}>
+          {/* <LitigationTable /> */}
+          {/* <button disabled={isDeleting} onClick={handleDelete}>
             Delete row
-          </button>
+          </button> */}
 
           <form
             onSubmit={handleSubmit}
