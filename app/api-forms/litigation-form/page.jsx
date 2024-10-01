@@ -83,7 +83,153 @@ const LitigationForm = () => {
               <ErrorMessage error={errors.country} />
             </label>
 
-            {/* Hide these later */}
+            <label className='pb-2 block text-lg text-gray-600'>
+              Name
+              <Input
+                name='name'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.name} // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                required
+              />
+              <ErrorMessage error={errors.name} />
+            </label>
+
+            <label className='pb-2 block text-lg text-gray-600'>
+              Link
+              <Input
+                name='link'
+                type='url'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.link}
+                className={generalFieldClassName}
+                required
+              />
+              <ErrorMessage error={errors.link} />
+            </label>
+
+            <label className='pb-2 block text-lg text-gray-600'>
+              Summary
+              <div>
+                <textarea
+                  name='summary'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={formData.summary}
+                  className={`${generalFieldClassName} h-40 resize-y`}
+                  placeholder='Provide a detailed summary...'
+                  required
+                />
+              </div>
+              <ErrorMessage error={errors.summary} />
+            </label>
+            <label className='pb-2 block text-lg text-gray-600'>
+              Status
+              <Input
+                name='status'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.status}
+                className={generalFieldClassName}
+                required
+              />
+              <ErrorMessage error={errors.status} />
+            </label>
+
+            <label className='pb-2 block text-lg text-gray-600'>
+              Mandate
+              <Input
+                name='mandate'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.mandate}
+                className={generalFieldClassName}
+                // required
+              />
+              <ErrorMessage error={errors.mandate} />
+            </label>
+
+            <label className='pb-2 block text-lg text-gray-600'>
+              Start Date
+              <Input
+                name='start_date'
+                type='date'
+                placeholder='YYYY-MM-DD'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.start_date}
+                className={generalFieldClassName}
+                required
+              />
+              <ErrorMessage error={errors.start_date} />
+            </label>
+
+            <label className='pb-2 block text-lg text-gray-600'>
+              Jurisdiction
+              <Input
+                name='jurisdiction'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.jurisdiction}
+                className={generalFieldClassName}
+                required
+              />
+              <ErrorMessage error={errors.jurisdiction} />
+            </label>
+
+            <div className='form-group space-y-2'>
+              <label className='mb-2 block'>
+                Tags
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className='ml-4' variant='outline'>
+                      <span style={{ color: 'gray' }}>Select Tags</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align='end'>
+                    {Tags.map((tag) => (
+                      <DropdownMenuItem
+                        key={tag.id}
+                        onClick={() => handleTags(tag)}
+                      >
+                        {tag.name}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </label>
+              {/* <ErrorMessage error={errors.tags} /> */}
+            </div>
+            <div>
+              <ul>
+                {formData.tags.map((tag) => (
+                  <li key={tag.id}>{tag.name}</li>
+                ))}
+              </ul>
+            </div>
+
+            <label className='pb-2 block text-lg text-gray-600'>
+              Litigation id
+              <Input
+                name='litigation_id'
+                disabled
+                type='text' // make it conditionally retrived from BE if isUpdate
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.litigation_id} // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                required
+              />
+            </label>
+
             <label className='pb-2 block text-lg text-gray-600'>
               Created by
               <Input
@@ -116,19 +262,6 @@ const LitigationForm = () => {
               />
             </label>
 
-            <label className='pb-2 block text-lg text-gray-600'>
-              Litigation id
-              <Input
-                name='litigation_id'
-                type='text'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.litigation_id} // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
-                className={generalFieldClassName}
-                required
-              />
-            </label>
             {/* <ErrorMessage error={errors.name} /> */}
             <label className='pb-2 block text-lg text-gray-600'>
               Modified on
@@ -162,131 +295,6 @@ const LitigationForm = () => {
               />
               {/* <ErrorMessage error={errors.name} /> */}
             </label>
-            <label className='pb-2 block text-lg text-gray-600'>
-              Name
-              <Input
-                name='name'
-                type='text'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.name} // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
-                className={generalFieldClassName}
-                required
-              />
-              <ErrorMessage error={errors.name} />
-            </label>
-            <label className='pb-2 block text-lg text-gray-600'>
-              Link
-              <Input
-                name='link'
-                type='url'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.link}
-                className={generalFieldClassName}
-                required
-              />
-              <ErrorMessage error={errors.link} />
-            </label>
-            <label className='pb-2 block text-lg text-gray-600'>
-              Summary
-              <div>
-                <textarea
-                  name='summary'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={formData.summary}
-                  className={`${generalFieldClassName} h-40 resize-y`}
-                  placeholder='Provide a detailed summary...'
-                  required
-                />
-              </div>
-              <ErrorMessage error={errors.summary} />
-            </label>
-            <label className='pb-2 block text-lg text-gray-600'>
-              Status
-              <Input
-                name='status'
-                type='text'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.status}
-                className={generalFieldClassName}
-                required
-              />
-              <ErrorMessage error={errors.status} />
-            </label>
-            <label className='pb-2 block text-lg text-gray-600'>
-              Mandate
-              <Input
-                name='mandate'
-                type='text'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.mandate}
-                className={generalFieldClassName}
-                // required
-              />
-              <ErrorMessage error={errors.mandate} />
-            </label>
-            <label className='pb-2 block text-lg text-gray-600'>
-              Start Date
-              <Input
-                name='start_date'
-                type='date'
-                placeholder='YYYY-MM-DD'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.start_date}
-                className={generalFieldClassName}
-                required
-              />
-              <ErrorMessage error={errors.start_date} />
-            </label>
-            <label className='pb-2 block text-lg text-gray-600'>
-              Jurisdiction
-              <Input
-                name='jurisdiction'
-                type='text'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.jurisdiction}
-                className={generalFieldClassName}
-                required
-              />
-              <ErrorMessage error={errors.jurisdiction} />
-            </label>
-            <div className='form-group space-y-2'>
-              <label className='mb-2 block'>
-                Tags
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button className='ml-4' variant='outline'>
-                      <span style={{ color: 'gray' }}>Select Tags</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align='end'>
-                    {Tags.map((tag) => (
-                      <DropdownMenuItem
-                        key={tag.id}
-                        onClick={() => handleTags(tag)}
-                      >
-                        {tag.name}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </label>
-              {/* <ErrorMessage error={errors.tags} /> */}
-            </div>
-            <div>
-              <ul>
-                {formData.tags.map((tag) => (
-                  <li key={tag.id}>{tag.name}</li>
-                ))}
-              </ul>
-            </div>
 
             <Button
               variant='ghost'
