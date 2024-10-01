@@ -107,7 +107,6 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={formData.link}
                 className={generalFieldClassName}
-                required
               />
               <ErrorMessage error={errors.link} />
             </label>
@@ -122,7 +121,6 @@ const LitigationForm = () => {
                   value={formData.summary}
                   className={`${generalFieldClassName} h-40 resize-y`}
                   placeholder='Provide a detailed summary...'
-                  required
                 />
               </div>
               <ErrorMessage error={errors.summary} />
@@ -150,7 +148,6 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={formData.mandate}
                 className={generalFieldClassName}
-                // required
               />
               <ErrorMessage error={errors.mandate} />
             </label>
@@ -179,7 +176,6 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={formData.jurisdiction}
                 className={generalFieldClassName}
-                required
               />
               <ErrorMessage error={errors.jurisdiction} />
             </label>
@@ -262,7 +258,21 @@ const LitigationForm = () => {
               />
             </label>
 
-            {/* <ErrorMessage error={errors.name} /> */}
+            <label className='pb-2 block text-lg text-gray-600'>
+              Modified by
+              <Input
+                name='modified_by'
+                type='text'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formData.modified_by} // ADD A CONDITION: if UPDATE ? initialState : formData
+                // value={initialState.name} // I can fill up the value from what I get from supabase
+                className={generalFieldClassName}
+                required
+              />
+              {/* <ErrorMessage error={errors.name} /> */}
+            </label>
+
             <label className='pb-2 block text-lg text-gray-600'>
               Modified on
               <Input
@@ -277,24 +287,10 @@ const LitigationForm = () => {
                 } // ADD A CONDITION: if UPDATE ? initialState : formData
                 // value={initialState.name} // I can fill up the value from what I get from supabase
                 className={generalFieldClassName}
-                // required
+                required
               />
             </label>
             {/* <ErrorMessage error={errors.name} /> */}
-            <label className='pb-2 block text-lg text-gray-600'>
-              Modified by
-              <Input
-                name='modified_by'
-                type='text'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formData.modified_by} // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
-                className={generalFieldClassName}
-                // required
-              />
-              {/* <ErrorMessage error={errors.name} /> */}
-            </label>
 
             <Button
               variant='ghost'

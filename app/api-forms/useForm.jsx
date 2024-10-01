@@ -26,11 +26,9 @@ const useForm = (initialState, regexPatterns) => {
       invalid: 'Focus area must be between 2 and 50 alphabetic characters.',
     },
     summary: {
-      required: 'Summary is required.',
       invalid: 'Summary must be between 5 and 10000 characters.',
     },
     link: {
-      required: 'Link is required.',
       invalid: 'Please enter a valid URL.',
     },
     post: {
