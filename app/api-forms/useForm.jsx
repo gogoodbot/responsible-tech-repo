@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import {
   createLitigation,
   deleteLitigation,
+  getLitigation,
 } from './litigation-form/apiLitigation';
 import toast from 'react-hot-toast';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 const useForm = (initialState, regexPatterns) => {
   const [formData, setFormData] = useState(initialState);
@@ -161,6 +162,8 @@ const useForm = (initialState, regexPatterns) => {
   }
 
   const queryClient = useQueryClient();
+
+  // Create a new Litigation:
   const { mutate: createMutate, isLoading: isCreating } = useMutation({
     mutationFn: createLitigation,
     onSuccess: () => {
@@ -170,15 +173,50 @@ const useForm = (initialState, regexPatterns) => {
     onError: (err) => toast.error(err.ErrorMessage),
   });
 
+  // Delete a Litigation:
   const { mutate: deleteMutate, isLoading: isDeleting } = useMutation({
-    // mutationFn: (id) => deleteLitigation(id),
-    mutationFn: deleteLitigation,
+    mutationFn: deleteLitigation, // mutationFn: (id) => deleteLitigation(id),
     onSuccess: () => {
       toast.success('Litigation successfuly deleted');
       queryClient.invalidateQueries({ queryKey: ['Litigation'] });
     },
     onError: (err) => toast.error(err.ErrorMessage),
   });
+
+  //   const useFetchLitigation = (litigationId) => {
+  //   return useQuery(['litigation', litigationId], () => getLitigation(litigationId), {
+  //     enabled: !!litigationId,
+  //   });
+  // };
+  // Get an existing Litigation:
+  function useFetchLitigation(litigationId) {
+    return useQuery(
+      ['litigation', litigationId],
+      () => getLitigation(litigationId),
+      {
+        enabled: !!litigationId,
+      }
+    );
+    // const {
+    //   isLoading: isGetting,
+    //   error,
+    //   data: litigations,
+    // } = useQuery({
+    //   queryKey: ['Litigation'],
+    //   queryFn: getLitigation(id),
+    // });
+
+    // if (isGetting) return <p>Loading...</p>;
+    // if (error) {
+    //   console.log(error);
+    //   throw new Error("Litigation data couln't be fetched");
+    // }
+
+    // console.log(litigations);
+    // initialState.name = litigations[0].name;
+
+    // return <p>litigations</p>;
+  }
 
   function handleDelete(id) {
     deleteMutate(id);
@@ -235,6 +273,7 @@ const useForm = (initialState, regexPatterns) => {
     generalButtonClassName,
     handleDelete,
     isDeleting,
+    useFetchLitigation,
   };
 };
 
