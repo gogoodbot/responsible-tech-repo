@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import { createLitigation } from './litigation-form/apiLitigation';
+import {
+  createLitigation,
+  deleteLitigation,
+} from './litigation-form/apiLitigation';
 import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -45,6 +48,13 @@ const useForm = (initialState, regexPatterns) => {
       required: 'Format is required.',
       invalid: 'Format must be between 2 and 50 alphabetic characters.',
     },
+    // username: {
+    //   required: 'Username is required.',
+    //   invalid: 'Username must be between 3 and 20 alphanumeric characters.',
+    // },
+    // password: {
+    //   required: 'Password is required.',
+    // },
     country: {
       required: 'Country must be selected.',
     },
@@ -54,12 +64,30 @@ const useForm = (initialState, regexPatterns) => {
     city: {
       required: 'City must be selected.',
     },
+    // tags: {
+    //   required: 'At least one tag is required.',
+    // },
   };
 
   const validateField = (name, value) => {
+    // if (name === 'tags') {
+    //   // Example of custom validation logic for tags if needed
+    //   if (value.length === 0) {
+    //     return customErrorMessages.tags.required;
+    //   }
+    //   return null;
+    // }
+
     if (!value) {
+      // return customErrorMessages[name]?.required || 'This field is required';
       return customErrorMessages[name]?.required || null;
     }
+
+    // if (name !== 'password' && regexPatterns[name]) {
+    //   if (!regexPatterns[name].test(value)) {
+    //     return customErrorMessages[name]?.invalid || `${name} is invalid.`;
+    //   }
+    // }
 
     return null;
   };
@@ -170,6 +198,11 @@ const useForm = (initialState, regexPatterns) => {
       }
     });
 
+    // Check if at least one tag is selected
+    // if (formData.tags?.length === 0) {
+    //   newErrors.tags = customErrorMessages.tags.required;
+    // }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       console.log(newErrors);
@@ -182,6 +215,7 @@ const useForm = (initialState, regexPatterns) => {
   };
 
   const queryClient = useQueryClient();
+  // function CreateLitigationRow() {
   const { mutate, isLoading: isCreating } = useMutation({
     mutationFn: createLitigation,
     onSuccess: () => {
@@ -190,6 +224,23 @@ const useForm = (initialState, regexPatterns) => {
     },
     onError: (err) => toast.error(err.ErrorMessage),
   });
+  // }
+
+  // const { isLoading: isDeleting, mutate } = useMutation({
+  //   // mutationFn: (id) => deleteLitigation(id),
+  //   mutationFn: deleteLitigation,
+  //   onSuccess: () => {
+  //     toast.success('Litigation successfuly deleted');
+  //     queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+  //   },
+  //   onError: (err) => toast.error(err.ErrorMessage),
+  // });
+
+  function handleDelete() {
+    const testId = 'e1807dc0-a6bc-4da9-b503-54e1648fe41d';
+    mutate(testId);
+    console.log('id: ', testId, ' deleted');
+  }
 
   const handleResetForm = () => {
     const confirmReset = window.confirm(
@@ -218,6 +269,8 @@ const useForm = (initialState, regexPatterns) => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
+    // handleDelete,
+    // isDeleting,
   };
 };
 
