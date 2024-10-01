@@ -51,6 +51,8 @@ const LitigationForm = () => {
     handleResetForm,
     generalFieldClassName,
     generalButtonClassName,
+    handleDelete,
+    isDeleting,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
   const [isUpdate] = useState(false);
@@ -70,6 +72,13 @@ const LitigationForm = () => {
       <div className='flex items-center justify-center min-h-screen p-4'>
         <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
           <h1 className='text-3xl font-bold my-8'>Litigation Form</h1>
+          <button
+            disabled={isDeleting}
+            onClick={() => handleDelete('d86862fc-5f6b-4e07-9b70-39c0eb758863')}
+          >
+            Delete row
+          </button>
+
           <form
             onSubmit={handleSubmit}
             className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'

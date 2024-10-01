@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import { createLitigation } from './litigation-form/apiLitigation';
+import {
+  createLitigation,
+  deleteLitigation,
+} from './litigation-form/apiLitigation';
 import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -157,6 +160,30 @@ const useForm = (initialState, regexPatterns) => {
     setErrors({});
   }
 
+  const queryClient = useQueryClient();
+  const { mutate: createMutate, isLoading: isCreating } = useMutation({
+    mutationFn: createLitigation,
+    onSuccess: () => {
+      toast.success('Litigatio successfuly created!');
+      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+    },
+    onError: (err) => toast.error(err.ErrorMessage),
+  });
+
+  const { mutate: deleteMutate, isLoading: isDeleting } = useMutation({
+    // mutationFn: (id) => deleteLitigation(id),
+    mutationFn: deleteLitigation,
+    onSuccess: () => {
+      toast.success('Litigation successfuly deleted');
+      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+    },
+    onError: (err) => toast.error(err.ErrorMessage),
+  });
+
+  function handleDelete(id) {
+    deleteMutate(id);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = {};
@@ -174,20 +201,10 @@ const useForm = (initialState, regexPatterns) => {
       return;
     }
 
-    mutate(formData);
+    createMutate(formData);
     console.log('Form Data: ', formData);
     resetForm();
   };
-
-  const queryClient = useQueryClient();
-  const { mutate, isLoading: isCreating } = useMutation({
-    mutationFn: createLitigation,
-    onSuccess: () => {
-      toast.success('Litigatio successfuly created!');
-      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
-    },
-    onError: (err) => toast.error(err.ErrorMessage),
-  });
 
   const handleResetForm = () => {
     const confirmReset = window.confirm(
@@ -216,6 +233,8 @@ const useForm = (initialState, regexPatterns) => {
     selectedTags,
     generalFieldClassName,
     generalButtonClassName,
+    handleDelete,
+    isDeleting,
   };
 };
 
