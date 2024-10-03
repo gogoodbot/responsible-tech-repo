@@ -100,11 +100,16 @@ const LitigationForm = () => {
             className='w-full max-w-7xl bg-white p-8 rounded-md space-y-4'
           >
             <label className='pb-2 block text-lg text-gray-600'>
-              Country
-              <SelectCountry
-                onCountrySelect={handleCountryChange}
-                selectedCountry={selectedCountry}
-              />
+              Country{' '}
+              {/*  Figure out the selected country if isUpdate === true */}
+              {isUpdate && updatingData ? (
+                <Input />
+              ) : (
+                <SelectCountry
+                  onCountrySelect={handleCountryChange}
+                  selectedCountry={selectedCountry}
+                />
+              )}
               <ErrorMessage error={errors.country} />
             </label>
 
