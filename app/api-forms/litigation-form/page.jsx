@@ -53,10 +53,26 @@ const LitigationForm = () => {
     generalButtonClassName,
     handleDelete,
     isDeleting,
+    useFetchLitigation,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
-  const [isUpdate] = useState(false);
+  const [isUpdate] = useState(true);
+  // const [isUpdate] = useState(false);
 
+  const { data: updatingData } = useFetchLitigation(
+    '5554d7fa-e724-4ac6-8150-8b084e543136'
+  );
+
+  // Populate formData if it's an update and updatingData is available
+  useEffect(() => {
+    if (isUpdate && updatingData) {
+      setFormData((prev) => ({
+        ...prev,
+        ...updatingData[0], // Set the form fields with the data from the API
+      }));
+    }
+  }, [isUpdate, updatingData, setFormData]);
+  console.log('formDDD ', formData);
   useEffect(() => {
     if (!formData.litigation_id) {
       setFormData((prev) => ({
@@ -99,8 +115,9 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.name} // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
+                value={
+                  isUpdate ? updatingData?.name || formData.name : formData.name
+                }
                 className={generalFieldClassName}
                 required
               />
@@ -114,7 +131,9 @@ const LitigationForm = () => {
                 type='url'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.link}
+                value={
+                  isUpdate ? updatingData?.link || formData.link : formData.link
+                }
                 className={generalFieldClassName}
               />
               <ErrorMessage error={errors.link} />
@@ -127,7 +146,11 @@ const LitigationForm = () => {
                   name='summary'
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={formData.summary}
+                  value={
+                    isUpdate
+                      ? updatingData?.summary || formData.summary
+                      : formData.summary
+                  }
                   className={`${generalFieldClassName} h-40 resize-y`}
                   placeholder='Provide a detailed summary...'
                 />
@@ -141,7 +164,11 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.status}
+                value={
+                  isUpdate
+                    ? updatingData?.status || formData.status
+                    : formData.status
+                }
                 className={generalFieldClassName}
                 required
               />
@@ -155,7 +182,11 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.mandate}
+                value={
+                  isUpdate
+                    ? updatingData?.mandate || formData.mandate
+                    : formData.mandate
+                }
                 className={generalFieldClassName}
               />
               <ErrorMessage error={errors.mandate} />
@@ -169,7 +200,11 @@ const LitigationForm = () => {
                 placeholder='YYYY-MM-DD'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.start_date}
+                value={
+                  isUpdate
+                    ? updatingData?.start_date || formData.start_date
+                    : formData.start_date
+                }
                 className={generalFieldClassName}
                 required
               />
@@ -183,7 +218,11 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.jurisdiction}
+                value={
+                  isUpdate
+                    ? updatingData?.jurisdiction || formData.jurisdiction
+                    : formData.jurisdiction
+                }
                 className={generalFieldClassName}
               />
               <ErrorMessage error={errors.jurisdiction} />
@@ -199,7 +238,7 @@ const LitigationForm = () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align='end'>
-                    {Tags.map((tag) => (
+                    {Tags?.map((tag) => (
                       <DropdownMenuItem
                         key={tag.id}
                         onClick={() => handleTags(tag)}
@@ -228,8 +267,11 @@ const LitigationForm = () => {
                 type='text' // make it conditionally retrived from BE if isUpdate
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.litigation_id} // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
+                value={
+                  isUpdate
+                    ? updatingData?.litigation_id || formData.litigation_id
+                    : formData.litigation_id
+                }
                 className={generalFieldClassName}
                 required
               />
@@ -242,8 +284,11 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.created_by} // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
+                value={
+                  isUpdate
+                    ? updatingData?.litigation_id || formData.litigation_id
+                    : formData.litigation_id
+                }
                 className={generalFieldClassName}
                 required
               />
@@ -258,10 +303,9 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={
                   isUpdate
-                    ? formData.created_on // For update, use existing data
-                    : formData.created_on || new Date().toISOString() // For new entry, use current datetime in ISO format
-                } // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
+                    ? updatingData?.created_on || formData.created_on
+                    : formData.created_on
+                }
                 className={generalFieldClassName}
                 required
               />
@@ -274,8 +318,11 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formData.modified_by} // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
+                value={
+                  isUpdate
+                    ? updatingData?.modified_by || formData.modified_by
+                    : formData.modified_by
+                }
                 className={generalFieldClassName}
                 required
               />
@@ -291,10 +338,9 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={
                   isUpdate
-                    ? formData.modified_on || new Date().toISOString() // For update, use existing data
-                    : null // For new entry, use current datetime in ISO format
-                } // ADD A CONDITION: if UPDATE ? initialState : formData
-                // value={initialState.name} // I can fill up the value from what I get from supabase
+                    ? updatingData?.modified_on || formData.modified_on
+                    : formData.modified_on
+                }
                 className={generalFieldClassName}
                 required
               />

@@ -11,7 +11,7 @@ export async function getLitigation(id) {
     throw new Error("Litigation couldn't be loaded");
   }
 
-  console.log('fetched data: ', data);
+  console.log('fetched data from apiLitigation: ', data);
   return data;
 }
 
