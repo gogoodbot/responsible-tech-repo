@@ -54,10 +54,8 @@ const LitigationForm = () => {
     handleDelete,
     isDeleting,
     useFetchLitigation,
+    isUpdate,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
-
-  const [isUpdate] = useState(true);
-  // const [isUpdate] = useState(false);
 
   const { data: updatingData } = useFetchLitigation(
     '5554d7fa-e724-4ac6-8150-8b084e543136'
@@ -101,15 +99,16 @@ const LitigationForm = () => {
           >
             <label className='pb-2 block text-lg text-gray-600'>
               Country{' '}
+              <span>
+                {isUpdate
+                  ? updatingData?.country || ': ' + formData.country
+                  : formData.country}
+              </span>
               {/*  Figure out the selected country if isUpdate === true */}
-              {isUpdate && updatingData ? (
-                <Input />
-              ) : (
-                <SelectCountry
-                  onCountrySelect={handleCountryChange}
-                  selectedCountry={selectedCountry}
-                />
-              )}
+              <SelectCountry
+                onCountrySelect={handleCountryChange}
+                selectedCountry={selectedCountry}
+              />
               <ErrorMessage error={errors.country} />
             </label>
 
@@ -235,7 +234,13 @@ const LitigationForm = () => {
 
             <div className='form-group space-y-2'>
               <label className='mb-2 block'>
-                Tags
+                Tags{' '}
+                <span>
+                  {isUpdate
+                    ? updatingData?.tags || ': ' + formData.tags
+                    : formData.tags}
+                </span>
+                {/* <br /> Figure out what are Tags, their types and ... to fix the UI and data retrieve of it */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button className='ml-4' variant='outline'>
@@ -291,8 +296,8 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={
                   isUpdate
-                    ? updatingData?.litigation_id || formData.litigation_id
-                    : formData.litigation_id
+                    ? updatingData?.created_by || formData.created_by
+                    : formData.created_by
                 }
                 className={generalFieldClassName}
                 required

@@ -15,6 +15,22 @@ export async function getLitigation(id) {
   return data;
 }
 
+export async function updateLitigation(modifiedLitigation) {
+  const { data, error } = await supabase
+    .from('Litigation')
+    .update(modifiedLitigation)
+    .eq('litigation_id', modifiedLitigation.id)
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw new Error("Litgigation couldn't be updated");
+  }
+
+  console.log('updated data: ', data);
+  return data;
+}
+
 export async function createLitigation(newLitigation) {
   const { data, error } = await supabase
     .from('Litigation')
