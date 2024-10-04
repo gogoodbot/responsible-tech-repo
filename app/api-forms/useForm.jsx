@@ -3,6 +3,7 @@ import {
   createLitigation,
   deleteLitigation,
   getLitigation,
+  updateLitigation,
 } from './litigation-form/apiLitigation';
 import toast from 'react-hot-toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -16,6 +17,9 @@ const useForm = (initialState, regexPatterns) => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+
+  const [isUpdate] = useState(true);
+  // const [isUpdate] = useState(false);
 
   const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
   const generalButtonClassName =
@@ -58,6 +62,7 @@ const useForm = (initialState, regexPatterns) => {
     },
   };
 
+  //  <-- VALIDATIONS -->
   const validateField = (name, value) => {
     if (!value) {
       return customErrorMessages[name]?.required || null;
@@ -82,6 +87,7 @@ const useForm = (initialState, regexPatterns) => {
     });
   };
 
+  //  <-- HANDLE CHANGES -->
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -142,86 +148,10 @@ const useForm = (initialState, regexPatterns) => {
     });
   };
 
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-    const error = validateField(name, value);
-
-    setErrors((prevState) => ({
-      ...prevState,
-      [name]: error,
-    }));
-  };
-
-  function resetForm() {
-    setFormData(initialState);
-    setSelectedTags([]);
-    setSelectedCountry(null);
-    setSelectedProvince(null);
-    setSelectedCity(null);
-    setErrors({});
-  }
-
+  //  <-- QUERIES -->
   const queryClient = useQueryClient();
 
-  // Create a new Litigation:
-  const { mutate: createMutate, isLoading: isCreating } = useMutation({
-    mutationFn: createLitigation,
-    onSuccess: () => {
-      toast.success('Litigatio successfuly created!');
-      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
-    },
-    onError: (err) => toast.error(err.ErrorMessage),
-  });
-
-  // Delete a Litigation:
-  const { mutate: deleteMutate, isLoading: isDeleting } = useMutation({
-    mutationFn: deleteLitigation, // mutationFn: (id) => deleteLitigation(id),
-    onSuccess: () => {
-      toast.success('Litigation successfuly deleted');
-      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
-    },
-    onError: (err) => toast.error(err.ErrorMessage),
-  });
-
-  //   const useFetchLitigation = (litigationId) => {
-  //   return useQuery(['litigation', litigationId], () => getLitigation(litigationId), {
-  //     enabled: !!litigationId,
-  //   });
-  // };
-  // Get an existing Litigation:
-  function useFetchLitigation(litigationId) {
-    return useQuery(
-      ['litigation', litigationId],
-      () => getLitigation(litigationId),
-      {
-        enabled: !!litigationId,
-      }
-    );
-    // const {
-    //   isLoading: isGetting,
-    //   error,
-    //   data: litigations,
-    // } = useQuery({
-    //   queryKey: ['Litigation'],
-    //   queryFn: getLitigation(id),
-    // });
-
-    // if (isGetting) return <p>Loading...</p>;
-    // if (error) {
-    //   console.log(error);
-    //   throw new Error("Litigation data couln't be fetched");
-    // }
-
-    // console.log(litigations);
-    // initialState.name = litigations[0].name;
-
-    // return <p>litigations</p>;
-  }
-
-  function handleDelete(id) {
-    deleteMutate(id);
-  }
-
+  // Create & Update a Litigation:
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = {};
@@ -239,9 +169,73 @@ const useForm = (initialState, regexPatterns) => {
       return;
     }
 
-    createMutate(formData);
+    if (isUpdate) {
+      handleUpdate();
+    } else {
+      createMutate(formData);
+    }
+
     console.log('Form Data: ', formData);
     resetForm();
+  };
+  function handleUpdate() {
+    console.log('updateMutate fromData: ', formData);
+    updateMutate(formData);
+  }
+
+  // A) Create a new Litigation
+  const { mutate: createMutate, isLoading: isCreating } = useMutation({
+    mutationFn: createLitigation,
+    onSuccess: () => {
+      toast.success('Litigatio successfuly created!');
+      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+    },
+    onError: (err) => toast.error(err.ErrorMessage),
+  });
+
+  // B) Update a Litigation
+  const { mutate: updateMutate, isLoading: isUpdating } = useMutation({
+    mutationFn: updateLitigation,
+    onSuccess: () => {
+      toast.success('Litigation successfuly updated!');
+      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+    },
+    onError: (err) => toast.error(err.ErrorMessage),
+  });
+
+  // Delete a Litigation:
+  function handleDelete(id) {
+    deleteMutate(id);
+  }
+  const { mutate: deleteMutate, isLoading: isDeleting } = useMutation({
+    mutationFn: deleteLitigation, // mutationFn: (id) => deleteLitigation(id),
+    onSuccess: () => {
+      toast.success('Litigation successfuly deleted');
+      queryClient.invalidateQueries({ queryKey: ['Litigation'] });
+    },
+    onError: (err) => toast.error(err.ErrorMessage),
+  });
+
+  // Get an existing Litigation:
+  function useFetchLitigation(litigationId) {
+    return useQuery(
+      ['litigation', litigationId],
+      () => getLitigation(litigationId),
+      {
+        enabled: !!litigationId,
+      }
+    );
+  }
+
+  // <-- HANDLE THE REST -->
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+
+    setErrors((prevState) => ({
+      ...prevState,
+      [name]: error,
+    }));
   };
 
   const handleResetForm = () => {
@@ -252,6 +246,15 @@ const useForm = (initialState, regexPatterns) => {
       resetForm();
     }
   };
+
+  function resetForm() {
+    setFormData(initialState);
+    setSelectedTags([]);
+    setSelectedCountry(null);
+    setSelectedProvince(null);
+    setSelectedCity(null);
+    setErrors({});
+  }
 
   return {
     formData,
@@ -274,6 +277,7 @@ const useForm = (initialState, regexPatterns) => {
     handleDelete,
     isDeleting,
     useFetchLitigation,
+    isUpdate,
   };
 };
 
