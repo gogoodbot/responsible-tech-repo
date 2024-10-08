@@ -58,7 +58,8 @@ const LitigationForm = () => {
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
   const { data: updatingData } = useFetchLitigation(
-    '5554d7fa-e724-4ac6-8150-8b084e543136'
+    // 'e1b46d9a-7efb-4509-80f6-80bc5423c5f1'
+    'dbf2ab18-90ed-41bd-901a-d923471c454d'
   );
 
   // Populate formData if it's an update and updatingData is available
@@ -70,15 +71,17 @@ const LitigationForm = () => {
       }));
     }
   }, [isUpdate, updatingData, setFormData]);
+
   console.log('formDDD ', formData);
+
   useEffect(() => {
-    if (!formData.litigation_id) {
+    if (!isUpdate && !formData.litigation_id) {
       setFormData((prev) => ({
         ...prev,
         litigation_id: crypto.randomUUID(),
       }));
     }
-  }, [formData.litigation_id, setFormData]);
+  }, [formData.litigation_id, setFormData, isUpdate]);
 
   return (
     <>
@@ -101,7 +104,10 @@ const LitigationForm = () => {
               Country{' '}
               <span>
                 {isUpdate
-                  ? updatingData?.country || ': ' + formData.country
+                  ? updatingData?.country ||
+                    'is currently: ' +
+                      formData.country +
+                      '. Please selecet the desired country again to continue.'
                   : formData.country}
               </span>
               {/*  Figure out the selected country if isUpdate === true */}
