@@ -306,7 +306,7 @@ const LitigationForm = () => {
                     : formData.created_by
                 }
                 className={generalFieldClassName}
-                required
+                required={!isUpdate}
               />
             </label>
 
@@ -323,7 +323,7 @@ const LitigationForm = () => {
                     : formData.created_on
                 }
                 className={generalFieldClassName}
-                required
+                required={!isUpdate}
               />
             </label>
 
@@ -340,7 +340,7 @@ const LitigationForm = () => {
                     : formData.modified_by
                 }
                 className={generalFieldClassName}
-                required
+                required={isUpdate}
               />
               {/* <ErrorMessage error={errors.name} /> */}
             </label>
@@ -358,7 +358,7 @@ const LitigationForm = () => {
                     : formData.modified_on
                 }
                 className={generalFieldClassName}
-                required
+                required={isUpdate}
               />
             </label>
             {/* <ErrorMessage error={errors.name} /> */}

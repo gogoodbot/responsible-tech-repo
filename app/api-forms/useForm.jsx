@@ -18,8 +18,8 @@ const useForm = (initialState, regexPatterns) => {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
 
-  const [isUpdate] = useState(true);
-  // const [isUpdate] = useState(false);
+  // const [isUpdate] = useState(true);
+  const [isUpdate] = useState(false);
 
   const generalFieldClassName = 'px-4 border border-gray-300 rounded-md w-4/5';
   const generalButtonClassName =
