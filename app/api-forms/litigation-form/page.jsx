@@ -285,7 +285,7 @@ const LitigationForm = () => {
                 onBlur={handleBlur}
                 value={
                   isUpdate
-                    ? updatingData?.litigation_id || formData.litigation_id
+                    ? updatingData && updatingData[0].litigation_id
                     : formData.litigation_id
                 }
                 className={generalFieldClassName}

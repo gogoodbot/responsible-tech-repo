@@ -19,7 +19,7 @@ export async function updateLitigation(modifiedLitigation) {
   const { data, error } = await supabase
     .from('Litigation')
     .update(modifiedLitigation)
-    .eq('litigation_id', modifiedLitigation.id)
+    .eq('litigation_id', modifiedLitigation.litigation_id)
     .select();
 
   if (error) {
