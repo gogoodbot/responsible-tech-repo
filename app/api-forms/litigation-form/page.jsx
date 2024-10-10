@@ -55,6 +55,7 @@ const LitigationForm = () => {
     isDeleting,
     useFetchLitigation,
     isUpdate,
+    formatToTimestamp,
   } = useForm(initialState, REGEX_PATTERNS, submitToLitigation);
 
   const { data: updatingData } = useFetchLitigation(
@@ -68,11 +69,13 @@ const LitigationForm = () => {
       setFormData((prev) => ({
         ...prev,
         ...updatingData[0], // Set the form fields with the data from the API
+        // created_on: updatingData[0].created_on || prev.created_on, // Prevent resetting created_on
       }));
     }
   }, [isUpdate, updatingData, setFormData]);
 
   console.log('formDDD ', formData);
+  console.log('Now: ', formatToTimestamp(new Date()));
 
   useEffect(() => {
     if (!isUpdate && !formData.litigation_id) {
@@ -300,9 +303,10 @@ const LitigationForm = () => {
                 type='text'
                 onChange={handleChange}
                 onBlur={handleBlur}
+                disabled={isUpdate}
                 value={
                   isUpdate
-                    ? updatingData?.created_by || formData.created_by
+                    ? updatingData && updatingData[0].created_by
                     : formData.created_by
                 }
                 className={generalFieldClassName}
@@ -312,16 +316,20 @@ const LitigationForm = () => {
 
             <label className='pb-2 block text-lg text-gray-600'>
               Created on
+              <span>
+                {isUpdate
+                  ? updatingData?.created_on ||
+                    'is currently: ' + formData.created_on
+                  : 'now: ' + formatToTimestamp()}{' '}
+                {/* 2024-10-10 22:15:57.773+00 */}
+              </span>
               <Input
                 name='created_on'
-                type='datetime-local'
+                type='hidden'
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={
-                  isUpdate
-                    ? updatingData?.created_on || formData.created_on
-                    : formData.created_on
-                }
+                disabled={isUpdate}
+                value={formatToTimestamp()}
                 className={generalFieldClassName}
                 required={!isUpdate}
               />

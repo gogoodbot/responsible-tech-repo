@@ -62,6 +62,12 @@ const useForm = (initialState, regexPatterns) => {
     },
   };
 
+  //  <-- DATE FORMAT -->
+  function formatToTimestamp() {
+    const d = new Date();
+    return d.toISOString().replace('T', ' ').replace('Z', '+00');
+  }
+
   //  <-- VALIDATIONS -->
   const validateField = (name, value) => {
     if (!value) {
@@ -278,6 +284,7 @@ const useForm = (initialState, regexPatterns) => {
     isDeleting,
     useFetchLitigation,
     isUpdate,
+    formatToTimestamp,
   };
 };
 
