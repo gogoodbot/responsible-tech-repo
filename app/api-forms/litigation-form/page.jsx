@@ -63,6 +63,11 @@ const LitigationForm = () => {
     'dbf2ab18-90ed-41bd-901a-d923471c454d'
   );
 
+  useEffect(() => {
+    {
+      if (!isUpdate) formData.created_on = formatToTimestamp();
+    }
+  }, [isUpdate, formatToTimestamp, formData]);
   // Populate formData if it's an update and updatingData is available
   useEffect(() => {
     if (isUpdate && updatingData) {
@@ -75,7 +80,6 @@ const LitigationForm = () => {
   }, [isUpdate, updatingData, setFormData]);
 
   console.log('formDDD ', formData);
-  console.log('Now: ', formatToTimestamp(new Date()));
 
   useEffect(() => {
     if (!isUpdate && !formData.litigation_id) {
@@ -317,11 +321,10 @@ const LitigationForm = () => {
             <label className='pb-2 block text-lg text-gray-600'>
               Created on
               <span>
-                {isUpdate
-                  ? updatingData?.created_on ||
-                    'is currently: ' + formData.created_on
-                  : 'now: ' + formatToTimestamp()}{' '}
-                {/* 2024-10-10 22:15:57.773+00 */}
+                {formData.created_on}
+                {/* {isUpdate
+                  ? updatingData?.created_on || formData.created_on
+                  : formatToTimestamp()} */}
               </span>
               <Input
                 name='created_on'
@@ -329,7 +332,7 @@ const LitigationForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 disabled={isUpdate}
-                value={formatToTimestamp()}
+                value={formData.created_on}
                 className={generalFieldClassName}
                 required={!isUpdate}
               />
