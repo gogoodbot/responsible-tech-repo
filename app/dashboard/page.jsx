@@ -1,23 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-
-function Litigation() {
-  return <div>Litigation Content</div>;
-}
-function Policy() {
-  return <div>Policy Content</div>;
-}
-
-function Organization() {
-  return <div>Organization Content</div>;
-}
-function Resource() {
-  return <div>Resource Content</div>;
-}
-function Stakeholder() {
-  return <div>Stakeholder Content</div>;
-}
+import Litigation from '../artifact/Litigation/page';
+import Policy from '../artifact/page';
+import Organization from '../artifact/Organization/page';
+import Resource from '../artifact/Resource/page';
+import Stakeholder from '../artifact/Stakeholder/page';
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState('Litigation');
