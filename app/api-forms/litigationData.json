@@ -1,0 +1,62 @@
+[
+  {
+    "country": "United States",
+    "status": "Active",
+    "name": "TEST Environmental Protection Case",
+    "start_date": "",
+    "link": "",
+    "summary": "",
+    "jurisdiction": "Federal Court",
+    "mandate": "Environmental"
+  },
+  {
+    "country": "Canada",
+    "status": "Pending",
+    "name": "TEST Consumer Rights Litigation",
+    "start_date": "",
+    "link": "",
+    "summary": "Litigation concerning consumer protection policies.",
+    "jurisdiction": "Provincial Court",
+    "mandate": ""
+  },
+  {
+    "country": "United Kingdom",
+    "status": "Closed",
+    "name": "TEST Data Privacy Violation",
+    "start_date": "2021-10-05",
+    "link": "https://example.com/case2",
+    "summary": "A case involving a major data privacy breach.",
+    "jurisdiction": "High Court",
+    "mandate": "Data Protection"
+  },
+  {
+    "country": "Australia",
+    "status": "Active",
+    "name": "TEST Labor Rights Dispute",
+    "start_date": "",
+    "link": "",
+    "summary": "A dispute over labor rights and fair wages.",
+    "jurisdiction": "",
+    "mandate": ""
+  },
+  {
+    "country": "Germany",
+    "status": "Dismissed",
+    "name": "TEST Intellectual Property Case",
+    "start_date": "2023-05-10",
+    "link": "https://example.com/case3",
+    "summary": "",
+    "jurisdiction": "",
+    "mandate": ""
+  },
+  {
+    "country": "France",
+    "status": "Settled",
+    "name": "TEST Corporate Tax Fraud",
+    "start_date": "2023-05-10",
+    "link": "https://example.com/case3",
+    "summary": "",
+    "jurisdiction": "Federal Court",
+    "mandate": "Intellectual Property"
+  }
+]
