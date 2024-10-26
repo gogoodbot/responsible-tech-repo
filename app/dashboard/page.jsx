@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navbar from '../comps/Navbar';
 
 function Litigation() {
   return <div>Litigation Content</div>;
@@ -40,22 +39,56 @@ function Dashboard() {
     }
   };
 
+  // Function to set the active class on the current section's <li>
+  const getNavItemClass = (section) =>
+    `font-poppins font-bold text-1xl cursor-pointer px-3 py-2 rounded-sm ${
+      activeSection === section
+        ? 'overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50'
+        : ''
+    }`;
+
   return (
-    <section>
-      <div className='container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
+    <section className='container relative mt-8'>
+      <div className='flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
         <nav className='font-poppins font-bold text-1xl'>
           <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none' }}>
-            <li onClick={() => setActiveSection('Litigation')}>Litigation</li>
-            <li onClick={() => setActiveSection('Policy')}>Policy</li>
-            <li onClick={() => setActiveSection('Organization')}>
+            <li
+              className={getNavItemClass('Litigation')}
+              onClick={() => setActiveSection('Litigation')}
+            >
+              Litigation
+            </li>
+            <li
+              className={getNavItemClass('Policy')}
+              onClick={() => setActiveSection('Policy')}
+            >
+              Policy
+            </li>
+            <li
+              className={getNavItemClass('Organization')}
+              onClick={() => setActiveSection('Organization')}
+            >
               Organization
             </li>
-            <li onClick={() => setActiveSection('Resource')}>Resource</li>
-            <li onClick={() => setActiveSection('Stakeholder')}>Stakeholder</li>
+            <li
+              className={getNavItemClass('Resource')}
+              onClick={() => setActiveSection('Resource')}
+            >
+              Resource
+            </li>
+            <li
+              className={getNavItemClass('Stakeholder')}
+              onClick={() => setActiveSection('Stakeholder')}
+            >
+              Stakeholder
+            </li>
           </ul>
         </nav>
       </div>
-      <div>{renderSection()}</div>
+
+      <section className='overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 px-3 py-1.5 rounded-sm'>
+        {renderSection()}
+      </section>
     </section>
     // <section>
     //   <h2>Artifacts</h2>
