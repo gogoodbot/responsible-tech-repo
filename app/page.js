@@ -17,13 +17,15 @@ export const revalidate = 3600; // revalidate at most every hour
 export default async function Home() {
   const tags = await searchTags();
   return (
-    <section className="container relative">
+    <section className="container relative flex flex-col gap-16">
       <Hero />
+      <Search />
+      <hr />
       <section className="overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 ">
         <div className=" flex-col md:flex">
           <div className="border-b">
             <div className="flex h-16 items-center px-4">
-              <Search />
+
             </div>
           </div>
           <div className="flex-1 space-y-4 p-8 pt-6">

@@ -1,50 +1,17 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Search as SearchIcon} from "lucide-react";
+import React from "react";
+import { Search as SearchIcon } from "lucide-react";
+import { SlidersHorizontal as FilterIcon } from 'lucide-react';
 
 
 
 const Search = () => {
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || "");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (searchTerm) {
-      replace(`/results?query=${encodeURIComponent(searchTerm)}`);
-    }
-  };
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex w-full max-w-7xl items-center space-x-2 "
-    >
-      <Input
-        htmlFor="search"
-        type="text"
-        placeholder="Search for companies, policies, and trends..."
-        onChange={(e) => setSearchTerm(e.target.value)}
-        value={searchTerm}
-        className="px-4 border border-gray-300 rounded-md"
-      />
-      <Button
-        variant="ghost"
-        className="outline-none cursor-pointer border-2 border-black rounded-md text-white bg-black px-5 py-3 text-center transition duration-150 ease-in-out hover:bg-goodbot-primary-blue hover:border-goodbot-primary-blue hover:text-whit  dark:bg-white dark:text-black dark:border-white dark:hover:bg-goodbot-primary-blue dark:hover:border-goodbot-primary-blue dark:hover:text-white"
-        type="submit"
-
-
-      >
-        Search 
-        <SearchIcon className="mx-1" />  
-
-      </Button>
-
+    <form className="flex w-full gap-2">
+      <input type="text" placeholder="Search Goodbot ex. Digital Charter Canada" className="w-full border border-[#A1A1A1] rounded-md px-3 py-1.5 text-sm" />
+      <button className="text-base font-bold uppercase flex items-center justify-center gap-2 bg-[#A3E2EC] px-2 py-2.5 rounded-md min-w-[116px]"><SearchIcon size={20} />search</button>
+      <button className="text-base font-bold text-sky-900 uppercase flex items-center justify-center gap-2 px-2 py-2.5 rounded-md border border-sky-900 min-w-[116px]"><FilterIcon size={20} />filter</button>
     </form>
   );
 };
