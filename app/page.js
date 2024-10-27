@@ -1,6 +1,5 @@
 import Image from "next/image";
 import "./globals.css";
-import Navbar from "./comps/Navbar";
 import Hero from "./comps/Hero";
 import Search from "./comps/Search";
 import Results from "./results/page";
