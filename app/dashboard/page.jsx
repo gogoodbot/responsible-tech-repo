@@ -6,9 +6,11 @@ import Policy from '../artifact/page';
 import Organization from '../artifact/Organization/page';
 import Resource from '../artifact/Resource/page';
 import Stakeholder from '../artifact/Stakeholder/page';
+import Modal from '../comps/Modal';
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState('Litigation');
+  const [isModalOpen, setModalOpen] = useState(false); // Modal visibility state
   const sections = [
     'Litigation',
     'Policy',
@@ -66,7 +68,10 @@ function Dashboard() {
     return (
       <section className='overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 px-3 py-1.5 '>
         {renderSection()}
-        <button className='font-poppins font-bold text-1xl cursor-pointer px-3 py-2 my-3 rounded-sm overflow-hidden border bg-goodbot-primary-blue dark:bg-transparent shadow '>
+        <button
+          className='font-poppins font-bold text-1xl cursor-pointer px-3 py-2 my-3 rounded-sm overflow-hidden border bg-goodbot-primary-blue dark:bg-transparent shadow'
+          onClick={() => setModalOpen(true)}
+        >
           Create a new Litigation
         </button>
       </section>
@@ -77,6 +82,12 @@ function Dashboard() {
     <div className='container relative mt-8'>
       <NavSection />
       <ContentSection />
+      <Modal show={isModalOpen} onClose={() => setModalOpen(false)}>
+        <h2>Create a New Litigation</h2>
+        <p>
+          Litigation ID: {/* You can display a unique ID or form fields here */}
+        </p>
+      </Modal>
     </div>
   );
 }
