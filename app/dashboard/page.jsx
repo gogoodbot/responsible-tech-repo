@@ -60,9 +60,12 @@ function Dashboard() {
         </nav>
       </div>
 
-      <section className='overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 px-3 py-1.5 rounded-sm'>
+      <section className='overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 px-3 py-1.5 '>
         {renderSection()}
       </section>
+      <button className='font-poppins font-bold text-1xl cursor-pointer px-3 py-2 my-3 rounded-sm overflow-hidden border bg-goodbot-primary-blue dark:bg-transparent shadow '>
+        Create a new Litigation
+      </button>
     </section>
   );
 }
