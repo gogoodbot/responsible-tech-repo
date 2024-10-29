@@ -9,6 +9,21 @@ import Stakeholder from '../artifact/Stakeholder/page';
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState('Litigation');
+  const sections = [
+    'Litigation',
+    'Policy',
+    'Organization',
+    'Resource',
+    'Stakeholder',
+  ];
+
+  // Function to set the active class on the current section's <li>
+  const getNavItemClass = (section) =>
+    `font-poppins font-bold text-1xl cursor-pointer px-3 py-2 rounded-sm ${
+      activeSection === section
+        ? 'overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50'
+        : ''
+    }`;
 
   const renderSection = () => {
     switch (activeSection) {
@@ -27,49 +42,20 @@ function Dashboard() {
     }
   };
 
-  // Function to set the active class on the current section's <li>
-  const getNavItemClass = (section) =>
-    `font-poppins font-bold text-1xl cursor-pointer px-3 py-2 rounded-sm ${
-      activeSection === section
-        ? 'overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50'
-        : ''
-    }`;
-
   return (
     <section className='container relative mt-8'>
       <div className='flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
         <nav className='font-poppins font-bold text-1xl'>
           <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none' }}>
-            <li
-              className={getNavItemClass('Litigation')}
-              onClick={() => setActiveSection('Litigation')}
-            >
-              Litigation
-            </li>
-            <li
-              className={getNavItemClass('Policy')}
-              onClick={() => setActiveSection('Policy')}
-            >
-              Policy
-            </li>
-            <li
-              className={getNavItemClass('Organization')}
-              onClick={() => setActiveSection('Organization')}
-            >
-              Organization
-            </li>
-            <li
-              className={getNavItemClass('Resource')}
-              onClick={() => setActiveSection('Resource')}
-            >
-              Resource
-            </li>
-            <li
-              className={getNavItemClass('Stakeholder')}
-              onClick={() => setActiveSection('Stakeholder')}
-            >
-              Stakeholder
-            </li>
+            {sections.map((section) => (
+              <li
+                key={section}
+                className={getNavItemClass(section)}
+                onClick={() => setActiveSection(section)}
+              >
+                {section}
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
@@ -78,16 +64,6 @@ function Dashboard() {
         {renderSection()}
       </section>
     </section>
-    // <section>
-    //   <h2>Artifacts</h2>
-    //   <ul>
-    //     <li>Litigation</li>
-    //     <li>Policy</li>
-    //     <li>Organization</li>
-    //     <li>Resource</li>
-    //     <li>Stakeholder</li>
-    //   </ul>
-    // </section>
   );
 }
 
