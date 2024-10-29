@@ -1,62 +1,98 @@
 [
   {
+    "litigation_id": "a3c1c442-bc3a-4b12-bd5e-45a2d423457a",
     "country": "United States",
     "status": "Active",
     "name": "TEST Environmental Protection Case",
+    "created_on": "2023-06-15T10:20:30Z",
+    "created_by": "user123",
+    "modified_by": "user123",
     "start_date": "",
     "link": "",
     "summary": "",
     "jurisdiction": "Federal Court",
-    "mandate": "Environmental"
+    "mandate": "Environmental",
+    "modified_on": "2023-06-20T15:30:45Z",
+    "tage": []
   },
   {
+    "litigation_id": "d2c8d633-4c29-44a6-8f32-e3d9cb5796b9",
     "country": "Canada",
     "status": "Pending",
     "name": "TEST Consumer Rights Litigation",
+    "created_on": "2023-07-01T12:45:00Z",
+    "created_by": "user456",
+    "modified_by": "user456",
     "start_date": "",
     "link": "",
     "summary": "Litigation concerning consumer protection policies.",
     "jurisdiction": "Provincial Court",
-    "mandate": ""
+    "mandate": "",
+    "modified_on": "2023-07-05T08:15:22Z",
+    "tage": [101]
   },
   {
+    "litigation_id": "f7a9f1f4-92d2-4b29-b40e-f6a452238aef",
     "country": "United Kingdom",
     "status": "Closed",
     "name": "TEST Data Privacy Violation",
+    "created_on": "2022-10-20T09:30:00Z",
+    "created_by": "user789",
+    "modified_by": "user789",
     "start_date": "2021-10-05",
     "link": "https://example.com/case2",
     "summary": "A case involving a major data privacy breach.",
     "jurisdiction": "High Court",
-    "mandate": "Data Protection"
+    "mandate": "Data Protection",
+    "modified_on": "2023-01-15T13:25:10Z",
+    "tage": [102, 205]
   },
   {
+    "litigation_id": "bf8d94a3-9f2d-4b9a-b9ef-78e63c12a4de",
     "country": "Australia",
     "status": "Active",
     "name": "TEST Labor Rights Dispute",
+    "created_on": "2023-02-05T17:20:45Z",
+    "created_by": "user321",
+    "modified_by": "user321",
     "start_date": "",
     "link": "",
     "summary": "A dispute over labor rights and fair wages.",
     "jurisdiction": "",
-    "mandate": ""
+    "mandate": "",
+    "modified_on": "2023-02-08T11:10:30Z",
+    "tage": [202]
   },
   {
+    "litigation_id": "c19d4d21-8a2e-4c49-87d4-df2fba12345f",
     "country": "Germany",
     "status": "Dismissed",
     "name": "TEST Intellectual Property Case",
+    "created_on": "2023-04-10T14:35:20Z",
+    "created_by": "user654",
+    "modified_by": "user654",
     "start_date": "2023-05-10",
     "link": "https://example.com/case3",
     "summary": "",
     "jurisdiction": "",
-    "mandate": ""
+    "mandate": "",
+    "modified_on": "2023-05-20T10:05:40Z",
+    "tage": []
   },
   {
+    "litigation_id": "e18d7b8e-6d8e-4f62-92c8-eaf13d456c76",
     "country": "France",
     "status": "Settled",
     "name": "TEST Corporate Tax Fraud",
+    "created_on": "2023-03-12T07:50:15Z",
+    "created_by": "user987",
+    "modified_by": "user987",
     "start_date": "2023-05-10",
-    "link": "https://example.com/case3",
+    "link": "https://example.com/case4",
     "summary": "",
     "jurisdiction": "Federal Court",
-    "mandate": "Intellectual Property"
+    "mandate": "Intellectual Property",
+    "modified_on": "2023-06-02T14:45:55Z",
+    "tage": [303, 404]
   }
 ]
