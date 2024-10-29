@@ -42,9 +42,9 @@ function Dashboard() {
     }
   };
 
-  return (
-    <section className='container relative mt-8'>
-      <div className='flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
+  const NavSection = () => {
+    return (
+      <section className='flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0'>
         <nav className='font-poppins font-bold text-1xl'>
           <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none' }}>
             {sections.map((section) => (
@@ -58,15 +58,26 @@ function Dashboard() {
             ))}
           </ul>
         </nav>
-      </div>
+      </section>
+    );
+  };
 
+  const ContentSection = () => {
+    return (
       <section className='overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 px-3 py-1.5 '>
         {renderSection()}
+        <button className='font-poppins font-bold text-1xl cursor-pointer px-3 py-2 my-3 rounded-sm overflow-hidden border bg-goodbot-primary-blue dark:bg-transparent shadow '>
+          Create a new Litigation
+        </button>
       </section>
-      <button className='font-poppins font-bold text-1xl cursor-pointer px-3 py-2 my-3 rounded-sm overflow-hidden border bg-goodbot-primary-blue dark:bg-transparent shadow '>
-        Create a new Litigation
-      </button>
-    </section>
+    );
+  };
+
+  return (
+    <div className='container relative mt-8'>
+      <NavSection />
+      <ContentSection />
+    </div>
   );
 }
 
