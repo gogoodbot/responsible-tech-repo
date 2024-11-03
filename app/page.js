@@ -11,6 +11,9 @@ import { searchTags } from "@/lib/actions";
 import Link from "next/link";
 import { Separator } from "../components/ui/separator";
 import { Hash } from "lucide-react";
+import Card from "./comps/Card";
+import OrganizationCard from "./comps/OrganizationCard";
+import TopVoiceCard from "./comps/TopVoiceCard";
 
 export const revalidate = 3600; // revalidate at most every hour
 
@@ -21,7 +24,49 @@ export default async function Home() {
       <Hero />
       <Search />
       <hr />
-      <section className="overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 ">
+      <section>
+        <div>
+          Tabs
+        </div>
+        <div className="p-10 bg-zinc-100 rounded-3xl font-poppins flex flex-col gap-10 items-start">
+          <div>Sub Tabs</div>
+          <div className="flex flex-col gap-10 items-start w-full">
+            <h2 className="font-bold text-2xl">Community</h2>
+            <div className="flex flex-col gap-4 items-start w-full">
+              <h3 className="font-bold text-base">Organizations</h3>
+              <div className="w-full grid grid-cols-4 grid-rows-1 gap-4">
+                <OrganizationCard />
+                <OrganizationCard />
+                <OrganizationCard />
+                <OrganizationCard />
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 items-start w-full">
+              <h3 className="font-bold text-base">Top Vocies</h3>
+              <div className="w-full grid grid-cols-4 grid-rows-1 gap-4">
+                <TopVoiceCard />
+                <TopVoiceCard />
+                <TopVoiceCard />
+                <TopVoiceCard />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-10 items-start">
+            <h2 className="font-bold text-2xl">Legislation</h2>
+            <div className="flex justify-between items-center gap-6"><Card /><Card /><Card /></div>
+          </div>
+          <div className="flex flex-col gap-10 items-start">
+            <h2 className="font-bold text-2xl">Legal Processes</h2>
+            <div className="flex justify-between items-center gap-6"><Card /><Card /><Card /></div>
+          </div>
+          <div className="flex flex-col gap-10 items-start">
+            <h2 className="font-bold text-2xl">Resources</h2>
+            <div className="grid grid-cols-3 grid-rows-2 gap-6"><Card /><Card /><Card /><Card /><Card /><Card /></div>
+          </div>
+        </div>
+      </section>
+
+      {/* <section className="overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 ">
         <div className=" flex-col md:flex">
           <div className="border-b">
             <div className="flex h-16 items-center px-4">
@@ -29,7 +74,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="flex-1 space-y-4 p-8 pt-6">
-            {/* tags component */}
+           
             <div className="relative">
               <div className="mb-4 flex items-center">
                 {tags &&
@@ -57,7 +102,7 @@ export default async function Home() {
 
           <div className=""></div>
         </div>
-      </section>
+      </section> */}
     </section>
   );
 }
