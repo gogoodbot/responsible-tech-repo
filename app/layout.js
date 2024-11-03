@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./comps/Header";
 import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "./comps/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
           <div className="relative flex min-h-screen flex-col">
             <Header />
             <div className="flex-1">{children}</div>
+            <Footer></Footer>
           </div>
         </ThemeProvider>
       </body >
