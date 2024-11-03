@@ -14,6 +14,8 @@ import { Hash } from "lucide-react";
 import Card from "./comps/Card";
 import OrganizationCard from "./comps/OrganizationCard";
 import TopVoiceCard from "./comps/TopVoiceCard";
+import CategoryTab from "./comps/CategoryTab";
+import SubCategoryTab from "./comps/SubCategoryTab";
 
 export const revalidate = 3600; // revalidate at most every hour
 
@@ -24,12 +26,23 @@ export default async function Home() {
       <Hero />
       <Search />
       <hr />
-      <section>
-        <div>
-          Tabs
+      <section className="flex flex-col gap-10">
+        <div className="grid grid-cols-6 gap-4">
+          <CategoryTab />
+          <CategoryTab />
+          <CategoryTab />
+          <CategoryTab />
+          <CategoryTab />
+          <CategoryTab />
         </div>
         <div className="p-10 bg-zinc-100 rounded-3xl font-poppins flex flex-col gap-10 items-start">
-          <div>Sub Tabs</div>
+          <div className="flex gap-x-4">
+            <SubCategoryTab label="All" />
+            <SubCategoryTab label="Disinformation & DeepFakes" />
+            <SubCategoryTab label="Manipulation & Polarization" />
+            <SubCategoryTab label="Online Hate & Extremism" />
+            <SubCategoryTab label="Harassment, Bullying & Sexualization" />
+          </div>
           <div className="flex flex-col gap-10 items-start w-full">
             <h2 className="font-bold text-2xl">Community</h2>
             <div className="flex flex-col gap-4 items-start w-full">
