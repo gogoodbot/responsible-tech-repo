@@ -10,7 +10,7 @@ export default function Modal({ show, onClose, children }) {
       onClick={onClose} // Close modal on clicking outside content
     >
       <div
-        className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg relative'
+        className='bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg relative min-w-[70vw] max-h-[80vh] overflow-y-auto w-full max-w-lg'
         onClick={(e) => e.stopPropagation()} // Prevent closing on clicking inside content
       >
         <button
