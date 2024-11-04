@@ -6,7 +6,7 @@ function AddArtifact({ toRender }) {
     <Modal>
       <Modal.Open opens='add-artifact'>
         <Button className='font-poppins font-bold text-1xl cursor-pointer px-3 py-2 my-3 rounded-sm overflow-hidden border bg-goodbot-primary-blue dark:bg-transparent shadow'>
-          Create a new Litigation btn
+          Create a new Litigation
         </Button>
       </Modal.Open>
       <Modal.Window name='add-artifact'>
