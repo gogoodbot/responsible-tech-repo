@@ -14,7 +14,7 @@ export default function Modal({ show, onClose, children }) {
         onClick={(e) => e.stopPropagation()} // Prevent closing on clicking inside content
       >
         <button
-          className='absolute top-2 right-2 text-gray-400 hover:text-gray-600'
+          className='absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-3xl p-3'
           onClick={onClose}
         >
           &times;
