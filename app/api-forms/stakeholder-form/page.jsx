@@ -47,7 +47,7 @@ const StakeholderForm = () => {
 
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
-      <div className='w-full max-w-7xl bg-white p-8 rounded-md shadow-md'>
+      <div className='w-full max-w-7xl bg-white p-8 rounded-md '>
         <h1 className='text-3xl font-bold my-8'>Stakeholder Form</h1>
         <form
           onSubmit={handleSubmit}
