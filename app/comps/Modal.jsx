@@ -1,5 +1,11 @@
 // components/Modal.js
-import React from 'react';
+import { Button } from '@/components/ui/button';
+import React, {
+  cloneElement,
+  createContext,
+  useContext,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 const StyledModal = ({ children, onClose }) => {
@@ -18,26 +24,50 @@ const StyledModal = ({ children, onClose }) => {
   );
 };
 
-const CloseButton = ({ onClose }) => {
-  return (
-    <button
-      className='absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-3xl p-3'
-      onClick={onClose}
-    >
-      &times;
-    </button>
-  );
-};
+const ModalContext = createContext();
 
-export default function Modal({ show, onClose, children }) {
-  if (!show) return null;
+function Modal({ children }) {
+  const [openName, setOpenName] = useState('');
+
+  const close = () => setOpenName('');
+  const open = (name) => setOpenName(name);
+
+  return (
+    <ModalContext.Provider value={{ openName, close, open }}>
+      {children}
+    </ModalContext.Provider>
+  );
+}
+
+function Open({ opens: opensWindowName, children }) {
+  const { open } = useContext(ModalContext);
+
+  //  cloning the children with the open onClick prop
+  return cloneElement(children, {
+    onClick: () => open(opensWindowName),
+  });
+}
+
+function Window({ name, children }) {
+  const { openName, close } = useContext(ModalContext);
+  if (name !== openName) return null;
 
   //  using portal to ensure reusability of the modal and avoiding potential parent overflow hidden elsewhere
   return createPortal(
-    <StyledModal onClose={onClose}>
-      <CloseButton onClose={onClose} />
+    <StyledModal onClose={close}>
+      <Button
+        className='absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl'
+        onClick={close}
+      >
+        &times;
+      </Button>
       {children}
     </StyledModal>,
     document.body
   );
 }
+
+Modal.Open = Open;
+Modal.Window = Window;
+
+export default Modal;
