@@ -1,7 +1,7 @@
 import Modal from '../comps/Modal';
 import { useState } from 'react';
 
-function AddArtifact() {
+function AddArtifact({ toRender }) {
   const [isModalOpen, setModalOpen] = useState(false); // Modal visibility state
 
   return (
@@ -15,10 +15,7 @@ function AddArtifact() {
       {isModalOpen && (
         <Modal show={isModalOpen} onClose={() => setModalOpen(false)}>
           <h2>Create a New Litigation</h2>
-          <p>
-            Litigation ID:{' '}
-            {/* You can display a unique ID or form fields here */}
-          </p>
+          {toRender}
         </Modal>
       )}
     </>

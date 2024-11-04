@@ -7,6 +7,11 @@ import Organization from '../artifact/Organization/page';
 import Resource from '../artifact/Resource/page';
 import Stakeholder from '../artifact/Stakeholder/page';
 import AddArtifact from '../artifact/AddArtifact';
+import LitigationForm from '../api-forms/litigation-form/page';
+import PolicyForm from '../api-forms/policy-form/page';
+import OrganizationFrom from '../api-forms/organization-form/page';
+import ResourceForm from '../api-forms/resource-form/page';
+import StakeholderForm from '../api-forms/stakeholder-form/page';
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState('Litigation');
@@ -42,6 +47,22 @@ function Dashboard() {
         return <Litigation />;
     }
   };
+  const renderForm = () => {
+    switch (activeSection) {
+      case 'Litigation':
+        return <LitigationForm />;
+      case 'Policy':
+        return <PolicyForm />;
+      case 'Organization':
+        return <OrganizationFrom />;
+      case 'Resource':
+        return <ResourceForm />;
+      case 'Stakeholder':
+        return <StakeholderForm />;
+      default:
+        return <LitigationForm />;
+    }
+  };
 
   const NavSection = () => {
     return (
@@ -63,11 +84,11 @@ function Dashboard() {
     );
   };
 
-  const ContentSection = () => {
+  const ContentSection = ({ toRender }) => {
     return (
       <section className='overflow-hidden rounded-lg border bg-background dark:bg-transparent shadow bg-slate-50 px-3 py-1.5 '>
         {renderSection()}
-        <AddArtifact />
+        <AddArtifact toRender={toRender} />
       </section>
     );
   };
@@ -75,7 +96,7 @@ function Dashboard() {
   return (
     <div className='container relative mt-8'>
       <NavSection />
-      <ContentSection />
+      <ContentSection toRender={renderForm()} />
     </div>
   );
 }
