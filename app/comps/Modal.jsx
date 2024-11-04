@@ -1,10 +1,12 @@
 // components/Modal.js
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 export default function Modal({ show, onClose, children }) {
   if (!show) return null;
 
-  return (
+  //  using portal to ensure reusability of the modal and avoiding potential parent overflow hidden elsewhere
+  return createPortal(
     <div
       className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
       onClick={onClose} // Close modal on clicking outside content
@@ -21,6 +23,7 @@ export default function Modal({ show, onClose, children }) {
         </button>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
