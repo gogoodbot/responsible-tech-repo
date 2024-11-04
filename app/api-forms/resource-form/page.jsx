@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Tags, REGEX_PATTERNS } from '../api-data';
 import useForm from '../useForm';
-import { submitToResource } from '../submitHandlers';
+import { submitToResource } from '../submit-handler';
 
 const initialState = {
   name: '',
