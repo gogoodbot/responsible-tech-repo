@@ -35,12 +35,7 @@ function Dashboard() {
   const renderSection = () => {
     switch (activeSection) {
       case 'Litigation':
-        return (
-          <Litigation
-            toRender={renderForm()}
-            toConfirm={<ConfirmDelete resourceName='litigation' />}
-          />
-        );
+        return <Litigation toRender={renderForm()} resourceName='litigation' />;
       case 'Policy':
         return <Policy />;
       case 'Organization':

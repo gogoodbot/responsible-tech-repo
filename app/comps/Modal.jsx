@@ -61,7 +61,9 @@ function Window({ name, children }) {
       >
         &times;
       </Button>
-      {children}
+      {typeof children === 'function' ? children({ close }) : children}
+      {/* {children} */}
+      {/* <div>{cloneElement(children, { onCloseModal: close })}</div> */}
     </StyledModal>,
     document.body
   );

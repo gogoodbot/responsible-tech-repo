@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react';
 import litigationData from '../../api-forms/litigationData.json';
 import Modal from '@/app/comps/Modal';
 import AddArtifact from '../AddArtifact';
+import ConfirmDelete from '@/app/comps/ConfirmDelete';
 
-export default function Litigation({ toRender, toConfirm }) {
+export default function Litigation({ toRender, resourceName }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -91,7 +92,15 @@ export default function Litigation({ toRender, toConfirm }) {
                       Delete
                     </button>
                   </Modal.Open>
-                  <Modal.Window name='delete'>{toConfirm}</Modal.Window>
+                  <Modal.Window name='delete'>
+                    {({ close }) => (
+                      <ConfirmDelete
+                        resourceName={resourceName}
+                        onConfirm={() => console.log('deleted: ')}
+                        onCloseModal={close}
+                      />
+                    )}
+                  </Modal.Window>
                 </Modal>
               </td>
             </tr>
