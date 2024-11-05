@@ -12,6 +12,7 @@ import PolicyForm from '../api-forms/policy-form/page';
 import OrganizationFrom from '../api-forms/organization-form/page';
 import ResourceForm from '../api-forms/resource-form/page';
 import StakeholderForm from '../api-forms/stakeholder-form/page';
+import ConfirmDelete from '../comps/ConfirmDelete';
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState('Litigation');
@@ -34,7 +35,12 @@ function Dashboard() {
   const renderSection = () => {
     switch (activeSection) {
       case 'Litigation':
-        return <Litigation />;
+        return (
+          <Litigation
+            toRender={renderForm()}
+            toConfirm={<ConfirmDelete resourceName='litigation' />}
+          />
+        );
       case 'Policy':
         return <Policy />;
       case 'Organization':

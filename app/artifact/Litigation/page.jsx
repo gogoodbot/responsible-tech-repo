@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import litigationData from '../../api-forms/litigationData.json';
+import Modal from '@/app/comps/Modal';
+import AddArtifact from '../AddArtifact';
 
-export default function Litigation() {
+export default function Litigation({ toRender, toConfirm }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -76,18 +78,21 @@ export default function Litigation() {
               <td className='py-2 px-4 border-b border-gray-200'>
                 {' '}
                 {/* Flex container for buttons */}
-                <button
-                  className='text-blue-500 hover:underline'
-                  onClick={() => handleEdit(item)}
-                >
-                  Edit
-                </button>
-                <button
-                  className='text-red-500 hover:underline'
-                  onClick={() => handleDelete(item)}
-                >
-                  Delete
-                </button>
+                <Modal>
+                  <Modal.Open opens='edit'>
+                    <button className='text-blue-500 hover:underline'>
+                      Edit
+                    </button>
+                  </Modal.Open>
+                  <Modal.Window name='edit'>{toRender}</Modal.Window>
+
+                  <Modal.Open opens='delete'>
+                    <button className='text-blue-500 hover:underline'>
+                      Delete
+                    </button>
+                  </Modal.Open>
+                  <Modal.Window name='delete'>{toConfirm}</Modal.Window>
+                </Modal>
               </td>
             </tr>
           ))}
