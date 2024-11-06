@@ -55,15 +55,15 @@ function Window({ name, children }) {
   //  using portal to ensure reusability of the modal and avoiding potential parent overflow hidden elsewhere
   return createPortal(
     <StyledModal onClose={close}>
-      <Button
-        className='absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl'
-        onClick={close}
-      >
-        &times;
-      </Button>
+      <div className='sticky top-0 flex justify-end bg-white dark:bg-gray-800 z-10'>
+        <Button
+          className=' text-gray-400 hover:text-gray-600 text-xl'
+          onClick={close}
+        >
+          &times;
+        </Button>
+      </div>
       {typeof children === 'function' ? children({ close }) : children}
-      {/* {children} */}
-      {/* <div>{cloneElement(children, { onCloseModal: close })}</div> */}
     </StyledModal>,
     document.body
   );
