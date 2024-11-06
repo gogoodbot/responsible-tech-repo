@@ -1,15 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import litigationData from '../../api-forms/litigationData.json';
+import policyData from '../../api-forms/policyData.json';
 import Table from '@/app/comps/Table';
 
-export default function Litigation({ toRender, resourceName }) {
+export default function Policy({ toRender, resourceName }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     // Simulate fetching data by setting mock data to state
-    setData(litigationData);
+    setData(policyData);
   }, []);
 
   const headers = [
@@ -38,7 +38,7 @@ export default function Litigation({ toRender, resourceName }) {
 
   return (
     <div className='container mx-auto my-4'>
-      <h2 className='text-2xl font-bold mb-4'>Litigation Records</h2>
+      <h2 className='text-2xl font-bold mb-4'>Policy Records</h2>
       <Table
         headers={headers}
         data={data}

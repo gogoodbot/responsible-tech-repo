@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Litigation from '../artifact/Litigation/page';
-import Policy from '../artifact/page';
+import Policy from '../artifact/Policy/page';
 import Organization from '../artifact/Organization/page';
 import Resource from '../artifact/Resource/page';
 import Stakeholder from '../artifact/Stakeholder/page';
@@ -37,7 +37,7 @@ function Dashboard() {
       case 'Litigation':
         return <Litigation toRender={renderForm()} resourceName='litigation' />;
       case 'Policy':
-        return <Policy />;
+        return <Policy toRender={renderForm()} resourceName='policy' />;
       case 'Organization':
         return <Organization />;
       case 'Resource':
