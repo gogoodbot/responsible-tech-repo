@@ -1,4 +1,5 @@
 import React from 'react';
+import { HiPencil, HiTrash } from 'react-icons/hi2';
 import Modal from './Modal';
 import ConfirmDelete from './ConfirmDelete';
 
@@ -25,20 +26,20 @@ const TableRow = ({
         <Modal>
           <Modal.Open opens='edit'>
             <button
-              className='text-blue-500 hover:underline'
+              className='text-gray-500 hover:text-black mr-4'
               onClick={() => handleEdit(item)}
             >
-              Edit
+              <HiPencil />
             </button>
           </Modal.Open>
           <Modal.Window name='edit'>{toRender}</Modal.Window>
 
           <Modal.Open opens='delete'>
             <button
-              className='text-blue-500 hover:underline'
+              className='text-red-500 hover:text-red-700 mr-4'
               onClick={() => handleDelete(item)}
             >
-              Delete
+              <HiTrash />
             </button>
           </Modal.Open>
           <Modal.Window name='delete'>
