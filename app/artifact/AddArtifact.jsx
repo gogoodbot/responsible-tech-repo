@@ -1,18 +1,16 @@
 import { Button } from '@/components/ui/button';
 import Modal from '../comps/Modal';
 
-function AddArtifact({ toRender }) {
+function AddArtifact({ toRender, activeSection }) {
+  console.log('rendering: ', activeSection);
   return (
     <Modal>
       <Modal.Open opens='add-artifact'>
         <Button className='font-poppins font-bold text-1xl cursor-pointer px-3 py-2 my-3 rounded-sm overflow-hidden border bg-goodbot-primary-blue dark:bg-transparent shadow'>
-          Create a new Litigation
+          Add a new {activeSection}
         </Button>
       </Modal.Open>
-      <Modal.Window name='add-artifact'>
-        <h2>Create a New Litigation</h2>
-        {toRender}
-      </Modal.Window>
+      <Modal.Window name='add-artifact'>{toRender}</Modal.Window>
     </Modal>
   );
 }
