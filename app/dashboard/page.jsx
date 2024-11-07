@@ -12,7 +12,6 @@ import PolicyForm from '../api-forms/policy-form/page';
 import OrganizationFrom from '../api-forms/organization-form/page';
 import ResourceForm from '../api-forms/resource-form/page';
 import StakeholderForm from '../api-forms/stakeholder-form/page';
-import ConfirmDelete from '../comps/ConfirmDelete';
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState('Litigation');

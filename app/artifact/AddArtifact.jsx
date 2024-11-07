@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import Modal from '../comps/Modal';
 
 function AddArtifact({ toRender, activeSection }) {
-  console.log('rendering: ', activeSection);
   return (
     <Modal>
       <Modal.Open opens='add-artifact'>
