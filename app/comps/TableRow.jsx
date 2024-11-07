@@ -26,7 +26,7 @@ const TableRow = ({
         <Modal>
           <Modal.Open opens='edit'>
             <button
-              className='text-gray-500 hover:text-black mr-4'
+              className='text-blue-500 hover:text-blue-700 mr-4 text-lg'
               onClick={() => handleEdit(item)}
             >
               <HiPencil />
@@ -36,7 +36,7 @@ const TableRow = ({
 
           <Modal.Open opens='delete'>
             <button
-              className='text-red-500 hover:text-red-700 mr-4'
+              className='text-red-500 hover:text-red-700 mr-4 text-lg'
               onClick={() => handleDelete(item)}
             >
               <HiTrash />
