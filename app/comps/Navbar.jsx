@@ -11,6 +11,9 @@ const Navbar = () => {
         </Link>
       </div>
       <nav className='flex items-center space-x-6 text-sm font-medium'>
+        <Link href='/login' className='ml-6 flex items-center space-x-2'>
+          Login
+        </Link>
         <Link href='/dashboard' className='ml-6 flex items-center space-x-2'>
           Dashboard
         </Link>
