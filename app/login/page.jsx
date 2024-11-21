@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 const Login = () => {
@@ -18,6 +19,8 @@ const Login = () => {
     },
   });
 
+  const router = useRouter();
+
   const onSubmit = (data) => {
     console.log('Login data: ', data);
   };
@@ -25,6 +28,7 @@ const Login = () => {
   const onCancel = () => {
     console.log('Login cancelled');
     formMethods.reset(); // Reset form fields
+    router.back();
   };
 
   return (
