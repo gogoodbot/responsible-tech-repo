@@ -2,11 +2,15 @@ import React from "react";
 import { Scale } from 'lucide-react';
 
 
-const CategoryTab = () => {
+const CategoryTab = ({ data, setSelectedCategory, isSelected, setSelectedSubCategory }) => {
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+        setSelectedSubCategory('All')
+    };
     return (
-        <div className="py-2 px-4 rounded-lg border border-[#979797] flex items-center gap-4 min-h-[88px] cursor-pointer">
+        <div className={(isSelected) ? 'category-btn category-btn--active' : 'category-btn'} onClick={() => { handleCategoryClick(data) }}>
             <Scale size={24} className="shrink-0" />
-            <p className="text-sm">Business Models & Incentive Structures</p>
+            <p className="text-sm">{data.category}</p>
         </div>
     )
 }
