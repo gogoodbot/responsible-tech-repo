@@ -38,7 +38,7 @@ const FilterDropdown = () => {
                     e.preventDefault();
                     toggleDropdown();
                 }}
-                className="shadow text-base font-bold text-sky-900 uppercase flex items-center justify-center gap-2 px-2 py-2.5 rounded-md border border-sky-900 min-w-[116px]"
+                className="shadow text-base font-bold text-sky-900 uppercase flex items-center justify-center gap-2 px-2 py-2.5 rounded-md border border-sky-900 min-w-[116px] hover:bg-zinc-100"
             >
                 <FilterIcon size={20} />
                 Filter
