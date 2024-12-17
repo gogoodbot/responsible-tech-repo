@@ -15,14 +15,20 @@ const getCardsInfo = async (artifact) => {
 
 export default async function Home() {
 
-  const organizations = await getCardsInfo("Organization");
-  const litigations = await getCardsInfo("Litigation");
-  const policies = await getCardsInfo("Policy");
+  const organizations = await getCardsInfo("Organizations");
+  const topVoices = await getCardsInfo("experts")
+  const legalProcesses = await getCardsInfo("Litigation");
+  const legislation = await getCardsInfo("Policy");
   const resources = await getCardsInfo("Resource");
-  const stakeholders = await getCardsInfo("Stakeholder");
 
   return (
-    <HomePageClient organizations={organizations} />
+    <HomePageClient
+      organizations={organizations}
+      topVoices={topVoices}
+      legalProcesses={legalProcesses}
+      legislation={legislation}
+      resources={resources}
+    />
   )
 
 }

@@ -11,7 +11,7 @@ const OrganizationCardList = ({ data }) => {
     const [visibleCount, setVisibleCount] = useState(4);
 
     const handleSeeMore = () => {
-        setVisibleCount((prevCount) => (prevCount === 4 ? 8 : 4));
+        setVisibleCount((prevCount) => (prevCount === 4 ? 12 : 4));
     };
 
     return (

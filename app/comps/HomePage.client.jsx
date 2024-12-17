@@ -59,7 +59,7 @@ const categoryData = [
 
 ]
 
-const HomePageClient = ({ organizations }) => {
+const HomePageClient = ({ organizations, topVoices }) => {
 
     const [selectedCategory, setSelectedCategory] = useState(categoryData[0])
     const [selectedSubCategory, setSelectedSubCategory] = useState("All");
@@ -87,7 +87,7 @@ const HomePageClient = ({ organizations }) => {
                     <div className="flex flex-col gap-10 items-start w-full">
                         <h2 className="font-bold text-2xl">Community</h2>
                         <OrganizationCardList data={organizations} />
-                        <TopVoiceCardList />
+                        <TopVoiceCardList data={topVoices} />
                     </div>
                     <HomeCardList title='Legislation' />
                     <HomeCardList title='Legal Processes' />

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Eye } from 'lucide-react';
 
-const TopVoiceCard = () => {
+const TopVoiceCard = ({ topVoice }) => {
     return (
         <div className="flex flex-col bg-white w-full  rounded-lg border border-[#979797] overflow-hidden">
             <div className="flex items-start justify-between w-full relative bg-[#a3e2ec] p-4">
@@ -12,9 +12,9 @@ const TopVoiceCard = () => {
                 <Link href='/' className="flex items-center gap-2 text-sm text-sky-900 font-medium"><Eye size={20} />Preview</Link>
             </div>
             <div className="p-4">
-                <p className="text-base font-semibold text-[#757575]">Leigh Bardu</p>
-                <p className="text-sm font-medium text-[#b3b3b3]">PhD Researcher in Biology, MIT </p>
-                <p className="text-sm mt-2">Wrote Network effect on disadvantaged populations(2021)</p>
+                <p className="text-base font-semibold text-[#757575]">{topVoice.first_name} {topVoice.last_name}</p>
+                <p className="text-sm font-medium text-[#b3b3b3]">{topVoice.title}</p>
+                <p className="text-sm mt-2">{topVoice.sec_focus}</p>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ const OrganizationCard = ({ organization }) => {
             <div className="flex flex-col gap-2">
                 <p className="text-sm font-bold">{organization.name} </p>
                 <p className="text-sm">{organization.summary}</p>
-                <p className="text-sm text-[#1daeef]">#Social Media, Gaming & Entertainment #techforgood </p>
+                <p className="text-sm text-[#1daeef]"></p>
             </div>
         </div>
     )
