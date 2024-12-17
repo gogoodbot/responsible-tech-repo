@@ -59,7 +59,7 @@ const categoryData = [
 
 ]
 
-const HomePageClient = ({ organizations, topVoices }) => {
+const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses, resources }) => {
 
     const [selectedCategory, setSelectedCategory] = useState(categoryData[0])
     const [selectedSubCategory, setSelectedSubCategory] = useState("All");
@@ -89,9 +89,9 @@ const HomePageClient = ({ organizations, topVoices }) => {
                         <OrganizationCardList data={organizations} />
                         <TopVoiceCardList data={topVoices} />
                     </div>
-                    <HomeCardList title='Legislation' />
-                    <HomeCardList title='Legal Processes' />
-                    <HomeCardList title='Resources' />
+                    <HomeCardList visibleCard={3} data={legislation} title='Legislation' />
+                    <HomeCardList visibleCard={3} data={legalProcesses} title='Legal Processes' />
+                    <HomeCardList visibleCard={6} data={resources} title='Resources' />
                 </div>
             </section>
         </section>
