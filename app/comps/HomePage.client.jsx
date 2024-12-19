@@ -1,13 +1,13 @@
 'use client'
 
 import React from "react";
-import Hero from './Hero';
-import Search from "./Search";
-import CategoryTab from "./CategoryTab";
-import SubCategoryTab from "./SubCategoryTab";
-import OrganizationCardList from "./OrganizationCardList";
-import TopVoiceCardList from "./TopVoiceCardList";
-import HomeCardList from "./HomeCardList";
+import Hero from '../../components/home-page-ui/Hero';
+import Search from "../../components/home-page-ui/Search";
+import CategoryTab from "../../components/home-page-ui/CategoryTab";
+import SubCategoryTab from "../../components/home-page-ui/SubCategoryTab";
+import OrganizationCardList from "../../components/home-page-ui/OrganizationCardList";
+import TopVoiceCardList from "../../components/home-page-ui/TopVoiceCardList";
+import HomeCardList from "../../components/home-page-ui/HomeCardList";
 import { useState } from "react";
 
 const categoryData = [
