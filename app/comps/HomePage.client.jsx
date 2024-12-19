@@ -17,14 +17,16 @@ const categoryData = [
             'Manipulation & Polarization',
             'Online Hate & Extremism',
             'Harassment, Bullying & Sexualization',
-            'Attention, Mental Health & Well Being']
+            'Attention, Mental Health & Well Being'],
+        icon: 'Societal_Impacts_Trust_and_Safety'
     },
     {
-        category: 'Online Crime & Law Enforcment Response',
+        category: 'Online Crime & Law Enforcement Response',
         sub_categories: ["Online Financial Crimes",
             "Online Trafficking & Predators",
             "Cyber Security Attacks & Data Theft",
-            "Online Foreign and Political Interference"]
+            "Online Foreign and Political Interference"],
+        icon: 'Online_Crime_and_Law_Enforcement_Response'
     },
     {
         category: 'Equitable Inclusion, Access & Participation',
@@ -32,7 +34,8 @@ const categoryData = [
             "Unequal Participation in Technology and AI Development",
             "Digital Inclusion & Access",
             "Unequal Investment",
-            "Domestic AI and Innovation Capacity"]
+            "Domestic AI and Innovation Capacity"],
+        icon: 'Equitable_Inclusion_Access_and_Participation'
     },
     {
         category: 'Business Models & Incentive Structures',
@@ -40,21 +43,24 @@ const categoryData = [
             "Asymmetrical Power & Lobbies",
             "Workforce Displacement & Gig Economy",
             "Corporate Surveillance",
-            "Financial Incentive Structures"]
+            "Financial Incentive Structures"],
+        icon: 'Business_Models_and_Incentive_Structures'
     },
     {
         category: 'Public Policy & Enforcement',
         sub_categories: ["Governance Capacity for Rapid Tech Evolution",
             "Elections & Democratic Integrity",
             "Technology-Enabled State Surveillance",
-            "Autonomous & AI-Enabled Weapons"]
+            "Autonomous & AI-Enabled Weapons"],
+        icon: 'Public_Policy_and_Enforcement'
     },
     {
         category: 'Civil Society Capacity',
         sub_categories: ["Independent and Resourced Public Interest Research",
             "Independent Public Interest Media",
             "Public Awareness, Civic Engagement and Action",
-            "Responsible Tech and AI Education and Capacity"]
+            "Responsible Tech and AI Education and Capacity"],
+        icon: 'Civil_Society_Capacity'
     },
 
 ]

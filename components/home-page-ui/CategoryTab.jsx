@@ -1,5 +1,4 @@
 import React from "react";
-import { Scale } from 'lucide-react';
 
 
 const CategoryTab = ({ data, setSelectedCategory, isSelected, setSelectedSubCategory }) => {
@@ -9,7 +8,9 @@ const CategoryTab = ({ data, setSelectedCategory, isSelected, setSelectedSubCate
     };
     return (
         <div className={(isSelected) ? 'category-btn category-btn--active' : 'category-btn'} onClick={() => { handleCategoryClick(data) }}>
-            <Scale size={24} className="shrink-0" />
+            <svg className="w-6 h-6 flex-shrink-0 fill-current">
+                <use className="fill-current" xlinkHref={`/svg/category-tab-icons.svg#${data.icon}`}></use>
+            </svg>
             <p className="text-sm">{data.category}</p>
         </div>
     )
