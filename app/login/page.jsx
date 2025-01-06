@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 const Login = () => {
   const formMethods = useForm({
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
   });
@@ -23,6 +23,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log('Login data: ', data);
+    formMethods.reset(); // Reset form fields
   };
 
   const onCancel = () => {
@@ -46,22 +47,19 @@ const Login = () => {
           >
             {/* Email field: */}
             <FormField
-              name='email'
-              rules={{ required: 'Email is required' }}
+              name='username'
+              rules={{ required: 'Username is required' }}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Username</FormLabel>
                   <FormControl asChild>
                     <input
-                      type='email'
+                      type='text'
                       {...field}
-                      placeholder='Enter your email'
+                      placeholder='Enter your username'
                       className='w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400'
                     />
                   </FormControl>
-                  <FormDescription>
-                    We will never share your email.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
