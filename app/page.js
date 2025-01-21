@@ -15,7 +15,7 @@ const getCardsInfo = async (artifact) => {
 
 export default async function Home() {
 
-  const organizations = await getCardsInfo("Organizations");
+  const organizations = await getCardsInfo("Organization");
   const topVoices = await getCardsInfo("experts")
   const legalProcesses = await getCardsInfo("Litigation");
   const legislation = await getCardsInfo("Policy");
