@@ -22,28 +22,28 @@ const categoryData = [
     },
     {
         category: 'Online Crime & Law Enforcement Response',
-        sub_categories: ["Online Financial Crimes",
-            "Online Trafficking & Predators",
-            "Cyber Security Attacks & Data Theft",
-            "Online Foreign and Political Interference"],
+        sub_categories: ['Online Financial Crimes',
+            'Online Trafficking & Predators',
+            'Cyber Security Attacks & Data Theft',
+            'Online Foreign and Political Interference'],
         icon: 'Online_Crime_and_Law_Enforcement_Response'
     },
     {
         category: 'Equitable Inclusion, Access & Participation',
-        sub_categories: ["Algorithmic & Data Bias",
-            "Unequal Participation in Technology and AI Development",
-            "Digital Inclusion & Access",
-            "Unequal Investment",
-            "Domestic AI and Innovation Capacity"],
+        sub_categories: ['Algorithmic & Data Bias',
+            'Unequal Participation in Technology and AI Development',
+            'Digital Inclusion & Access',
+            'Unequal Investment',
+            'Domestic AI and Innovation Capacity'],
         icon: 'Equitable_Inclusion_Access_and_Participation'
     },
     {
         category: 'Business Models & Incentive Structures',
-        sub_categories: ["Data Collection, Control & Monetization",
-            "Asymmetrical Power & Lobbies",
-            "Workforce Displacement & Gig Economy",
-            "Corporate Surveillance",
-            "Financial Incentive Structures"],
+        sub_categories: ['Data Collection, Control & Monetization',
+            'Asymmetrical Power & Lobbies',
+            'Workforce Displacement & Gig Economy',
+            'Corporate Surveillance',
+            'Financial Incentive Structures'],
         icon: 'Business_Models_and_Incentive_Structures'
     },
     {
@@ -56,10 +56,10 @@ const categoryData = [
     },
     {
         category: 'Civil Society Capacity',
-        sub_categories: ["Independent and Resourced Public Interest Research",
-            "Independent Public Interest Media",
-            "Public Awareness, Civic Engagement and Action",
-            "Responsible Tech and AI Education and Capacity"],
+        sub_categories: ['Independent and Resourced Public Interest Research',
+            'Independent Public Interest Media',
+            'Public Awareness, Civic Engagement and Action',
+            'Responsible Tech and AI Education and Capacity'],
         icon: 'Civil_Society_Capacity'
     },
 
