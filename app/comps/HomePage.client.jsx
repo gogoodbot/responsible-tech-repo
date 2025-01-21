@@ -67,8 +67,10 @@ const categoryData = [
 
 const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses, resources }) => {
 
+    const ALL_SUBCATEGORIES = 'All';
+
     const [selectedCategory, setSelectedCategory] = useState(categoryData[0])
-    const [selectedSubCategory, setSelectedSubCategory] = useState("All");
+    const [selectedSubCategory, setSelectedSubCategory] = useState(ALL_SUBCATEGORIES);
 
     return (
         <section className="container relative flex flex-col gap-16">
@@ -85,7 +87,7 @@ const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses,
                 </div>
                 <div className="p-10 bg-[#ecfcff] rounded-3xl font-poppins flex flex-col gap-10 items-start">
                     <div className="flex gap-x-4">
-                        <SubCategoryTab label="All" setSelectedSubCategory={setSelectedSubCategory} isSelected={selectedSubCategory === "All"} />
+                        <SubCategoryTab label="All" setSelectedSubCategory={setSelectedSubCategory} isSelected={selectedSubCategory === ALL_SUBCATEGORIES} />
                         {selectedCategory.sub_categories.map((subCategory) => (
                             <SubCategoryTab key={subCategory} label={subCategory} setSelectedSubCategory={setSelectedSubCategory} isSelected={selectedSubCategory === subCategory} />
                         ))}
