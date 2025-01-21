@@ -6,8 +6,7 @@ export const revalidate = 3600; // revalidate at most every hour
 
 const getCardsInfo = async (artifact) => {
   try {
-    const cards = await cardsHome(artifact);
-    return cards;
+    return await cardsHome(artifact);
   } catch (error) {
     console.log(error);
   }

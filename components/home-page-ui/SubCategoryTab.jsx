@@ -7,7 +7,7 @@ const SubCategoryTab = ({ label, setSelectedSubCategory, isSelected }) => {
     };
 
     return (
-        <p className={(isSelected) ? "subcategory-btn subcategory-btn--active" : "subcategory-btn"} onClick={() => handleSubCategoryClick(label)}>{label}</p>
+        <p className={`subcategory-btn ${isSelected ? 'subcategory-btn--active' : ''}`} onClick={() => handleSubCategoryClick(label)}>{label}</p>
     )
 }
 
