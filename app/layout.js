@@ -25,7 +25,6 @@ export default function RootLayout({ children }) {
           enableSystem={true}
           disableTransitionOnChange
         >
-          {/* @todo - refactor this into  SiteHeader component*/}
           <div className="relative flex min-h-screen flex-col">
             <Header />
             <div className="flex-1">{children}</div>
