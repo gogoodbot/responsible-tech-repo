@@ -10,17 +10,17 @@ const filterData = [
     {
         title: "Discipline",
         type: "checkbox",
-        options: ['business', 'comp science', 'engineering', 'government', 'law']
+        options: ['Business', 'Computer Science', 'Engineering', 'Government', 'Law']
     },
     {
         title: "SUBJECT TERMS",
         type: "checkbox",
-        options: ['artificial intelligence', 'privacy', 'data integrity', 'bills', 'personal information']
+        options: ['Artificial Intelligence', 'Privacy', 'Data Integrity', 'Bills', 'Personal Information']
     },
     {
         title: "PUBLICATION DATE",
         type: "radio",
-        options: ['1 year', '3 year', '5 year', '10 year', 'Custom']
+        options: ['1 year', '3 years', '5 years', '10 years', 'Custom']
     },
 ]
 
