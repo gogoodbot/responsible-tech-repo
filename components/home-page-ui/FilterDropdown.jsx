@@ -8,7 +8,7 @@ const filterData = [
         options: ['Magazine Article', 'Web Resource', 'Conference Proceeding', 'Journal Article', 'Newspaper Article']
     },
     {
-        title: "Discipline",
+        title: "DISCIPLINE",
         type: "checkbox",
         options: ['Business', 'Computer Science', 'Engineering', 'Government', 'Law']
     },
