@@ -1,10 +1,10 @@
 import React from "react";
 
 
-const CategoryTab = ({ data, setSelectedCategory, isSelected, setSelectedSubCategory }) => {
+const CategoryTab = ({ data, setSelectedCategory, isSelected, setSelectedSubCategory, allSubcategories }) => {
     const handleCategoryClick = (category) => {
         setSelectedCategory(category);
-        setSelectedSubCategory('All')
+        setSelectedSubCategory(allSubcategories)
     };
     return (
         <div className={(isSelected) ? 'category-btn category-btn--active' : 'category-btn'} onClick={() => { handleCategoryClick(data) }}>

@@ -80,7 +80,7 @@ const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses,
             <section className="flex flex-col gap-10">
                 <div className="grid grid-cols-6 gap-4">
                     {categoryData.map((category) => (
-                        <CategoryTab data={category} key={category.category} isSelected={category === selectedCategory} setSelectedCategory={setSelectedCategory} setSelectedSubCategory={setSelectedSubCategory}
+                        <CategoryTab data={category} key={category.category} isSelected={category === selectedCategory} setSelectedCategory={setSelectedCategory} setSelectedSubCategory={setSelectedSubCategory} allSubcategories={ALL_SUBCATEGORIES}
                         />
                     ))}
 
