@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Footer = () => {
     return (
-        <footer className="mt-28 bg-[#242424] py-[100px] font-poppins">
+        <footer className="mt-28 bg-goodbot-primary-starryNightBlack py-[100px] font-poppins">
             <div className="container flex flex-col justify-center items-center border-b border-white border-opacity-20">
                 <p className="text-sm text-white uppercase tracking-[2.8px] text-opacity-60 mb-4">Join us in advancing responsible tech everywhere.</p>
                 <p className="text-[50px] text-white font-bold">Request More Information</p>

@@ -12,7 +12,7 @@ const Header = () => {
           alt="goodbot logo"
         ></Image>
       </Link>
-      <h1 className="text-base font-bold font-poppins text-center text-[#242424]">Responsible Tech Repo</h1>
+      <h1 className="text-base font-bold font-poppins text-center text-goodbot-primary-starryNightBlack">Responsible Tech Repo</h1>
       <Link href="/login" className="text-base font-bold text-center text-sky-900 font-poppins uppercase">
         login
       </Link>
