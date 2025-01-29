@@ -17,9 +17,10 @@ const Card = ({ cardData }) => {
                 <p className="text-sm font-medium text-[#64748B]">{formattedDate}</p>
                 <p className="text-base text-[#020817] line-clamp-5">{cardData.summary}</p>
             </div>
-            {/* <div className="flex items-center p-4 gap-4 flex-wrap">
+            {/* @todo - The "hidden" class will be removed once the API to fetch the tags list is created */}
+            <div className="flex items-center p-4 gap-4 flex-wrap hidden">
                 <p className="bg-[#a3e2ec] text-base px-4 py-2 inline-block rounded-lg min-w-[106px]">Tag Name</p>
-            </div> */}
+            </div>
         </div>
     )
 }
