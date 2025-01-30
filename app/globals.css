@@ -40,6 +40,9 @@
 		--medium-gray: #979797;
 
 		--hashtag-blue: #0aa0f5;
+
+		--button-primary: #a3e2ec;
+		--button-primary-hover: #95dbe6;
 	}
 
 	.dark {

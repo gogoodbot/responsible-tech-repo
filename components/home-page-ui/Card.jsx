@@ -19,7 +19,7 @@ const Card = ({ cardData }) => {
             </div>
             {/* @todo - The "hidden" class will be removed once the API to fetch the tags list is created */}
             <div className="flex items-center p-4 gap-4 flex-wrap hidden">
-                <p className="bg-[#a3e2ec] text-base px-4 py-2 inline-block rounded-lg min-w-[106px]">Tag Name</p>
+                <p className="bg-[var(--button-primary)] text-base px-4 py-2 inline-block rounded-lg min-w-[106px]">Tag Name</p>
             </div>
         </div>
     )
