@@ -35,6 +35,9 @@
 		--ring: 222.2 84% 4.9%;
 
 		--radius: 0.5rem;
+
+		--light-gray: #d9d9d9;
+		--medium-gray: #979797;
 	}
 
 	.dark {
@@ -76,7 +79,7 @@
 		@apply bg-background text-foreground;
 	}
 	.category-btn {
-		@apply py-2 px-4 rounded-lg border border-[#979797] flex items-center gap-4 min-h-[88px] cursor-pointer transition ease-in-out duration-150;
+		@apply py-2 px-4 rounded-lg border border-[var(--medium-gray)] flex items-center gap-4 min-h-[88px] cursor-pointer transition ease-in-out duration-150;
 	}
 	.category-btn:hover {
 		@apply bg-[#fafafa] border-2 border-sky-900 text-sky-900;
