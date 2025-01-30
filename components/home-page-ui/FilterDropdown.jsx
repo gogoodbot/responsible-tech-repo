@@ -1,28 +1,47 @@
 import React, { useState } from "react";
 import { SlidersHorizontal as FilterIcon, ChevronsUp } from 'lucide-react';
 
-const filterData = [
+
+const checkboxOptions = [
     {
         title: "CONTENT TYPE",
-        type: "checkbox",
         options: ['Magazine Article', 'Web Resource', 'Conference Proceeding', 'Journal Article', 'Newspaper Article']
     },
     {
         title: "DISCIPLINE",
-        type: "checkbox",
         options: ['Business', 'Computer Science', 'Engineering', 'Government', 'Law']
     },
     {
         title: "SUBJECT TERMS",
-        type: "checkbox",
         options: ['Artificial Intelligence', 'Privacy', 'Data Integrity', 'Bills', 'Personal Information']
     },
+]
+
+const radioOptions = [
     {
         title: "PUBLICATION DATE",
-        type: "radio",
         options: ['1 year', '3 years', '5 years', '10 years', 'Custom']
     },
 ]
+
+
+const Checkbox = ({ option }) => {
+    return (
+        <label className="flex gap-4 items-center mt-2">
+            <input type="checkbox" className="accent-black" />
+            {option}
+        </label>
+    )
+}
+
+const Radio = ({ option }) => {
+    return (
+        <label className="flex gap-4 items-center mt-2">
+            <input type="radio" name="date" className="accent-black" />
+            {option}
+        </label>
+    )
+}
 
 const FilterDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -46,21 +65,19 @@ const FilterDropdown = () => {
 
             {isOpen && (
                 <div className="flex items-start absolute right-0 mt-2  bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-10">
-                    {filterData.map((filterCategory, index) => (
+                    {checkboxOptions.map((checkboxOption, index) => (
                         <div key={index} className="w-[227px]">
-                            <h3 className="font-semibold">{filterCategory.title}</h3>
-                            {filterCategory.options.map((option, i) => (
-                                filterCategory.type === 'checkbox' ? (
-                                    <label key={i} className="flex gap-4 items-center mt-2">
-                                        <input type="checkbox" className="accent-black" />
-                                        {option}
-                                    </label>
-                                ) : (
-                                    <label key={i} className="flex gap-4 items-center mt-2">
-                                        <input type="radio" name="date" className="accent-black" />
-                                        {option}
-                                    </label>
-                                )
+                            <h3 className="font-semibold">{checkboxOption.title}</h3>
+                            {checkboxOption.options.map((option, i) => (
+                                <Checkbox key={i} option={option} />
+                            ))}
+                        </div>
+                    ))}
+                    {radioOptions.map((radioOption, index) => (
+                        <div key={index} className="w-[227px]">
+                            <h3 className="font-semibold">{radioOption.title}</h3>
+                            {radioOption.options.map((option, i) => (
+                                <Radio key={i} option={option} />
                             ))}
                         </div>
                     ))}
