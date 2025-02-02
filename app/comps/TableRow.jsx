@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiPencil, HiTrash } from 'react-icons/hi2';
 import Modal from './Modal';
-// import ConfirmDelete from './ConfirmDelete';
+import ConfirmDelete from './ConfirmDelete';
 
 const TableRow = ({
   item,
@@ -44,12 +44,11 @@ const TableRow = ({
           </Modal.Open>
           <Modal.Window name='delete'>
             {({ close }) => (
-              <p> confirm delete?</p>
-              // <ConfirmDelete
-              //   resourceName={resourceName}
-              //   onConfirm={() => console.log('deleted: ')}
-              //   onCloseModal={close}
-              // />
+              <ConfirmDelete
+                resourceName={resourceName}
+                onConfirm={() => console.log('deleted: ')}
+                onCloseModal={close}
+              />
             )}
           </Modal.Window>
         </Modal>
