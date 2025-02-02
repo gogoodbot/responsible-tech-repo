@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-// import litigationData from '../../api-forms/litigationData.json';
+import litigationData from '../api-forms/litigationData.json';
 import Table from '@/app/comps/Table';
 
 export default function Litigation({ toRender, resourceName }) {
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   // Simulate fetching data by setting mock data to state
-  //   setData(litigationData);
-  // }, []);
+  useEffect(() => {
+    // Simulate fetching data by setting mock data to state
+    setData(litigationData);
+  }, []);
 
   const headers = [
     'Country',
