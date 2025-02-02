@@ -10,6 +10,16 @@ import {
 } from '@/components/ui/form';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+
+// Create an Axios instance with the base URL
+const api = axios.create({
+  baseURL: 'https://goodbot-api.vercel.app',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Access-Control-Allow-Origin': '*', // Try adding this, although it's better handled server-side
+  },
+});
 
 const Login = () => {
   const formMethods = useForm({
@@ -21,9 +31,27 @@ const Login = () => {
 
   const router = useRouter();
 
-  const onSubmit = (data) => {
-    console.log('Login data: ', data);
-    formMethods.reset(); // Reset form fields
+  // const onSubmit = (data) => {
+  //   console.log('Login data: ', data);
+  //   formMethods.reset(); // Reset form fields
+  // };
+
+  const onSubmit = async (data) => {
+    try {
+      const params = new URLSearchParams();
+      params.append('username', data.username);
+      params.append('password', data.password);
+
+      // const response = await api.post('/v1/login', params);
+      const response = await api.post('/api/v1/login', params); // Use the relative path
+
+      const { access_token } = response.data;
+
+      console.log('Login successful: ', access_token);
+      // router.push('/dashboard');
+    } catch (error) {
+      console.error('Login failed: ', error.response?.data || error.message);
+    }
   };
 
   const onCancel = () => {
@@ -52,7 +80,7 @@ const Login = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Username</FormLabel>
-                  <FormControl asChild>
+                  <FormControl>
                     <input
                       type='text'
                       {...field}
@@ -72,7 +100,7 @@ const Login = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
-                  <FormControl asChild>
+                  <FormControl>
                     <input
                       type='password'
                       {...field}
