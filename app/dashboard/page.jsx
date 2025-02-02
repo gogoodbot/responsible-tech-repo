@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import Litigation from '../litigation/page';
-
-// import Policy from '../artifact/Policy/page';
+import Policy from '../policy/page';
 // import Organization from '../artifact/Organization/page';
 // import Resource from '../artifact/Resource/page';
 // import Stakeholder from '../artifact/Stakeholder/page';
@@ -52,8 +51,8 @@ function Dashboard() {
     switch (activeSection) {
       case 'Litigation':
         return <Litigation resourceName='litigation' />;
-      // case 'Policy':
-      //   return <Policy resourceName='policy' />;
+      case 'Policy':
+        return <Policy resourceName='policy' />;
       // case 'Organization':
       //   return <Organization />;
       // case 'Resource':
