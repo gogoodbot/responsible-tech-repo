@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import policyData from '../../api-forms/policyData.json';
+import policyData from '../api-forms/policyData.json';
 import Table from '@/app/comps/Table';
 
 export default function Policy({ toRender, resourceName }) {
