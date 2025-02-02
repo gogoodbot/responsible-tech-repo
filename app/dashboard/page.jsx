@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import Litigation from '../litigation/page';
 import Policy from '../policy/page';
 import Organization from '../organization/page';
-// import Resource from '../artifact/Resource/page';
-// import Stakeholder from '../artifact/Stakeholder/page';
+import Resource from '../resource/page';
+import Stakeholder from '../stakeholder/page';
 // import AddArtifact from '../artifact/AddArtifact';
 // import LitigationForm from '../api-forms/litigation-form/page';
 // import PolicyForm from '../api-forms/policy-form/page';
@@ -55,10 +55,10 @@ function Dashboard() {
         return <Policy resourceName='policy' />;
       case 'Organization':
         return <Organization />;
-      // case 'Resource':
-      //   return <Resource />;
-      // case 'Stakeholder':
-      //   return <Stakeholder />;
+      case 'Resource':
+        return <Resource />;
+      case 'Stakeholder':
+        return <Stakeholder />;
       default:
         return <Litigation />;
     }
