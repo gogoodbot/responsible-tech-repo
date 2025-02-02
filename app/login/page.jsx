@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 const Login = () => {
   const formMethods = useForm({
@@ -98,6 +99,8 @@ const Login = () => {
               >
                 Login
               </button>
+              {/* temp btn to navigate to dashboard page: */}
+              <Link href='/dashboard'>Dashboard</Link>
             </div>
           </form>
         </Form>
