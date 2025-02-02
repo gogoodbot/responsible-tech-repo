@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Litigation from '../litigation/page';
 import Policy from '../policy/page';
-// import Organization from '../artifact/Organization/page';
+import Organization from '../organization/page';
 // import Resource from '../artifact/Resource/page';
 // import Stakeholder from '../artifact/Stakeholder/page';
 // import AddArtifact from '../artifact/AddArtifact';
@@ -53,8 +53,8 @@ function Dashboard() {
         return <Litigation resourceName='litigation' />;
       case 'Policy':
         return <Policy resourceName='policy' />;
-      // case 'Organization':
-      //   return <Organization />;
+      case 'Organization':
+        return <Organization />;
       // case 'Resource':
       //   return <Resource />;
       // case 'Stakeholder':
