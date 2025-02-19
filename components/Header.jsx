@@ -13,7 +13,8 @@ const Header = () => {
         ></Image>
       </Link>
       <h1 className="text-base font-bold font-poppins text-center text-goodbot-primary-starryNightBlack">Responsible Tech Repo</h1>
-      <Link href="/login" className="text-base font-bold text-center text-sky-900 font-poppins uppercase">
+      <Link href="/login" className="text-base font-bold text-center text-sky-900 font-poppins uppercase invisible">
+        {/* @todo: When the login page is created, remove the 'invisible' class */}
         login
       </Link>
     </header>
