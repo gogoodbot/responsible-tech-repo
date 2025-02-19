@@ -13,8 +13,8 @@ const HomeCardList = ({ title, data, visibleCard }) => {
         <div className="flex flex-col gap-10 items-start">
             <h2 className="font-bold text-2xl">{title}</h2>
             <div className="grid grid-cols-3 gap-6">
-                {data.slice(0, visibleCount).map(card => (
-                    <Card key={card.id} cardData={card} />
+                {data.slice(0, visibleCount).map((card, index) => (
+                    <Card key={index} cardData={card} />
                 ))}
             </div>
             {visibleCount === visibleCard ? (<SeeMoreButton onClick={handleSeeMore} />) : <SeeLessButton onClick={handleSeeMore} />}
