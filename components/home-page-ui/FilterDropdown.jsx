@@ -64,27 +64,33 @@ const FilterDropdown = () => {
             </button>
 
             {isOpen && (
-                <div className="flex items-start absolute right-0 mt-2  bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-10">
-                    {checkboxOptions.map((checkboxOption, index) => (
-                        <div key={index} className="w-[227px]">
-                            <h3 className="font-semibold">{checkboxOption.title}</h3>
-                            {checkboxOption.options.map((option, i) => (
-                                <Checkbox key={i} option={option} />
-                            ))}
-                        </div>
-                    ))}
-                    {radioOptions.map((radioOption, index) => (
-                        <div key={index} className="w-[227px]">
-                            <h3 className="font-semibold">{radioOption.title}</h3>
-                            {radioOption.options.map((option, i) => (
-                                <Radio key={i} option={option} />
-                            ))}
-                        </div>
-                    ))}
+                <div className="flex gap-y-4 flex-col absolute right-0 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-10">
+                    <div className="flex items-start mt-2">
+                        {checkboxOptions.map((checkboxOption, index) => (
+                            <div key={index} className="w-[227px]">
+                                <h3 className="font-semibold">{checkboxOption.title}</h3>
+                                {checkboxOption.options.map((option, i) => (
+                                    <Checkbox key={i} option={option} />
+                                ))}
+                            </div>
+                        ))}
+                        {radioOptions.map((radioOption, index) => (
+                            <div key={index} className="w-[227px]">
+                                <h3 className="font-semibold">{radioOption.title}</h3>
+                                {radioOption.options.map((option, i) => (
+                                    <Radio key={i} option={option} />
+                                ))}
+                            </div>
+                        ))}
 
 
-                    <ChevronsUp size={20} onClick={toggleDropdown} className="cursor-pointer" />
+                        <ChevronsUp size={20} onClick={toggleDropdown} className="cursor-pointer" />
 
+                    </div>
+                    <div className="flex justify-end gap-x-4">
+                        <button className="font-bold text-base text-sky-900 cursor-pointer uppercase px-3 py-2.5">Clear All</button>
+                        <button className="shadow text-base font-bold uppercase flex items-center justify-center gap-2 bg-[var(--button-primary)] px-2 py-2.5 rounded-md min-w-[116px] hover:bg-[var(--button-primary-hover)]">Apply</button>
+                    </div>
                 </div>
             )}
         </div>

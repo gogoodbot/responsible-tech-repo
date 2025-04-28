@@ -44,6 +44,11 @@
 
 		--button-primary: #a3e2ec;
 		--button-primary-hover: #95dbe6;
+
+		/* New variables for colors */
+		--primary-dark: #501b94;
+		--primary-light: rgba(80, 27, 148, 0.7);
+		--primary-background: #f0ecff;
 	}
 }
 
@@ -58,18 +63,18 @@
 		@apply py-2 px-4 rounded-lg border border-[var(--medium-gray)] flex items-center gap-4 min-h-[88px] cursor-pointer transition ease-in-out duration-150;
 	}
 	.category-btn:hover {
-		@apply bg-[#fafafa] border-2 border-sky-900 text-sky-900;
+		@apply bg-[#fafafa] border-2 border-[--primary-dark] text-[--primary-dark];
 	}
 	.category-btn--active {
-		@apply bg-[#ecfcff] border-2 border-sky-900 text-sky-900 font-bold;
+		@apply bg-[--primary-background] border-2 border-[--primary-dark] text-[--primary-dark] font-bold;
 	}
 	.subcategory-btn {
-		@apply text-base px-4 pb-1.5 border-b-2 border-[#79b5d7] text-base text-center cursor-pointer;
+		@apply text-base px-4 pb-1.5 border-b-2 border-[--primary-light] text-base text-center cursor-pointer;
 	}
 	.subcategory-btn:hover {
-		@apply text-sky-900 cursor-pointer;
+		@apply text-[--primary-dark] cursor-pointer;
 	}
 	.subcategory-btn--active {
-		@apply font-bold text-sky-900 border-sky-900;
+		@apply font-bold text-[--primary-dark] border-[--primary-dark];
 	}
 }

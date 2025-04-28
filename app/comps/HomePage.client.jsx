@@ -85,7 +85,7 @@ const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses,
                     ))}
 
                 </div>
-                <div className="p-10 bg-[#ecfcff] rounded-3xl font-poppins flex flex-col gap-10 items-start">
+                <div className="p-10 bg-[var(--primary-background)] rounded-3xl font-poppins flex flex-col gap-10 items-start">
                     <div className="flex gap-x-4">
                         <SubCategoryTab label="All" setSelectedSubCategory={setSelectedSubCategory} isSelected={selectedSubCategory === ALL_SUBCATEGORIES} />
                         {selectedCategory.sub_categories.map((subCategory) => (
