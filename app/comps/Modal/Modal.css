@@ -1,0 +1,186 @@
+/* Modal */
+.modal-container{
+    box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: flex-start;
+padding: 32px 0px;
+gap: 24px;
+isolation: isolate;
+
+position: relative;
+width: 682px;
+height: 695px;
+/* left: 21597px;
+top: 1790px; */
+
+background: #FFFFFF;
+border: 1px solid #E2E8F0;
+box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+border-radius: 16px;
+
+}
+
+.close-button{
+    /* Select */
+
+position: absolute;
+width: 20px;
+height: 20px;
+left: 638px;
+top: 24px;
+
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+z-index: 4;
+
+}
+
+
+.modal-head{
+    /* Frame 1089 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px 32px;
+gap: 16px;
+
+width: 436px;
+height: 66px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+}
+
+.head-title{
+font-family: Poppins;
+font-weight: 700;
+font-style: Bold;
+font-size: 24px;
+leading-trim: NONE;
+line-height: 24px;
+letter-spacing: 0.5px;
+vertical-align: middle;
+}
+
+.head-logo{
+width: 66;
+height: 66;
+opacity: 1;
+}
+.head-type{
+    /* Frame 1075 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 10px;
+
+width: 98px;
+height: 36px;
+
+/* Sky Blue */
+background: #A3E2EC;
+border-radius: 8px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+.head-typedesc{
+  font-family: Poppins;
+font-weight: 400;
+font-style: Regular;
+font-size: 14px;
+leading-trim: NONE;
+line-height: 20px;
+letter-spacing: 0.1px;
+vertical-align: middle;
+
+
+}
+
+.about{
+    /* Frame 1091 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px 32px;
+gap: 16px;
+
+width: 682px;
+height: 213px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+z-index: 2;
+
+}
+.about-title{
+    /* Heading 3 → Canada's Digital Charter */
+
+width: 618px;
+height: 24px;
+
+/* Subheader */
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+display: flex;
+align-items: center;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+
+color: #020817;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.about-desc{
+width: 682;
+height: 213;
+padding-right: 32px;
+padding-left: 32px;
+gap: 16px;
+angle: 0 deg;
+opacity: 1;
+
+}
+
+
+
+
+
