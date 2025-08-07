@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Circle } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+
 import Modal from '../comps/Modal/Modal';
 
 const ResultCard = ({ data }) => {
@@ -47,7 +47,6 @@ const ResultCard = ({ data }) => {
     return "text-sky-400 fill-sky-400"; // Default color
   };
   const circleColor = getCircleColor();
-  const [isOpen,setIsOpen]=useState(false);
 
 
   return (
@@ -56,8 +55,6 @@ const ResultCard = ({ data }) => {
         <CardHeader>
           <CardTitle className>{data.name}</CardTitle>
           <CardDescription>{formattedDate}</CardDescription>
-          <button onClick={() => setIsOpen(true)}>Modal</button>
-          <Modal  isOpen={isOpen} onClose={()=>setIsOpen(prev=>!prev)} data={data}/>
         </CardHeader>
         <CardContent>
           <p>{data.summary}</p>
