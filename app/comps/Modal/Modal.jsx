@@ -171,7 +171,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           </div>
         </div>
 
-        <div className="px-8 flex flex-col gap-4">
+        {(data.publication ||data.recommendation) &&<div className="px-8 flex flex-col gap-4">
           <h3 className="text-base font-bold uppercase tracking-wide text-slate-900">
             {isTopVoice ? "Recommendation" : "Publication"}
           </h3>
@@ -186,7 +186,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
               November 27, 2023
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );
