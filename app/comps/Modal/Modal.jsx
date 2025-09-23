@@ -25,10 +25,13 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
         instagram: data.instagram,
         youtube: data.youtube,
       };
+  const splitName = ModalData?.name?.trim().split(/\s+/); // split on one or more spaces
+  const initials = splitName?.map((c) => c[0]);
+  const logoIntials = initials?.join('');
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
-      <div className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px] h-[695px] p-8 flex flex-col gap-6 relative">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px] h-[600px] p-8 flex flex-col gap-6 relative overflow-x-auto">
         <div className="absolute right-6 top-6 z-10">
           <button
             className="w-5 h-5 bg-white text-black border-none text-sm font-medium flex items-center justify-center transform rotate-90 cursor-pointer"
@@ -42,9 +45,10 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           {ModalData?.logo && (
             <img src="image.png" alt="Logo" className="w-16 h-16" />
           )}
+          {isTopVoice && !ModalData.logo && <div className="font-bold bg-gray-300 rounded-full p-4"><p className="font-large font-bold">{logoIntials}</p></div>}
           <div className="flex flex-col">
             {ModalData?.name && (
-              <div className="text-xl font-bold tracking-wide text-slate-900 whitespace-nowrap">
+              <div className="text-xl font-bold tracking-wide text-slate-900 ">
                 {ModalData.name}
               </div>
             )}
@@ -63,8 +67,13 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           <h3 className="text-base font-bold uppercase tracking-wide text-slate-900">
             About
           </h3>
-          <p className="text-base text-slate-900">{ModalData.about}</p>
-          <p className="text-base italic text-slate-900"> {ModalData.email}</p>
+          <p className="text-base text-black">
+            {ModalData.about ?? "Not yet available..."}
+          </p>
+          <p className="text-base italic text-slate-900 font-semibold">
+            {" "}
+            {ModalData.email}
+          </p>
 
           <div className="relative w-full h-12 flex items-center gap-10">
             {/* LinkedIn */}
@@ -148,15 +157,16 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="w-full h-full rounded-full border-2 border-black bg-white opacity-25 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full border-2 border-gray-300 bg-white  flex items-center justify-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
                       height="18"
-                      fill="#000000"
+                      fill="black"
                       viewBox="0 0 24 24"
                     >
                       <path
+                        fill="black"
                         d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10
             10-4.477 10-10S17.523 2 12 2zm-1 17.93C7.062 19.436 4 16.07 4
             12c0-.692.098-1.36.276-2H11v7.93zM11 10H5.082A8.001 8.001 0 0 1
@@ -171,22 +181,24 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           </div>
         </div>
 
-        {(data.publication ||data.recommendation) &&<div className="px-8 flex flex-col gap-4">
-          <h3 className="text-base font-bold uppercase tracking-wide text-slate-900">
-            {isTopVoice ? "Recommendation" : "Publication"}
-          </h3>
-          <div className="flex flex-col gap-1 w-full">
-            <a
-              href="https://example.com"
-              className="text-base underline text-slate-900"
-            >
-              Title of Publication: Sample Topic
-            </a>
-            <div className="text-sm font-medium text-slate-500">
-              November 27, 2023
+        {(data.publication || data.recommendation) && (
+          <div className="px-8 flex flex-col gap-4">
+            <h3 className="text-base font-bold uppercase tracking-wide text-slate-900">
+              {isTopVoice ? "Recommendation" : "Publication"}
+            </h3>
+            <div className="flex flex-col gap-1 w-full">
+              <a
+                href="https://example.com"
+                className="text-base underline text-slate-900"
+              >
+                Title of Publication: Sample Topic
+              </a>
+              <div className="text-sm font-medium text-slate-500">
+                November 27, 2023
+              </div>
             </div>
           </div>
-        </div>}
+        )}
       </div>
     </div>
   );
