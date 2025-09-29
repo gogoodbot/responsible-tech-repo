@@ -10,10 +10,11 @@ import OrganizationCardList from "../../components/home-page-ui/OrganizationCard
 import TopVoiceCardList from "../../components/home-page-ui/TopVoiceCardList";
 import { useState } from "react";
 import HomePageSkeletonLoading from "./HomePageSkeletonLoading.client";
+import DataMissingCard from "@/components/home-page-ui/DataMissingCard";
 
 
 
-const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses, resources }) => {
+const HomePageClient = () => {
 
     const API_URL = process.env.NEXT_PUBLIC_GOODBOT_API_URL
     const [homePageData, setHomePageData] = useState({})
@@ -60,7 +61,7 @@ const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses,
         homePageData && Object.keys(homePageData).length === 0 ? (
             <HomePageSkeletonLoading />
         ) : (
-            <section className="container relative flex flex-col gap-16">
+            <section className="container relative flex flex-col gap-10">
                 <Hero />
                 <Search />
                 <hr />
@@ -77,18 +78,18 @@ const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses,
                             <SubCategoryTab key={subCategory.id} label={subCategory.name} onClick={() => handleSubCategoryChange(index)} isSelected={currentSubCategory?.id === subCategory.id} />
                         ))}
                     </div>
-                    <div className="p-10 bg-[#ecfcff] rounded-3xl font-poppins flex flex-col gap-10 items-start">
 
-                        <div className="flex flex-col gap-10 items-start w-full">
+                    {!nonProfitsData && !topVoicesData ? (<DataMissingCard title="Community Resources" />) : (
+                        <div className="flex flex-col gap-10 items-start w-full py-10 px-8 bg-[#ecfcff] rounded-3xl font-poppins">
                             <h2 className="font-bold text-2xl text-[#0C4A6E] tracking-wide">Community Resources</h2>
                             <OrganizationCardList data={nonProfitsData} />
                             <TopVoiceCardList data={topVoicesData} />
                         </div>
-                        {/* <HomeCardList visibleCard={3} data={legislation} title='Legislation' />
-                    <HomeCardList visibleCard={3} data={legalProcesses} title='Legal Processes' />
-                    <HomeCardList visibleCard={6} data={resources} title='Resources' /> */}
-                    </div>
+                    )}
                 </section>
+                <DataMissingCard title="Legislation, Past and Present" />
+                <DataMissingCard title="Legal Processes" />
+                <DataMissingCard title="Resources" />
             </section>
         )
     )
