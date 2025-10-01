@@ -1,7 +1,7 @@
 import React from "react";
 
 const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
-  console.log(data);
+  //console.log(data);
 
   const ModalData = isTopVoice
     ? {
@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
       }
     : {
         name: data.name,
-        about: data.about_page,
+        about: data.summary,
         email: data.email,
         linkedin: data.linkedin,
         website: data.website,
@@ -34,7 +34,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
       <div className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px] h-[600px] p-8 flex flex-col gap-6 relative overflow-x-auto">
         <div className="absolute right-6 top-6 z-10">
           <button
-            className="w-5 h-5 bg-white text-black border-none text-sm font-medium flex items-center justify-center transform rotate-90 cursor-pointer"
+            className="w-6 h-7 bg-white text-black border-none text-lg font-bold flex items-center justify-center transform rotate-90 cursor-pointer"
             onClick={onClose}
           >
             x
@@ -56,7 +56,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
                 {ModalData.name}
               </div>
             )}
-            <div className="font-poppins font-bold text-base leading-6 flex items-center tracking-[0.5px] uppercase text-[#020817] order-1 flex-none grow-0 whitespace-wrap">
+            <div className="font-poppins font-medium text-base leading-6 flex items-center tracking-[0.5px]  text-[#020817] order-1 flex-none grow-0 whitespace-wrap">
               {ModalData.title}
             </div>
           </div>
@@ -72,7 +72,8 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
             About
           </h3>
           <p className="text-base text-black">
-            {ModalData.about ?? "Not yet available..."}
+            {ModalData?.about?.trim() ? ModalData.about : "Not yet available."}
+
           </p>
           <p className="text-base italic text-slate-900 font-semibold">
             {" "}
