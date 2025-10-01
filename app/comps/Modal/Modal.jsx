@@ -5,6 +5,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
 
   const ModalData = isTopVoice
     ? {
+       logo:data.image_url,
         name: data.first_name + " " + data.last_name,
         title: data.title,
         about: data.about,
@@ -16,6 +17,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
         youtube: data.youtube,
       }
     : {
+      logo:data.image_url,
         name: data.name,
         about: data.summary,
         email: data.email,
@@ -31,7 +33,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
-      <div className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px] h-[600px] p-8 flex flex-col gap-6 relative overflow-x-auto">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px]  p-8 flex flex-col gap-6 relative overflow-x-auto">
         <div className="absolute right-6 top-6 z-10">
           <button
             className="w-6 h-7 bg-white text-black border-none text-lg font-bold flex items-center justify-center transform rotate-90 cursor-pointer"
