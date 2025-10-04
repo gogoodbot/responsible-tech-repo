@@ -26,6 +26,21 @@ module.exports = {
         openSans: ["Open Sans"],
       },
       colors: {
+        'goodbot-primary': {
+          DEFAULT: '#0C4A6E',
+          light: '#0284C7',
+          dark: '#075985',
+        },
+        'goodbot-background': {
+          DEFAULT: '#ECFCFF',
+          light: '#FFFFFF',
+        },
+        'goodbot-text': {
+          DEFAULT: '#242424',
+          secondary: '#6B7280',
+          disabled: '#94A3B8',
+        },
+
         goodbot: {
           primary: {
             lightgrey: "rgb(241 241 242 / 40%)",
