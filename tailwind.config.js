@@ -48,6 +48,16 @@ module.exports = {
           medium: "#979797",
           dark: "#757575",
         },
+        'goodbot-button': {
+          primary: {
+            DEFAULT: '#A3E2EC',
+            hover: '#95dbe6',
+          },
+          secondary: {
+            DEFAULT: '#FFFFFF',
+            hover: '#f4f4f5',
+          },
+        },
 
         goodbot: {
           primary: {
