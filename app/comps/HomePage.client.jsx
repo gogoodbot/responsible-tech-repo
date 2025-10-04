@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Hero from '../../components/home-page-ui/Hero';
 import Search from "../../components/home-page-ui/Search";
@@ -8,7 +8,6 @@ import CategoryTab from "../../components/home-page-ui/CategoryTab";
 import SubCategoryTab from "../../components/home-page-ui/SubCategoryTab";
 import OrganizationCardList from "../../components/home-page-ui/OrganizationCardList";
 import TopVoiceCardList from "../../components/home-page-ui/TopVoiceCardList";
-import { useState } from "react";
 import HomePageSkeletonLoading from "./HomePageSkeletonLoading.client";
 import DataMissingCard from "@/components/home-page-ui/DataMissingCard";
 
@@ -79,9 +78,9 @@ const HomePageClient = () => {
                         ))}
                     </div>
 
-                    {!nonProfitsData && !topVoicesData ? (<DataMissingCard title="Community Resources" />) : (
-                        <div className="flex flex-col gap-10 items-start w-full py-10 px-8 bg-[#ecfcff] rounded-3xl font-poppins">
-                            <h2 className="font-bold text-2xl text-[#0C4A6E] tracking-wide">Community Resources</h2>
+                    {!nonProfitsData.length && !topVoicesData.length ? (<DataMissingCard title="Community Resources" />) : (
+                        <div className="flex flex-col gap-10 items-start w-full py-10 px-8 bg-goodbot-background rounded-3xl font-poppins">
+                            <h2 className="font-bold text-2xl text-goodbot-primary tracking-wide">Community Resources</h2>
                             <OrganizationCardList data={nonProfitsData} />
                             <TopVoiceCardList data={topVoicesData} />
                         </div>
