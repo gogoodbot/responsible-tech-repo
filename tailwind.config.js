@@ -38,9 +38,9 @@ module.exports = {
         },
         'goodbot-text': {
           DEFAULT: '#242424',
-          secondary: '#6B7280',
+          secondary: '#757575',
           dark: '#000000',
-          disabled: '#94A3B8',
+          disabled: '#B3B3B3',
         },
         'goodbot-gray': {
           light: "#F5F5F5",

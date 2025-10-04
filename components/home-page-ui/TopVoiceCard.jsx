@@ -2,25 +2,22 @@ import React from "react";
 
 const TopVoiceCard = ({ topVoice }) => {
 
-    const getInitials = (first, last) => {
-        const firstInitial = first?.charAt(0).toUpperCase() || "";
-        const lastInitial = last?.charAt(0).toUpperCase() || "";
-        return firstInitial + lastInitial;
-    };
+    const getInitials = (first = "", last = "") =>
+        `${first.charAt(0).toUpperCase() || ""}${last.charAt(0).toUpperCase() || ""}`;
 
     return (
-        <div className="flex flex-col bg-white w-full  rounded-lg border border-[var(--medium-gray)] overflow-hidden">
-            <div className="flex items-start justify-between w-full relative bg-[var(--button-primary)] p-4">
+        <div className="flex flex-col bg-goodbot-background-light w-full  rounded-lg border border-goodbot-gray-medium overflow-hidden">
+            <div className="flex items-start justify-between w-full relative bg-goodbot-button-primary p-4">
                 <div className="flex gap-3 items-start justify-start">
-                    <div className="w-10 h-10 rounded-full bg-[#2c2c2c] border border-[#fff] flex justify-center items-center text-[#f5f5f5] shadow-md">
+                    <div className="w-10 h-10 rounded-full bg-goodbot-background-starryNightBlack border border-white flex justify-center items-center text-goodbot-gray-light shadow-md" aria-label={`${topVoice.first_name} ${topVoice.last_name}'s initials`}>
                         {getInitials(topVoice.first_name, topVoice.last_name)}
                     </div>
                 </div>
             </div>
             <div className="p-4">
-                <p className="text-base font-semibold text-[var(--dark-gray)]">{topVoice.first_name} {topVoice.last_name}</p>
-                <p className="text-sm font-medium text-gray-400">{topVoice.title}</p>
-                <p className="text-sm mt-2 line-clamp-3">{topVoice.about}</p>
+                <p className="text-base font-semibold text-goodbot-text-secondary">{topVoice.first_name} {topVoice.last_name}</p>
+                <p className="text-sm font-medium text-goodbot-text-disabled">{topVoice.title}</p>
+                <p className="text-sm mt-2 line-clamp-3 text-goodbot-text-dark">{topVoice.about}</p>
             </div>
         </div>
     )
