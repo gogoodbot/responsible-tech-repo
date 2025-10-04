@@ -78,7 +78,7 @@ const HomePageClient = () => {
                         ))}
                     </div>
 
-                    {!nonProfitsData.length && !topVoicesData.length ? (<DataMissingCard title="Community Resources" />) : (
+                    {!nonProfitsData && !topVoicesData ? (<DataMissingCard title="Community Resources" />) : (
                         <div className="flex flex-col gap-10 items-start w-full py-10 px-8 bg-goodbot-background rounded-3xl font-poppins">
                             <h2 className="font-bold text-2xl text-goodbot-primary tracking-wide">Community Resources</h2>
                             <OrganizationCardList data={nonProfitsData} />
