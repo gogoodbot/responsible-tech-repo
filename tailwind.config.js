@@ -34,6 +34,7 @@ module.exports = {
         'goodbot-background': {
           DEFAULT: '#ECFCFF',
           light: '#FFFFFF',
+          starryNightBlack: '#242424'
         },
         'goodbot-text': {
           DEFAULT: '#242424',

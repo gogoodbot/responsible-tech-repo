@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const Footer = () => {
     return (
-        <footer className="mt-28 bg-goodbot-primary-starryNightBlack py-[100px] font-poppins">
+        <footer className="mt-28 bg-goodbot-background-starryNightBlack py-[100px] font-poppins">
             <div className="container flex flex-col justify-center items-center border-b border-white border-opacity-20">
                 <p className="text-sm text-white uppercase tracking-[2.8px] text-opacity-60 mb-4">Join us in advancing responsible tech everywhere.</p>
                 <p className="text-[50px] text-white font-bold">Request More Information</p>
                 <p className="max-w-[430px] text-lg text-opacity-80 text-white text-center mb-[45px]">GoodBot is a catalyst for research and practice in innovative technology governance</p>
-                <Link className="min-w-[224px] py-[18px] bg-sky-900 text-base text-white rounded-[30px] mb-[50px] flex justify-center items-center hover:bg-sky-800 transition-colors duration-300" href="mailto:hello@goodbot.ca">Contact Us</Link>
+                <Link className="min-w-[224px] py-[18px] bg-goodbot-primary text-base text-white rounded-[30px] mb-[50px] flex justify-center items-center hover:bg-goodbot-primary-light transition-colors duration-200" href="mailto:hello@goodbot.ca">Contact Us</Link>
                 <p className="text-sm text-white text-opacity-80 mb-[48px]">© GoodBot Responsible Repo</p>
             </div>
             <div className="container flex items-center w-full justify-between mt-[48px]">
