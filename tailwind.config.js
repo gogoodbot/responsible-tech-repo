@@ -27,34 +27,34 @@ module.exports = {
       },
       colors: {
         'goodbot-primary': {
-          DEFAULT: '#0C4A6E',
-          light: '#0284C7',
+          DEFAULT: '#0c4a6e',
+          light: '#0284c7',
           dark: '#075985',
         },
         'goodbot-background': {
-          DEFAULT: '#ECFCFF',
-          light: '#FFFFFF',
+          DEFAULT: '#ecfcff',
+          light: '#ffffff',
           starryNightBlack: '#242424'
         },
         'goodbot-text': {
           DEFAULT: '#242424',
           secondary: '#757575',
           dark: '#000000',
-          disabled: '#B3B3B3',
+          disabled: '#b3b3b3',
         },
         'goodbot-gray': {
-          light: "#F5F5F5",
-          DEFAULT: "#D9D9D9",
+          light: "#f5f5f5",
+          DEFAULT: "#d9d9d9",
           medium: "#979797",
           dark: "#757575",
         },
         'goodbot-button': {
           primary: {
-            DEFAULT: '#A3E2EC',
+            DEFAULT: '#a3e2ec',
             hover: '#95dbe6',
           },
           secondary: {
-            DEFAULT: '#FFFFFF',
+            DEFAULT: '#ffffff',
             hover: '#f4f4f5',
           },
         },
