@@ -53,7 +53,6 @@ const HomePageClient = () => {
         setNonProfitsData(selected.nonprofits)
         setTopVoicesData(selected.experts)
     }
-    console.log(process.env.NEXT_PUBLIC_GOODBOT_API_URL)
 
 
     return (
