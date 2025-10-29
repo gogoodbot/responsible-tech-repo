@@ -11,7 +11,7 @@ import {
 import { Circle } from "lucide-react";
 import Link from "next/link";
 
-import Modal from '../comps/Modal/Modal';
+import Modal from "../comps/Modal/Modal";
 
 const ResultCard = ({ data }) => {
   const date = new Date(data.modified_on);
@@ -48,27 +48,24 @@ const ResultCard = ({ data }) => {
   };
   const circleColor = getCircleColor();
 
-
   return (
-    // <Link href={`/artifact/${id}`}>
-      <Card>
-        <CardHeader>
-          <CardTitle className>{data.name}</CardTitle>
-          <CardDescription>{formattedDate}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>{data.summary}</p>
-        </CardContent>
-        <CardFooter>
-          <div className="flex space-x-4 text-sm text-muted-foreground">
-            <div className="flex items-center">
-              <Circle className={`mr-1 h-3 w-3 ${circleColor}`} />
-              {data.tableName}
-            </div>
+    <Card>
+      <CardHeader>
+        <CardTitle className>{data.name}</CardTitle>
+        <CardDescription>{formattedDate}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>{data.summary}</p>
+      </CardContent>
+      <CardFooter>
+        <div className="flex space-x-4 text-sm text-muted-foreground">
+          <div className="flex items-center">
+            <Circle className={`mr-1 h-3 w-3 ${circleColor}`} />
+            {data.tableName}
           </div>
-        </CardFooter>
-      </Card>
-    // </Link>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 

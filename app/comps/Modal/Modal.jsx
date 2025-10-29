@@ -1,11 +1,9 @@
 import React from "react";
 
 const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
-  //console.log(data);
-
   const ModalData = isTopVoice
     ? {
-       logo:data.image_url,
+        logo: data.image_url,
         name: data.first_name + " " + data.last_name,
         title: data.title,
         about: data.about,
@@ -17,7 +15,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
         youtube: data.youtube,
       }
     : {
-      logo:data.image_url,
+        logo: data.image_url,
         name: data.name,
         about: data.summary,
         email: data.email,
@@ -75,7 +73,6 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           </h3>
           <p className="text-base text-black">
             {ModalData?.about?.trim() ? ModalData.about : "Not yet available."}
-
           </p>
           <p className="text-base italic text-slate-900 font-semibold">
             {" "}
