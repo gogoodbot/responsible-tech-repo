@@ -1,13 +1,10 @@
 import React from "react";
 
 
-const SubCategoryTab = ({ label, setSelectedSubCategory, isSelected }) => {
-    const handleSubCategoryClick = (subCategory) => {
-        setSelectedSubCategory(subCategory);
-    };
+const SubCategoryTab = ({ label, onClick, isSelected }) => {
 
     return (
-        <p className={`subcategory-btn ${isSelected ? 'subcategory-btn--active' : ''}`} onClick={() => handleSubCategoryClick(label)}>{label}</p>
+        <button className={`${isSelected ? 'subcategory-btn subcategory-btn--active' : 'subcategory-btn'}`} onClick={onClick}>{label}</button>
     )
 }
 

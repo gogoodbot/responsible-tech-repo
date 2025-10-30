@@ -1,35 +1,36 @@
 "use client";
-import React from "react";
-import Link from "next/link";
-import { Eye } from "lucide-react";
-import { useState } from "react";
+import { React, useState } from "react";
+import Image from "next/image";
 import Modal from "@/app/comps/Modal/Modal";
 
 const OrganizationCard = ({ organization }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="flex flex-col gap-2 bg-white w-full p-4 rounded-lg border border-[var(--medium-gray)]">
-      <div className="flex items-start justify-between w-full">
-        <div className="text-sm px-9 py-3 bg-[var(--light-gray)]">Logo</div>
-        <button
-          className="flex items-center gap-2 text-sm text-sky-900 font-medium"
-          onClick={() => setIsOpen(true)}
-        >
-          <Eye size={20} />
-          Preview
-        </button>
+    <div
+      className="flex flex-col gap-2 bg-goodbot-background-light w-full p-4 rounded-lg border border-goodbot-gray-medium"
+      onClick={() => setIsOpen(true)}
+    >
+      <div className="flex items-start justify-between  w-full ">
+        <Image
+          src={organization.image_url}
+          alt={`${organization.name}'s logo`}
+          height={500}
+          width={500}
+          className="h-10 w-fit"
+        />
+      </div>
+      <div className="flex flex-col gap-2 text-goodbot-text-dark">
+        <p className="text-sm font-bold">{organization.name} </p>
+        <p className="text-sm line-clamp-3">{organization.about}</p>
+      </div>
+      {isOpen && (
         <Modal
           isOpen={isOpen}
-          onClose={() => setIsOpen((prev) => !prev)}
+          onClose={() => setIsOpen(false)}
           data={organization}
           isTopVoice={false}
         />
-      </div>
-      <div className="flex flex-col gap-2">
-        <p className="text-sm font-bold">{organization.name} </p>
-        <p className="text-sm">{organization.summary}</p>
-        <p className="text-sm text-[var(--hashtag-blue)]"></p>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
   const ModalData = isTopVoice
     ? {
@@ -30,8 +30,14 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
   const logoIntials = initials?.join("");
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
-      <div className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px]  p-8 flex flex-col gap-6 relative overflow-x-auto">
+    <div
+      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px]  p-8 flex flex-col gap-6 relative overflow-x-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="absolute right-6 top-6 z-10">
           <button
             className="w-6 h-7 bg-white text-black border-none text-lg font-bold flex items-center justify-center transform rotate-90 cursor-pointer"
@@ -43,7 +49,13 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
 
         <div className="flex items-center gap-4 px-8">
           {ModalData?.logo && (
-            <img src="image.png" alt="Logo" className="w-16 h-16" />
+            <Image
+              src={ModalData.logo}
+              alt={`${ModalData.name}'s logo`}
+              height={500}
+              width={500}
+              className="h-10 w-fit"
+            />
           )}
           {isTopVoice && !ModalData.logo && (
             <div className="font-bold bg-gray-300 rounded-full p-4">

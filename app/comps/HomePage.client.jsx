@@ -1,108 +1,95 @@
 'use client'
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Hero from '../../components/home-page-ui/Hero';
 import Search from "../../components/home-page-ui/Search";
 import CategoryTab from "../../components/home-page-ui/CategoryTab";
 import SubCategoryTab from "../../components/home-page-ui/SubCategoryTab";
 import OrganizationCardList from "../../components/home-page-ui/OrganizationCardList";
 import TopVoiceCardList from "../../components/home-page-ui/TopVoiceCardList";
-import HomeCardList from "../../components/home-page-ui/HomeCardList";
-import { useState } from "react";
+import HomePageSkeletonLoading from "./HomePageSkeletonLoading.client";
+import DataMissingCard from "@/components/home-page-ui/DataMissingCard";
 
-const categoryData = [
-    {
-        category: 'Societal Impacts, Trust & Safety',
-        sub_categories: ['Disinformation & DeepFakes',
-            'Manipulation & Polarization',
-            'Online Hate & Extremism',
-            'Harassment, Bullying & Sexualization',
-            'Attention, Mental Health & Well Being'],
-        icon: 'Societal_Impacts_Trust_and_Safety'
-    },
-    {
-        category: 'Online Crime & Law Enforcement Response',
-        sub_categories: ['Online Financial Crimes',
-            'Online Trafficking & Predators',
-            'Cyber Security Attacks & Data Theft',
-            'Online Foreign and Political Interference'],
-        icon: 'Online_Crime_and_Law_Enforcement_Response'
-    },
-    {
-        category: 'Equitable Inclusion, Access & Participation',
-        sub_categories: ['Algorithmic & Data Bias',
-            'Unequal Participation in Technology and AI Development',
-            'Digital Inclusion & Access',
-            'Unequal Investment',
-            'Domestic AI and Innovation Capacity'],
-        icon: 'Equitable_Inclusion_Access_and_Participation'
-    },
-    {
-        category: 'Business Models & Incentive Structures',
-        sub_categories: ['Data Collection, Control & Monetization',
-            'Asymmetrical Power & Lobbies',
-            'Workforce Displacement & Gig Economy',
-            'Corporate Surveillance',
-            'Financial Incentive Structures'],
-        icon: 'Business_Models_and_Incentive_Structures'
-    },
-    {
-        category: 'Public Policy & Enforcement',
-        sub_categories: ["Governance Capacity for Rapid Tech Evolution",
-            "Elections & Democratic Integrity",
-            "Technology-Enabled State Surveillance",
-            "Autonomous & AI-Enabled Weapons"],
-        icon: 'Public_Policy_and_Enforcement'
-    },
-    {
-        category: 'Civil Society Capacity',
-        sub_categories: ['Independent and Resourced Public Interest Research',
-            'Independent Public Interest Media',
-            'Public Awareness, Civic Engagement and Action',
-            'Responsible Tech and AI Education and Capacity'],
-        icon: 'Civil_Society_Capacity'
-    },
 
-]
 
-const HomePageClient = ({ organizations, topVoices, legislation, legalProcesses, resources }) => {
+const HomePageClient = () => {
 
-    const ALL_SUBCATEGORIES = 'All';
+    const API_URL = process.env.NEXT_PUBLIC_GOODBOT_API_URL
+    const [homePageData, setHomePageData] = useState({})
+    const [categoryTabs, setCategoryTabs] = useState([])
+    const [currentTab, setCurrentTab] = useState([])
+    const [subCategoryTabs, setSubCategoryTabs] = useState([])
+    const [currentSubCategory, setCurrentSubCategory] = useState([])
+    const [nonProfitsData, setNonProfitsData] = useState([])
+    const [topVoicesData, setTopVoicesData] = useState([])
 
-    const [selectedCategory, setSelectedCategory] = useState(categoryData[0])
-    const [selectedSubCategory, setSelectedSubCategory] = useState(ALL_SUBCATEGORIES);
+    useEffect(() => {
+        if (API_URL) {
+            axios.get(`${API_URL}/v1/home`).then(response => {
+                setHomePageData(response.data)
+                setCategoryTabs(response.data.subfactors)
+                setCurrentTab(response.data.subfactors[0])
+                setSubCategoryTabs(response.data.subfactors[0].harms_and_risks)
+                setCurrentSubCategory(response.data.subfactors[0].harms_and_risks[0])
+                setNonProfitsData(response.data.subfactors[0].harms_and_risks[0].nonprofits)
+                setTopVoicesData(response.data.subfactors[0].harms_and_risks[0].experts)
+            })
+        }
+    }, [API_URL])
+
+    const handleCategoryChange = (index) => {
+        const selected = categoryTabs[index];
+        setCurrentTab(selected);
+        setSubCategoryTabs(selected?.harms_and_risks || []);
+        setCurrentSubCategory(selected.harms_and_risks[0])
+        setNonProfitsData(selected.harms_and_risks[0].nonprofits)
+        setTopVoicesData(selected.harms_and_risks[0].experts)
+    };
+
+    const handleSubCategoryChange = (index) => {
+        const selected = subCategoryTabs[index]
+        setCurrentSubCategory(selected)
+        setNonProfitsData(selected.nonprofits)
+        setTopVoicesData(selected.experts)
+    }
+
 
     return (
-        <section className="container relative flex flex-col gap-16">
-            <Hero />
-            <Search />
-            <hr />
-            <section className="flex flex-col gap-10">
-                <div className="grid grid-cols-6 gap-4">
-                    {categoryData.map((category) => (
-                        <CategoryTab data={category} key={category.category} isSelected={category === selectedCategory} setSelectedCategory={setSelectedCategory} setSelectedSubCategory={setSelectedSubCategory} allSubcategories={ALL_SUBCATEGORIES}
-                        />
-                    ))}
-
-                </div>
-                <div className="p-10 bg-[#ecfcff] rounded-3xl font-poppins flex flex-col gap-10 items-start">
-                    <div className="flex gap-x-4">
-                        <SubCategoryTab label="All" setSelectedSubCategory={setSelectedSubCategory} isSelected={selectedSubCategory === ALL_SUBCATEGORIES} />
-                        {selectedCategory.sub_categories.map((subCategory) => (
-                            <SubCategoryTab key={subCategory} label={subCategory} setSelectedSubCategory={setSelectedSubCategory} isSelected={selectedSubCategory === subCategory} />
+        homePageData && Object.keys(homePageData).length === 0 ? (
+            <HomePageSkeletonLoading />
+        ) : (
+            <section className="container relative flex flex-col gap-10">
+                <Hero />
+                <Search />
+                <hr />
+                <section className="flex flex-col gap-10">
+                    <div className="grid grid-cols-6 gap-4">
+                        {categoryTabs && (
+                            categoryTabs.map((category, index) => (
+                                <CategoryTab data={category} key={category.id} onClick={() => handleCategoryChange(index)} isSelected={currentTab?.id === category.id} />
+                            ))
+                        )}
+                    </div>
+                    <div className="flex gap-x-4 overflow-auto subcategory-tab-container">
+                        {subCategoryTabs.map((subCategory, index) => (
+                            <SubCategoryTab key={subCategory.id} label={subCategory.name} onClick={() => handleSubCategoryChange(index)} isSelected={currentSubCategory?.id === subCategory.id} />
                         ))}
                     </div>
-                    <div className="flex flex-col gap-10 items-start w-full">
-                        <h2 className="font-bold text-2xl">Community</h2>
-                        <OrganizationCardList data={organizations} />
-                        <TopVoiceCardList data={topVoices} />
-                    </div>
-                    <HomeCardList visibleCard={3} data={legislation} title='Legislation' />
-                    <HomeCardList visibleCard={3} data={legalProcesses} title='Legal Processes' />
-                    <HomeCardList visibleCard={6} data={resources} title='Resources' />
-                </div>
+
+                    {!nonProfitsData && !topVoicesData ? (<DataMissingCard title="Community Resources" />) : (
+                        <div className="flex flex-col gap-10 items-start w-full py-10 px-8 bg-goodbot-background rounded-3xl font-poppins">
+                            <h2 className="font-bold text-2xl text-goodbot-primary tracking-wide">Community Resources</h2>
+                            <OrganizationCardList data={nonProfitsData} />
+                            <TopVoiceCardList data={topVoicesData} />
+                        </div>
+                    )}
+                </section>
+                <DataMissingCard title="Legislation, Past and Present" />
+                <DataMissingCard title="Legal Processes" />
+                <DataMissingCard title="Resources" />
             </section>
-        </section>
+        )
     )
 }
 
