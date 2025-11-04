@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import Image from "next/image";
 const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
   const ModalData = isTopVoice
@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
     : {
         logo: data.image_url,
         name: data.name,
-        about: data.summary,
+        about: data.about,
         email: data.email,
         linkedin: data.linkedin,
         website: data.website,
@@ -25,17 +25,29 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
         instagram: data.instagram,
         youtube: data.youtube,
       };
-  const splitName = ModalData?.name?.trim().split(/\s+/); // split on one or more spaces
+  const splitName = ModalData?.name?.trim().split(/\s+/);
   const initials = splitName?.map((c) => c[0]);
   const logoIntials = initials?.join("");
+  useEffect(() => {
+    const handleEsc = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
+
+  const handleBackdropClick = (e) => {
+    e.stopPropagation();
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
   if (!isOpen) return null;
   return (
     <div
       className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
-      onClick={onClose}
+      onClick={handleBackdropClick}
     >
       <div
-        className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px]  p-8 flex flex-col gap-6 relative overflow-x-auto"
+        className="bg-white border border-gray-200 shadow-sm rounded-2xl w-[682px] p-8 flex flex-col gap-6 relative max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="absolute right-6 top-6 z-10">
@@ -43,7 +55,18 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
             className="w-6 h-7 bg-white text-black border-none text-lg font-bold flex items-center justify-center transform rotate-90 cursor-pointer"
             onClick={onClose}
           >
-            x
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.7803 6.28033C15.0732 5.98744 15.0732 5.51256 14.7803 5.21967C14.4874 4.92678 14.0126 4.92678 13.7197 5.21967L10 8.93934L6.28033 5.21967C5.98744 4.92678 5.51256 4.92678 5.21967 5.21967C4.92678 5.51256 4.92678 5.98744 5.21967 6.28033L8.93934 10L5.21967 13.7197C4.92678 14.0126 4.92678 14.4874 5.21967 14.7803C5.51256 15.0732 5.98744 15.0732 6.28033 14.7803L10 11.0607L13.7197 14.7803C14.0126 15.0732 14.4874 15.0732 14.7803 14.7803C15.0732 14.4874 15.0732 14.0126 14.7803 13.7197L11.0607 10L14.7803 6.28033Z"
+                fill="#242424"
+              />
+            </svg>
           </button>
         </div>
 
@@ -92,11 +115,10 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           </p>
 
           <div className="relative w-full h-12 flex items-center gap-10">
-            {/* LinkedIn */}
             {ModalData.linkedin != null && (
               <div className="w-11 h-11 relative">
                 <a
-                  href={ModalData.linkedin} // 🔁 Replace with your actual LinkedIn ID
+                  href={ModalData.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -117,7 +139,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
                 </a>
               </div>
             )}
-            {/* Website */}
+
             {ModalData.website != null && (
               <div className="w-11 h-11 relative">
                 <a
@@ -148,7 +170,7 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
             )}
           </div>
         </div>
-        {/* Instagram */}
+
         {ModalData.instagram != null && (
           <div className="w-11 h-11 relative">
             <div className="w-full h-full border-2  border-gray-300 rounded-full bg-white  flex items-center justify-center">
@@ -168,7 +190,6 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           </div>
         )}
 
-        {/* Facebook */}
         {ModalData.facebook != null && (
           <div className="w-11 h-11 relative">
             <div className="w-full h-full border-2  border-gray-300 rounded-full bg-white flex items-center justify-center">
@@ -188,7 +209,6 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
           </div>
         )}
 
-        {/* YouTube */}
         {ModalData.youtube != null && (
           <div className="w-11 h-11 relative">
             <div className="w-full h-full border-2  border-gray-300 rounded-full bg-white  flex items-center justify-center">
@@ -212,17 +232,31 @@ const Modal = ({ isOpen, onClose, data, isTopVoice }) => {
         {(data.publication || data.recommendation) && (
           <div className="px-8 flex flex-col gap-4">
             <h3 className="text-base font-bold uppercase tracking-wide text-slate-900">
-              {isTopVoice ? "Recommendation" : "Publication"}
+              {data.recommendation ? "Recommendation" : "Publication"}
             </h3>
+
             <div className="flex flex-col gap-1 w-full">
               <a
-                href="https://example.com"
+                href={data.publication?.url || data.recommendation?.url || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-base underline text-slate-900"
               >
-                Title of Publication: Sample Topic
+                {data.publication
+                  ? `Title of Publication: ${
+                      data.publication.title || "Untitled"
+                    }`
+                  : data.recommendation
+                  ? `Title of Recommendation: ${
+                      data.recommendation.title || "Untitled"
+                    }`
+                  : "No Title"}
               </a>
+
               <div className="text-sm font-medium text-slate-500">
-                November 27, 2023
+                {data.publication?.date ||
+                  data.recommendation?.date ||
+                  "No Date Provided"}
               </div>
             </div>
           </div>

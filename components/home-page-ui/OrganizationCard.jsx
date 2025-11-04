@@ -5,9 +5,12 @@ import Modal from "@/app/comps/Modal/Modal";
 
 const OrganizationCard = ({ organization }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   return (
     <div
-      className="flex flex-col gap-2 bg-goodbot-background-light w-full p-4 rounded-lg border border-goodbot-gray-medium"
+      className="flex flex-col gap-2 bg-goodbot-background-light w-full p-4 rounded-lg border border-goodbot-gray-medium cursor-pointer"
       onClick={() => setIsOpen(true)}
     >
       <div className="flex items-start justify-between  w-full ">
@@ -26,7 +29,7 @@ const OrganizationCard = ({ organization }) => {
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
+          onClose={handleClose}
           data={organization}
           isTopVoice={false}
         />

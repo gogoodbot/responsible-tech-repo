@@ -9,7 +9,7 @@ const TopVoiceCard = ({ topVoice }) => {
     }`;
 
   return (
-    <div className="flex flex-col bg-goodbot-background-light w-full  rounded-lg border border-goodbot-gray-medium overflow-hidden" onClick={() => setIsOpen(true)}>
+    <div className="flex flex-col bg-goodbot-background-light w-full  rounded-lg border border-goodbot-gray-medium overflow-hidden cursor-pointer" onClick={() => setIsOpen(true)}>
       <div className="flex items-start justify-between w-full relative bg-goodbot-button-primary p-4">
         <div className="flex gap-3 items-start justify-start">
           <div
