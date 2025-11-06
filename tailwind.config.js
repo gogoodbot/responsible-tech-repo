@@ -41,6 +41,7 @@ module.exports = {
           secondary: '#757575',
           dark: '#000000',
           disabled: '#b3b3b3',
+          tag: '#1daeef',
         },
         'goodbot-gray': {
           light: "#f5f5f5",
