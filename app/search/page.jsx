@@ -16,6 +16,7 @@ export default function SearchPage() {
     const initialQuery = searchParams.get('q') || "";
     const [query, setQuery] = useState(initialQuery);
     const [results, setResults] = useState([]);
+    const [searchedQuery, setSearchedQuery] = useState(initialQuery);
 
     useEffect(() => {
         if (initialQuery) {
@@ -28,6 +29,7 @@ export default function SearchPage() {
             const response = await axios.get(`${API_URL}/v1/search/${encodeURIComponent(term)}`);
             setResults(response.data);
             router.push(`/search?q=${encodeURIComponent(term)}`, { scroll: false });
+            setSearchedQuery(term);
         } catch (error) {
             console.error("Error fetching search results:", error);
         }
@@ -39,7 +41,6 @@ export default function SearchPage() {
 
     const handleSearchSubmit = (e) => {
         fetchResults(query);
-        console.log(results)
     };
 
     return (
@@ -52,6 +53,7 @@ export default function SearchPage() {
                     Go Back
                 </Link>
                 <Search value={query} onChange={handleSearchChange} onSubmit={handleSearchSubmit} />
+                <p className={`text-base text-goodbot-text -mt-4 ${initialQuery === '' ? 'hidden' : ''}`}># Results for “{searchedQuery}”</p>
             </div>
 
             <div className="flex flex-col gap-8">
