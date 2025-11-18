@@ -54,7 +54,7 @@ export default function SearchPage() {
                 <Search value={query} onChange={handleSearchChange} onSubmit={handleSearchSubmit} />
             </div>
 
-            <div>
+            <div className="flex flex-col gap-8">
                 {results.nonprofits &&
                     results.nonprofits.map(nonprofit => (
                         <SearchCard data={nonprofit} key={nonprofit.id} type='nonprofit' />
