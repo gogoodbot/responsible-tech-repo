@@ -54,6 +54,10 @@ const HomePageClient = () => {
         setTopVoicesData(selected.experts)
     }
 
+    const handleSearch = (term) => {
+        console.log(term)
+    }
+
 
     return (
         homePageData && Object.keys(homePageData).length === 0 ? (
@@ -61,7 +65,7 @@ const HomePageClient = () => {
         ) : (
             <section className="container relative flex flex-col gap-10">
                 <Hero />
-                <Search />
+                <Search onChange={handleSearch} />
                 <hr />
                 <section className="flex flex-col gap-10">
                     <div className="grid grid-cols-6 gap-4">
