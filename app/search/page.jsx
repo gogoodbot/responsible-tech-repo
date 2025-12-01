@@ -6,6 +6,7 @@ import SearchCard from "../comps/SearchCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Pagination from "./Pagination";
 
 export default function SearchPage() {
     const router = useRouter();
@@ -18,6 +19,9 @@ export default function SearchPage() {
     const [results, setResults] = useState([]);
     const [searchedQuery, setSearchedQuery] = useState(initialQuery);
 
+    const [page, setPage] = useState(1);
+    const limit = 5;
+
     useEffect(() => {
         if (initialQuery) {
             fetchResults(initialQuery);
@@ -28,6 +32,7 @@ export default function SearchPage() {
         try {
             const response = await axios.get(`${API_URL}/v1/search/${encodeURIComponent(term)}`);
             setResults(response.data);
+            setPage(1);
             router.push(`/search?q=${encodeURIComponent(term)}`, { scroll: false });
             setSearchedQuery(term);
         } catch (error) {
@@ -43,6 +48,14 @@ export default function SearchPage() {
         fetchResults(query);
     };
 
+    const combinedResults = [
+        ...(results.nonprofits || []).map(item => ({ ...item, type: "nonprofit" })),
+        ...(results.experts || []).map(item => ({ ...item, type: "expert" }))
+    ];
+
+    const totalPages = Math.ceil(combinedResults.length / limit);
+    const paginatedItems = combinedResults.slice((page - 1) * limit, page * limit);
+
     return (
         <section className="container py-8 flex flex-col gap-8">
             <div className="flex flex-col gap-8">
@@ -57,18 +70,15 @@ export default function SearchPage() {
             </div>
 
             <div className="flex flex-col gap-8">
-                {results.nonprofits &&
-                    results.nonprofits.map(nonprofit => (
-                        <SearchCard data={nonprofit} key={nonprofit.id} type='nonprofit' />
-                    ))
-                }
-
-                {results.experts &&
-                    results.experts.map(expert => (
-                        <SearchCard data={expert} key={expert.id} type='expert' />
-                    ))}
-
+                {paginatedItems.map(item => (
+                    <SearchCard
+                        key={item.id}
+                        data={item}
+                        type={item.type}
+                    />
+                ))}
             </div>
+            <Pagination page={page} totalPages={totalPages} setPage={setPage} />
         </section>
     );
 }
