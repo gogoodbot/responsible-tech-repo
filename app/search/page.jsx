@@ -78,7 +78,9 @@ export default function SearchPage() {
                     />
                 ))}
             </div>
-            <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+            {paginatedItems.length !== 0 &&
+                <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+            }
         </section>
     );
 }
