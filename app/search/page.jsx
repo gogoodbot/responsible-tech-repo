@@ -28,6 +28,7 @@ export default function SearchPage() {
         }
     }, []);
 
+
     const fetchResults = async (term) => {
         try {
             const response = await axios.get(`${API_URL}/v1/search/${encodeURIComponent(term)}`);
