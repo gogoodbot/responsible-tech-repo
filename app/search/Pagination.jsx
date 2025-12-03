@@ -54,7 +54,6 @@ const Pagination = ({ page, totalPages, setPage }) => {
                         key={i}
                         onClick={() => {
                             setPage(p)
-                            moveTopOfPage();
                         }}
                         className={`w-9 h-9 flex items-center justify-center rounded 
                             ${page === p ? "bg-goodbot-button-primary" : ""}`
