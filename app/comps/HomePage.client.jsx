@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import Hero from '../../components/home-page-ui/Hero';
 import Search from "../../components/home-page-ui/Search";
@@ -14,6 +15,9 @@ import DataMissingCard from "@/components/home-page-ui/DataMissingCard";
 
 
 const HomePageClient = () => {
+
+    const router = useRouter();
+    const [searchTerm, setSearchTerm] = useState("");
 
     const API_URL = process.env.NEXT_PUBLIC_GOODBOT_API_URL
     const [homePageData, setHomePageData] = useState({})
@@ -54,8 +58,9 @@ const HomePageClient = () => {
         setTopVoicesData(selected.experts)
     }
 
-    const handleSearch = (term) => {
-        console.log(term)
+    const handleSearchSubmit = () => {
+        if (!searchTerm) return;
+        router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
     }
 
 
@@ -65,7 +70,7 @@ const HomePageClient = () => {
         ) : (
             <section className="container relative flex flex-col gap-10">
                 <Hero />
-                <Search onChange={handleSearch} />
+                <Search onSubmit={handleSearchSubmit} value={searchTerm} onChange={setSearchTerm} />
                 <hr />
                 <section className="flex flex-col gap-10">
                     <div className="grid grid-cols-6 gap-4">
