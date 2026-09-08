@@ -6,7 +6,7 @@ import SearchCard from "../comps/SearchCard";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Pagination from "./Pagination";
+import Pagination from "../comps/Pagination";
 
 export default function SearchPage() {
     const router = useRouter();
