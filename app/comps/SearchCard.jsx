@@ -28,8 +28,6 @@ export default function SearchCard({ data, type }) {
 
     const name = config.getName(data);
 
-    const getInitials = (first = "", last = "") =>
-        `${first.charAt(0).toUpperCase() || ""}${last.charAt(0).toUpperCase() || ""}`;
     return (
         <div className="flex justify-start items-stretch gap-8 px-6 py-8 border border-zinc-300 rounded">
             {config.getInitials(data) ? (
