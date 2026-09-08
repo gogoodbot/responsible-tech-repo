@@ -10,16 +10,32 @@ export default function SearchCard({ data, type }) {
         setIsOpen(false);
     };
 
-    const name = type === 'expert'
-        ? `${data.first_name} ${data.last_name}`
-        : data.name;
+    const cardConfig = {
+        expert: {
+            getName: (data) => `${data.first_name} ${data.last_name}`,
+            getInitials: (data) =>
+                `${data.first_name?.charAt(0) ?? ""}${data.last_name?.charAt(0) ?? ""}`,
+            isTopVoice: true,
+        },
+        default: {
+            getName: (data) => data.name,
+            getInitials: () => "",
+            isTopVoice: false,
+        },
+    };
+
+    const config = cardConfig[type] ?? cardConfig.default;
+
+    const name = config.getName(data);
 
     const getInitials = (first = "", last = "") =>
         `${first.charAt(0).toUpperCase() || ""}${last.charAt(0).toUpperCase() || ""}`;
     return (
         <div className="flex justify-start items-stretch gap-8 px-6 py-8 border border-zinc-300 rounded">
-            {type === 'expert' ? (
-                <div className="w-[104px] bg-goodbot-primary flex-shrink-0 text-2xl text-white flex justify-center items-center">{getInitials(data.first_name, data.last_name)}</div>
+            {config.getInitials(data) ? (
+                <div className="w-[104px] bg-goodbot-primary flex-shrink-0 text-2xl text-white flex justify-center items-center">
+                    {config.getInitials(data)}
+                </div>
             ) : (<div className="w-[104px] h-auto bg-black flex-shrink-0"></div>)}
 
             <div className="flex flex-col gap-4 justify-center items-start">
@@ -38,7 +54,7 @@ export default function SearchCard({ data, type }) {
                     isOpen={isOpen}
                     onClose={handleClose}
                     data={data}
-                    isTopVoice={type === 'expert'}
+                    isTopVoice={config.isTopVoice}
                 />
             )}
         </div>
