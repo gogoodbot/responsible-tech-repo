@@ -22,31 +22,43 @@ export default function SearchPage() {
     const [page, setPage] = useState(1);
     const limit = 5;
 
+
+
     useEffect(() => {
-        if (initialQuery) {
-            fetchResults(initialQuery);
-        }
-    }, []);
+        const fetchResults = async () => {
+            if (!initialQuery) return;
 
+            try {
+                const response = await axios.get(
+                    `${API_URL}/v1/search/${encodeURIComponent(initialQuery)}`
+                );
 
-    const fetchResults = async (term) => {
-        try {
-            const response = await axios.get(`${API_URL}/v1/search/${encodeURIComponent(term)}`);
-            setResults(response.data);
-            setPage(1);
-            router.push(`/search?q=${encodeURIComponent(term)}`, { scroll: false });
-            setSearchedQuery(term);
-        } catch (error) {
-            console.error("Error fetching search results:", error);
-        }
-    };
+                setResults(response.data);
+                setSearchedQuery(initialQuery);
+                setPage(1);
+            } catch (error) {
+                console.error("Error fetching search results:", error);
+            }
+        };
+
+        fetchResults();
+    }, [initialQuery, API_URL]);
 
     const handleSearchChange = (value) => {
         setQuery(value);
     };
 
     const handleSearchSubmit = (e) => {
-        fetchResults(query);
+        e.preventDefault();
+
+        const trimmedQuery = query.trim();
+
+        if (!trimmedQuery) return;
+
+        router.push(
+            `/search?q=${encodeURIComponent(trimmedQuery)}`,
+            { scroll: false }
+        );
     };
 
     const combinedResults = [
