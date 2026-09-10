@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "../comps/Pagination";
+import SearchCardSkeleton from "../comps/SearchCardSkeletonLoading.client";
 
 export default function SearchPage() {
     const router = useRouter();
@@ -19,6 +20,8 @@ export default function SearchPage() {
     const [results, setResults] = useState([]);
     const [searchedQuery, setSearchedQuery] = useState(initialQuery);
 
+    const [loading, setLoading] = useState(true)
+
     const [page, setPage] = useState(1);
     const limit = 5;
 
@@ -26,7 +29,12 @@ export default function SearchPage() {
 
     useEffect(() => {
         const fetchResults = async () => {
-            if (!initialQuery) return;
+            if (!initialQuery) {
+                setLoading(false)
+                return;
+            }
+
+            setLoading(true)
 
             try {
                 const response = await axios.get(
@@ -38,6 +46,8 @@ export default function SearchPage() {
                 setPage(1);
             } catch (error) {
                 console.error("Error fetching search results:", error);
+            } finally {
+                setLoading(false)
             }
         };
 
@@ -50,6 +60,7 @@ export default function SearchPage() {
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
+        setLoading(true)
 
         const trimmedQuery = query.trim();
 
@@ -83,15 +94,20 @@ export default function SearchPage() {
             </div>
 
             <div className="flex flex-col gap-8">
-                {paginatedItems.map(item => (
-                    <SearchCard
-                        key={item.id}
-                        data={item}
-                        type={item.type}
-                    />
-                ))}
+                {loading
+                    ? Array.from({ length: limit }).map((_, index) => (
+                        <SearchCardSkeleton key={index} />
+                    ))
+                    : paginatedItems.map((item) => (
+                        <SearchCard
+                            key={`${item.type}-${item.id}`}
+                            data={item}
+                            type={item.type}
+                        />
+                    ))
+                }
             </div>
-            {paginatedItems.length !== 0 &&
+            {!loading && paginatedItems.length !== 0 &&
                 <Pagination page={page} totalPages={totalPages} setPage={setPage} />
             }
         </section>
