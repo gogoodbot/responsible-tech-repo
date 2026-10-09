@@ -1,11 +1,10 @@
 "use client";
-import {React,useState} from "react";
-import Modal from "@/app/comps/Modal/Modal";
+import { React, useState } from "react";
+import Modal from "@/components/Modal";
 const TopVoiceCard = ({ topVoice }) => {
   const [isOpen, setIsOpen] = useState(false);
   const getInitials = (first = "", last = "") =>
-    `${first.charAt(0).toUpperCase() || ""}${
-      last.charAt(0).toUpperCase() || ""
+    `${first.charAt(0).toUpperCase() || ""}${last.charAt(0).toUpperCase() || ""
     }`;
 
   return (
@@ -31,7 +30,7 @@ const TopVoiceCard = ({ topVoice }) => {
           {topVoice.about}
         </p>
       </div>
-      {isOpen&&<Modal
+      {isOpen && <Modal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         data={topVoice}
@@ -39,7 +38,7 @@ const TopVoiceCard = ({ topVoice }) => {
       />}
     </div>
 
-  
+
   );
 };
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react";
-import Modal from "./Modal/Modal";
+import Modal from "../Modal";
 
 const cardConfig = {
     expert: {

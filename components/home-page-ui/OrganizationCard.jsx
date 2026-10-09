@@ -1,7 +1,7 @@
 "use client";
 import { React, useState } from "react";
 import Image from "next/image";
-import Modal from "@/app/comps/Modal/Modal";
+import Modal from "@/components/Modal";
 
 const OrganizationCard = ({ organization }) => {
   const [isOpen, setIsOpen] = useState(false);
